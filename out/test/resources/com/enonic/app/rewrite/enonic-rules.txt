@@ -1,0 +1,30 @@
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+"{{site:my-corperation}}/ost/(.*)$" "/fisk/ost" [301]
+
+"{{vhost:myvhost}}/balle1" "/another/balle" [301]
+"{{vhost:myvhost}}/balle2" "/another/balle" [301]
+"{{vhost:myvhost}}/balle3" "/another/balle" [301]
+"{{vhost:myvhost}}/balle4" "/another/balle" [301]
+"{{vhost:myvhost}}/balle5" "/another/balle" [301]
+"{{vhost:myvhost}}/balle6" "/another/balle" [301]
+"{{vhost:myvhost}}/balle7" "/another/balle" [301]
+"{{vhost:myvhost}}/balle8" "/another/balle" [301]
+"{{vhost:myvhost}}/balle9" "/another/balle" [301]
+"{{vhost:myvhost}}/balle10" "/another/balle" [301]
+"{{vhost:myvhost}}/balle11" "/another/balle" [301]
+
+
+
+
+
