@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.context.ContextResolver;
+import com.enonic.app.rewrite.engine.RewriteEngine;
+import com.enonic.app.rewrite.engine.RewriteEngineImpl;
 import com.enonic.xp.annotation.Order;
 import com.enonic.xp.web.filter.OncePerRequestFilter;
 
@@ -24,18 +26,20 @@ public class RewriteFilter
 {
     private RewriteFilterConfig config;
 
-    private RewriteEngine rewriteEngine;
-
     private Patterns excludePatterns;
 
     private Patterns includePatterns;
+
+    private RewriteEngine rewriteEngine;
 
     public final static Logger LOG = LoggerFactory.getLogger( RewriteFilter.class );
 
     @Activate
     public void activate()
     {
+        System.out.println( "Activating RewriteFilter" );
         this.excludePatterns = new Patterns( config.excludePatterns() );
+        this.rewriteEngine = new RewriteEngineImpl();
     }
 
     @Override
@@ -60,12 +64,16 @@ public class RewriteFilter
 
     private boolean doInclude( final RequestWrapper request )
     {
-        return this.includePatterns.anyMatch( request.getRequestURI() );
+        //return this.includePatterns.anyMatch( request.getRequestURI() );
+        return true;
     }
 
     private boolean doRewriteURL( HttpServletRequest hsRequest, HttpServletResponse hsResponse, FilterChain chain )
         throws Exception
     {
+
+        LOG.info( "Checking if URL is to be rewritten" );
+
         if ( !this.config.enabled() )
         {
             return false;
@@ -79,7 +87,7 @@ public class RewriteFilter
             LOG.debug( "Skipped: " + hsRequest.getRequestURI() );
             return false;
         }
-        final String url = rewriteEngine.process( hsRequest, hsResponse );
+        final String url = rewriteEngine.process( hsRequest );
         if ( url == null )
         {
             LOG.debug( "Ignored: " + hsRequest.getRequestURI() );
@@ -88,7 +96,9 @@ public class RewriteFilter
 
         LOG.debug( "Changed from: " + hsRequest.getRequestURI() + " to: " + url );
 
-        return rewriteEngine.process( hsRequest, hsResponse, chain );
+        hsResponse.sendRedirect( url );
+
+        return true;
     }
 
 
@@ -96,12 +106,6 @@ public class RewriteFilter
     public void setConfig( final RewriteFilterConfig config )
     {
         this.config = config;
-    }
-
-    @Reference
-    public void setRewriteEngine( final RewriteEngine rewriteEngine )
-    {
-        this.rewriteEngine = rewriteEngine;
     }
 
 }

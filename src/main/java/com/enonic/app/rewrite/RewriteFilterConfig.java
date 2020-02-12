@@ -2,8 +2,6 @@ package com.enonic.app.rewrite;
 
 import java.util.List;
 
-import org.tuckey.web.filters.urlrewrite.Conf;
-
 public interface RewriteFilterConfig
 {
     boolean enabled();
@@ -12,7 +10,5 @@ public interface RewriteFilterConfig
 
     List<String> includePatterns();
 
-    Conf get();
-
-    String configFile();
+    String ruleFilePattern();
 }

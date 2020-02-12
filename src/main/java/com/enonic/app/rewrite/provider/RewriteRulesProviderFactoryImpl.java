@@ -7,7 +7,12 @@ public class RewriteRulesProviderFactoryImpl
 {
     public RewriteRulesProvider get( final RewriteFilterConfig config )
     {
-        return new RewriteRulesLocalFileProvider( config.configFile() );
+        if ( true )
+        {
+            throw new RuntimeException( "HANDLE THE BAS EPATH" );
+        }
+
+        return new RewriteRulesLocalFileProvider( null, config.ruleFilePattern() );
     }
 
 }

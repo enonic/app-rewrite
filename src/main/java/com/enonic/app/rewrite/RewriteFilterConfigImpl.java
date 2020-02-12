@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.tuckey.web.filters.urlrewrite.Conf;
 
 import com.enonic.xp.config.ConfigBuilder;
 import com.enonic.xp.config.ConfigInterpolator;
@@ -41,15 +40,9 @@ public class RewriteFilterConfigImpl
     }
 
     @Override
-    public String configFile()
+    public String ruleFilePattern()
     {
-        return this.config.get( "rewriteFile" );
-    }
-
-    @Override
-    public Conf get()
-    {
-        return new Conf();
+        return this.config.get( "ruleFilePattern" );
     }
 
     @Activate
