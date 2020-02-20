@@ -1,5 +1,8 @@
 package com.enonic.app.rewrite.engine.processor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.engine.RewriteEngineConfig;
@@ -7,6 +10,8 @@ import com.enonic.app.rewrite.engine.RewriteEngineConfig;
 public class RewriteProcessor
 {
     private final RulePatterns rulePatterns;
+
+    private final static Logger LOG = LoggerFactory.getLogger( RewriteProcessor.class );
 
     private RewriteProcessor( final RulePatterns rulePatterns )
     {
@@ -22,13 +27,17 @@ public class RewriteProcessor
             int order = 0;
             for ( final RewriteRule rule : config.getRewriteRulesMap().get( context ) )
             {
-                builder.rule( RulePattern.create().
+                final RulePattern pattern = RulePattern.create().
                     target( rule.getTarget() ).
                     priority( order++ ).
                     type( rule.getType() ).
                     pattern( rule.getFrom() ).
                     context( context.context() ).
-                    build() );
+                    build();
+
+                LOG.info( "Adding rule-pattern: {}", pattern );
+
+                builder.rule( pattern );
             }
         }
 

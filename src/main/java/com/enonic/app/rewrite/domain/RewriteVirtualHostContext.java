@@ -2,12 +2,12 @@ package com.enonic.app.rewrite.domain;
 
 import com.enonic.xp.web.vhost.VirtualHost;
 
-public class RewriteVHostContext
+public class RewriteVirtualHostContext
     implements RewriteContext
 {
     private VirtualHost virtualHost;
 
-    public RewriteVHostContext( final VirtualHost virtualHost )
+    public RewriteVirtualHostContext( final VirtualHost virtualHost )
     {
         this.virtualHost = virtualHost;
     }
@@ -15,6 +15,6 @@ public class RewriteVHostContext
     @Override
     public String context()
     {
-        return this.virtualHost.getSource();
+        return this.virtualHost.getTarget();
     }
 }

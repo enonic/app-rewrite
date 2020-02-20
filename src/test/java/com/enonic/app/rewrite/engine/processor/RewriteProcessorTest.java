@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
+import com.enonic.app.rewrite.domain.SimpleRewriteContext;
 import com.enonic.app.rewrite.engine.RewriteEngineConfig;
 
 class RewriteProcessorTest
@@ -13,7 +14,7 @@ class RewriteProcessorTest
     void testSimpleMatch()
     {
         final RewriteEngineConfig config = RewriteEngineConfig.create().
-            add( new TestContext( "/site/default/.*/mySite" ), RewriteRules.create().
+            add( new SimpleRewriteContext( "/site/default/.+/mySite" ), RewriteRules.create().
                 addRule( RewriteRule.create().
                     from( "/a" ).
                     to( "/b" ).

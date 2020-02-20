@@ -1,0 +1,2 @@
+RewriteRule    "^/offentlig/fond/(.*)$" /virksomhet/fond/$1" [R=301,NC,L]
+RewriteRule    "^/offentlig/skjema-bedrift-offentlig$" "/virksomhet/skjema" [R=301,NC,L]

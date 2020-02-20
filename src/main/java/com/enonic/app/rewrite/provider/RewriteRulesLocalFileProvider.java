@@ -16,18 +16,26 @@ import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
-import com.enonic.app.rewrite.domain.SimpleRewriteContext;
+import com.enonic.app.rewrite.domain.RewriteVirtualHostContext;
 import com.enonic.app.rewrite.engine.RewriteEngineConfig;
+import com.enonic.app.rewrite.provider.format.RewriteFormatReader;
+import com.enonic.app.rewrite.vhost.VirtualHostResolver;
+import com.enonic.xp.web.vhost.VirtualHost;
 
 
 class RewriteRulesLocalFileProvider
     implements RewriteRulesProvider
 {
-
     private final Logger LOG = LoggerFactory.getLogger( RewriteRulesLocalFileProvider.class );
 
-    RewriteRulesLocalFileProvider( final Path base, final String ruleFilePattern )
+    private RewriteEngineConfig config;
+
+    private final VirtualHostResolver virtualHostResolver;
+
+    RewriteRulesLocalFileProvider( final Path base, final String ruleFilePattern, final VirtualHostResolver virtualHostResolver )
     {
+        this.virtualHostResolver = virtualHostResolver;
+
         final RewriteEngineConfig.Builder builder = RewriteEngineConfig.create();
 
         try
@@ -36,29 +44,7 @@ class RewriteRulesLocalFileProvider
 
             for ( final VHostAndPath item : items )
             {
-
-                final SimpleRewriteContext context = new SimpleRewriteContext( item.vHostName );
-                final RewriteRules.Builder rewritesBuilder = RewriteRules.create();
-
-                LOG.info( "Fetching rewrite-config from file: [{}]", ruleFilePattern );
-
-                try (Stream<String> stream = Files.lines( Paths.get( item.path.toString() ) ))
-                {
-                    stream.forEach( line -> {
-                        final RewriteRule rule = ApacheRewriteFormatReader.read( line );
-                        if ( rule != null )
-                        {
-                            rewritesBuilder.addRule( rule );
-                        }
-
-                    } );
-                }
-                catch ( IOException e )
-                {
-                    e.printStackTrace();
-                }
-
-                builder.add( context, rewritesBuilder.build() );
+                handleRewriteItem( builder, item );
             }
         }
         catch ( IOException e )
@@ -66,15 +52,51 @@ class RewriteRulesLocalFileProvider
             throw new RuntimeException( "Cannot configure rewrite-filter" );
         }
 
-        System.out.println( builder.build() );
+        this.config = builder.build();
+    }
 
+    @Override
+    public RewriteEngineConfig provide()
+    {
+        return this.config;
+    }
+
+    private void handleRewriteItem( final RewriteEngineConfig.Builder builder, final VHostAndPath item )
+    {
+        final VirtualHost resolvedVirtualHost = this.virtualHostResolver.resolve( item.vHostName );
+
+        if ( resolvedVirtualHost == null )
+        {
+            LOG.warn( "Cannot resolve vhost [%s] in vhost-config, skipping..", item.vHostName );
+            return;
+        }
+
+        final RewriteVirtualHostContext context = new RewriteVirtualHostContext( resolvedVirtualHost );
+        final RewriteRules.Builder rewritesBuilder = RewriteRules.create();
+
+        LOG.info( "Fetching rewrite-config from file: [{}]", item.path );
+
+        try (final Stream<String> stream = Files.lines( Paths.get( item.path.toString() ) ))
+        {
+            stream.forEach( line -> {
+                final RewriteRule rule = RewriteFormatReader.read( line );
+                if ( rule != null )
+                {
+                    rewritesBuilder.addRule( rule );
+                }
+            } );
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException( "Cannot read rewrite-config from file [" + item.path + "]", e );
+        }
+
+        builder.add( context, rewritesBuilder.build() );
     }
 
     private List<Path> findFiles( final Path base, final String ruleFilePattern )
         throws IOException
     {
-        Files.walk( base ).forEach( f -> System.out.println( f.toAbsolutePath() ) );
-
         return Files.walk( base ).filter( f -> FileNameMatcher.matches( f, ruleFilePattern ) ).collect( Collectors.toList() );
     }
 

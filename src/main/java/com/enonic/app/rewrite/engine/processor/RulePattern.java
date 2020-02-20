@@ -1,6 +1,7 @@
 package com.enonic.app.rewrite.engine.processor;
 
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.enonic.app.rewrite.domain.RedirectType;
@@ -41,7 +42,8 @@ class RulePattern
             return null;
         }
 
-        return this.pattern.matcher( value ).replaceFirst( target.toString() );
+        final Matcher matcher = this.pattern.matcher( value );
+        return matcher.matches() ? matcher.replaceFirst( target.toString() ) : null;
     }
 
     @Override
@@ -63,6 +65,13 @@ class RulePattern
     int getOrder()
     {
         return order;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "RulePattern{" + "target=" + target + ", context='" + context + '\'' + ", type=" + type + ", order=" + order + ", pattern=" +
+            pattern + '}';
     }
 
     static final class Builder
