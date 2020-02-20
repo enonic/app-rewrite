@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import com.enonic.app.rewrite.MockHttpRequest;
 import com.enonic.app.rewrite.domain.RedirectType;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
-import com.enonic.app.rewrite.domain.SimpleRewriteContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +24,7 @@ class RewriteEngineImplTest
             build();
 
         final RewriteEngineConfig engineConfig = RewriteEngineConfig.create().
-            add( new SimpleRewriteContext( "/site/default/master/mysite" ), rules ).
+            add( new RewriteContextKey( "myvhost" ), rules ).
             build();
 
         final RewriteEngine rewriteEngine = new RewriteEngine( engineConfig );

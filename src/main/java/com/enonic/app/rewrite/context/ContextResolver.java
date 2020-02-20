@@ -11,7 +11,7 @@ public class ContextResolver
 
     public static String resolve( final HttpServletRequest request )
     {
-        LOG.debug( "Resolving context for [{}], currentContext is [{}]", request.getRequestURI(), request.getContextPath() );
+        LOG.debug( "Resolving getSourceContext for [{}], currentContext is [{}]", request.getRequestURI(), request.getContextPath() );
         return request.getContextPath();
     }
 

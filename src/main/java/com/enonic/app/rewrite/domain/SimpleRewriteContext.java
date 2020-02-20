@@ -1,41 +1,36 @@
 package com.enonic.app.rewrite.domain;
 
-import java.util.Objects;
-
 public class SimpleRewriteContext
     implements RewriteContext
 {
-    private final String context;
+    private final RewriteContextKey key;
 
-    public SimpleRewriteContext( final String context )
+    private final String sourceContext;
+
+    private final String targetContext;
+
+    public SimpleRewriteContext( final String key, final String sourceContext, final String targetContext )
     {
-        this.context = context;
+        this.key = new RewriteContextKey( key );
+        this.sourceContext = sourceContext;
+        this.targetContext = targetContext;
     }
 
     @Override
-    public String context()
+    public RewriteContextKey getKey()
     {
-        return context;
+        return this.key;
     }
 
     @Override
-    public boolean equals( final Object o )
+    public String getSourceContext()
     {
-        if ( this == o )
-        {
-            return true;
-        }
-        if ( o == null || getClass() != o.getClass() )
-        {
-            return false;
-        }
-        final SimpleRewriteContext that = (SimpleRewriteContext) o;
-        return Objects.equals( context, that.context );
+        return this.sourceContext;
     }
 
     @Override
-    public int hashCode()
+    public String getTargetContext()
     {
-        return Objects.hash( context );
+        return this.targetContext;
     }
 }

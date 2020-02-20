@@ -2,7 +2,9 @@ package com.enonic.app.rewrite.domain;
 
 public interface RewriteContext
 {
+    RewriteContextKey getKey();
 
-    String context();
+    String getSourceContext();
 
+    String getTargetContext();
 }

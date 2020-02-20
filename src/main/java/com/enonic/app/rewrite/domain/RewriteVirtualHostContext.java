@@ -5,16 +5,34 @@ import com.enonic.xp.web.vhost.VirtualHost;
 public class RewriteVirtualHostContext
     implements RewriteContext
 {
-    private VirtualHost virtualHost;
+    private RewriteContextKey key;
+
+    private String sourceContext;
+
+    private String targetContext;
 
     public RewriteVirtualHostContext( final VirtualHost virtualHost )
     {
-        this.virtualHost = virtualHost;
+        this.key = new RewriteContextKey( virtualHost.getName() );
+        this.sourceContext = virtualHost.getSource();
+        this.targetContext = virtualHost.getTarget();
     }
 
     @Override
-    public String context()
+    public RewriteContextKey getKey()
     {
-        return this.virtualHost.getTarget();
+        return key;
+    }
+
+    @Override
+    public String getSourceContext()
+    {
+        return sourceContext;
+    }
+
+    @Override
+    public String getTargetContext()
+    {
+        return targetContext;
     }
 }

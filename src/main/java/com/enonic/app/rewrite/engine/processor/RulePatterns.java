@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-class RulePatterns
+public class RulePatterns
     implements Iterable<RulePattern>
 {
     private final List<RulePattern> rules;

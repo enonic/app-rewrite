@@ -14,13 +14,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
-import com.enonic.app.rewrite.domain.RewriteVirtualHostContext;
 import com.enonic.app.rewrite.engine.RewriteEngineConfig;
 import com.enonic.app.rewrite.provider.format.RewriteFormatReader;
-import com.enonic.app.rewrite.vhost.VirtualHostResolver;
-import com.enonic.xp.web.vhost.VirtualHost;
 
 
 class RewriteRulesLocalFileProvider
@@ -30,11 +28,9 @@ class RewriteRulesLocalFileProvider
 
     private RewriteEngineConfig config;
 
-    private final VirtualHostResolver virtualHostResolver;
 
-    RewriteRulesLocalFileProvider( final Path base, final String ruleFilePattern, final VirtualHostResolver virtualHostResolver )
+    RewriteRulesLocalFileProvider( final Path base, final String ruleFilePattern )
     {
-        this.virtualHostResolver = virtualHostResolver;
 
         final RewriteEngineConfig.Builder builder = RewriteEngineConfig.create();
 
@@ -63,15 +59,7 @@ class RewriteRulesLocalFileProvider
 
     private void handleRewriteItem( final RewriteEngineConfig.Builder builder, final VHostAndPath item )
     {
-        final VirtualHost resolvedVirtualHost = this.virtualHostResolver.resolve( item.vHostName );
-
-        if ( resolvedVirtualHost == null )
-        {
-            LOG.warn( "Cannot resolve vhost [%s] in vhost-config, skipping..", item.vHostName );
-            return;
-        }
-
-        final RewriteVirtualHostContext context = new RewriteVirtualHostContext( resolvedVirtualHost );
+        final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );
         final RewriteRules.Builder rewritesBuilder = RewriteRules.create();
 
         LOG.info( "Fetching rewrite-config from file: [{}]", item.path );
@@ -91,7 +79,7 @@ class RewriteRulesLocalFileProvider
             throw new RuntimeException( "Cannot read rewrite-config from file [" + item.path + "]", e );
         }
 
-        builder.add( context, rewritesBuilder.build() );
+        builder.add( contextKey, rewritesBuilder.build() );
     }
 
     private List<Path> findFiles( final Path base, final String ruleFilePattern )

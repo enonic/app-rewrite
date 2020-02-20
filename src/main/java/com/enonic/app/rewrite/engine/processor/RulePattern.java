@@ -1,6 +1,5 @@
 package com.enonic.app.rewrite.engine.processor;
 
-import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,8 +11,6 @@ class RulePattern
 {
     private final RewriteTarget target;
 
-    private final String context;
-
     private final RedirectType type;
 
     private final int order;
@@ -23,10 +20,9 @@ class RulePattern
     private RulePattern( final Builder builder )
     {
         target = builder.target;
-        context = builder.context;
         type = builder.type;
         order = builder.order;
-        this.pattern = Pattern.compile( Paths.get( builder.context, builder.pattern ).toString() );
+        this.pattern = Pattern.compile( builder.pattern );
     }
 
     static Builder create()
@@ -70,15 +66,12 @@ class RulePattern
     @Override
     public String toString()
     {
-        return "RulePattern{" + "target=" + target + ", context='" + context + '\'' + ", type=" + type + ", order=" + order + ", pattern=" +
-            pattern + '}';
+        return "RulePattern{" + "target=" + target + ", type=" + type + ", order=" + order + ", pattern=" + pattern + '}';
     }
 
     static final class Builder
     {
         private RewriteTarget target;
-
-        private String context;
 
         private RedirectType type;
 
@@ -100,12 +93,6 @@ class RulePattern
         Builder target( final RewriteTarget target )
         {
             this.target = target;
-            return this;
-        }
-
-        Builder context( final String context )
-        {
-            this.context = context;
             return this;
         }
 
