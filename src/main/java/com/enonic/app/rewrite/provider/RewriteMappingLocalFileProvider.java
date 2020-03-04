@@ -15,28 +15,34 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
-import com.enonic.app.rewrite.engine.RewriteEngineConfig;
 import com.enonic.app.rewrite.provider.format.RewriteFormatReader;
 
 
-class RewriteRulesLocalFileProvider
-    implements RewriteRulesProvider
+class RewriteMappingLocalFileProvider
+    implements RewriteMappingProvider
 {
-    private final Logger LOG = LoggerFactory.getLogger( RewriteRulesLocalFileProvider.class );
+    private final Logger LOG = LoggerFactory.getLogger( RewriteMappingLocalFileProvider.class );
 
-    private RewriteEngineConfig config;
+    private final Path base;
 
+    private final String ruleFilePattern;
 
-    RewriteRulesLocalFileProvider( final Path base, final String ruleFilePattern )
+    private RewriteMappingLocalFileProvider( final Builder builder )
     {
+        base = builder.base;
+        ruleFilePattern = builder.ruleFilePattern;
+    }
 
-        final RewriteEngineConfig.Builder builder = RewriteEngineConfig.create();
+    public RewriteMapping get()
+    {
+        final RewriteMapping.Builder builder = RewriteMapping.create();
 
         try
         {
-            final List<VHostAndPath> items = getHostsAndPaths( base, ruleFilePattern );
+            final List<VHostAndPath> items = getHostsAndPaths( this.base, this.ruleFilePattern );
 
             for ( final VHostAndPath item : items )
             {
@@ -48,16 +54,10 @@ class RewriteRulesLocalFileProvider
             throw new RuntimeException( "Cannot configure rewrite-filter" );
         }
 
-        this.config = builder.build();
+        return builder.build();
     }
 
-    @Override
-    public RewriteEngineConfig provide()
-    {
-        return this.config;
-    }
-
-    private void handleRewriteItem( final RewriteEngineConfig.Builder builder, final VHostAndPath item )
+    private void handleRewriteItem( final RewriteMapping.Builder builder, final VHostAndPath item )
     {
         final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );
         final RewriteRules.Builder rewritesBuilder = RewriteRules.create();
@@ -106,6 +106,10 @@ class RewriteRulesLocalFileProvider
         return hostsAndPaths;
     }
 
+    public static Builder create()
+    {
+        return new Builder();
+    }
 
     private final static class VHostAndPath
     {
@@ -120,4 +124,31 @@ class RewriteRulesLocalFileProvider
         }
     }
 
+    public static final class Builder
+    {
+        private Path base;
+
+        private String ruleFilePattern;
+
+        private Builder()
+        {
+        }
+
+        public Builder base( final Path base )
+        {
+            this.base = base;
+            return this;
+        }
+
+        public Builder ruleFilePattern( final String ruleFilePattern )
+        {
+            this.ruleFilePattern = ruleFilePattern;
+            return this;
+        }
+
+        public RewriteMappingLocalFileProvider build()
+        {
+            return new RewriteMappingLocalFileProvider( this );
+        }
+    }
 }

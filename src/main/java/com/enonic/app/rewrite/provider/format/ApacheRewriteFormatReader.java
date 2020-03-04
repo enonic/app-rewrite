@@ -50,7 +50,7 @@ class ApacheRewriteFormatReader
                 }
                 else
                 {
-                    LOG.warn( "Cannot read redirect-type for code %s, using default %s", flags.get( REDIRECT_CODE_KEY ),
+                    LOG.warn( "Cannot read redirect-type for code {}, using default {}", flags.get( REDIRECT_CODE_KEY ),
                               DEFAULT_REDIRECT_TYPE );
                     type = DEFAULT_REDIRECT_TYPE;
                 }

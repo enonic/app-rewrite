@@ -6,7 +6,7 @@ import java.net.URL;
 import org.junit.jupiter.api.Test;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.engine.RewriteEngineConfig;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,10 +22,12 @@ class RewriteRulesLocalFileProviderTest
 
         File file = new File( resource.toURI() );
 
-        final RewriteRulesLocalFileProvider provider =
-            new RewriteRulesLocalFileProvider( file.getParentFile().toPath(), "com.enonic.app.rewrite.{{vhost}}.txt" );
+        final RewriteMappingLocalFileProvider provider = RewriteMappingLocalFileProvider.create().
+            base( file.getParentFile().toPath() ).
+            ruleFilePattern( "com.enonic.app.rewrite.{{vhost}}.txt" ).
+            build();
 
-        final RewriteEngineConfig config = provider.provide();
+        final RewriteMapping config = provider.get();
 
         assertEquals( 2, config.getRewriteRulesMap().keySet().size() );
         assertNotNull( config.getRewriteRulesMap().get( new RewriteContextKey( "myvhost" ) ) );

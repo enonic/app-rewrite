@@ -1,0 +1,24 @@
+<html>
+<head>
+
+</head>
+<body>
+<h1>Mapping-rules</h1>
+<p data-th-text="${mappings}">rules</p>
+<ul data-th-each="mapping,iterStat : ${mappings}">
+    <li>
+        <p><span data-th-text="${mapping.key}"/></p>
+        <ul data-th-each="rule,iterStat : ${mapping.value.rules}">
+            <p><span data-th-text="${rule.from}"/> ->
+                <span data-th-text="${rule.to}"/>
+                (<span data-th-text="${rule.type}"/>)
+            </p>
+        </ul>
+    </li>
+
+</ul>
+
+
+</ul>
+</body>
+</html>

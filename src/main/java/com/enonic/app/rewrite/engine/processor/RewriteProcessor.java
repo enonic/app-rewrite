@@ -15,7 +15,7 @@ import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteTarget;
-import com.enonic.app.rewrite.engine.RewriteEngineConfig;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 
 public class RewriteProcessor
 {
@@ -28,7 +28,7 @@ public class RewriteProcessor
         this.rewriteMap = rewriteMap;
     }
 
-    public static RewriteProcessor from( final RewriteEngineConfig config )
+    public static RewriteProcessor from( final RewriteMapping config )
     {
         final Map<RewriteContextKey, RulePatterns> rewriteMap = Maps.newHashMap();
 

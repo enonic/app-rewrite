@@ -1,4 +1,4 @@
-package com.enonic.app.rewrite;
+package com.enonic.app.rewrite.filter;
 
 import java.util.List;
 import java.util.Map;

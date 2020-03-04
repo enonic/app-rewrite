@@ -1,29 +1,26 @@
-package com.enonic.app.rewrite.engine;
+package com.enonic.app.rewrite.domain;
 
 import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.domain.RewriteRules;
-
-public class RewriteEngineConfig
+public class RewriteMapping
 {
     private Map<RewriteContextKey, RewriteRules> rewriteRulesMap;
 
-    private RewriteEngineConfig( final Builder builder )
+    private RewriteMapping( final Builder builder )
     {
         rewriteRulesMap = builder.rewriteRulesMap;
-    }
-
-    public Map<RewriteContextKey, RewriteRules> getRewriteRulesMap()
-    {
-        return rewriteRulesMap;
     }
 
     public static Builder create()
     {
         return new Builder();
+    }
+
+    public Map<RewriteContextKey, RewriteRules> getRewriteRulesMap()
+    {
+        return rewriteRulesMap;
     }
 
     public static final class Builder
@@ -46,9 +43,9 @@ public class RewriteEngineConfig
             return this;
         }
 
-        public RewriteEngineConfig build()
+        public RewriteMapping build()
         {
-            return new RewriteEngineConfig( this );
+            return new RewriteMapping( this );
         }
     }
 }

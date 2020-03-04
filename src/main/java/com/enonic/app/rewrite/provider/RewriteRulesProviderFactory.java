@@ -1,8 +1,8 @@
 package com.enonic.app.rewrite.provider;
 
-import com.enonic.app.rewrite.RewriteFilterConfig;
+import com.enonic.app.rewrite.filter.RewriteFilterConfig;
 
 public interface RewriteRulesProviderFactory
 {
-    RewriteRulesProvider get( final RewriteFilterConfig config );
+    RewriteMappingProvider get( final RewriteFilterConfig config );
 }

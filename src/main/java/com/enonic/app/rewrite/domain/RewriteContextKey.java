@@ -14,7 +14,7 @@ public class RewriteContextKey
     @Override
     public String toString()
     {
-        return "RewriteContextKey{" + "value='" + value + '\'' + '}';
+        return value;
     }
 
     @Override

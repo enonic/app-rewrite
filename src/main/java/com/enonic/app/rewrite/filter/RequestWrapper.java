@@ -1,4 +1,4 @@
-package com.enonic.app.rewrite;
+package com.enonic.app.rewrite.filter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

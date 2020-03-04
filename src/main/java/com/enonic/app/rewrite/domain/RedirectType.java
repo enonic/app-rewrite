@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.toMap;
 
 public enum RedirectType
 {
-    MOVED_PERMANENTLY( 301 ), TEMPORARILY_REDIRECT( 307 ), PERMANENT_REDIRECT( 308 );
+    MOVED_PERMANENTLY( 301 ), FOUND( 302 ), TEMPORARILY_REDIRECT( 307 ), PERMANENT_REDIRECT( 308 );
 
     private int httpCode;
 

@@ -9,7 +9,7 @@ import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.app.rewrite.domain.SimpleRewriteContext;
-import com.enonic.app.rewrite.engine.RewriteEngineConfig;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -30,11 +30,11 @@ class RewriteProcessorTest
                 build() ).
             build();
 
-        final RewriteEngineConfig rewriteEngineConfig = RewriteEngineConfig.create().
+        final RewriteMapping rewriteMapping = RewriteMapping.create().
             add( new RewriteContextKey( "myContextKey" ), rules ).
             build();
 
-        final RewriteProcessor processor = RewriteProcessor.from( rewriteEngineConfig );
+        final RewriteProcessor processor = RewriteProcessor.from( rewriteMapping );
 
         final Redirect redirect = processor.match( context, "/oldURL" );
 
@@ -57,11 +57,11 @@ class RewriteProcessorTest
                 build() ).
             build();
 
-        final RewriteEngineConfig rewriteEngineConfig = RewriteEngineConfig.create().
+        final RewriteMapping rewriteMapping = RewriteMapping.create().
             add( new RewriteContextKey( "myContextKey" ), rules ).
             build();
 
-        final RewriteProcessor processor = RewriteProcessor.from( rewriteEngineConfig );
+        final RewriteProcessor processor = RewriteProcessor.from( rewriteMapping );
 
         final Redirect redirect = processor.match( context, "/stuff" );
 
@@ -73,7 +73,7 @@ class RewriteProcessorTest
     @Test
     void testSimpleMatch()
     {
-        final RewriteEngineConfig config = RewriteEngineConfig.create().
+        final RewriteMapping config = RewriteMapping.create().
             add( new RewriteContextKey( "myVHost" ), RewriteRules.create().
                 addRule( RewriteRule.create().
                     from( "/a" ).
@@ -95,7 +95,7 @@ class RewriteProcessorTest
     @Test
     void wildcardMatch()
     {
-        final RewriteEngineConfig config = RewriteEngineConfig.create().
+        final RewriteMapping config = RewriteMapping.create().
             add( new RewriteContextKey( "myVHost" ), RewriteRules.create().
                 addRule( RewriteRule.create().
                     from( "/a/(.+)" ).

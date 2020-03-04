@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<tool xmlns="urn:enonic:xp:model:1.0">
+  <display-name>Redirect Manager</display-name>
+  <description>Redirect-configuration and management</description>
+  <allow>
+    <principal>role:system.admin</principal>
+    <principal>role:system.admin</principal>
+  </allow>
+</tool>

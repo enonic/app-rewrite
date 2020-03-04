@@ -9,6 +9,7 @@ import com.enonic.app.rewrite.MockHttpRequest;
 import com.enonic.app.rewrite.domain.Redirect;
 import com.enonic.app.rewrite.domain.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.web.vhost.VirtualHost;
@@ -30,7 +31,7 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        final RewriteEngineConfig engineConfig = RewriteEngineConfig.create().
+        final RewriteMapping engineConfig = RewriteMapping.create().
             add( new RewriteContextKey( "myvhost" ), rules ).
             build();
 
@@ -64,7 +65,7 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        final RewriteEngineConfig engineConfig = RewriteEngineConfig.create().
+        final RewriteMapping engineConfig = RewriteMapping.create().
             add( new RewriteContextKey( "myvhost" ), rules ).
             build();
 
