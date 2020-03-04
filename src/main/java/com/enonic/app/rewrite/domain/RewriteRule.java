@@ -54,7 +54,7 @@ public class RewriteRule
             return this;
         }
 
-        public Builder to( final String to )
+        public Builder target( final String to )
         {
             this.target = to;
             return this;

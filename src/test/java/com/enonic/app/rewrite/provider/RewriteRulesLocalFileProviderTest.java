@@ -15,7 +15,7 @@ class RewriteRulesLocalFileProviderTest
 {
 
     @Test
-    void name()
+    void testLoadVHostConfigs()
         throws Exception
     {
         final URL resource = getClass().getResource( "com.enonic.app.rewrite.myvhost.txt" );

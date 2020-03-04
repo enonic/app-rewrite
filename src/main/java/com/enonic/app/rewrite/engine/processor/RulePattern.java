@@ -1,6 +1,5 @@
 package com.enonic.app.rewrite.engine.processor;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.enonic.app.rewrite.domain.RedirectType;
@@ -13,7 +12,7 @@ class RulePattern
 
     private final RedirectType type;
 
-    private final int order;
+    private final int priority;
 
     private final Pattern pattern;
 
@@ -21,7 +20,7 @@ class RulePattern
     {
         target = builder.target;
         type = builder.type;
-        order = builder.order;
+        priority = builder.priority;
         this.pattern = Pattern.compile( builder.pattern );
     }
 
@@ -31,26 +30,20 @@ class RulePattern
     }
 
 
-    String match( final String value )
+    public Pattern getPattern()
     {
-        if ( value == null )
-        {
-            return null;
-        }
-
-        final Matcher matcher = this.pattern.matcher( value );
-        return matcher.matches() ? matcher.replaceFirst( target.toString() ) : null;
+        return pattern;
     }
 
     @Override
     public int compareTo( final RulePattern o )
     {
-        return Integer.compare( this.order, o.order );
+        return Integer.compare( this.priority, o.priority );
     }
 
-    String getTarget()
+    RewriteTarget getTarget()
     {
-        return target.toString();
+        return target;
     }
 
     RedirectType getType()
@@ -58,15 +51,15 @@ class RulePattern
         return type;
     }
 
-    int getOrder()
+    int getPriority()
     {
-        return order;
+        return priority;
     }
 
     @Override
     public String toString()
     {
-        return "RulePattern{" + "target=" + target + ", type=" + type + ", order=" + order + ", pattern=" + pattern + '}';
+        return "RulePattern{" + "target=" + target + ", type=" + type + ", priority=" + priority + ", pattern=" + pattern + '}';
     }
 
     static final class Builder
@@ -75,7 +68,7 @@ class RulePattern
 
         private RedirectType type;
 
-        private int order;
+        private int priority;
 
         private String pattern;
 
@@ -102,16 +95,9 @@ class RulePattern
             return this;
         }
 
-        Builder order( final int order )
+        Builder priority( final int priority )
         {
-            this.order = order;
-            return this;
-        }
-
-
-        Builder priority( final int order )
-        {
-            this.order = order;
+            this.priority = priority;
             return this;
         }
 
@@ -125,7 +111,7 @@ class RulePattern
         {
             if ( pattern == null )
             {
-                throw new IllegalArgumentException( "Patterns must not be null" );
+                throw new IllegalArgumentException( "Pattern must not be null" );
             }
         }
 

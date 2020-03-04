@@ -13,6 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.context.ContextResolver;
+import com.enonic.app.rewrite.domain.Redirect;
+import com.enonic.app.rewrite.domain.RedirectExternal;
+import com.enonic.app.rewrite.domain.RedirectTarget;
 import com.enonic.app.rewrite.engine.RewriteEngine;
 import com.enonic.app.rewrite.provider.RewriteRulesProvider;
 import com.enonic.app.rewrite.provider.RewriteRulesProviderFactory;
@@ -53,7 +56,7 @@ public class RewriteFilter
         LOG.info( "Handling in RewriteFilter" );
         LOG.debug( "Im in debug-mode" );
 
-        final boolean responseCommitted = doRewriteURL( req, res, chain );
+        final boolean responseCommitted = doRewriteURL( req, res );
         if ( !responseCommitted )
         {
             chain.doFilter( req, res );
@@ -71,10 +74,10 @@ public class RewriteFilter
         return true;
     }
 
-    private boolean doRewriteURL( HttpServletRequest hsRequest, HttpServletResponse hsResponse, FilterChain chain )
+    private boolean doRewriteURL( HttpServletRequest hsRequest, HttpServletResponse hsResponse )
         throws Exception
     {
-        LOG.info( "Checking if URL is to be rewritten" );
+        LOG.info( "Checking if URL is target be rewritten" );
 
         if ( !this.config.enabled() )
         {
@@ -89,21 +92,31 @@ public class RewriteFilter
             LOG.debug( "Skipped: " + hsRequest.getRequestURI() );
             return false;
         }
-        final String url = rewriteEngine.process( hsRequest );
+        final Redirect redirect = rewriteEngine.process( hsRequest );
 
-        if ( url == null )
+        if ( redirect == null )
         {
-            LOG.debug( "Ignored: " + hsRequest.getRequestURI() );
+            LOG.debug( "No matching rules: " + hsRequest.getRequestURI() );
             return false;
         }
 
-        LOG.debug( "Changed from: " + hsRequest.getRequestURI() + " to: " + url );
+        final RedirectTarget redirectTarget = redirect.getRedirectTarget();
+        LOG.debug( "Changed from: " + hsRequest.getRequestURI() + " target: " + redirectTarget );
 
-        hsResponse.sendRedirect( url );
+        final int httpCode = redirect.getType().getHttpCode();
 
+        if ( redirect.getRedirectTarget() instanceof RedirectExternal )
+        {
+            hsResponse.setStatus( httpCode );
+            hsResponse.sendRedirect( redirect.getRedirectTarget().getTargetPath() );
+        }
+        else
+        {
+            hsResponse.setStatus( httpCode );
+            hsResponse.setHeader( "Location", redirect.getRedirectTarget().getTargetPath() );
+        }
         return true;
     }
-
 
     @Reference
     public void setConfig( final RewriteFilterConfig config )

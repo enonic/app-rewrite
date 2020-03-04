@@ -2,32 +2,30 @@ package com.enonic.app.rewrite.domain;
 
 public class RewriteTarget
 {
-    private String target;
+    private final String path;
 
-    boolean isAbsolute()
+    private final boolean isExternal;
+
+    private RewriteTarget( final String path )
     {
-        return this.target.startsWith( "/" );
+        this.path = path;
+        this.isExternal = path.startsWith( "http" );
     }
 
-    String target()
+    public static RewriteTarget from( final String targetString )
     {
-        return this.target;
+        return new RewriteTarget( targetString );
     }
 
-    public RewriteTarget( final String url )
+    public String path()
     {
-
-        this.target = url;
+        return path;
     }
 
-    public static RewriteTarget from( final String value )
+    public boolean isExternal()
     {
-        return new RewriteTarget( value );
-    }
-
-    @Override
-    public String toString()
-    {
-        return this.target;
+        return isExternal;
     }
 }
+
+

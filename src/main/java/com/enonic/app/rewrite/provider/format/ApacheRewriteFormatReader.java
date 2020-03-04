@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
@@ -20,6 +23,8 @@ class ApacheRewriteFormatReader
 
     private static RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.MOVED_PERMANENTLY;
 
+    private final static Logger LOG = LoggerFactory.getLogger( ApacheRewriteFormatReader.class );
+
     static RewriteRule read( final String value )
     {
         if ( Strings.isNullOrEmpty( value ) )
@@ -32,15 +37,33 @@ class ApacheRewriteFormatReader
         if ( matcher.matches() )
         {
             final String from = clean( matcher.group( 1 ) );
-            final String to = clean( matcher.group( 2 ) );
+            final String target = clean( matcher.group( 2 ) );
             final Map<String, String> flags = parseFlags( matcher.group( 4 ) );
+
+            final RedirectType type;
+
+            if ( flags.get( REDIRECT_CODE_KEY ) != null )
+            {
+                if ( RedirectType.valueOf( Integer.valueOf( flags.get( REDIRECT_CODE_KEY ) ) ) != null )
+                {
+                    type = RedirectType.valueOf( Integer.valueOf( flags.get( REDIRECT_CODE_KEY ) ) );
+                }
+                else
+                {
+                    LOG.warn( "Cannot read redirect-type for code %s, using default %s", flags.get( REDIRECT_CODE_KEY ),
+                              DEFAULT_REDIRECT_TYPE );
+                    type = DEFAULT_REDIRECT_TYPE;
+                }
+            }
+            else
+            {
+                type = DEFAULT_REDIRECT_TYPE;
+            }
 
             return RewriteRule.create().
                 from( from ).
-                to( clean( matcher.group( 2 ) ) ).
-                type( flags.get( REDIRECT_CODE_KEY ) != null
-                          ? RedirectType.valueOf( Integer.valueOf( flags.get( REDIRECT_CODE_KEY ) ) )
-                          : DEFAULT_REDIRECT_TYPE ).
+                target( clean( target ) ).
+                type( type ).
                 build();
         }
 

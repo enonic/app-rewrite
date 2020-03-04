@@ -1,46 +1,24 @@
 package com.enonic.app.rewrite;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.mockito.Mockito;
 
+import com.enonic.xp.web.vhost.VirtualHost;
+
 public class MockHttpRequest
 {
-
-    public MockHttpRequest( final HttpServletRequest request, final String contextPath )
-    {
-        this.request = request;
-        this.contextPath = contextPath;
-    }
-
     private final HttpServletRequest request;
-
-    private final String contextPath;
 
     private MockHttpRequest( final Builder builder )
     {
-        contextPath = builder.contextPath;
-
         this.request = Mockito.mock( HttpServletRequest.class );
-        final URL url;
-        try
-        {
-            url = new URL( builder.url );
-        }
-        catch ( MalformedURLException e )
-        {
-            throw new RuntimeException( "Cannot create url" );
-        }
-
-        Mockito.when( request.getProtocol() ).thenReturn( url.getProtocol() );
-        Mockito.when( request.getServerName() ).thenReturn( url.getHost() );
-        Mockito.when( request.getServerPort() ).thenReturn( url.getPort() );
-        Mockito.when( request.getQueryString() ).thenReturn( url.getQuery() );
-        Mockito.when( request.getRequestURI() ).thenReturn( url.getPath() );
-        Mockito.when( request.getContextPath() ).thenReturn( contextPath );
+        Mockito.when( this.request.getContextPath() ).thenReturn( builder.contextPath );
+        final URI uri = URI.create( builder.url );
+        Mockito.when( this.request.getRequestURI() ).thenReturn( uri.getPath() );
+        Mockito.when( this.request.getAttribute( VirtualHost.class.getName() ) ).thenReturn( builder.virtualHost );
     }
 
     public HttpServletRequest getRequest()
@@ -53,12 +31,13 @@ public class MockHttpRequest
         return new Builder();
     }
 
-
     public static final class Builder
     {
         private String url;
 
         private String contextPath;
+
+        private VirtualHost virtualHost;
 
         private Builder()
         {
@@ -76,10 +55,17 @@ public class MockHttpRequest
             return this;
         }
 
+        public Builder vhost( final VirtualHost virtualHost )
+        {
+            this.virtualHost = virtualHost;
+            return this;
+        }
+
         public MockHttpRequest build()
         {
             return new MockHttpRequest( this );
         }
+
     }
 
 }
