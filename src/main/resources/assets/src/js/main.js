@@ -12,16 +12,16 @@ let initListeners = function () {
     $(model.input.requestURL).keyup(function () {
         delay(function () {
             testRequest();
-        }, 100);
+        }, 150);
     });
 };
 
 let testRequest = function () {
 
-    let fieldVal = $(model.input.requestURL).val();
+    cleanTestState();
 
+    let fieldVal = $(model.input.requestURL).val();
     if (fieldVal === "") {
-        $(model.elements.vhosts).removeClass("match");
         return;
     }
 
@@ -52,7 +52,6 @@ let handleError = function (result) {
 
 let processResult = function (data) {
 
-    $(model.elements.vhosts).removeClass("match");
 
     if (data.result.virtualHost.name) {
 
@@ -62,6 +61,11 @@ let processResult = function (data) {
         $(model.elements.result).html(generateResultHtml(data.result));
     }
 
+};
+
+let cleanTestState = function () {
+    $(model.elements.vhosts).removeClass("match");
+    $(model.elements.result).html("");
 };
 
 let generateResultHtml = function (result) {
