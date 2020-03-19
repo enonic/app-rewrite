@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -64,10 +65,11 @@ class RewriteMappingLocalFileProvider
 
         LOG.info( "Fetching rewrite-config from file: [{}]", item.path );
 
+        final AtomicInteger i = new AtomicInteger( 0 );
         try (final Stream<String> stream = Files.lines( Paths.get( item.path.toString() ) ))
         {
             stream.forEach( line -> {
-                final RewriteRule rule = RewriteFormatReader.read( line );
+                final RewriteRule rule = RewriteFormatReader.read( line, i.getAndIncrement() );
                 if ( rule != null )
                 {
                     rewritesBuilder.addRule( rule );

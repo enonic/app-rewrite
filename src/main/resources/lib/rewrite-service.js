@@ -1,7 +1,12 @@
-var bean = __.newBean('com.enonic.app.rewrite.RewriteBean');
+let bean = __.newBean('com.enonic.app.rewrite.RewriteBean');
 
 
 exports.getRewriteMapping = function () {
-    var result = bean.getRewriteMapping();
+    let result = bean.getRewriteMapping();
+    return __.toNativeObject(result);
+};
+
+exports.testRequest = function (requestURL) {
+    let result = bean.requestTester(requestURL);
     return __.toNativeObject(result);
 };

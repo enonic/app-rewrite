@@ -1,6 +1,8 @@
 package com.enonic.app.rewrite.mapping;
 
 import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 
@@ -19,15 +21,36 @@ public class RewriteMappingMapper
     {
         this.rewriteMapping.getRewriteRulesMap().forEach( ( key, rules ) -> {
             gen.map( key.toString() );
-            gen.array( "rules" );
-            rules.forEach( rule -> {
-                gen.map();
-                gen.value( "from", rule.getFrom() );
-                gen.value( "to", rule.getTarget().path() );
-                gen.value( "type", rule.getType() );
-                gen.end();
-            } );
+            mapRules( gen, rules );
             gen.end();
         } );
+    }
+
+    private void mapRules( final MapGenerator gen, final RewriteRules rules )
+    {
+        gen.array( "rules" );
+        rules.forEach( rule -> {
+            mapRule( gen, rule );
+        } );
+        gen.end();
+    }
+
+    private void mapRule( final MapGenerator gen, final RewriteRule rule )
+    {
+        gen.map();
+        gen.value( "order", rule.getOrder() );
+        gen.value( "from", rule.getFrom() );
+        mapTarget( gen, rule );
+        gen.value( "type", rule.getType() );
+
+        gen.end();
+    }
+
+    private void mapTarget( final MapGenerator gen, final RewriteRule rule )
+    {
+        gen.map( "target" );
+        gen.value( "path", rule.getTarget().path() );
+        gen.value( "external", rule.getTarget().isExternal() );
+        gen.end();
     }
 }

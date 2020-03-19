@@ -13,9 +13,9 @@ import com.enonic.app.rewrite.domain.RedirectExternal;
 import com.enonic.app.rewrite.domain.RedirectInternal;
 import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteTarget;
-import com.enonic.app.rewrite.domain.RewriteMapping;
 
 public class RewriteProcessor
 {
@@ -42,7 +42,7 @@ public class RewriteProcessor
             {
                 final RulePattern pattern = RulePattern.create().
                     target( rule.getTarget() ).
-                    priority( priority++ ).
+                    order( rule.getOrder() ).
                     type( rule.getType() ).
                     pattern( rule.getFrom() ).
                     build();

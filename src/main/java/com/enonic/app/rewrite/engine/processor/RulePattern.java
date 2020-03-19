@@ -12,7 +12,7 @@ class RulePattern
 
     private final RedirectType type;
 
-    private final int priority;
+    private final int order;
 
     private final Pattern pattern;
 
@@ -20,7 +20,7 @@ class RulePattern
     {
         target = builder.target;
         type = builder.type;
-        priority = builder.priority;
+        order = builder.order;
         this.pattern = Pattern.compile( builder.pattern );
     }
 
@@ -38,7 +38,7 @@ class RulePattern
     @Override
     public int compareTo( final RulePattern o )
     {
-        return Integer.compare( this.priority, o.priority );
+        return Integer.compare( this.order, o.order );
     }
 
     RewriteTarget getTarget()
@@ -51,15 +51,15 @@ class RulePattern
         return type;
     }
 
-    int getPriority()
+    int getOrder()
     {
-        return priority;
+        return order;
     }
 
     @Override
     public String toString()
     {
-        return "RulePattern{" + "target=" + target + ", type=" + type + ", priority=" + priority + ", pattern=" + pattern + '}';
+        return "RulePattern{" + "target=" + target + ", type=" + type + ", order=" + order + ", pattern=" + pattern + '}';
     }
 
     static final class Builder
@@ -68,7 +68,7 @@ class RulePattern
 
         private RedirectType type;
 
-        private int priority;
+        private int order;
 
         private String pattern;
 
@@ -95,9 +95,9 @@ class RulePattern
             return this;
         }
 
-        Builder priority( final int priority )
+        Builder order( final int priority )
         {
-            this.priority = priority;
+            this.order = priority;
             return this;
         }
 

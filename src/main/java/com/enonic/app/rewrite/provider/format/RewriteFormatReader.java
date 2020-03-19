@@ -9,13 +9,13 @@ public class RewriteFormatReader
 {
     private static final Logger LOG = LoggerFactory.getLogger( RewriteFormatReader.class );
 
-    public static RewriteRule read( final String value )
+    public static RewriteRule read( final String value, final int order )
     {
         RewriteRule rule = null;
 
         try
         {
-            rule = ApacheRewriteFormatReader.read( value );
+            rule = ApacheRewriteFormatReader.read( value, order );
             if ( rule != null )
             {
                 return rule;

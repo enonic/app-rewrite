@@ -1,0 +1,50 @@
+.redirect-manager {
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+
+  .request-tester {
+
+    width: 100%;
+    margin: 20px 0;
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+    }
+
+  }
+
+  div.match {
+    outline: none;
+    border-color: lime;
+    box-shadow: 0 0 10px lime;
+  }
+
+  .vhost {
+
+    padding: 10px;
+    border: 1px solid silver;
+    border-radius: 2px;
+
+    margin: 20px 0;
+
+    table {
+
+      thead.thead-dark {
+
+        th {
+          color: white;
+          background-color: #666;
+          border-color: #333;
+        }
+
+      }
+
+    }
+
+  }
+
+}
