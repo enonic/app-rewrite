@@ -1,4 +1,4 @@
-# app-redirect
+# app-rewrite
 App for handling request redirects
 
 
