@@ -3,6 +3,8 @@ package com.enonic.app.rewrite.requesttester;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import com.google.common.base.Strings;
+
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.domain.Redirect;
 import com.enonic.xp.web.vhost.VirtualHost;
@@ -19,7 +21,12 @@ public class RequestTesterImpl
     @Override
     public RequestTesterResult testRequest( final String requestURL )
     {
-        final RewriteTesterRequest req = new RewriteTesterRequest( "https://" + requestURL );
+        if ( Strings.isNullOrEmpty( requestURL ) )
+        {
+            return new RequestTesterResult( null, null );
+        }
+
+        final RewriteTesterRequest req = new RewriteTesterRequest( requestURL );
         getAndSetVHost( req );
 
         final VirtualHost virtualHost = VirtualHostHelper.getVirtualHost( req );

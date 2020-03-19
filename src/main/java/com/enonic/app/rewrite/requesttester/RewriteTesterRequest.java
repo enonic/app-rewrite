@@ -41,17 +41,30 @@ public class RewriteTesterRequest
 
     public RewriteTesterRequest( final String requestURL )
     {
+        final String value = sanitize( requestURL );
+
         try
         {
-            this.requestURL = new URL( requestURL );
+            this.requestURL = new URL( value );
             this.requestURI = this.requestURL.toURI();
         }
         catch ( MalformedURLException | URISyntaxException e )
         {
-            e.printStackTrace();
-            throw new IllegalArgumentException( "Cannot process request" );
+            throw new IllegalArgumentException( "Cannot create test-request from [" + requestURL + "]", e );
         }
 
+    }
+
+    private String sanitize( final String value )
+    {
+        String sanitized = value;
+
+        if ( !sanitized.startsWith( "https://" ) && !sanitized.startsWith( "http://" ) )
+        {
+            sanitized = "https://" + sanitized;
+        }
+
+        return sanitized;
     }
 
     @Override

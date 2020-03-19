@@ -12,14 +12,21 @@ let initListeners = function () {
     $(model.input.requestURL).keyup(function () {
         delay(function () {
             testRequest();
-        }, 10);
+        }, 100);
     });
 };
 
 let testRequest = function () {
 
+    let fieldVal = $(model.input.requestURL).val();
+
+    if (fieldVal === "") {
+        $(model.elements.vhosts).removeClass("match");
+        return;
+    }
+
     let data = {
-        requestURL: $(model.input.requestURL).val()
+        requestURL: fieldVal
     };
 
     jQuery.ajax({
@@ -27,12 +34,20 @@ let testRequest = function () {
         cache: false,
         type: 'GET',
         data: data,
+        error: function (request, status, error) {
+            $(model.elements.result).html(request.responseText);
+        },
         success: function (result) {
             console.log("Result: ", JSON.stringify(result));
             processResult(result);
         }
     });
 
+};
+
+let handleError = function (result) {
+
+    $(model.elements.result).html("<p>Error: " + result.message + "</p>");
 };
 
 let processResult = function (data) {

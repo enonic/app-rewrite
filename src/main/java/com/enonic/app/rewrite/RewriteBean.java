@@ -1,6 +1,7 @@
 package com.enonic.app.rewrite;
 
 import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.mapping.ErrorMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingMapper;
 import com.enonic.app.rewrite.requesttester.RequestTester;
@@ -31,7 +32,15 @@ public class RewriteBean
 
     public Object requestTester( final String requestURI )
     {
-        final RequestTesterResult requestTesterResult = this.requestTester.testRequest( requestURI );
+        final RequestTesterResult requestTesterResult;
+        try
+        {
+            requestTesterResult = this.requestTester.testRequest( requestURI );
+        }
+        catch ( Exception e )
+        {
+            return new ErrorMapper( e );
+        }
 
         return new RequestTesterResultMapper( requestTesterResult );
     }
