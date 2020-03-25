@@ -9,6 +9,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.enonic.app.rewrite.domain.Redirect;
+import com.enonic.app.rewrite.domain.RedirectMatch;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.engine.RewriteEngine;
 import com.enonic.app.rewrite.filter.RewriteFilterConfig;
@@ -36,7 +37,7 @@ public class RewriteServiceImpl
     }
 
     @Override
-    public Redirect process( final HttpServletRequest request )
+    public RedirectMatch process( final HttpServletRequest request )
     {
         return this.rewriteEngine.process( request );
     }

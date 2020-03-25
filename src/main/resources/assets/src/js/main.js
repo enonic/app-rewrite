@@ -18,8 +18,6 @@ let initListeners = function () {
 
 let testRequest = function () {
 
-    cleanTestState();
-
     let fieldVal = $(model.input.requestURL).val();
     if (fieldVal === "") {
         return;
@@ -52,34 +50,36 @@ let handleError = function (result) {
 
 let processResult = function (data) {
 
-
     if (data.result.virtualHost.name) {
 
-        let matchingVhost = $("#vhost_" + data.result.virtualHost.name);
-        matchingVhost.addClass("match");
+        toogleMatch(model.elements.vhosts, "#vhost_" + data.result.virtualHost.name);
 
-        $(model.elements.result).html(generateResultHtml(data.result));
+        let matchingRule = data.result.rewrite.matchId;
+
+        if (matchingRule != null) {
+            toogleMatch(model.elements.rows, "#" + data.result.virtualHost.name + "_" + matchingRule);
+        } else {
+            toogleMatch(model.elements.rows, null)
+        }
+
+    } else {
+        toogleMatch(model.elements.vhosts, null);
+        toogleMatch(model.elements.rows, null);
     }
-
 };
 
-let cleanTestState = function () {
-    $(model.elements.vhosts).removeClass("match");
-    $(model.elements.result).html("");
-};
+let toogleMatch = function (selector, matchId) {
 
-let generateResultHtml = function (result) {
-    let html = "";
-
-    if (result.virtualHost.name) {
-        html += "<p>vhost: " + result.virtualHost.name + "</p>";
+    if (!matchId) {
+        $(selector).removeClass("match");
+        return;
     }
 
-    if (result.rewrite.target) {
-        html += "<p>target: " + result.rewrite.target + "</p>";
-    }
-    return html;
+    let matching = $(matchId);
+    $(selector).not(matching).removeClass("match");
+    matching.addClass("match");
 };
+
 
 let delay = (function () {
     let timer = 0;

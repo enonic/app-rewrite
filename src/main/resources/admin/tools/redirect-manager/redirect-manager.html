@@ -32,13 +32,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-th-each="rule,iterStat : ${mapping.value.rules}">
-                    <td data-th-text="${rule.order}"></td>
-                    <td data-th-text="${rule.from}"></td>
-                    <td data-th-text="${rule.target.path}"></td>
-                    <td data-th-text="${rule.target.external}"></td>
-                    <td data-th-text="${rule.type}"></td>
-                </tr>
+                <div data-th-each="rule,iterStat : ${mapping.value.rules}" data-th-remove="tag">
+                    <tr data-th-id="${mapping.key + '_' + rule.order}">
+                        <td data-th-text="${rule.order }"></td>
+                        <td data-th-text="${rule.from}"></td>
+                        <td data-th-text="${rule.target.path}"></td>
+                        <td data-th-text="${rule.target.external}"></td>
+                        <td data-th-text="${rule.type}"></td>
+                    </tr>
+                </div>
                 </tbody>
             </table>
         </div>

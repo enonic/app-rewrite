@@ -17,6 +17,7 @@ import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.context.ContextResolver;
 import com.enonic.app.rewrite.domain.Redirect;
 import com.enonic.app.rewrite.domain.RedirectExternal;
+import com.enonic.app.rewrite.domain.RedirectMatch;
 import com.enonic.app.rewrite.domain.RedirectTarget;
 import com.enonic.xp.annotation.Order;
 import com.enonic.xp.web.filter.OncePerRequestFilter;
@@ -87,14 +88,15 @@ public class RewriteFilter
             LOG.debug( "Skipped: " + hsRequest.getRequestURI() );
             return false;
         }
-        final Redirect redirect = rewriteService.process( hsRequest );
+        final RedirectMatch match = rewriteService.process( hsRequest );
 
-        if ( redirect == null )
+        if ( match == null )
         {
             LOG.debug( "No matching rules: " + hsRequest.getRequestURI() );
             return false;
         }
 
+        final Redirect redirect = match.getRedirect();
         final RedirectTarget redirectTarget = redirect.getRedirectTarget();
         LOG.debug( "Changed from: " + hsRequest.getRequestURI() + " target: " + redirectTarget );
 

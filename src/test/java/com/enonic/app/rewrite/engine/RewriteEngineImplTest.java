@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.enonic.app.rewrite.MockHttpRequest;
-import com.enonic.app.rewrite.domain.Redirect;
+import com.enonic.app.rewrite.domain.RedirectMatch;
 import com.enonic.app.rewrite.domain.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
@@ -48,10 +48,10 @@ class RewriteEngineImplTest
             vhost( vhost ).
             build().getRequest();
 
-        final Redirect redirect = rewriteEngine.process( request );
+        final RedirectMatch match = rewriteEngine.process( request );
 
-        assertNotNull( redirect );
-        assertEquals( "/newUrl", redirect.getRedirectTarget().getTargetPath() );
+        assertNotNull( match );
+        assertEquals( "/newUrl", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 
     @Test
@@ -82,9 +82,9 @@ class RewriteEngineImplTest
             vhost( vhost ).
             build().getRequest();
 
-        final Redirect redirect = rewriteEngine.process( request );
+        final RedirectMatch match = rewriteEngine.process( request );
 
-        assertNotNull( redirect );
-        assertEquals( "/newUrl/child", redirect.getRedirectTarget().getTargetPath() );
+        assertNotNull( match );
+        assertEquals( "/newUrl/child", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 }

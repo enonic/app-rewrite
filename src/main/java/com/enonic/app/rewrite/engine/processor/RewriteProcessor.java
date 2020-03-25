@@ -11,6 +11,7 @@ import com.google.common.collect.Maps;
 import com.enonic.app.rewrite.domain.Redirect;
 import com.enonic.app.rewrite.domain.RedirectExternal;
 import com.enonic.app.rewrite.domain.RedirectInternal;
+import com.enonic.app.rewrite.domain.RedirectMatch;
 import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
@@ -58,7 +59,7 @@ public class RewriteProcessor
         return new RewriteProcessor( rewriteMap );
     }
 
-    public Redirect match( final RewriteContext rewriteContext, final String requestPath )
+    public RedirectMatch match( final RewriteContext rewriteContext, final String requestPath )
     {
         if ( requestPath == null )
         {
@@ -81,7 +82,7 @@ public class RewriteProcessor
             {
                 continue;
             }
-            return createRedirect( rewriteContext, rulePattern, matcher );
+            return new RedirectMatch( createRedirect( rewriteContext, rulePattern, matcher ), rulePattern.getOrder() );
         }
 
         return null;

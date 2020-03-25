@@ -6,7 +6,7 @@ import org.osgi.service.component.annotations.Reference;
 import com.google.common.base.Strings;
 
 import com.enonic.app.rewrite.RewriteService;
-import com.enonic.app.rewrite.domain.Redirect;
+import com.enonic.app.rewrite.domain.RedirectMatch;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
 
@@ -30,7 +30,7 @@ public class RequestTesterImpl
         getAndSetVHost( req );
 
         final VirtualHost virtualHost = VirtualHostHelper.getVirtualHost( req );
-        final Redirect redirect = this.rewriteService.process( req );
+        final RedirectMatch redirect = this.rewriteService.process( req );
 
         return new RequestTesterResult( virtualHost, redirect );
     }

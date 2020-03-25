@@ -1,6 +1,6 @@
 package com.enonic.app.rewrite.requesttester;
 
-import com.enonic.app.rewrite.domain.Redirect;
+import com.enonic.app.rewrite.domain.RedirectMatch;
 import com.enonic.xp.web.vhost.VirtualHost;
 
 public class RequestTesterResult
@@ -8,12 +8,12 @@ public class RequestTesterResult
 
     private final VirtualHost virtualHost;
 
-    private final Redirect redirect;
+    private final RedirectMatch match;
 
-    public RequestTesterResult( final VirtualHost virtualHost, final Redirect redirect )
+    public RequestTesterResult( final VirtualHost virtualHost, final RedirectMatch match )
     {
         this.virtualHost = virtualHost;
-        this.redirect = redirect;
+        this.match = match;
     }
 
     public VirtualHost getVirtualHost()
@@ -21,8 +21,8 @@ public class RequestTesterResult
         return virtualHost;
     }
 
-    public Redirect getRedirect()
+    public RedirectMatch getRedirectMatch()
     {
-        return redirect;
+        return match;
     }
 }
