@@ -43,10 +43,6 @@ let testRequest = function () {
 
 };
 
-let handleError = function (result) {
-
-    $(model.elements.result).html("<p>Error: " + result.message + "</p>");
-};
 
 let processResult = function (data) {
 
@@ -80,7 +76,7 @@ let toogleMatch = function (selector, matchId, scrollTo) {
     matching.addClass("match");
 
     if (scrollTo) {
-        matching.get(0).scrollIntoView(false);
+        matching.get(0).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
 
 };
