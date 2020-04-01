@@ -57,18 +57,18 @@ let processResult = function (data) {
         let matchingRule = data.result.rewrite.matchId;
 
         if (matchingRule != null) {
-            toogleMatch(model.elements.rows, "#" + data.result.virtualHost.name + "_" + matchingRule);
+            toogleMatch(model.elements.rows, "#" + data.result.virtualHost.name + "_" + matchingRule, true);
         } else {
             toogleMatch(model.elements.rows, null)
         }
 
     } else {
-        toogleMatch(model.elements.vhosts, null);
-        toogleMatch(model.elements.rows, null);
+        toogleMatch(model.elements.vhosts, null, false);
+        toogleMatch(model.elements.rows, null, false);
     }
 };
 
-let toogleMatch = function (selector, matchId) {
+let toogleMatch = function (selector, matchId, scrollTo) {
 
     if (!matchId) {
         $(selector).removeClass("match");
@@ -78,6 +78,11 @@ let toogleMatch = function (selector, matchId) {
     let matching = $(matchId);
     $(selector).not(matching).removeClass("match");
     matching.addClass("match");
+
+    if (scrollTo) {
+        matching.get(0).scrollIntoView(false);
+    }
+
 };
 
 

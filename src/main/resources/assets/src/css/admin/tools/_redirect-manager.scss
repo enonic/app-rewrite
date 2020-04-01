@@ -3,12 +3,18 @@
   display: flex;
   flex-direction: column;
 
-  padding: 10px;
-
   .request-tester {
 
     width: 100%;
-    margin: 20px 0;
+    height: 200px;
+    position: sticky;
+    top: 0;
+    border: 1px solid silver;
+    background: #eee;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.75);
+    z-index: 100;
+
+    padding: 20px;
 
     input[type="text"] {
       width: 100%;
@@ -17,34 +23,40 @@
 
   }
 
-  div.match {
-    outline: none;
-    border-color: lime;
-    box-shadow: 0 0 10px lime;
-  }
+  .request-tester-result {
 
-  tr.match {
-    background-color: lime !important;
-  }
+    padding: 20px;
 
-  .vhost {
+    div.match {
+      outline: none;
+      border-color: lime;
+      box-shadow: 0 0 10px lime;
+    }
 
-    padding: 10px;
-    border: 1px solid silver;
-    border-radius: 2px;
+    tr.match {
+      background-color: lime !important;
+    }
 
-    margin: 20px 0;
+    .vhost {
 
-    table {
+      padding: 10px;
+      border: 1px solid silver;
+      border-radius: 2px;
 
-      max-width: 100%;
+      margin: 20px 0;
 
-      thead.thead-dark {
+      table {
 
-        th {
-          color: white;
-          background-color: #666;
-          border-color: #333;
+        max-width: 100%;
+
+        thead.thead-dark {
+
+          th {
+            color: white;
+            background-color: #666;
+            border-color: #333;
+          }
+
         }
 
       }
