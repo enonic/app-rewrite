@@ -25,8 +25,6 @@ public final class VirtualHostMappings
     {
         for ( final VirtualHostMapping entry : this.set )
         {
-            System.out.println( "Checking entry: " + entry );
-
             if ( entry.matches( req ) )
             {
                 return entry;

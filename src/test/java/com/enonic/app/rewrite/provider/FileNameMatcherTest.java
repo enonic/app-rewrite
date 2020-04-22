@@ -5,12 +5,13 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
+import com.enonic.app.rewrite.provider.file.FileNameMatcher;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FileNameMatcherTest
 {
-
     @Test
     void testMatcher()
     {
@@ -19,6 +20,5 @@ class FileNameMatcherTest
 
         assertTrue( FileNameMatcher.matches( path, pattern ) );
         assertEquals( "myvhost", FileNameMatcher.getMatch( path, pattern, 1 ) );
-
     }
 }

@@ -1,6 +1,6 @@
 package com.enonic.app.rewrite.requesttester;
 
-import com.enonic.app.rewrite.domain.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.xp.web.vhost.VirtualHost;
 
 public class RequestTesterResult

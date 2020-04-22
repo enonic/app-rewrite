@@ -30,7 +30,7 @@ import javax.servlet.http.Part;
 
 import com.google.common.collect.Maps;
 
-public class RewriteTesterRequest
+class RewriteTesterRequest
     implements HttpServletRequest
 {
     private final URL requestURL;

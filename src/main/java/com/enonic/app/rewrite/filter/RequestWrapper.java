@@ -3,7 +3,7 @@ package com.enonic.app.rewrite.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-public class RequestWrapper
+class RequestWrapper
     extends HttpServletRequestWrapper
 {
     private String contextPath;

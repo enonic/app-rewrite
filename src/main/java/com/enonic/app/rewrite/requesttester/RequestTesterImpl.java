@@ -6,7 +6,7 @@ import org.osgi.service.component.annotations.Reference;
 import com.google.common.base.Strings;
 
 import com.enonic.app.rewrite.RewriteService;
-import com.enonic.app.rewrite.domain.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
 

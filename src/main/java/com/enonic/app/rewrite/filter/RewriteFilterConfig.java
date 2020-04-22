@@ -6,6 +6,8 @@ public interface RewriteFilterConfig
 {
     boolean enabled();
 
+    String provider();
+
     List<String> excludePatterns();
 
     List<String> includePatterns();

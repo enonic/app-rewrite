@@ -1,6 +1,9 @@
 package com.enonic.app.rewrite;
 
-import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.redirect.RedirectType;
+import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingMapper;
@@ -44,5 +47,20 @@ public class RewriteBean
 
         return new RequestTesterResultMapper( requestTesterResult );
     }
+
+    public Object store( final StoreRuleParams params )
+    {
+        System.out.println( params );
+
+        this.rewriteService.store( new RewriteContextKey( params.getContextKey() ), RewriteRule.create().
+            from( params.getFrom() ).
+            target( params.getTarget() ).
+            order( params.getOrder() ).
+            type( RedirectType.MOVED_PERMANENTLY ).
+            build() );
+
+        return null;
+    }
+
 
 }

@@ -1,6 +1,6 @@
 package com.enonic.app.rewrite.mapping;
 
-import com.enonic.app.rewrite.domain.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;

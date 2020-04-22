@@ -12,7 +12,7 @@ import com.enonic.xp.config.ConfigBuilder;
 import com.enonic.xp.config.ConfigInterpolator;
 import com.enonic.xp.config.Configuration;
 
-@Component(immediate = true, configurationPid = "com.enonic.xp.app.rewrite")
+@Component(immediate = true, configurationPid = "com.enonic.app.rewrite")
 public class RewriteFilterConfigImpl
     implements RewriteFilterConfig
 {
@@ -37,6 +37,12 @@ public class RewriteFilterConfigImpl
     private List<String> doGetCommaSeparatedPropAsList( final String propertyName )
     {
         return Stream.of( this.config.get( propertyName ).split( "," ) ).collect( Collectors.toList() );
+    }
+
+    @Override
+    public String provider()
+    {
+        return this.config.get( "provider" );
     }
 
     @Override

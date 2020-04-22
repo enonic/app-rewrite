@@ -12,13 +12,12 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.enonic.app.rewrite.Patterns;
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.context.ContextResolver;
-import com.enonic.app.rewrite.domain.Redirect;
-import com.enonic.app.rewrite.domain.RedirectExternal;
-import com.enonic.app.rewrite.domain.RedirectMatch;
-import com.enonic.app.rewrite.domain.RedirectTarget;
+import com.enonic.app.rewrite.redirect.Redirect;
+import com.enonic.app.rewrite.redirect.RedirectExternal;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectTarget;
 import com.enonic.xp.annotation.Order;
 import com.enonic.xp.web.filter.OncePerRequestFilter;
 
@@ -36,12 +35,11 @@ public class RewriteFilter
 
     private RewriteService rewriteService;
 
-    public final static Logger LOG = LoggerFactory.getLogger( RewriteFilter.class );
+    private final static Logger LOG = LoggerFactory.getLogger( RewriteFilter.class );
 
     @Activate
     public void activate()
     {
-        System.out.println( "Activating RewriteFilter" );
         this.excludePatterns = new Patterns( config.excludePatterns() );
     }
 
@@ -49,9 +47,6 @@ public class RewriteFilter
     protected void doHandle( final HttpServletRequest req, final HttpServletResponse res, final FilterChain chain )
         throws Exception
     {
-        LOG.info( "Handling in RewriteFilter" );
-        LOG.debug( "Im in debug-mode" );
-
         final boolean responseCommitted = doRewriteURL( req, res );
         if ( !responseCommitted )
         {
@@ -73,7 +68,6 @@ public class RewriteFilter
     private boolean doRewriteURL( HttpServletRequest hsRequest, HttpServletResponse hsResponse )
         throws Exception
     {
-        LOG.info( "Checking if URL is target be rewritten" );
 
         if ( !this.config.enabled() )
         {

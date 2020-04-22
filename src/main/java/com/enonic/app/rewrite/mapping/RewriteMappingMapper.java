@@ -1,8 +1,8 @@
 package com.enonic.app.rewrite.mapping;
 
-import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteRule;
-import com.enonic.app.rewrite.domain.RewriteRules;
+import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.rewrite.RewriteRules;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 
@@ -20,6 +20,9 @@ public class RewriteMappingMapper
     public void serialize( final MapGenerator gen )
     {
         this.rewriteMapping.getRewriteRulesMap().forEach( ( key, rules ) -> {
+
+            System.out.println( "MapKey: " + key );
+
             gen.map( key.toString() );
             mapRules( gen, rules );
             gen.end();

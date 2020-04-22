@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.enonic.app.rewrite.MockHttpRequest;
-import com.enonic.app.rewrite.domain.RedirectMatch;
-import com.enonic.app.rewrite.domain.RedirectType;
-import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteRule;
-import com.enonic.app.rewrite.domain.RewriteRules;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectType;
+import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.rewrite.RewriteRules;
 import com.enonic.xp.web.vhost.VirtualHost;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,11 +31,12 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        final RewriteMapping engineConfig = RewriteMapping.create().
+        final RewriteMapping rewriteMapping = RewriteMapping.create().
             add( new RewriteContextKey( "myvhost" ), rules ).
             build();
 
-        final RewriteEngine rewriteEngine = new RewriteEngine( engineConfig );
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMapping );
 
         final VirtualHost vhost = Mockito.mock( VirtualHost.class );
         Mockito.when( vhost.getName() ).thenReturn( "myvhost" );
@@ -65,11 +66,12 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        final RewriteMapping engineConfig = RewriteMapping.create().
+        final RewriteMapping rewriteMapping = RewriteMapping.create().
             add( new RewriteContextKey( "myvhost" ), rules ).
             build();
 
-        final RewriteEngine rewriteEngine = new RewriteEngine( engineConfig );
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMapping );
 
         final VirtualHost vhost = Mockito.mock( VirtualHost.class );
         Mockito.when( vhost.getName() ).thenReturn( "myvhost" );
@@ -87,4 +89,6 @@ class RewriteEngineImplTest
         assertNotNull( match );
         assertEquals( "/newUrl/child", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
+
+  
 }
