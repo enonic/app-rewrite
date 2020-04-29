@@ -2,13 +2,16 @@ package com.enonic.app.rewrite.requesttester;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.RewriteService;
+import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
@@ -26,6 +29,8 @@ public class RequestTesterImpl
     @Override
     public RequestTesterResult testRequest( final String requestURL )
     {
+        List<Redirect> redirectedTargets = Lists.newArrayList();
+
         final RequestTesterResult.Builder builder = RequestTesterResult.create();
 
         if ( Strings.isNullOrEmpty( requestURL ) )
@@ -33,23 +38,31 @@ public class RequestTesterImpl
             return builder.build();
         }
 
-        int counter = 0;
         RedirectTestResult redirectTestResult = doTest( requestURL );
+
+        int counter = 0;
 
         while ( redirectTestResult != null )
         {
-            System.out.println( "########## Redirecting to " + redirectTestResult );
             builder.add( redirectTestResult );
 
-            if ( redirectTestResult.getMatch() != null )
+            final RedirectMatch match = redirectTestResult.getMatch();
+
+            if ( match != null )
             {
-                if ( ++counter > THRESHOLD )
+                final Redirect redirect = match.getRedirect();
+
+                System.out.println( "Current redirect: " + redirect );
+
+                if ( counter++ > 100 || redirectedTargets.contains( redirect ) )
                 {
-                    throw new RuntimeException( "Looping redirect detected" );
+                    throw new RedirectLoopException( redirectedTargets, redirect );
                 }
-                final Path newPath = Paths.get( redirectTestResult.getVirtualHost().getHost(),
-                                                redirectTestResult.getMatch().getRedirect().getRedirectTarget().getTargetPath() );
-                System.out.println( "redirected to " + newPath );
+
+                redirectedTargets.add( redirect );
+
+                final Path newPath =
+                    Paths.get( redirectTestResult.getVirtualHost().getHost(), redirect.getRedirectTarget().getTargetPath() );
                 redirectTestResult = doTest( newPath.toString() );
             }
             else

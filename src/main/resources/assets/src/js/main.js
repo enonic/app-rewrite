@@ -32,8 +32,9 @@ let testRequest = function () {
         cache: false,
         type: 'GET',
         data: data,
-        error: function (request, status, error) {
-            $(model.elements.result).html(request.responseText);
+        error: function (response, status, error) {
+            console.log("Result: ", response.responseText);
+            $(model.elements.result).html(response.responseText);
         },
         success: function (result) {
             console.log("Result: ", JSON.stringify(result));
@@ -69,7 +70,7 @@ let doMarkMatch = function (result) {
     if (matchingRule != null) {
         toggleMatch(model.elements.rows, "#" + result.virtualHost.name + "_" + matchingRule, true);
     } else {
-      //  toggleMatch(model.elements.rows, null)
+        toggleMatch(model.elements.rows, null)
     }
 };
 

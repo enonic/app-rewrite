@@ -1,5 +1,7 @@
 package com.enonic.app.rewrite.redirect;
 
+import java.util.Objects;
+
 import com.google.common.base.Preconditions;
 
 public class Redirect
@@ -32,4 +34,26 @@ public class Redirect
     {
         return "Redirect{" + "redirectTarget=" + redirectTarget + ", type=" + type + '}';
     }
+
+    @Override
+    public boolean equals( final Object o )
+    {
+        if ( this == o )
+        {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() )
+        {
+            return false;
+        }
+        final Redirect redirect = (Redirect) o;
+        return Objects.equals( redirectTarget, redirect.redirectTarget ) && type == redirect.type;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash( redirectTarget, type );
+    }
 }
+

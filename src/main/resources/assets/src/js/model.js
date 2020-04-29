@@ -6,7 +6,8 @@ export const model = {
     elements: {
         vhosts: ".vhost",
         result: "#result",
-        rows: "tr"
+        rows: "tr",
+        errorMsg: "#errorMsg"
     }
 
 };

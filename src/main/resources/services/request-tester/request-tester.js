@@ -19,6 +19,8 @@ exports.get = function (req) {
 
     if (result.error) {
 
+        log.error("Error in request tester: %s", JSON.stringify(result.error, null, 2));
+
         return {
             status: 500,
             body: result.error,
