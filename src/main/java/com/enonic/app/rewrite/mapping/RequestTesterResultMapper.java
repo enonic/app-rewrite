@@ -1,6 +1,7 @@
 package com.enonic.app.rewrite.mapping;
 
 import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.requesttester.RedirectTestResult;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
@@ -19,9 +20,19 @@ public class RequestTesterResultMapper
     @Override
     public void serialize( final MapGenerator gen )
     {
-        gen.map( "result" );
-        serialize( gen, this.result.getVirtualHost() );
-        serialize( gen, this.result.getRedirectMatch() );
+        gen.array( "results" );
+        result.getMatchList().forEach( redirectMatch -> {
+            serialize( gen, redirectMatch );
+        } );
+        gen.end();
+    }
+
+
+    private void serialize( final MapGenerator gen, final RedirectTestResult testResult )
+    {
+        gen.map();
+        serialize( gen, testResult.getVirtualHost() );
+        serialize( gen, testResult.getMatch() );
         gen.end();
     }
 

@@ -1,28 +1,46 @@
 package com.enonic.app.rewrite.requesttester;
 
-import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.xp.web.vhost.VirtualHost;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 public class RequestTesterResult
 {
 
-    private final VirtualHost virtualHost;
+    private final List<RedirectTestResult> matchList;
 
-    private final RedirectMatch match;
-
-    public RequestTesterResult( final VirtualHost virtualHost, final RedirectMatch match )
+    private RequestTesterResult( final Builder builder )
     {
-        this.virtualHost = virtualHost;
-        this.match = match;
+        matchList = builder.matchList;
     }
 
-    public VirtualHost getVirtualHost()
+    public List<RedirectTestResult> getMatchList()
     {
-        return virtualHost;
+        return matchList;
     }
 
-    public RedirectMatch getRedirectMatch()
+    public static Builder create()
     {
-        return match;
+        return new Builder();
+    }
+
+    public static final class Builder
+    {
+        private List<RedirectTestResult> matchList = Lists.newArrayList();
+
+        private Builder()
+        {
+        }
+
+        public Builder add( final RedirectTestResult result )
+        {
+            this.matchList.add( result );
+            return this;
+        }
+
+        public RequestTesterResult build()
+        {
+            return new RequestTesterResult( this );
+        }
     }
 }

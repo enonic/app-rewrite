@@ -1,14 +1,14 @@
 package com.enonic.app.rewrite;
 
-import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingMapper;
+import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
+import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
 
@@ -42,6 +42,7 @@ public class RewriteBean
         }
         catch ( Exception e )
         {
+            e.printStackTrace();
             return new ErrorMapper( e );
         }
 

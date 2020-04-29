@@ -43,28 +43,50 @@ let testRequest = function () {
 
 };
 
-
 let processResult = function (data) {
 
-    if (data.result.virtualHost.name) {
+    writeRequestRoute(data.results);
 
-        toogleMatch(model.elements.vhosts, "#vhost_" + data.result.virtualHost.name);
-
-        let matchingRule = data.result.rewrite.matchId;
-
-        if (matchingRule != null) {
-            toogleMatch(model.elements.rows, "#" + data.result.virtualHost.name + "_" + matchingRule, true);
-        } else {
-            toogleMatch(model.elements.rows, null)
-        }
-
+    let anyResult = data.results[0] != null;
+    if (anyResult) {
+        data.results.forEach(function (result) {
+            doMarkMatch(result);
+        });
     } else {
-        toogleMatch(model.elements.vhosts, null, false);
-        toogleMatch(model.elements.rows, null, false);
+        toggleMatch(model.elements.vhosts, null, false);
+        toggleMatch(model.elements.rows, null, false);
     }
 };
 
-let toogleMatch = function (selector, matchId, scrollTo) {
+let doMarkMatch = function (result) {
+
+    console.log("Matching: ", result);
+
+    toggleMatch(model.elements.vhosts, "#vhost_" + result.virtualHost.name);
+
+    let matchingRule = result.rewrite ? result.rewrite.matchId : null;
+
+    if (matchingRule != null) {
+        toggleMatch(model.elements.rows, "#" + result.virtualHost.name + "_" + matchingRule, true);
+    } else {
+      //  toggleMatch(model.elements.rows, null)
+    }
+};
+
+let writeRequestRoute = function (results) {
+
+    let html = $(model.input.requestURL).val();
+
+    results.forEach(function (result) {
+        if (result.rewrite && result.rewrite.target) {
+            html += " -> " + result.rewrite.target;
+        }
+    });
+
+    $("#resultPath").html(html);
+};
+
+let toggleMatch = function (selector, matchId, scrollTo) {
 
     console.log("Toggeling match for selector", selector, matchId, scrollTo);
 
@@ -80,7 +102,6 @@ let toogleMatch = function (selector, matchId, scrollTo) {
     if (scrollTo) {
         matching.get(0).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
-
 };
 
 

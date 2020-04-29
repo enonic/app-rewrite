@@ -26,4 +26,10 @@ public class Redirect
     {
         return type;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Redirect{" + "redirectTarget=" + redirectTarget + ", type=" + type + '}';
+    }
 }
