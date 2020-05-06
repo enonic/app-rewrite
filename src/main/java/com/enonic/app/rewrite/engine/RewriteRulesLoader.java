@@ -6,19 +6,20 @@ import com.google.common.collect.Maps;
 
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.app.rewrite.rewrite.RewriteRule;
 
 class RewriteRulesLoader
 {
-    static Map<RewriteContextKey, RulePatterns> load( final RewriteMapping mapping )
+    static Map<RewriteContextKey, RulePatterns> load( final RewriteMappings mappings )
     {
         final Map<RewriteContextKey, RulePatterns> rewriteMap = Maps.newHashMap();
 
-        for ( final RewriteContextKey contextKey : mapping.getRewriteRulesMap().keySet() )
+        for ( final RewriteMapping rewriteMapping : mappings )
         {
             final RulePatterns.Builder patternsBuilder = RulePatterns.create();
 
-            for ( final RewriteRule rule : mapping.getRewriteRulesMap().get( contextKey ) )
+            for ( final RewriteRule rule : rewriteMapping )
             {
                 final RulePattern pattern = RulePattern.create().
                     target( rule.getTarget() ).
@@ -29,10 +30,9 @@ class RewriteRulesLoader
                 patternsBuilder.rule( pattern );
             }
 
-            rewriteMap.put( contextKey, patternsBuilder.build() );
+            rewriteMap.put( rewriteMapping.getContextKey(), patternsBuilder.build() );
         }
 
         return rewriteMap;
     }
-
 }

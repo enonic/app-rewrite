@@ -19,6 +19,7 @@ import com.enonic.app.rewrite.format.RewriteFormatReader;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.app.rewrite.rewrite.RewriteRules;
 
@@ -38,9 +39,9 @@ public class RewriteMappingLocalFileProvider
         ruleFilePattern = builder.ruleFilePattern;
     }
 
-    public RewriteMapping getAll()
+    public RewriteMappings getAll()
     {
-        final RewriteMapping.Builder builder = RewriteMapping.create();
+        final RewriteMappings.Builder builder = RewriteMappings.create();
 
         try
         {
@@ -60,12 +61,12 @@ public class RewriteMappingLocalFileProvider
     }
 
     @Override
-    public void store( final RewriteContextKey contextKey, final RewriteRule rule )
+    public void store( final RewriteMapping rewriteMapping )
     {
         throw new RuntimeException( "Cannot store to provider " + this.getClass().getName() );
     }
 
-    private void handleRewriteItem( final RewriteMapping.Builder builder, final VHostAndPath item )
+    private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )
     {
         final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );
         final RewriteRules.Builder rewritesBuilder = RewriteRules.create();
@@ -88,7 +89,10 @@ public class RewriteMappingLocalFileProvider
             throw new RuntimeException( "Cannot read rewrite-config from file [" + item.path + "]", e );
         }
 
-        builder.add( contextKey, rewritesBuilder.build() );
+        builder.add( RewriteMapping.create().
+            contextKey( contextKey ).
+            rewriteRules( rewritesBuilder.build() ).
+            build() );
     }
 
     private List<Path> findFiles( final Path base, final String ruleFilePattern )

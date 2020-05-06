@@ -1,16 +1,19 @@
 package com.enonic.app.rewrite.rewrite;
 
-import java.util.Map;
-
-import com.google.common.collect.Maps;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class RewriteMapping
+    implements Iterable<RewriteRule>
 {
-    private Map<RewriteContextKey, RewriteRules> rewriteRulesMap;
+    private final RewriteContextKey contextKey;
+
+    private final RewriteRules rewriteRules;
 
     private RewriteMapping( final Builder builder )
     {
-        rewriteRulesMap = builder.rewriteRulesMap;
+        contextKey = builder.contextKey;
+        rewriteRules = builder.rewriteRules;
     }
 
     public static Builder create()
@@ -18,28 +21,41 @@ public class RewriteMapping
         return new Builder();
     }
 
-    public Map<RewriteContextKey, RewriteRules> getRewriteRulesMap()
+    public RewriteContextKey getContextKey()
     {
-        return rewriteRulesMap;
+        return contextKey;
+    }
+
+    public RewriteRules getRewriteRules()
+    {
+        return rewriteRules;
+    }
+
+    @Override
+    public Iterator<RewriteRule> iterator()
+    {
+        return this.rewriteRules.iterator();
     }
 
     public static final class Builder
     {
-        private Map<RewriteContextKey, RewriteRules> rewriteRulesMap = Maps.newHashMap();
+        private RewriteContextKey contextKey;
+
+        private RewriteRules rewriteRules;
 
         private Builder()
         {
         }
 
-        public Builder add( final RewriteContextKey context, final RewriteRules rules )
+        public Builder contextKey( final RewriteContextKey contextKey )
         {
-            rewriteRulesMap.put( context, rules );
+            this.contextKey = contextKey;
             return this;
         }
 
-        public Builder rewriteRulesMap( final Map<RewriteContextKey, RewriteRules> rewriteRulesMap )
+        public Builder rewriteRules( final RewriteRules rewriteRules )
         {
-            this.rewriteRulesMap = rewriteRulesMap;
+            this.rewriteRules = rewriteRules;
             return this;
         }
 
@@ -47,5 +63,26 @@ public class RewriteMapping
         {
             return new RewriteMapping( this );
         }
+    }
+
+    @Override
+    public boolean equals( final Object o )
+    {
+        if ( this == o )
+        {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() )
+        {
+            return false;
+        }
+        final RewriteMapping that = (RewriteMapping) o;
+        return Objects.equals( contextKey, that.contextKey ) && Objects.equals( rewriteRules, that.rewriteRules );
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash( contextKey, rewriteRules );
     }
 }

@@ -38,4 +38,6 @@ public enum RedirectType
         return httpCode;
     }
 
+
+
 }

@@ -14,7 +14,7 @@ import com.enonic.app.rewrite.redirect.RedirectInternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.rewrite.RewriteContext;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.app.rewrite.rewrite.RewriteTarget;
 import com.enonic.app.rewrite.rewrite.RewriteVirtualHostContext;
 import com.enonic.xp.web.vhost.VirtualHost;
@@ -38,7 +38,7 @@ public class RewriteEngine
         return null;
     }
 
-    public RewriteRulesLoadResult load( final RewriteMapping mapping )
+    public RewriteRulesLoadResult load( final RewriteMappings mapping )
     {
         this.rewriteMap = RewriteRulesLoader.load( mapping );
 

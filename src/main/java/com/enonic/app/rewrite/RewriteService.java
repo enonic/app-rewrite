@@ -3,16 +3,15 @@ package com.enonic.app.rewrite;
 import javax.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 
 public interface RewriteService
 {
     RedirectMatch process( final HttpServletRequest request );
 
-    RewriteMapping getRewriteMapping();
+    RewriteMappings getRewriteMappings();
 
-    void store( final RewriteContextKey contextKey, final RewriteRule rewriteRule );
+    void store( final RewriteMapping rewriteMapping );
 
 }

@@ -1,9 +1,25 @@
 import '../css/main.scss';
 import {model} from "./model";
+import {initToolbar} from "./toolbar";
 
 let dt = require('datatables.net');
 
 let svcUrl;
+
+
+$(document).ready(function () {
+    console.log("Document ready...");
+
+    svcUrl = CONFIG.svcUrl;
+
+    $('#myTable').DataTable();
+
+    initListeners();
+    initButtons();
+    initToolbar();
+
+});
+
 
 let initListeners = function () {
 
@@ -113,19 +129,6 @@ let delay = (function () {
         timer = setTimeout(callback, ms);
     };
 })();
-
-$(document).ready(function () {
-    console.log("Document ready...");
-
-    svcUrl = CONFIG.svcUrl;
-
-    $('#myTable').DataTable();
-
-    initListeners();
-
-    initButtons();
-
-});
 
 let initButtons = function () {
 

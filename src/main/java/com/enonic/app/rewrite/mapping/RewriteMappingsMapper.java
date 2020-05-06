@@ -1,35 +1,37 @@
 package com.enonic.app.rewrite.mapping;
 
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 
-public class RewriteMappingMapper
+public class RewriteMappingsMapper
     implements MapSerializable
 {
-    private final RewriteMapping rewriteMapping;
+    private final RewriteMappings rewriteMappings;
 
-    public RewriteMappingMapper( final RewriteMapping rewriteMapping )
+    public RewriteMappingsMapper( final RewriteMappings rewriteMappings )
     {
-        this.rewriteMapping = rewriteMapping;
+        this.rewriteMappings = rewriteMappings;
     }
 
     @Override
     public void serialize( final MapGenerator gen )
     {
-        this.rewriteMapping.getRewriteRulesMap().forEach( ( key, rules ) -> {
-
-            System.out.println( "MapKey: " + key );
-
-            gen.map( key.toString() );
-            mapRules( gen, rules );
-            gen.end();
+        this.rewriteMappings.forEach( mapping -> {
+            mapMapping( gen, mapping );
         } );
     }
 
-    private void mapRules( final MapGenerator gen, final RewriteRules rules )
+    private void mapMapping( final MapGenerator gen, final RewriteMapping rewriteMapping )
+    {
+        gen.map( rewriteMapping.getContextKey().toString() );
+        mapRules( gen, rewriteMapping );
+        gen.end();
+    }
+
+    private void mapRules( final MapGenerator gen, final Iterable<RewriteRule> rules )
     {
         gen.array( "rules" );
         rules.forEach( rule -> {

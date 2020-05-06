@@ -10,6 +10,7 @@ import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.app.rewrite.rewrite.RewriteRules;
 import com.enonic.xp.web.vhost.VirtualHost;
@@ -31,12 +32,15 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        final RewriteMapping rewriteMapping = RewriteMapping.create().
-            add( new RewriteContextKey( "myvhost" ), rules ).
+        final RewriteMappings rewriteMappings = RewriteMappings.create().
+            add( RewriteMapping.create().
+                contextKey( new RewriteContextKey( "myvhost" ) ).
+                rewriteRules( rules ).
+                build() ).
             build();
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
-        rewriteEngine.load( rewriteMapping );
+        rewriteEngine.load( rewriteMappings );
 
         final VirtualHost vhost = Mockito.mock( VirtualHost.class );
         Mockito.when( vhost.getName() ).thenReturn( "myvhost" );
@@ -66,12 +70,15 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        final RewriteMapping rewriteMapping = RewriteMapping.create().
-            add( new RewriteContextKey( "myvhost" ), rules ).
+        final RewriteMappings rewriteMappings = RewriteMappings.create().
+            add( RewriteMapping.create().
+                contextKey( new RewriteContextKey( "myvhost" ) ).
+                rewriteRules( rules ).
+                build() ).
             build();
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
-        rewriteEngine.load( rewriteMapping );
+        rewriteEngine.load( rewriteMappings );
 
         final VirtualHost vhost = Mockito.mock( VirtualHost.class );
         Mockito.when( vhost.getName() ).thenReturn( "myvhost" );
@@ -90,5 +97,5 @@ class RewriteEngineImplTest
         assertEquals( "/newUrl/child", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 
-  
+
 }

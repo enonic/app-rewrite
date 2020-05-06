@@ -1,5 +1,7 @@
 package com.enonic.app.rewrite.rewrite;
 
+import java.util.Objects;
+
 public class RewriteTarget
 {
     private final String path;
@@ -25,6 +27,27 @@ public class RewriteTarget
     public boolean isExternal()
     {
         return isExternal;
+    }
+
+    @Override
+    public boolean equals( final Object o )
+    {
+        if ( this == o )
+        {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() )
+        {
+            return false;
+        }
+        final RewriteTarget that = (RewriteTarget) o;
+        return isExternal == that.isExternal && Objects.equals( path, that.path );
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash( path, isExternal );
     }
 }
 

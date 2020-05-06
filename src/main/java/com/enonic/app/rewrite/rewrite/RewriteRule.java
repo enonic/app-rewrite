@@ -1,5 +1,7 @@
 package com.enonic.app.rewrite.rewrite;
 
+import java.util.Objects;
+
 import com.google.common.base.Preconditions;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
@@ -103,5 +105,26 @@ public class RewriteRule
     public String toString()
     {
         return "RewriteRule{" + "from='" + from + '\'' + ", target=" + target + ", type=" + type + ", order=" + order + '}';
+    }
+
+    @Override
+    public boolean equals( final Object o )
+    {
+        if ( this == o )
+        {
+            return true;
+        }
+        if ( o == null || getClass() != o.getClass() )
+        {
+            return false;
+        }
+        final RewriteRule that = (RewriteRule) o;
+        return order == that.order && Objects.equals( from, that.from ) && Objects.equals( target, that.target ) && type == that.type;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash( from, target, type, order );
     }
 }

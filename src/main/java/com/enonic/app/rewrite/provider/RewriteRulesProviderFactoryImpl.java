@@ -25,8 +25,9 @@ public class RewriteRulesProviderFactoryImpl
 
     public RewriteMappingProvider get( final RewriteFilterConfig config )
     {
+        final String providerName = config.provider();
 
-        if ( config.provider().equals( "file" ) )
+        if ( providerName.equals( "file" ) )
         {
             final String rulePattern = config.ruleFilePattern();
             final HomeDir xpHome = HomeDir.get();
@@ -36,12 +37,12 @@ public class RewriteRulesProviderFactoryImpl
                 build();
         }
 
-        if ( config.provider().equals( "repo" ) )
+        if ( providerName.equals( "repo" ) )
         {
             return new RewriteRepoMappingProvider( this.repositoryService, this.indexService, this.nodeService );
         }
 
-        throw new IllegalArgumentException( "Unknown provider: [" + config.provider() + "]" );
+        throw new IllegalArgumentException( "Unknown provider: [" + providerName + "]" );
     }
 
     @Reference

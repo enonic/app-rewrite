@@ -8,6 +8,12 @@ export const model = {
         result: "#result",
         rows: "tr",
         errorMsg: "#errorMsg"
+    },
+    components: {
+        tool: ".tool"
+    },
+    toolbar: {
+        toolNav: ".tool-nav"
     }
 
 };

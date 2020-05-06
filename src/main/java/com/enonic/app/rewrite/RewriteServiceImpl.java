@@ -16,9 +16,8 @@ import com.enonic.app.rewrite.filter.RewriteFilterConfig;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.provider.RewriteRulesProviderFactory;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 
 @Component(immediate = true)
 public class RewriteServiceImpl
@@ -28,7 +27,7 @@ public class RewriteServiceImpl
 
     private RewriteRulesProviderFactory rewriteRulesProviderFactory;
 
-    private RewriteMapping rewriteMapping;
+    private RewriteMappings rewriteMappings;
 
     private RewriteFilterConfig config;
 
@@ -40,10 +39,10 @@ public class RewriteServiceImpl
     public void activate( final Map<String, String> map )
     {
         this.provider = this.rewriteRulesProviderFactory.get( this.config );
-        this.rewriteMapping = this.provider.getAll();
+        this.rewriteMappings = this.provider.getAll();
         this.rewriteEngine = new RewriteEngine();
         LOG.info( "Loading rules into engine" );
-        final RewriteRulesLoadResult loadResult = this.rewriteEngine.load( rewriteMapping );
+        final RewriteRulesLoadResult loadResult = this.rewriteEngine.load( rewriteMappings );
         LOG.info( "Loaded rules: " + loadResult );
         LOG.info( "RewriteService initialized" );
     }
@@ -54,9 +53,9 @@ public class RewriteServiceImpl
         return this.rewriteEngine.process( request );
     }
 
-    public RewriteMapping getRewriteMapping()
+    public RewriteMappings getRewriteMappings()
     {
-        return this.rewriteMapping;
+        return this.rewriteMappings;
     }
 
     @Reference
@@ -71,9 +70,9 @@ public class RewriteServiceImpl
         this.rewriteRulesProviderFactory = rewriteRulesProviderFactory;
     }
 
-    public void store( final RewriteContextKey contextKey, final RewriteRule rewriteRule )
+    public void store( final RewriteMapping rewriteMapping )
     {
-        this.provider.store( contextKey, rewriteRule );
+        this.provider.store( rewriteMapping );
     }
 }
 

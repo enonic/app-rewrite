@@ -1,14 +1,13 @@
 package com.enonic.app.rewrite.provider;
 
 
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.rewrite.RewriteMappings;
 
 public interface RewriteMappingProvider
 {
-    RewriteMapping getAll();
+    RewriteMappings getAll();
 
-    void store( final RewriteContextKey contextKey, final RewriteRule rule );
+    void store( final RewriteMapping rewriteMapping );
 
 }
