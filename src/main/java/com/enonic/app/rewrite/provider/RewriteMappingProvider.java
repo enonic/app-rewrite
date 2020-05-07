@@ -6,7 +6,7 @@ import com.enonic.app.rewrite.rewrite.RewriteMappings;
 
 public interface RewriteMappingProvider
 {
-    RewriteMappings getAll();
+    RewriteMappings getRewriteMappings();
 
     void store( final RewriteMapping rewriteMapping );
 

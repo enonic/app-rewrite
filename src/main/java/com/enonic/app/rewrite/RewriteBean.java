@@ -1,5 +1,6 @@
 package com.enonic.app.rewrite;
 
+import com.enonic.app.rewrite.context.VHostContextHelper;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingsMapper;
@@ -16,18 +17,25 @@ public class RewriteBean
 
     private RequestTester requestTester;
 
+    private VHostContextHelper vHostContextHelper;
+
     @Override
     public void initialize( final BeanContext context )
     {
         this.rewriteService = context.getService( RewriteService.class ).get();
         this.requestTester = context.getService( RequestTester.class ).get();
+        this.vHostContextHelper = context.getService( VHostContextHelper.class ).get();
     }
 
-    public Object getRewriteMapping()
+    public Object getRewriteMappings()
     {
         final RewriteMappings rewriteMappings = this.rewriteService.getRewriteMappings();
 
-        return new RewriteMappingsMapper( rewriteMappings );
+        rewriteMappings.forEach( mapping -> {
+
+        } );
+
+        return new RewriteMappingsMapper( rewriteMappings, this.vHostContextHelper.getMappings() );
     }
 
     public Object requestTester( final String requestURI )

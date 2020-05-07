@@ -1,0 +1,107 @@
+@import 'tool-context-bar';
+
+#tools-window {
+
+  flex: 1 0 auto;
+
+  .tool {
+
+    display: none;
+
+    &.selected {
+      display: block;
+    }
+
+    .tool-main {
+      padding: 40px;
+
+
+      table {
+        width: 100%;
+        border: 1px solid $color-border-light;
+        border-radius: 2px;
+
+        tr {
+          border-bottom: 1px solid $color-border-light;
+        }
+
+        th {
+          padding: 10px 5px;
+        }
+
+        td {
+          padding: 10px 5px;
+        }
+
+        thead {
+          background: $color-selected-1-active;
+        }
+
+        tbody {
+          background: $color-tool-context-bar;
+        }
+
+      }
+
+    }
+
+  }
+
+  .request-tester-input {
+
+    width: 100%;
+    height: 200px;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid $color-border-light;
+    z-index: 100;
+    padding: 20px;
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+    }
+
+  }
+
+  .request-tester-result {
+
+    padding: 20px;
+
+    div.match {
+      outline: none;
+      border-color: lime;
+      box-shadow: 0 0 10px lime;
+    }
+
+    tr.match {
+      background-color: lime !important;
+    }
+
+    .vhost {
+
+      padding: 10px;
+      border: 1px solid $color-border-light;
+      border-radius: 2px;
+
+      margin: 20px 0;
+
+      table {
+
+        font-size: 0.8em;
+
+        max-width: 100%;
+
+        thead.thead-dark {
+
+          th {
+            color: white;
+            background-color: #666;
+            border-color: $color-border-light;
+          }
+
+        }
+      }
+    }
+  }
+}

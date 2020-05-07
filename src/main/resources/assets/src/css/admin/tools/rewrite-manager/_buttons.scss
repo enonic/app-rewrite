@@ -1,0 +1,38 @@
+@import 'colors';
+
+.actions {
+
+  button {
+
+    font-family: $monserrat;
+    background-color: $color-selected-3;
+    border: 1px solid $color-border-light;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      background-color: $color-selected-3-active;
+    }
+
+    &:active {
+      background-color: $color-selected-3-active;
+      border: 1px solid $color-border-dark;
+    }
+
+    i {
+      font-size: 36px;
+    }
+
+    span {
+      // To avoid the odd skewish look 
+      padding-right: 10px;
+    }
+
+  }
+
+}

@@ -1,0 +1,24 @@
+@import "common";
+@import "main";
+@import "side-nav";
+@import "tools";
+@import "top-nav";
+@import "colors";
+@import "buttons";
+@import "../../../fonts";
+
+.rewrite-manager {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+
+  font-family: $titillium;
+
+  width: 100%;
+
+}

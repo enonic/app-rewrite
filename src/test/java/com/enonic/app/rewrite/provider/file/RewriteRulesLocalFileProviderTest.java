@@ -29,7 +29,7 @@ class RewriteRulesLocalFileProviderTest
             ruleFilePattern( "com.enonic.app.rewrite.{{vhost}}.txt" ).
             build();
 
-        final RewriteMappings rewriteMappings = provider.getAll();
+        final RewriteMappings rewriteMappings = provider.getRewriteMappings();
 
         assertEquals( 2, rewriteMappings.size() );
         final List<RewriteMapping> mappingList = rewriteMappings.getRewriteMappings();

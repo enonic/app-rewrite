@@ -14,6 +14,11 @@ export const model = {
     },
     toolbar: {
         toolNav: ".tool-nav"
+    },
+    buttons: {
+        tool: {
+            action: "button.action"
+        }
     }
 
 };

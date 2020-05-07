@@ -3,6 +3,7 @@ package com.enonic.app.rewrite.mapping;
 import org.junit.jupiter.api.Test;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
+import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
@@ -27,7 +28,7 @@ class RewriteMappingsMapperTest
                 build() ).
             build() );
 
-        final RewriteMappingsMapper rewriteMappingsMapper = new RewriteMappingsMapper( builder.build() );
+        final RewriteMappingsMapper rewriteMappingsMapper = new RewriteMappingsMapper( builder.build(), new VirtualHostMappings() );
         final JsonMapGenerator gen = new JsonMapGenerator();
         rewriteMappingsMapper.serialize( gen );
     }

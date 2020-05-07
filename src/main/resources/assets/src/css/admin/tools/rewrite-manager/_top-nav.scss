@@ -1,0 +1,43 @@
+@import "common";
+@import "colors";
+
+#top-nav {
+
+  font-family: $monserrat;
+
+  flex: 0 0 $topbar-height;
+
+  height: $topbar-height;
+  background: #333;
+  border-bottom: 1px solid $color-border-light;
+
+  display: flex;
+  align-items: center;
+
+  #top-info-bar {
+    flex: 1 0 auto;
+    height: $top-info-bar-height;
+    color: #eee;
+
+    .context-info {
+      padding: 5px;
+      display: flex;
+      justify-content: flex-end;
+
+      p {
+        padding: 0 5px;
+      }
+
+    }
+
+  }
+
+  .logo {
+    flex: 0 0 $toolbar-width;
+    padding: 20px;
+    color: #eee;
+    align-items: center;
+    justify-content: center;
+  }
+
+}

@@ -1,0 +1,16 @@
+@import "common";
+@import "colors";
+
+.tool-context-bar {
+
+  padding: 40px;
+  height: $tool-nav-height;
+  background: $color-tool-context-bar;
+  color: #333;
+  border-bottom: 1px solid $color-border-light;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}

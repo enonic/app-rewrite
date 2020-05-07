@@ -1,8 +1,8 @@
 let bean = __.newBean('com.enonic.app.rewrite.RewriteBean');
 
 
-exports.getRewriteMapping = function () {
-    let result = bean.getRewriteMapping();
+exports.getRewriteMappings = function () {
+    let result = bean.getRewriteMappings();
     return __.toNativeObject(result);
 };
 

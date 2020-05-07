@@ -39,7 +39,7 @@ public class RewriteMappingLocalFileProvider
         ruleFilePattern = builder.ruleFilePattern;
     }
 
-    public RewriteMappings getAll()
+    public RewriteMappings getRewriteMappings()
     {
         final RewriteMappings.Builder builder = RewriteMappings.create();
 

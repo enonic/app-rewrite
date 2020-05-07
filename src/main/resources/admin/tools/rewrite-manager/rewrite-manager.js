@@ -7,7 +7,7 @@ exports.get = function (req) {
 
     let view = resolve('rewrite-manager.html');
 
-    let mapping = rewriteService.getRewriteMapping();
+    let mapping = rewriteService.getRewriteMappings();
 
     let model = {
         assetsUrl: portal.assetUrl({path: ""}),
@@ -15,6 +15,7 @@ exports.get = function (req) {
         svcUrl: portal.serviceUrl({service: 'Z'}).slice(0, -1)
     };
 
+    log.info("Model: %s", JSON.stringify(model, null, 4));
 
     return {
         contentType: 'text/html',

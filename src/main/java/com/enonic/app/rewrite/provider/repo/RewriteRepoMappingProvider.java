@@ -54,7 +54,7 @@ public class RewriteRepoMappingProvider
     }
 
     @Override
-    public RewriteMappings getAll()
+    public RewriteMappings getRewriteMappings()
     {
         return setRepoContext().callWith( this::doGetMappings );
     }

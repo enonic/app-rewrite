@@ -1,0 +1,81 @@
+@import "common";
+@import "colors";
+
+#side-nav {
+
+  font-family: $monserrat;
+  flex: 0 0 $toolbar-width;
+  overflow-y: auto;
+  background: $color-side-nav;
+  border-right: 1px $color-border-dark solid;
+
+  display: flex;
+  flex-direction: column;
+
+  .material-icons {
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  .tool-nav-info {
+    background: $color-nav-toolbar-info;
+    color: $color-font-dark;
+    padding: 20px;
+    align-items: center;
+    height: $tool-nav-height;
+    border-bottom: 1px solid $color-border-dark;
+  }
+
+  .tool-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: $tool-nav-height;
+    border-bottom: 1px solid $color-border-dark;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:nth-of-type(1) {
+      border-left: $selectBorderWidth solid $color-selected-1;
+      &.selected {
+        background: $color-selected-1-active;
+      }
+    }
+    &:nth-of-type(2) {
+      border-left: $selectBorderWidth solid $color-selected-2;
+      &.selected {
+        background: $color-selected-2-active;
+      }
+    }
+    &:nth-of-type(3) {
+      border-left: $selectBorderWidth solid $color-selected-3;
+      &.selected {
+        background: $color-selected-3-active;
+      }
+    }
+    &:nth-of-type(4) {
+      border-left: $selectBorderWidth solid $color-selected-4;
+      &.selected {
+        background: $color-selected-4-active;
+      }
+    }
+
+    .toolIcon {
+      flex: 1 0 30%;
+      height: $tool-nav-height;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toolName {
+      flex: 1 0 70%;
+      height: $tool-nav-height;
+      display: flex;
+      align-items: center;
+    }
+
+  }
+}

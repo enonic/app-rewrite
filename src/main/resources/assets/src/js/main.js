@@ -1,6 +1,7 @@
 import '../css/main.scss';
 import {model} from "./model";
 import {initToolbar} from "./toolbar";
+import {initToolActions} from "./tools";
 
 let dt = require('datatables.net');
 
@@ -17,6 +18,7 @@ $(document).ready(function () {
     initListeners();
     initButtons();
     initToolbar();
+    initToolActions();
 
 });
 

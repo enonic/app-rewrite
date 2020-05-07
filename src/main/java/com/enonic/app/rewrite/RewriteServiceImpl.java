@@ -39,7 +39,7 @@ public class RewriteServiceImpl
     public void activate( final Map<String, String> map )
     {
         this.provider = this.rewriteRulesProviderFactory.get( this.config );
-        this.rewriteMappings = this.provider.getAll();
+        this.rewriteMappings = this.provider.getRewriteMappings();
         this.rewriteEngine = new RewriteEngine();
         LOG.info( "Loading rules into engine" );
         final RewriteRulesLoadResult loadResult = this.rewriteEngine.load( rewriteMappings );
