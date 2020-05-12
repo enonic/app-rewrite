@@ -1,7 +1,7 @@
 import '../css/main.scss';
 import {model} from "./model";
 import {initToolbar} from "./toolbar";
-import {initToolActions} from "./tools";
+import {initModals} from "./modals";
 
 let dt = require('datatables.net');
 
@@ -13,12 +13,15 @@ $(document).ready(function () {
 
     svcUrl = CONFIG.svcUrl;
 
+    console.log("svcURL: " + svcUrl);
+
     $('#myTable').DataTable();
 
     initListeners();
     initButtons();
     initToolbar();
-    initToolActions();
+    //initToolActions();
+    initModals(svcUrl);
 
 });
 

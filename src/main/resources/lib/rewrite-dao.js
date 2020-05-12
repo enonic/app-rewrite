@@ -12,3 +12,8 @@ exports.store = function (rule) {
     let result = bean.store(params);
     return __.toNativeObject(result);
 };
+
+exports.getVirtualHosts = function () {
+    let result = bean.getVirtualHosts();
+    return __.toNativeObject(result);
+};

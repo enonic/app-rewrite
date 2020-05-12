@@ -17,7 +17,6 @@ public class RewriteMappingsMapper
 {
     private final RewriteMappings rewriteMappings;
 
-
     private final Map<String, VirtualHostMapping> virtualHostMappingMap = Maps.newHashMap();
 
     public RewriteMappingsMapper( final RewriteMappings rewriteMappings, final VirtualHostMappings virtualHostMappings )

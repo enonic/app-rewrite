@@ -19,6 +19,12 @@ export const model = {
         tool: {
             action: "button.action"
         }
+    },
+    modals: {
+        all: ".modal",
+        overlay: "#modal-overlay",
+        triggers: ".modalTrigger",
+        contextCreate: "#modalContextCreate"
     }
 
 };

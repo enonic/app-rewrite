@@ -4,8 +4,10 @@ import com.enonic.app.rewrite.context.VHostContextHelper;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingsMapper;
+import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
+import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
@@ -52,6 +54,13 @@ public class RewriteBean
         }
 
         return new RequestTesterResultMapper( requestTesterResult );
+    }
+
+    public Object getVirtualHosts()
+    {
+        final VirtualHostMappings virtualHosts = this.vHostContextHelper.getMappings();
+
+        return new VirtualHostsMapper( virtualHosts );
     }
 
 }

@@ -1,0 +1,38 @@
+<div class="modal-guts create-context">
+
+    <div class="modal-content">
+        <h1>Create context</h1>
+
+        <div class="form-grid">
+
+            <label for="createContextKey">Key</label>
+            <input type="text" id="createContextKey" name="createContextKey"/>
+
+            <select id="createContextType" name="createContextType">
+                <option value="virtualHost" selected="selected" readonly="readonly">VirtualHost</option>
+            </select>
+            <label for="createContextType">Type</label>
+
+
+            <select id="createContextHost" name="createContextHost">
+                <div data-th-each="virtualHost,iterStat : ${virtualHosts}" data-th-remove="tag">
+                    <option value="${virtualHost.host}"
+                            data-th-text="${virtualHost.host + ' - ' + virtualHost.source}">VirtualHost
+                    </option>
+                </div>
+            </select>
+            <label for="createContextHost">Host</label>
+
+
+            <label for="createContextSource">Source</label>
+            <input type="text" id="createContextSource" name="createContextSource" readonly="readonly"/>
+
+            <label for="createContextTarget">Target</label>
+            <input type="text" id="createContextTarget" name="createContextTarget" readonly="readonly"/>
+
+            <button class="create">Create</button>
+
+        </div>
+    </div>
+
+</div>
