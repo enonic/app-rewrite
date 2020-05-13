@@ -63,7 +63,12 @@ public class RewriteMappingSerializer
     {
         final PropertyTree propertyTree = new PropertyTree();
         final PropertySet data = propertyTree.getRoot();
-        data.addSets( RULES_KEY, createRules( rewriteMapping.getRewriteRules() ) );
+
+        if ( rewriteMapping.getRewriteRules() != null )
+        {
+            data.addSets( RULES_KEY, createRules( rewriteMapping.getRewriteRules() ) );
+        }
+
         data.setString( CONTEXT_KEY, rewriteMapping.getContextKey().toString() );
         return propertyTree;
     }

@@ -15,7 +15,7 @@ exports.get = function (req) {
         svcUrl: portal.serviceUrl({service: 'Z'}).slice(0, -1)
     };
 
-    log.info("Model: %s", JSON.stringify(model, null, 4));
+    //  log.info("Model: %s", JSON.stringify(model, null, 4));
 
     return {
         contentType: 'text/html',

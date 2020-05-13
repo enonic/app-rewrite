@@ -8,6 +8,7 @@ import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
+import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
@@ -61,6 +62,18 @@ public class RewriteBean
         final VirtualHostMappings virtualHosts = this.vHostContextHelper.getMappings();
 
         return new VirtualHostsMapper( virtualHosts );
+    }
+
+    public Object createRewriteContext( final String contextKey )
+    {
+        this.rewriteService.create( new RewriteContextKey( contextKey ) );
+        return null;
+    }
+
+    public Object deleteRewriteContext( final String contextKey )
+    {
+        this.rewriteService.delete( new RewriteContextKey( contextKey ) );
+        return null;
     }
 
 }

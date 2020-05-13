@@ -23,8 +23,14 @@ export const model = {
     modals: {
         all: ".modal",
         overlay: "#modal-overlay",
-        triggers: ".modalTrigger",
-        contextCreate: "#modalContextCreate"
+        triggers: ".modal-trigger",
+        modalAction: ".modal-action",
+        contextCreate: {
+            selector: "#modalContextCreate",
+            modalService: "modal-create-context"
+        }
+
+
     }
 
 };

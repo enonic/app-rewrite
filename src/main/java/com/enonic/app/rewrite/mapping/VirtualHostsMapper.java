@@ -29,6 +29,7 @@ public class VirtualHostsMapper
     {
         gen.map();
         gen.value( "type", "virtualHost" );
+        gen.value( "name", virtualHostMapping.getName() );
         gen.value( "host", virtualHostMapping.getHost() );
         gen.value( "source", virtualHostMapping.getSource() );
         gen.value( "target", virtualHostMapping.getTarget() );

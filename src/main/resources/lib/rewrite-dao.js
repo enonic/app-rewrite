@@ -17,3 +17,8 @@ exports.getVirtualHosts = function () {
     let result = bean.getVirtualHosts();
     return __.toNativeObject(result);
 };
+
+exports.storeRewriteContext = function (contextKey) {
+    let result = bean.createRewriteContext(contextKey);
+    return __.toNativeObject(result);
+};

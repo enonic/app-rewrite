@@ -3,10 +3,12 @@ package com.enonic.app.rewrite.provider.repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
+import com.enonic.app.rewrite.rewrite.RewriteRules;
 import com.enonic.xp.context.Context;
 import com.enonic.xp.context.ContextAccessor;
 import com.enonic.xp.context.ContextBuilder;
@@ -96,6 +98,35 @@ public class RewriteRepoMappingProvider
         final Context context = setRepoContext();
 
         context.runWith( () -> doCreateOrUpdate( mappingNodePath, rewriteMapping ) );
+    }
+
+    @Override
+    public void create( final RewriteContextKey rewriteContextKey )
+    {
+        setRepoContext().runWith( () -> doCreate( rewriteContextKey ) );
+    }
+
+    private void doCreate( final RewriteContextKey rewriteContextKey )
+    {
+        final NodePath mappingNodePath = createContextNodePath( rewriteContextKey );
+
+        final Node existingNode = doGetContextNode( rewriteContextKey );
+
+        if ( existingNode != null )
+        {
+            throw new RewriteContextExistsException( rewriteContextKey );
+        }
+
+        doCreateContextNode( mappingNodePath, RewriteMapping.create().
+            contextKey( rewriteContextKey ).
+            rewriteRules( RewriteRules.create().build() ).
+            build() );
+    }
+
+    @Override
+    public void delete( final RewriteContextKey rewriteContextKey )
+    {
+        setRepoContext().runWith( () -> this.nodeService.deleteByPath( createContextNodePath( rewriteContextKey ) ) );
     }
 
     private Node doCreateOrUpdate( final NodePath nodePath, final RewriteMapping rewriteMapping )

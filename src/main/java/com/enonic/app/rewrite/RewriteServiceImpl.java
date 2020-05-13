@@ -16,6 +16,7 @@ import com.enonic.app.rewrite.filter.RewriteFilterConfig;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.provider.RewriteRulesProviderFactory;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
 
@@ -27,8 +28,6 @@ public class RewriteServiceImpl
 
     private RewriteRulesProviderFactory rewriteRulesProviderFactory;
 
-    private RewriteMappings rewriteMappings;
-
     private RewriteFilterConfig config;
 
     private RewriteMappingProvider provider;
@@ -39,10 +38,9 @@ public class RewriteServiceImpl
     public void activate( final Map<String, String> map )
     {
         this.provider = this.rewriteRulesProviderFactory.get( this.config );
-        this.rewriteMappings = this.provider.getRewriteMappings();
         this.rewriteEngine = new RewriteEngine();
         LOG.info( "Loading rules into engine" );
-        final RewriteRulesLoadResult loadResult = this.rewriteEngine.load( rewriteMappings );
+        final RewriteRulesLoadResult loadResult = this.rewriteEngine.load( this.provider.getRewriteMappings() );
         LOG.info( "Loaded rules: " + loadResult );
         LOG.info( "RewriteService initialized" );
     }
@@ -55,7 +53,7 @@ public class RewriteServiceImpl
 
     public RewriteMappings getRewriteMappings()
     {
-        return this.rewriteMappings;
+        return this.provider.getRewriteMappings();
     }
 
     @Reference
@@ -73,6 +71,18 @@ public class RewriteServiceImpl
     public void store( final RewriteMapping rewriteMapping )
     {
         this.provider.store( rewriteMapping );
+    }
+
+    @Override
+    public void create( final RewriteContextKey rewriteContextKey )
+    {
+        this.provider.create( rewriteContextKey);
+    }
+
+    @Override
+    public void delete( final RewriteContextKey rewriteContextKey )
+    {
+        this.provider.delete( rewriteContextKey);
     }
 }
 

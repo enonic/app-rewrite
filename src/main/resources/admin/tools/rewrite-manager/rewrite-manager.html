@@ -34,7 +34,7 @@
                 <p>Hi, im stupid</p>
             </aside>
 
-            <div class="tool-nav" data-activator="tool-contexts">
+            <div class="tool-nav selected" data-activator="tool-contexts">
                 <div class="toolIcon"><i class="material-icons">call_split</i></div>
                 <div class="toolName"><p>Rewrite Contexts</p></div>
             </div>
@@ -64,7 +64,7 @@
                 <div class="tool-context-bar">
                     <h2>Rewrite contexts</h2>
                     <div class="actions">
-                        <button class="action modalTrigger" data-modal="contextCreate" data-action="create" data-context="context"><i
+                        <button class="action modal-trigger" data-modal="contextCreate" data-action="create" data-context="context"><i
                                 class="material-icons">add</i><span>Add context</span>
                         </button>
                     </div>
@@ -79,6 +79,7 @@
                             <th>Source</th>
                             <th>Target</th>
                             <th>Rules</th>
+                            <th>Tools</th>
                         </tr>
                         </thead>
                         <div data-th-each="mapping,iterStat : ${mappings}" data-th-remove="tag">
@@ -90,6 +91,10 @@
                                 <td data-th-text="${mapping.value.source}">source</td>
                                 <td data-th-text="${mapping.value.target}">target</td>
                                 <td data-th-text="${#lists.size(mapping.value.rules)}">rules</td>
+                                <td>
+                                    <div class="tool-table-actions" data-th-attr='data-action-type=delete,data-id=${mapping.key}'><i
+                                            class="material-icons">delete</i></div>
+                                </td>
                             </tr>
                             </tbody>
                         </div>
@@ -107,7 +112,7 @@
                 <div class="tool-context-bar">
                     <h2>Rewrite rules</h2>
                     <div class="actions">
-                        <button class="action modalTrigger" data-modal="ruleCreate" data-action="create" data-context="context"><i
+                        <button class="action modal-trigger" data-modal="ruleCreate"><i
                                 class="material-icons">add</i><span>Add rule</span>
                         </button>
                     </div>

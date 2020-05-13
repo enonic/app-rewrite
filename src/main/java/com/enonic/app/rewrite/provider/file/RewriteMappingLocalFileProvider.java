@@ -66,6 +66,18 @@ public class RewriteMappingLocalFileProvider
         throw new RuntimeException( "Cannot store to provider " + this.getClass().getName() );
     }
 
+    @Override
+    public void create( final RewriteContextKey rewriteContextKey )
+    {
+        throw new RuntimeException( "Cannot create context " + this.getClass().getName() );
+    }
+
+    @Override
+    public void delete( final RewriteContextKey rewriteContextKey )
+    {
+        throw new RuntimeException( "Cannot delete from provider " + this.getClass().getName() );
+    }
+
     private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )
     {
         final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );

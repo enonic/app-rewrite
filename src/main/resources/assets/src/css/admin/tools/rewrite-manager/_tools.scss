@@ -15,7 +15,6 @@
     .tool-main {
       padding: 40px;
 
-
       table {
         width: 100%;
         border: 1px solid $color-border-light;
@@ -39,6 +38,18 @@
 
         tbody {
           background: $color-tool-context-bar;
+        }
+
+      }
+
+      .tool-table-actions {
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .material-icons {
+          font-size: 28px;
         }
 
       }
