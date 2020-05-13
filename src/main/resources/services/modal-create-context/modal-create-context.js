@@ -6,7 +6,6 @@ exports.get = function (req) {
     let params = req.params;
 
 
-
     let result = rewriteDao.getVirtualHosts();
 
     let model = {
@@ -26,6 +25,5 @@ exports.get = function (req) {
     return {
         contentType: 'text/html',
         body: thymeleaf.render(view, model)
-
     };
 };

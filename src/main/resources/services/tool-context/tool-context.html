@@ -1,0 +1,41 @@
+<div class="tool-wrapper">
+    <div class="tool-context-bar">
+        <h2>Rewrite contexts</h2>
+        <div class="actions">
+            <button class="action modal-trigger" data-modal="contextCreate" data-action="create" data-context="context"><i
+                    class="material-icons">add</i><span>Add context</span>
+            </button>
+        </div>
+    </div>
+    <div class="tool-main">
+        <table class="tool-listing">
+            <thead>
+            <tr>
+                <th>Key</th>
+                <th>Type</th>
+                <th>Host</th>
+                <th>Source</th>
+                <th>Target</th>
+                <th>Rules</th>
+                <th>Tools</th>
+            </tr>
+            </thead>
+            <div data-th-each="mapping,iterStat : ${mappings}" data-th-remove="tag">
+                <tbody>
+                <tr>
+                    <td data-th-text="${mapping.key}">key</td>
+                    <td data-th-text="${mapping.value.type}">type</td>
+                    <td data-th-text="${mapping.value.host}">host</td>
+                    <td data-th-text="${mapping.value.source}">source</td>
+                    <td data-th-text="${mapping.value.target}">target</td>
+                    <td data-th-text="${#lists.size(mapping.value.rules)}">rules</td>
+                    <td>
+                        <div class="tool-table-actions" data-th-attr='data-action-type=delete,data-id=${mapping.key}'><i
+                                class="material-icons">delete</i></div>
+                    </td>
+                </tr>
+                </tbody>
+            </div>
+        </table>
+    </div>
+</div>
