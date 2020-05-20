@@ -7,35 +7,13 @@
             </button>
         </div>
     </div>
+
     <div class="tool-main">
-        <table class="tool-listing data-table">
-            <thead>
-            <tr>
-                <th>Key</th>
-                <th>Type</th>
-                <th>Host</th>
-                <th>Source</th>
-                <th>Target</th>
-                <th>Rules</th>
-                <th>Tools</th>
-            </tr>
-            </thead>
-            <div data-th-each="mapping,iterStat : ${mappings}" data-th-remove="tag">
-                <tbody>
-                <tr>
-                    <td data-th-text="${mapping.key}">key</td>
-                    <td data-th-text="${mapping.value.type}">type</td>
-                    <td data-th-text="${mapping.value.host}">host</td>
-                    <td data-th-text="${mapping.value.source}">source</td>
-                    <td data-th-text="${mapping.value.target}">target</td>
-                    <td data-th-text="${#lists.size(mapping.value.rules)}">rules</td>
-                    <td>
-                        <div class="tool-table-action " data-th-attr='data-action-type=delete,data-id=${mapping.key}'><i
-                                class="material-icons">delete</i></div>
-                    </td>
-                </tr>
-                </tbody>
-            </div>
+        <table id="toolContextContextTable"
+               data-target-type="table"
+               data-service-name="context"
+               data-target-selector="#toolContextContextTable"
+               class="data-table auto-load table table-striped table-bordered">
         </table>
     </div>
 

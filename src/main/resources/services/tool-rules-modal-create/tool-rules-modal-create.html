@@ -21,10 +21,10 @@
             <label for="createRuleOrder">Order</label>
             <input type="text" id="createRuleOrder" name="createRuleOrder"/>
 
-            <button class="modal-action" data-action-type="create"
-                    data-th-attr='data-tool-key=tool-rules,
-                    data-
-                    data-form=${form.id}'>Add Rule
+            <button class="modal-action"
+                    data-action-type="create"
+                    data-refresh-data-selector="#toolRulesRulesTable"
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Add Rule
             </button>
         </form>
     </div>

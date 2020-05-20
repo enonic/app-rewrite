@@ -1,6 +1,5 @@
 import {model} from "./model";
 
-
 export let initToolbar = function () {
 
     let allNavs = $(model.toolbar.toolNav);
@@ -13,14 +12,9 @@ export let initToolbar = function () {
             toggleTool(activates);
         })
     })
-
-
 };
 
-
 let toggleTool = function (id) {
-
-    console.log("Toggle tool: " + id);
     $(model.components.tool).each(function () {
         if ($(this).attr('id') === id) {
             $(this).addClass("selected");
@@ -28,5 +22,4 @@ let toggleTool = function (id) {
             $(this).removeClass("selected");
         }
     });
-
 };

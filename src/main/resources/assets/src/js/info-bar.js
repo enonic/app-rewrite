@@ -3,9 +3,6 @@ import {model} from "./model";
 const types = ["info", "warn", "error"];
 
 function doDisplayInfoBar(msg, type) {
-
-    console.log("Showing info-bar with msg: " + msg + " for type: " + type);
-
     let infoBar = $(model.infoBar.selector);
     infoBar.removeClass(types);
     infoBar.addClass(type);

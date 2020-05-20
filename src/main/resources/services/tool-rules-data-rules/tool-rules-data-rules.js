@@ -9,35 +9,26 @@ exports.get = function (req) {
         throw "contextKey is missing";
     }
 
-    log.info("ContextKey:" + contextKey);
-
     let mappings = rewriteService.getRewriteMappings();
-
 
     let model = {
         columns: [
-            "order",
-            "from",
-            "target",
-            "external",
-            "type"
+            {title: "Order", data: "order"},
+            {title: "From", data: "from"},
+            {title: "Target", data: "target.path"},
+            {title: "External", data: "target.external"},
+            {title: "Type", data: "type"},
         ]
     };
 
-
     for (let mappingKey in mappings) {
-
         log.info("####### MappingKey: %s, contextKey: %s", mappingKey, contextKey);
-
         if (mappings.hasOwnProperty(mappingKey)) {
             if (contextKey === mappingKey) {
                 model.data = mappings[mappingKey].rules;
             }
         }
     }
-
-
-    let view = resolve('tool-rules-select-list.html');
 
     return {
         contentType: 'application/json',

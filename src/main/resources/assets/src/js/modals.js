@@ -1,7 +1,7 @@
 import {model} from "./model";
 import {showError, showInfo} from "./info-bar";
 import {createActionServiceUrl, createModalSelector, createModalUrl} from "./serviceRegistry";
-import {refreshTool} from "./tools";
+import {refreshDataTable} from "./dataTables";
 
 
 export let initModals = function (svcUrl) {
@@ -15,7 +15,7 @@ let initializeOverlay = function () {
     });
 };
 
-export let initializeModalTrigger = function (toolKey, svcUrl) {
+export let initModalTriggers = function (toolKey, svcUrl) {
 
     console.log("initializeTriggers for toolId", toolKey);
 
@@ -57,13 +57,17 @@ let initializeModalActions = function (svcUrl) {
 
     $(model.modals.modalAction).click(function (event) {
         event.preventDefault();
-        let toolKey = $(this).data("tool-key");
-        let actionType = $(this).data("action-type");
-        let formId = $(this).data("form");
+        let thisElem = $(this);
+        let toolKey = thisElem.data("tool-key");
+        let actionType = thisElem.data("action-type");
+        let formId = thisElem.data("form");
+        let refreshDataSelector = thisElem.data("refresh-data-selector");
         let data = $("#" + formId).serialize();
 
+        let actionServiceUrl = createActionServiceUrl(svcUrl, toolKey, actionType);
+
         jQuery.ajax({
-            url: createActionServiceUrl(svcUrl, toolKey, actionType),
+            url: actionServiceUrl,
             cache: false,
             type: 'POST',
             data: data,
@@ -76,7 +80,7 @@ let initializeModalActions = function (svcUrl) {
                 showInfo(response.message);
                 closeModals();
                 toggleOverlay();
-                refreshTool(svcUrl, toolKey);
+                refreshDataTable(refreshDataSelector);
             }
         });
 

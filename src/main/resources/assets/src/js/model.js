@@ -34,7 +34,8 @@ export const model = {
     },
     tool: {
         dataTriggers: {
-            select: ".data-trigger-select"
+            select: ".data-trigger-select",
+            auto: ".auto-load"
         },
         select: {
             selector: ".select"
