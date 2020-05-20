@@ -18,12 +18,31 @@ exports.getVirtualHosts = function () {
     return __.toNativeObject(result);
 };
 
-exports.storeRewriteContext = function (contextKey) {
+exports.createRewriteContext = function (contextKey) {
     let result = bean.createRewriteContext(contextKey);
     return __.toNativeObject(result);
 };
 
 exports.deleteRewriteContext = function (contextKey) {
     let result = bean.deleteRewriteContext(contextKey);
+    return __.toNativeObject(result);
+};
+
+exports.createRule = function (contextKey, rule) {
+    let params = __.newBean('com.enonic.app.rewrite.CreateRuleParams');
+    params.order = rule.order;
+    params.source = rule.source;
+    params.target = rule.target;
+    params.type = rule.type;
+    params.contextKey = contextKey;
+
+    log.info("Storing rule with params: %s", rule);
+
+    let result = bean.createRule(params);
+    return __.toNativeObject(result);
+};
+
+exports.getProviderInfo = function () {
+    let result = bean.getProviderInfo();
     return __.toNativeObject(result);
 };

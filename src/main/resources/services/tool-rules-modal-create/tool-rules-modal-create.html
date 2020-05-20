@@ -1,0 +1,32 @@
+<div class="modal-guts create-context">
+
+    <div class="modal-content">
+        <h1>Create rule</h1>
+        <form class="form-grid" data-th-id="${form.id}">
+            <label for="createRuleContextKey">ContextKey</label>
+            <input type="text" id="createRuleContextKey" name="createRuleContextKey"/>
+
+            <label for="createRuleSource">Source</label>
+            <input type="text" id="createRuleSource" name="createRuleSource"/>
+
+            <label for="createRuleTarget">Target</label>
+            <input type="text" id="createRuleTarget" name="createRuleTarget"/>
+
+            <label for="createRuleType">Type</label>
+            <select id="createRuleType" name="createRuleType">
+                <option value="MOVED_PERMANENTLY" selected="selected">MOVED_PERMANENTLY</option>
+                <option value="TEMPORARILY_REDIRECT">TEMPORARILY_REDIRECT</option>
+            </select>
+
+            <label for="createRuleOrder">Order</label>
+            <input type="text" id="createRuleOrder" name="createRuleOrder"/>
+
+            <button class="modal-action" data-action-type="create"
+                    data-th-attr='data-tool-key=tool-rules,
+                    data-
+                    data-form=${form.id}'>Add Rule
+            </button>
+        </form>
+    </div>
+
+</div>

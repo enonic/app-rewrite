@@ -46,20 +46,18 @@
         font-weight: 700;
         color: #444;
         line-height: 1.3;
-        padding: .6em 1.4em .5em .8em;
+        padding: 1.0em 1.4em 1.0em .8em;
         width: 100%;
         max-width: 100%; /* useful when width is set to anything other than 100% */
         box-sizing: border-box;
         margin: 0;
         border: 1px solid $color-border-light;
-        border-radius: .5em;
+        border-radius: 2px;
         appearance: none;
-        background-color: $color-side-nav;
+        background-color: $color-main-background;
       }
 
-
     }
-
 
   }
 

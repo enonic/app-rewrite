@@ -16,6 +16,19 @@ public class RewriteRules
         ruleList = builder.rules;
     }
 
+    public RewriteRule get( final Integer order )
+    {
+        for ( final RewriteRule rule : ruleList )
+        {
+            if ( rule.getOrder() == order )
+            {
+                return rule;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public Iterator<RewriteRule> iterator()
     {
@@ -25,6 +38,13 @@ public class RewriteRules
     public static Builder create()
     {
         return new Builder();
+    }
+
+    public static Builder from( final RewriteRules rules )
+    {
+        final Builder builder = new Builder();
+        rules.forEach( builder::addRule );
+        return builder;
     }
 
     public int size()

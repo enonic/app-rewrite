@@ -2,14 +2,17 @@ package com.enonic.app.rewrite;
 
 import com.enonic.app.rewrite.context.VHostContextHelper;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
+import com.enonic.app.rewrite.mapping.ProviderInfoMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingsMapper;
 import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
+import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
 
@@ -74,6 +77,23 @@ public class RewriteBean
     {
         this.rewriteService.delete( new RewriteContextKey( contextKey ) );
         return null;
+    }
+
+    public Object createRule( final CreateRuleParams params )
+    {
+        this.rewriteService.addRule( new RewriteContextKey( params.getContextKey() ), RewriteRule.create().
+            order( params.getOrder() ).
+            from( params.getFrom() ).
+            target( params.getTarget() ).
+            type( RedirectType.valueOf( params.getType() ) ).
+            build() );
+
+        return null;
+    }
+
+    public Object getProviderInfo()
+    {
+        return new ProviderInfoMapper( this.rewriteService.getProviderInfo() );
     }
 
 }

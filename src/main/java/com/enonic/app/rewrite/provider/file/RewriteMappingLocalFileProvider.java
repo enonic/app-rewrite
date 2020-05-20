@@ -39,6 +39,12 @@ public class RewriteMappingLocalFileProvider
         ruleFilePattern = builder.ruleFilePattern;
     }
 
+    @Override
+    public String name()
+    {
+        return "LocalFile";
+    }
+
     public RewriteMappings getRewriteMappings()
     {
         final RewriteMappings.Builder builder = RewriteMappings.create();
@@ -76,6 +82,12 @@ public class RewriteMappingLocalFileProvider
     public void delete( final RewriteContextKey rewriteContextKey )
     {
         throw new RuntimeException( "Cannot delete from provider " + this.getClass().getName() );
+    }
+
+    @Override
+    public void addRule( final RewriteContextKey key, final RewriteRule rule )
+    {
+        throw new RuntimeException( "Cannot add rule to provider " + this.getClass().getName() );
     }
 
     private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )

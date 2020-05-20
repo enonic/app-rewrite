@@ -9,6 +9,8 @@ exports.get = function (req) {
         throw "contextKey is missing";
     }
 
+    log.info("ContextKey:" + contextKey);
+
     let mappings = rewriteService.getRewriteMappings();
 
 

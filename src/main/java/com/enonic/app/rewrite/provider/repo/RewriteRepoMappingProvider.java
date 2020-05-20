@@ -4,10 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
+import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
+import com.enonic.app.rewrite.provider.RewriteRuleException;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
 import com.enonic.app.rewrite.rewrite.RewriteRules;
 import com.enonic.xp.context.Context;
 import com.enonic.xp.context.ContextAccessor;
@@ -58,24 +61,15 @@ public class RewriteRepoMappingProvider
     }
 
     @Override
+    public String name()
+    {
+        return "LocalRepo";
+    }
+
+    @Override
     public RewriteMappings getRewriteMappings()
     {
         return setRepoContext().callWith( this::doGetMappings );
-    }
-
-    private Node getOrCreateContext( final RewriteContextKey contextKey )
-    {
-        final Node existing = this.doGetContextNode( contextKey );
-        if ( existing != null )
-        {
-            return existing;
-        }
-
-        return this.nodeService.create( CreateNodeParams.create().
-            parent( MAPPING_ROOT_NODE ).
-            name( RewriteContextName.from( contextKey ).getName() ).
-            data( ContextSerializer.toCreateNodeData( contextKey ) ).
-            build() );
     }
 
     private RewriteMappings doGetMappings()
@@ -131,6 +125,39 @@ public class RewriteRepoMappingProvider
     public void delete( final RewriteContextKey rewriteContextKey )
     {
         setRepoContext().runWith( () -> doDelete( rewriteContextKey ) );
+    }
+
+    @Override
+    public void addRule( final RewriteContextKey key, final RewriteRule rule )
+    {
+        setRepoContext().runWith( () -> doAddRule( key, rule ) );
+    }
+
+    private void doAddRule( final RewriteContextKey key, final RewriteRule rule )
+    {
+        final Node existingNode = doGetContextNode( key );
+
+        if ( existingNode == null )
+        {
+            throw new RewriteContextNotFoundException( key );
+        }
+
+        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( existingNode );
+
+        final RewriteRule existingRule = rewriteMapping.getRewriteRules().get( rule.getOrder() );
+
+        if ( existingRule != null )
+        {
+            throw new RewriteRuleException( String.format( "Rule with order %s alread exist in context %s", rule.getOrder(), key ) );
+        }
+
+        final RewriteMapping newMapping = RewriteMapping.create().
+            contextKey( key ).rewriteRules( RewriteRules.from( rewriteMapping.getRewriteRules() ).
+            addRule( rule ).
+            build() ).
+            build();
+
+        doUpdateContextNode( existingNode, newMapping );
     }
 
     private NodeIds doDelete( final RewriteContextKey rewriteContextKey )

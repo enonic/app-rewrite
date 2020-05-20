@@ -12,7 +12,6 @@
 
 import {model} from "./model";
 import {createDataServiceUrl} from "./serviceRegistry";
-import {showError, showInfo} from "./info-bar";
 
 export let initDataTriggers = function (toolKey, svcUrl) {
 
@@ -32,13 +31,14 @@ export let initDataTriggers = function (toolKey, svcUrl) {
         // Get selected value
         let selectedValue = elem.val();
 
-        let data = {
-            id: selectedValue
+
+        let dataFunction = function (d) {
+            d.id = elem.val();
         };
 
         let serviceUrl = createDataServiceUrl(svcUrl, toolKey, serviceName);
 
-        populateDataTable(serviceUrl, targetSelector, data);
+        populateDataTable(serviceUrl, targetSelector, dataFunction);
 
         /*
         jQuery.ajax({
@@ -64,24 +64,32 @@ export let initDataTriggers = function (toolKey, svcUrl) {
 };
 
 
-let populateDataTable = function (serviceUrl, selector, data) {
+let populateDataTable = function (serviceUrl, selector, dataFunction) {
 
-    console.log("Populating [" + selector + "] with data from " + serviceUrl)
+    console.log("Populating [" + selector + "] with data from " + serviceUrl);
 
-    $(selector).DataTable({
-        pageLength: 100,
-        ajax: {
-            url: serviceUrl,
-            dataSrc: "data",
-            data: data
-        },
-        columns: [
-            {data: 'order'},
-            {data: 'from'},
-            {data: 'target.path'},
-            {data: 'target.external'},
-            {data: 'type'}
-        ]
-    });
+    if ($.fn.DataTable.isDataTable(selector)) {
+        console.log("reload data");
+        $(selector).DataTable().ajax.reload();
+    } else {
+        console.log("initialize data")
+        $(selector).DataTable({
+            pageLength: 50,
+            ajax: {
+                url: serviceUrl,
+                dataSrc: "data",
+                data: dataFunction
+            },
+            columns: [
+                {data: 'order'},
+                {data: 'from'},
+                {data: 'target.path'},
+                {data: 'target.external'},
+                {data: 'type'}
+            ]
+        });
+
+    }
+
 
 };

@@ -13,12 +13,14 @@ import org.slf4j.LoggerFactory;
 import com.enonic.app.rewrite.engine.RewriteEngine;
 import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
 import com.enonic.app.rewrite.filter.RewriteFilterConfig;
+import com.enonic.app.rewrite.provider.ProviderInfo;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.provider.RewriteRulesProviderFactory;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
+import com.enonic.app.rewrite.rewrite.RewriteRule;
 
 @Component(immediate = true)
 public class RewriteServiceImpl
@@ -43,6 +45,11 @@ public class RewriteServiceImpl
         final RewriteRulesLoadResult loadResult = this.rewriteEngine.load( this.provider.getRewriteMappings() );
         LOG.info( "Loaded rules: " + loadResult );
         LOG.info( "RewriteService initialized" );
+    }
+
+    public RewriteMappingProvider getProvider()
+    {
+        return provider;
     }
 
     @Override
@@ -74,15 +81,29 @@ public class RewriteServiceImpl
     }
 
     @Override
+    public void addRule( final RewriteContextKey rewriteContextKey, final RewriteRule rule )
+    {
+        this.provider.addRule( rewriteContextKey, rule );
+    }
+
+    @Override
     public void create( final RewriteContextKey rewriteContextKey )
     {
-        this.provider.create( rewriteContextKey);
+        this.provider.create( rewriteContextKey );
     }
 
     @Override
     public void delete( final RewriteContextKey rewriteContextKey )
     {
-        this.provider.delete( rewriteContextKey);
+        this.provider.delete( rewriteContextKey );
+    }
+
+    @Override
+    public ProviderInfo getProviderInfo()
+    {
+        return ProviderInfo.create().
+            name( this.provider.name() ).
+            build();
     }
 }
 
