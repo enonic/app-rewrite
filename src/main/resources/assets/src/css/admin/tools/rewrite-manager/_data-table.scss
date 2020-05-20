@@ -1,0 +1,29 @@
+table.data-table {
+
+  border: 1px solid $color-border-light;
+  border-radius: 2px;
+  overflow-x: auto;
+  width: 90%;
+
+  tr {
+    border-bottom: 1px solid $color-border-light;
+  }
+
+  th {
+    padding: 10px 5px;
+  }
+
+  td {
+    padding: 10px 5px;
+    font-size: 0.8em;
+  }
+
+  thead {
+    background: $color-selected-1-active;
+  }
+
+  tbody {
+    background: $color-tool-context-bar;
+  }
+
+}

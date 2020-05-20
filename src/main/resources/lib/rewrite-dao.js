@@ -22,3 +22,8 @@ exports.storeRewriteContext = function (contextKey) {
     let result = bean.createRewriteContext(contextKey);
     return __.toNativeObject(result);
 };
+
+exports.deleteRewriteContext = function (contextKey) {
+    let result = bean.deleteRewriteContext(contextKey);
+    return __.toNativeObject(result);
+};

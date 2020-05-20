@@ -1,0 +1,37 @@
+<div class="tool-wrapper">
+    <div class="tool-context-bar">
+        <h2>Rewrite rules</h2>
+        <div class="actions">
+            <div class="large-selector">
+                <label for="toolRulesContextSelect">Context:</label>
+                <select class="select data-trigger-select"
+                        data-target-type="table"
+                        data-service-name="rules"
+                        data-target-selector="#toolRulesRulesTable"
+                        id="toolRulesContextSelect"
+                        name="toolRulesContextSelector">
+                    <option disabled selected value> -- select a context --</option>
+                    <div data-th-each="mapping,iterStat : ${mappings}" data-th-remove="tag">
+                        <option data-th-value="${mapping.key}"
+                                data-th-text="${mapping.key + ' (' + #lists.size(mapping.value.rules) + ')'}">VirtualHost
+                        </option>
+                    </div>
+                </select>
+            </div>
+            <button class="action modal-trigger" data-tool-key="tool-rule" data-modal-type="create"><i
+                    class="material-icons">add</i><span>Add rule</span>
+            </button>
+        </div>
+    </div>
+    <div class="tool-main">
+        <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered">
+        </table>
+    </div>
+
+    <div class="modals">
+        <div class="modal closed" id="tool-rule-modal-create">
+            <p>Hello, I am context-create modal</p>
+        </div>
+    </div>
+
+</div>

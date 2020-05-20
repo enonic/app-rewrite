@@ -20,6 +20,7 @@ export let initToolbar = function () {
 
 let toggleTool = function (id) {
 
+    console.log("Toggle tool: " + id);
     $(model.components.tool).each(function () {
         if ($(this).attr('id') === id) {
             $(this).addClass("selected");

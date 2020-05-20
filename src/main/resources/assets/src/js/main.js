@@ -140,7 +140,6 @@ let delay = (function () {
 let initButtons = function () {
 
     $('.btnCreate').click(function () {
-        console.log("Create entry for context " + $(this).data("context-key"))
         doCreatePosting($(this));
     });
 
@@ -154,8 +153,6 @@ let doCreatePosting = function (context) {
         let elem = $(this);
         data[elem.attr("name")] = elem.val();
     });
-
-    console.log("DATA: ", data);
 
     jQuery.ajax({
         url: svcUrl + "/rule-creator-service",

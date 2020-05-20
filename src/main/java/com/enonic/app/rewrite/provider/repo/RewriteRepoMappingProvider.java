@@ -18,8 +18,10 @@ import com.enonic.xp.node.CreateNodeParams;
 import com.enonic.xp.node.FindNodesByParentParams;
 import com.enonic.xp.node.FindNodesByParentResult;
 import com.enonic.xp.node.Node;
+import com.enonic.xp.node.NodeIds;
 import com.enonic.xp.node.NodePath;
 import com.enonic.xp.node.NodeService;
+import com.enonic.xp.node.RefreshMode;
 import com.enonic.xp.node.UpdateNodeParams;
 import com.enonic.xp.repository.RepositoryService;
 
@@ -121,12 +123,21 @@ public class RewriteRepoMappingProvider
             contextKey( rewriteContextKey ).
             rewriteRules( RewriteRules.create().build() ).
             build() );
+
+        this.nodeService.refresh( RefreshMode.ALL );
     }
 
     @Override
     public void delete( final RewriteContextKey rewriteContextKey )
     {
-        setRepoContext().runWith( () -> this.nodeService.deleteByPath( createContextNodePath( rewriteContextKey ) ) );
+        setRepoContext().runWith( () -> doDelete( rewriteContextKey ) );
+    }
+
+    private NodeIds doDelete( final RewriteContextKey rewriteContextKey )
+    {
+        final NodeIds nodeIds = this.nodeService.deleteByPath( createContextNodePath( rewriteContextKey ) );
+        this.nodeService.refresh( RefreshMode.ALL );
+        return nodeIds;
     }
 
     private Node doCreateOrUpdate( final NodePath nodePath, final RewriteMapping rewriteMapping )

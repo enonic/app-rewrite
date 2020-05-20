@@ -34,7 +34,7 @@
                 <p>Hi, im stupid</p>
             </aside>
 
-            <div class="tool-nav selected" data-activator="tool-contexts">
+            <div class="tool-nav selected" data-activator="tool-context">
                 <div class="toolIcon"><i class="material-icons">call_split</i></div>
                 <div class="toolName"><p>Rewrite Contexts</p></div>
             </div>
@@ -62,46 +62,11 @@
 
             <div id="tool-context" class="tool loadable-tool selected"></div>
 
+            <div id="tool-rules" class="tool loadable-tool"></div>
+
             <div id="tool-import-export" class="tool">
                 <div class="tool-context-bar">
                     <h2>Import / Export</h2>
-                </div>
-            </div>
-
-            <div id="tool-rules" class="tool">
-                <div class="tool-context-bar">
-                    <h2>Rewrite rules</h2>
-                    <div class="actions">
-                        <button class="action modal-trigger" data-modal="ruleCreate"><i
-                                class="material-icons">add</i><span>Add rule</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="tool-main">
-                    <div data-th-each="mapping,iterStat : ${mappings}" data-th-remove="tag">
-                        <table class="tool-listing">
-                            <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>External</th>
-                                <th>Type</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <div data-th-each="rule,iterStat : ${mapping.value.rules}" data-th-remove="tag">
-                                <tr data-th-id="${mapping.key + '_' + rule.order}">
-                                    <td data-th-text="${rule.order }"></td>
-                                    <td data-th-text="${rule.from}"></td>
-                                    <td data-th-text="${rule.target.path}"></td>
-                                    <td data-th-text="${rule.target.external}"></td>
-                                    <td data-th-text="${rule.type}"></td>
-                                </tr>
-                            </div>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
 
@@ -151,14 +116,13 @@
             </div>
         </div>
 
-        <div class="modals">
-            <div class="modal closed" id="modalContextCreate">
-                <p>Hello, I am context-create modal</p>
-            </div>
-        </div>
-
         <div class="modal-overlay closed" id="modal-overlay"></div>
     </div>
+</div>
+
+
+<div id="bottom-bar" class="info-bar bottom hidden">
+    <p>This is some info</p>
 </div>
 
 <script type="text/javascript" data-th-inline="javascript">

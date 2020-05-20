@@ -3,24 +3,16 @@ const rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 
-    let params = req.params;
-
-
     let result = rewriteDao.getVirtualHosts();
 
     let model = {
         virtualHosts: result.virtualHosts,
         form: {
-            id: "create-context-form",
-            create: {
-                serviceUrl: "service-create-context"
-            }
+            id: "tool-context-action-create-form",
         }
     };
 
-    log.info("MODEL %s", JSON.stringify(model, null, 3));
-
-    let view = resolve('modal-create-context.html');
+    let view = resolve('tool-context-modal-create.html');
 
     return {
         contentType: 'text/html',

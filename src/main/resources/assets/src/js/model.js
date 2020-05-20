@@ -27,10 +27,23 @@ export const model = {
         modalAction: ".modal-action",
         contextCreate: {
             selector: "#modalContextCreate",
-            modalService: "modal-create-context"
+        }
+    },
+    infoBar: {
+        selector: "#bottom-bar"
+    },
+    tool: {
+        dataTriggers: {
+            select: ".data-trigger-select"
+        },
+        select: {
+            selector: ".select"
+        },
+        table: {
+            action: ".tool-table-action"
         }
 
-
     }
+
 
 };

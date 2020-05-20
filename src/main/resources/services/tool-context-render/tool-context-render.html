@@ -2,13 +2,13 @@
     <div class="tool-context-bar">
         <h2>Rewrite contexts</h2>
         <div class="actions">
-            <button class="action modal-trigger" data-modal="contextCreate" data-action="create" data-context="context"><i
+            <button class="action modal-trigger" data-tool-key="tool-context" data-modal-type="create"><i
                     class="material-icons">add</i><span>Add context</span>
             </button>
         </div>
     </div>
     <div class="tool-main">
-        <table class="tool-listing">
+        <table class="tool-listing data-table">
             <thead>
             <tr>
                 <th>Key</th>
@@ -30,7 +30,7 @@
                     <td data-th-text="${mapping.value.target}">target</td>
                     <td data-th-text="${#lists.size(mapping.value.rules)}">rules</td>
                     <td>
-                        <div class="tool-table-actions" data-th-attr='data-action-type=delete,data-id=${mapping.key}'><i
+                        <div class="tool-table-action " data-th-attr='data-action-type=delete,data-id=${mapping.key}'><i
                                 class="material-icons">delete</i></div>
                     </td>
                 </tr>
@@ -38,4 +38,11 @@
             </div>
         </table>
     </div>
+
+    <div class="modals">
+        <div class="modal closed" id="tool-context-modal-create">
+            <p>Hello, I am context-create modal</p>
+        </div>
+    </div>
+
 </div>

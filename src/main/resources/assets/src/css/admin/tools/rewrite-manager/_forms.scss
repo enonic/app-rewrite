@@ -1,11 +1,12 @@
 
 .form-grid {
-  
+
   display: grid;
   grid-template-columns: 1fr 1em 2fr;
   grid-gap: 0.3em 0.6em;
   grid-auto-flow: dense;
   align-items: center;
+  margin-top: 20px;
 
   input, output, textarea, select, button {
     grid-column: 2 / 4;

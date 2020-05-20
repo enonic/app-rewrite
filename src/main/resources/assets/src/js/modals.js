@@ -1,47 +1,12 @@
 import {model} from "./model";
+import {showError, showInfo} from "./info-bar";
+import {createActionServiceUrl, createModalSelector, createModalUrl} from "./serviceRegistry";
+import {refreshTool} from "./tools";
 
 
 export let initModals = function (svcUrl) {
-
-    console.log("Initializing modals");
-    initializeTriggers(svcUrl);
     initializeOverlay();
 };
-
-let initializeModalActions = function (svcUrl) {
-
-    console.log("Initialize modal-actions");
-
-    $(model.modals.modalAction).click(function (event) {
-
-        event.preventDefault();
-        let serviceName = $(this).data("service");
-        let formId = $(this).data("form");
-        let actionType = $(this).data("action-type");
-
-        console.log("FormId: " + formId);
-
-        let data = $("#" + formId).serialize();
-
-        console.log("data: " + data);
-
-        jQuery.ajax({
-            url: svcUrl + "/" + serviceName,
-            cache: false,
-            type: 'POST',
-            data: data,
-            error: function (response, status, error) {
-                console.log("Result: ", response.responseText);
-                $(model.elements.result).html(response.responseText);
-            },
-            success: function (result) {
-                console.log("Result: ", JSON.stringify(result));
-            }
-        });
-
-    });
-};
-
 
 let initializeOverlay = function () {
     $(model.modals.overlay).click(function () {
@@ -50,48 +15,81 @@ let initializeOverlay = function () {
     });
 };
 
-let initializeTriggers = function (svcUrl) {
-    $(model.modals.triggers).click(function () {
+export let initializeModalTrigger = function (toolKey, svcUrl) {
+
+    console.log("initializeTriggers for toolId", toolKey);
+
+    let toolSelector = "#" + toolKey;
+
+    $(toolSelector).find(model.modals.triggers).click(function () {
         let modalTrigger = $(this);
-        console.log("Enable modal-trigger", modalTrigger);
-        let modalId = modalTrigger.data("modal");
-        console.log("ModalId: " + modalId);
-        displayModal(svcUrl, modalId);
+        let modalType = modalTrigger.data("modal-type");
+        displayModal(svcUrl, toolKey, modalType);
     });
 };
 
-export let displayModal = function (svcUrl, name) {
-
-    let selector = model.modals[name].selector;
-    let modalService = model.modals[name].modalService;
+export let displayModal = function (svcUrl, toolKey, modalType) {
 
     let data = {};
+    let modalSelector = createModalSelector(toolKey, modalType);
 
     jQuery.ajax({
-        url: svcUrl + "/" + modalService,
+        url: createModalUrl(svcUrl, toolKey, modalType),
         cache: false,
         type: 'GET',
         data: data,
         error: function (response, status, error) {
             console.log("Result: ", response.responseText);
-            $(model.elements.result).html(response.responseText);
+            showError(response.responseText);
         },
         success: function (result) {
-            console.log("Result: ", JSON.stringify(result));
-            $(selector).html(result);
+            $(modalSelector).html(result);
             initializeModalActions(svcUrl);
-            $(selector).toggleClass("closed");
+            $(modalSelector).toggleClass("closed");
             toggleOverlay();
         }
     });
-
-
 };
 
-let closeModals = function () {
+let initializeModalActions = function (svcUrl) {
+
+    console.log("Initialize modal-actions");
+
+    $(model.modals.modalAction).click(function (event) {
+        event.preventDefault();
+        let toolKey = $(this).data("tool-key");
+        let actionType = $(this).data("action-type");
+        let formId = $(this).data("form");
+        let data = $("#" + formId).serialize();
+
+        jQuery.ajax({
+            url: createActionServiceUrl(svcUrl, toolKey, actionType),
+            cache: false,
+            type: 'POST',
+            data: data,
+            error: function (response, status, error) {
+                console.log("ERROR: ", response);
+                showError(response.responseText);
+            },
+            success: function (response, textStatus, jqXHR) {
+                console.log("SUCCESS: ", response, textStatus, jqXHR);
+                showInfo(response.message);
+                closeModals();
+                toggleOverlay();
+                refreshTool(svcUrl, toolKey);
+            }
+        });
+
+    });
+};
+
+export let closeModals = function () {
     $(model.modals.all).addClass("closed");
 };
 
-let toggleOverlay = function () {
+export let closeOverlay = function () {
+    $(model.modals.overlay).addClass("closed");
+};
+export let toggleOverlay = function () {
     $(model.modals.overlay).toggleClass("closed");
 };

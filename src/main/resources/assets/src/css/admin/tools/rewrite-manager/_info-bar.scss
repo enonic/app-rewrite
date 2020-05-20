@@ -1,0 +1,39 @@
+$info-bar-height: "200px";
+
+.info-bar {
+
+  position: fixed;
+  width: 100%;
+  height: $info-bar-height;
+
+  &.bottom {
+    bottom: 0;
+    left: 0;
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2000;
+  border-top: 1px solid $color-border-dark;
+
+  font-size: 2.0em;
+
+  p {
+    text-align: center;
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  &.info {
+    background: lightgreen;
+  }
+
+  &.error {
+    background: lightcoral;
+  }
+
+}

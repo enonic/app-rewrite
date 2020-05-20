@@ -1,4 +1,6 @@
 @import 'tool-context-bar';
+@import 'data-table';
+
 
 #tools-window {
 
@@ -15,34 +17,10 @@
     .tool-main {
       padding: 40px;
 
-      table {
-        width: 100%;
-        border: 1px solid $color-border-light;
-        border-radius: 2px;
 
-        tr {
-          border-bottom: 1px solid $color-border-light;
-        }
+      .tool-table-action {
 
-        th {
-          padding: 10px 5px;
-        }
-
-        td {
-          padding: 10px 5px;
-        }
-
-        thead {
-          background: $color-selected-1-active;
-        }
-
-        tbody {
-          background: $color-tool-context-bar;
-        }
-
-      }
-
-      .tool-table-actions {
+        display: inline;
 
         &:hover {
           cursor: pointer;
@@ -79,6 +57,7 @@
 
     padding: 20px;
 
+
     div.match {
       outline: none;
       border-color: lime;
@@ -100,7 +79,6 @@
       table {
 
         font-size: 0.8em;
-
         max-width: 100%;
 
         thead.thead-dark {
