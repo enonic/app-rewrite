@@ -1,5 +1,4 @@
-let thymeleaf = require('/lib/thymeleaf');
-const rewriteService = require('/lib/rewrite-service');
+const rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 
@@ -8,8 +7,6 @@ exports.get = function (req) {
     if (!contextKey) {
         throw "contextKey is missing";
     }
-
-    let mappings = rewriteService.getRewriteMappings();
 
     let model = {
         columns: [
@@ -21,14 +18,10 @@ exports.get = function (req) {
         ]
     };
 
-    for (let mappingKey in mappings) {
-        log.info("####### MappingKey: %s, contextKey: %s", mappingKey, contextKey);
-        if (mappings.hasOwnProperty(mappingKey)) {
-            if (contextKey === mappingKey) {
-                model.data = mappings[mappingKey].rules;
-            }
-        }
-    }
+    let result = rewriteDao.getRewriteMapping(contextKey);
+    model.data = result.mapping.rules;
+
+    log.info("Model: %s", JSON.stringify(model, null, 4));
 
     return {
         contentType: 'application/json',

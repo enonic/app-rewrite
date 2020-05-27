@@ -33,10 +33,18 @@ public class RewriteMappingLocalFileProvider
 
     private final String ruleFilePattern;
 
+    private RewriteMappings rewriteMappings;
+
     private RewriteMappingLocalFileProvider( final Builder builder )
     {
         base = builder.base;
         ruleFilePattern = builder.ruleFilePattern;
+    }
+
+    @Override
+    public boolean readOnly()
+    {
+        return true;
     }
 
     @Override
@@ -45,7 +53,18 @@ public class RewriteMappingLocalFileProvider
         return "LocalFile";
     }
 
-    public RewriteMappings getRewriteMappings()
+    @Override
+    public RewriteMapping getRewriteMapping( final RewriteContextKey contextKey )
+    {
+        if ( this.rewriteMappings == null )
+        {
+            this.rewriteMappings = doGetAllRewriteMappings();
+        }
+
+        return rewriteMappings.getRewriteMapping( contextKey );
+    }
+
+    private RewriteMappings doGetAllRewriteMappings()
     {
         final RewriteMappings.Builder builder = RewriteMappings.create();
 

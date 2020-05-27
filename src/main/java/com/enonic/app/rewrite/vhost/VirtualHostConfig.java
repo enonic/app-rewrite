@@ -1,4 +1,4 @@
-package com.enonic.app.rewrite.requesttester;
+package com.enonic.app.rewrite.vhost;
 
 public interface VirtualHostConfig
 {

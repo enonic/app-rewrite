@@ -61,12 +61,35 @@ public class RewriteRepoMappingProvider
     }
 
     @Override
+    public RewriteMapping getRewriteMapping( final RewriteContextKey contextKey )
+    {
+        return setRepoContext().callWith( () -> doGetRewriteMapping( contextKey ) );
+    }
+
+    private RewriteMapping doGetRewriteMapping( final RewriteContextKey contextKey )
+    {
+        final Node node = doGetContextNode( contextKey );
+
+        if ( node == null )
+        {
+            return null;
+        }
+
+        return RewriteMappingSerializer.fromNode( node );
+    }
+
+    @Override
+    public boolean readOnly()
+    {
+        return false;
+    }
+
+    @Override
     public String name()
     {
         return "LocalRepo";
     }
 
-    @Override
     public RewriteMappings getRewriteMappings()
     {
         return setRepoContext().callWith( this::doGetMappings );

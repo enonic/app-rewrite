@@ -1,18 +1,21 @@
 package com.enonic.app.rewrite;
 
-import com.enonic.app.rewrite.context.VHostContextHelper;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
-import com.enonic.app.rewrite.mapping.ProviderInfoMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
-import com.enonic.app.rewrite.mapping.RewriteMappingsMapper;
+import com.enonic.app.rewrite.mapping.RewriteConfigurationsMapper;
+import com.enonic.app.rewrite.mapping.RewriteContextMapper;
+import com.enonic.app.rewrite.mapping.RewriteMappingMapper;
 import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
 import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
-import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMappings;
+import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.vhost.RewriteConfigurations;
+import com.enonic.app.rewrite.vhost.VHostService;
+import com.enonic.app.rewrite.vhost.VirtualHostMapping;
+import com.enonic.app.rewrite.vhost.VirtualHostMappings;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
 
@@ -23,25 +26,43 @@ public class RewriteBean
 
     private RequestTester requestTester;
 
-    private VHostContextHelper vHostContextHelper;
+    private VHostService vHostService;
 
     @Override
     public void initialize( final BeanContext context )
     {
         this.rewriteService = context.getService( RewriteService.class ).get();
         this.requestTester = context.getService( RequestTester.class ).get();
-        this.vHostContextHelper = context.getService( VHostContextHelper.class ).get();
+        this.vHostService = context.getService( VHostService.class ).get();
     }
 
-    public Object getRewriteMappings()
+
+    public Object getRewriteConfigurations()
     {
-        final RewriteMappings rewriteMappings = this.rewriteService.getRewriteMappings();
+        final RewriteConfigurations rewriteConfigurations = this.rewriteService.getRewriteConfigurations();
 
-        rewriteMappings.forEach( mapping -> {
+        System.out.println( rewriteConfigurations );
 
-        } );
+        return new RewriteConfigurationsMapper( rewriteConfigurations );
+    }
 
-        return new RewriteMappingsMapper( rewriteMappings, this.vHostContextHelper.getMappings() );
+    public Object getRewriteContext( final String contextKey )
+    {
+        final VirtualHostMapping rewriteContext = this.rewriteService.getRewriteContext( new RewriteContextKey( contextKey ) );
+
+        return new RewriteContextMapper( rewriteContext );
+    }
+
+    public Object getRewriteMapping( final String contextKey )
+    {
+        final RewriteMapping rewriteMapping = this.rewriteService.getRewriteMapping( new RewriteContextKey( contextKey ) );
+
+        if ( rewriteMapping == null )
+        {
+            return null;
+        }
+
+        return new RewriteMappingMapper( rewriteMapping );
     }
 
     public Object requestTester( final String requestURI )
@@ -62,7 +83,7 @@ public class RewriteBean
 
     public Object getVirtualHosts()
     {
-        final VirtualHostMappings virtualHosts = this.vHostContextHelper.getMappings();
+        final VirtualHostMappings virtualHosts = this.vHostService.getMappings();
 
         return new VirtualHostsMapper( virtualHosts );
     }
@@ -89,11 +110,6 @@ public class RewriteBean
             build() );
 
         return null;
-    }
-
-    public Object getProviderInfo()
-    {
-        return new ProviderInfoMapper( this.rewriteService.getProviderInfo() );
     }
 
 }

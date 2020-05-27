@@ -1,40 +1,29 @@
 package com.enonic.app.rewrite.mapping;
 
 import com.enonic.app.rewrite.vhost.VirtualHostMapping;
-import com.enonic.app.rewrite.vhost.VirtualHostMappings;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 
-public class VirtualHostsMapper
+public class RewriteContextMapper
     implements MapSerializable
 {
-    private final VirtualHostMappings virtualHostMappings;
+    private final VirtualHostMapping virtualHostMapping;
 
-    public VirtualHostsMapper( final VirtualHostMappings virtualHostMappings )
+    public RewriteContextMapper( final VirtualHostMapping virtualHostMapping )
     {
-        this.virtualHostMappings = virtualHostMappings;
+        this.virtualHostMapping = virtualHostMapping;
     }
 
     @Override
     public void serialize( final MapGenerator gen )
     {
-        gen.array( "virtualHosts" );
-        this.virtualHostMappings.forEach( mapping -> {
-            mapVirtualHost( gen, mapping );
-        } );
-        gen.end();
-    }
-
-    private void mapVirtualHost( final MapGenerator gen, final VirtualHostMapping virtualHostMapping )
-    {
-        gen.map();
-        gen.value( "type", "virtualHost" );
+        gen.map( "rewriteContext" );
         gen.value( "name", virtualHostMapping.getName() );
+        gen.value( "type", "virtualHost" );
         gen.value( "host", virtualHostMapping.getHost() );
         gen.value( "source", virtualHostMapping.getSource() );
         gen.value( "target", virtualHostMapping.getTarget() );
         gen.value( "defaultIdProviderKey", virtualHostMapping.getDefaultIdProviderKey() );
         gen.end();
     }
-
 }

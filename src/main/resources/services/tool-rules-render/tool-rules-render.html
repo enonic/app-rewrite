@@ -11,9 +11,9 @@
                         id="toolRulesContextSelect"
                         name="toolRulesContextSelector">
                     <option disabled selected value> -- select a context --</option>
-                    <div data-th-each="mapping,iterStat : ${mappings}" data-th-remove="tag">
-                        <option data-th-value="${mapping.key}"
-                                data-th-text="${mapping.key + ' (' + #lists.size(mapping.value.rules) + ')'}">VirtualHost
+                    <div data-th-each="config,iterStat : ${configs}" data-th-remove="tag">
+                        <option data-th-value="${config.contextKey}"
+                                data-th-text="${config.contextKey + ' (' + config.rules + ')'}">VirtualHost
                         </option>
                     </div>
                 </select>

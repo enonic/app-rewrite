@@ -1,9 +1,12 @@
 package com.enonic.app.rewrite.provider;
 
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+
+import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.filter.RewriteFilterConfig;
 import com.enonic.app.rewrite.provider.file.RewriteMappingLocalFileProvider;
@@ -23,26 +26,27 @@ public class RewriteRulesProviderFactoryImpl
 
     private NodeService nodeService;
 
-    public RewriteMappingProvider get( final RewriteFilterConfig config )
+    public List<RewriteMappingProvider> getProviders( final RewriteFilterConfig config )
     {
-        final String providerName = config.provider();
+        final List<RewriteMappingProvider> providers = Lists.newArrayList();
+        providers.add( initFileProvider( config ) );
+        providers.add( initRepoProvider() );
+        return providers;
+    }
 
-        if ( providerName.equals( "file" ) )
-        {
-            final String rulePattern = config.ruleFilePattern();
-            final HomeDir xpHome = HomeDir.get();
-            return RewriteMappingLocalFileProvider.create().
-                base( Paths.get( xpHome.toFile().getPath(), "config" ) ).
-                ruleFilePattern( rulePattern ).
-                build();
-        }
+    private RewriteMappingProvider initFileProvider( final RewriteFilterConfig config )
+    {
+        final String rulePattern = config.ruleFilePattern();
+        final HomeDir xpHome = HomeDir.get();
+        return RewriteMappingLocalFileProvider.create().
+            base( Paths.get( xpHome.toFile().getPath(), "config" ) ).
+            ruleFilePattern( rulePattern ).
+            build();
+    }
 
-        if ( providerName.equals( "repo" ) )
-        {
-            return new RewriteRepoMappingProvider( this.repositoryService, this.indexService, this.nodeService );
-        }
-
-        throw new IllegalArgumentException( "Unknown provider: [" + providerName + "]" );
+    private RewriteMappingProvider initRepoProvider()
+    {
+        return new RewriteRepoMappingProvider( this.repositoryService, this.indexService, this.nodeService );
     }
 
     @Reference

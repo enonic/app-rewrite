@@ -1,16 +1,12 @@
-package com.enonic.app.rewrite.context;
+package com.enonic.app.rewrite.vhost;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import com.enonic.app.rewrite.requesttester.VirtualHostConfig;
-import com.enonic.app.rewrite.requesttester.VirtualHostMapping;
-import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
-
 @Component(immediate = true)
-public class VHostContextHelperImpl
-    implements VHostContextHelper
+public class VHostServiceImpl
+    implements VHostService
 {
     private VirtualHostConfig virtualHostConfig;
 

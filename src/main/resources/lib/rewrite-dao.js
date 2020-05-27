@@ -13,8 +13,18 @@ exports.store = function (rule) {
     return __.toNativeObject(result);
 };
 
-exports.getVirtualHosts = function () {
-    let result = bean.getVirtualHosts();
+exports.getRewriteConfigurations = function () {
+    let result = bean.getRewriteConfigurations();
+    return __.toNativeObject(result);
+};
+
+exports.getRewriteContext = function (contextKey) {
+    let result = bean.getRewriteContext(contextKey);
+    return __.toNativeObject(result);
+};
+
+exports.getRewriteMapping = function (contextKey) {
+    let result = bean.getRewriteMapping(contextKey);
     return __.toNativeObject(result);
 };
 
@@ -39,10 +49,5 @@ exports.createRule = function (contextKey, rule) {
     log.info("Storing rule with params: %s", rule);
 
     let result = bean.createRule(params);
-    return __.toNativeObject(result);
-};
-
-exports.getProviderInfo = function () {
-    let result = bean.getProviderInfo();
     return __.toNativeObject(result);
 };

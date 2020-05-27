@@ -10,6 +10,7 @@ public class RewriteMappings
 {
     private List<RewriteMapping> rewriteMappingList;
 
+
     public static Builder create()
     {
         return new Builder();
@@ -18,6 +19,19 @@ public class RewriteMappings
     public RewriteMappings( final Builder builder )
     {
         this.rewriteMappingList = builder.rewriteMappings;
+    }
+
+    public RewriteMapping getRewriteMapping( final RewriteContextKey contextKey )
+    {
+        for ( final RewriteMapping mapping : rewriteMappingList )
+        {
+            if ( mapping.getContextKey().equals( contextKey ) )
+            {
+                return mapping;
+            }
+        }
+
+        return null;
     }
 
     @Override

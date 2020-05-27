@@ -1,34 +1,40 @@
-let thymeleaf = require('/lib/thymeleaf');
-const rewriteService = require('/lib/rewrite-service');
+const rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 
-    let mappings = rewriteService.getRewriteMappings();
-    log.info("Mapping: %s", JSON.stringify(mappings, null, 2));
+    let result = rewriteDao.getRewriteConfigurations();
 
     let model = {
         columns: [
-            {title: "Order", data: "contextKey"},
-            {title: "Host", data: "host"},
-            {title: "Source", data: "source"}
+            {title: "ContextKey", data: "contextKey"},
+            {title: "Url", data: "url"},
+            {title: "Provider", data: "provider"}
         ]
     };
 
     model.data = [];
-    for (let mappingKey in mappings) {
 
-        if (mappings.hasOwnProperty(mappingKey)) {
-            model.data.push({
-                contextKey: mappingKey,
-                host: mappings[mappingKey].host,
-                source: mappings[mappingKey].source
-            });
-        }
-    }
+    result.configurations.forEach(function (configuration) {
+
+        let contextKey = configuration.contextKey;
+        let result = rewriteDao.getRewriteContext(contextKey);
+        let rewriteContext = result.rewriteContext;
+
+        model.data.push({
+            contextKey: contextKey,
+            url: createUrl(rewriteContext),
+            mapped: configuration.provider != null && configuration.provider !== "",
+            provider: configuration.provider
+        });
+    });
 
     return {
         contentType: 'application/json',
         status: 200,
         body: model
     };
+};
+
+let createUrl = function (rewriteContext) {
+    return rewriteContext.host + rewriteContext.source;
 };

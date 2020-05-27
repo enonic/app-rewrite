@@ -13,6 +13,8 @@ import com.google.common.collect.Lists;
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.vhost.VirtualHostConfig;
+import com.enonic.app.rewrite.vhost.VirtualHostMapping;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
 

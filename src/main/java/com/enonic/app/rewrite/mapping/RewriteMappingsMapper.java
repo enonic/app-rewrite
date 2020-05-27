@@ -4,8 +4,8 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import com.enonic.app.rewrite.requesttester.VirtualHostMapping;
-import com.enonic.app.rewrite.requesttester.VirtualHostMappings;
+import com.enonic.app.rewrite.vhost.VirtualHostMapping;
+import com.enonic.app.rewrite.vhost.VirtualHostMappings;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
 import com.enonic.app.rewrite.rewrite.RewriteRule;
