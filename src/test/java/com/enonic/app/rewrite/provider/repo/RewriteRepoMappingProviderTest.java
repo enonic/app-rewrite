@@ -60,7 +60,6 @@ class RewriteRepoMappingProviderTest
                 addRule( RewriteRule.create().
                     from( "/original" ).
                     target( "/target" ).
-                    order( 0 ).
                     type( RedirectType.MOVED_PERMANENTLY ).
                     build() ).
                 build() ).

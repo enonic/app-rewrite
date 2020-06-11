@@ -15,7 +15,7 @@ public class RewriteFormatReader
 
         try
         {
-            rule = ApacheRewriteFormatReader.read( value, order );
+            rule = ApacheRewriteFormatReader.read( value );
             if ( rule != null )
             {
                 return rule;

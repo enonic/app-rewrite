@@ -50,7 +50,6 @@ public class RewriteMappingSerializer
                 builder.addRule( RewriteRule.create().
                     from( ruleSet.getString( RULE_FROM_KEY ) ).
                     target( ruleSet.getString( RULE_TARGET_KEY ) ).
-                    order( ruleSet.getDouble( RULE_ORDER_KEY ).intValue() ).
                     type( RedirectType.valueOf( ruleSet.getString( RULE_TYPE_KEY ) ) ).
                     build() );
             } );
@@ -88,7 +87,6 @@ public class RewriteMappingSerializer
             final PropertySet ruleData = new PropertySet();
             ruleData.addString( RULE_FROM_KEY, rule.getFrom() );
             ruleData.addString( RULE_TARGET_KEY, rule.getTarget().path() );
-            ruleData.addDouble( RULE_ORDER_KEY, toDouble( rule.getOrder() ) );
             ruleData.addString( RULE_TYPE_KEY, rule.getType().name() );
             setList.add( ruleData );
         } );

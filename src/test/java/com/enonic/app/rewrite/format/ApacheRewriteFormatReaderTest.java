@@ -15,7 +15,7 @@ class ApacheRewriteFormatReaderTest
     void testRule()
     {
         final RewriteRule rule =
-            ApacheRewriteFormatReader.read( "RewriteRule    \"^/bedrift/pensjon/(.*)$\" \"/virksomhet/pensjon/$1\" [R=307,NC,L]", 0 );
+            ApacheRewriteFormatReader.read( "RewriteRule    \"^/bedrift/pensjon/(.*)$\" \"/virksomhet/pensjon/$1\" [R=307,NC,L]" );
 
         assertNotNull( rule );
         assertEquals( "^/bedrift/pensjon/(.*)$", rule.getFrom() );
@@ -26,8 +26,7 @@ class ApacheRewriteFormatReaderTest
     @Test
     void testRule2()
     {
-        final RewriteRule rule =
-            ApacheRewriteFormatReader.read( "RewriteRule    \"^/bedrift/pensjon/(.*)$\" \"/virksomhet/pensjon/$1\"", 0 );
+        final RewriteRule rule = ApacheRewriteFormatReader.read( "RewriteRule    \"^/bedrift/pensjon/(.*)$\" \"/virksomhet/pensjon/$1\"" );
 
         assertNotNull( rule );
         assertEquals( "^/bedrift/pensjon/(.*)$", rule.getFrom() );

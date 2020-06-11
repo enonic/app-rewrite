@@ -28,16 +28,18 @@ public class RewriteMappingMapper
     private void mapRules( final MapGenerator gen, final Iterable<RewriteRule> rules )
     {
         gen.array( "rules" );
-        rules.forEach( rule -> {
-            mapRule( gen, rule );
-        } );
+        int i = 0;
+        for ( final RewriteRule rule : rules )
+        {
+            mapRule( gen, rule, i++ );
+        }
         gen.end();
     }
 
-    private void mapRule( final MapGenerator gen, final RewriteRule rule )
+    private void mapRule( final MapGenerator gen, final RewriteRule rule, int index )
     {
         gen.map();
-        gen.value( "order", rule.getOrder() );
+        gen.value( "order", index );
         gen.value( "from", rule.getFrom() );
         mapTarget( gen, rule );
         gen.value( "type", rule.getType() );

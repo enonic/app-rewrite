@@ -25,7 +25,7 @@ class ApacheRewriteFormatReader
 
     private final static Logger LOG = LoggerFactory.getLogger( ApacheRewriteFormatReader.class );
 
-    static RewriteRule read( final String value, int order )
+    static RewriteRule read( final String value )
     {
         if ( Strings.isNullOrEmpty( value ) )
         {
@@ -64,7 +64,6 @@ class ApacheRewriteFormatReader
                 from( from ).
                 target( clean( target ) ).
                 type( type ).
-                order( order ).
                 build();
         }
 

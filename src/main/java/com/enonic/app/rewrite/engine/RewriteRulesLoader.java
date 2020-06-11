@@ -23,7 +23,6 @@ class RewriteRulesLoader
             {
                 final RulePattern pattern = RulePattern.create().
                     target( rule.getTarget() ).
-                    order( rule.getOrder() ).
                     type( rule.getType() ).
                     pattern( rule.getFrom() ).
                     build();
