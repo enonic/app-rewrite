@@ -22,8 +22,6 @@ public interface RewriteService
 
     void store( final RewriteMapping rewriteMapping );
 
-    void addRule( final RewriteContextKey rewriteContextKey, final RewriteRule rule );
-
     void createRule( final CreateRuleParams params );
 
     void create( final RewriteContextKey rewriteContextKey );

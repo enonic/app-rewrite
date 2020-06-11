@@ -16,19 +16,6 @@ public class RewriteRules
         ruleList = builder.rules;
     }
 
-    public RewriteRule get( final Integer order )
-    {
-        for ( final RewriteRule rule : ruleList )
-        {
-            if ( rule.getOrder() == order )
-            {
-                return rule;
-            }
-        }
-
-        return null;
-    }
-
     @Override
     public Iterator<RewriteRule> iterator()
     {
@@ -66,10 +53,23 @@ public class RewriteRules
             return this;
         }
 
-
         public Builder addRule( final RewriteRule rule )
         {
             this.rules.add( rule );
+            return this;
+        }
+
+        public Builder addRule( final RewriteRule rule, boolean first )
+        {
+            if ( first )
+            {
+                this.rules.add( 0, rule );
+            }
+            else
+            {
+                this.rules.add( rule );
+            }
+
             return this;
         }
 

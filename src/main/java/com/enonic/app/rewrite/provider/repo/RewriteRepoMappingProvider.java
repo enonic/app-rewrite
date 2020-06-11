@@ -8,6 +8,7 @@ import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.provider.RewriteRuleException;
+import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
@@ -152,12 +153,6 @@ public class RewriteRepoMappingProvider
     }
 
     @Override
-    public void addRule( final RewriteContextKey key, final RewriteRule rule )
-    {
-        setRepoContext().runWith( () -> doAddRule( key, rule ) );
-    }
-
-    @Override
     public void createRule( final CreateRuleParams params )
     {
         setRepoContext().runWith( () -> doCreateRule( params ) );
@@ -176,36 +171,15 @@ public class RewriteRepoMappingProvider
 
         final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( existingNode );
 
-        final RewriteMapping newMapping = RewriteMapping.create().
-            contextKey( contextKey ).rewriteRules( RewriteRules.from( rewriteMapping.getRewriteRules() ).
-            addRule( rule ).
-            build() ).
+        final RewriteRule rule = RewriteRule.create().
+            from( params.getFrom() ).
+            target( params.getTarget() ).
+            type( RedirectType.valueOf( params.getType() ) ).
             build();
 
-        doUpdateContextNode( existingNode, newMapping );
-    }
-
-    private void doAddRule( final RewriteContextKey key, final RewriteRule rule )
-    {
-        final Node existingNode = doGetContextNode( key );
-
-        if ( existingNode == null )
-        {
-            throw new RewriteContextNotFoundException( key );
-        }
-
-        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( existingNode );
-
-        final RewriteRule existingRule = rewriteMapping.getRewriteRules().get( rule.getOrder() );
-
-        if ( existingRule != null )
-        {
-            throw new RewriteRuleException( String.format( "Rule with order %s alread exist in context %s", rule.getOrder(), key ) );
-        }
-
         final RewriteMapping newMapping = RewriteMapping.create().
-            contextKey( key ).rewriteRules( RewriteRules.from( rewriteMapping.getRewriteRules() ).
-            addRule( rule ).
+            contextKey( contextKey ).rewriteRules( RewriteRules.from( rewriteMapping.getRewriteRules() ).
+            addRule( rule, params.getInsertStrategy().equalsIgnoreCase( "First" ) ).
             build() ).
             build();
 

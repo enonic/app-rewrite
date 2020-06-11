@@ -16,8 +16,6 @@ public interface RewriteMappingProvider
 
     void delete( final RewriteContextKey rewriteContextKey );
 
-    void addRule( final RewriteContextKey key, final RewriteRule rule );
-
     void createRule( final CreateRuleParams params );
 
     boolean readOnly();

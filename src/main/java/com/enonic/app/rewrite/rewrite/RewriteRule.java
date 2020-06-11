@@ -14,14 +14,11 @@ public class RewriteRule
 
     private final RedirectType type;
 
-    private final int order;
-
     private RewriteRule( final Builder builder )
     {
         from = builder.from;
         target = RewriteTarget.from( builder.target );
         type = builder.type;
-        this.order = builder.order;
     }
 
     public String getFrom()
@@ -39,11 +36,6 @@ public class RewriteRule
         return type;
     }
 
-    public int getOrder()
-    {
-        return order;
-    }
-
     public static Builder create()
     {
         return new Builder();
@@ -56,8 +48,6 @@ public class RewriteRule
         private String target;
 
         private RedirectType type;
-
-        private int order;
 
         private Builder()
         {
@@ -72,12 +62,6 @@ public class RewriteRule
         public Builder target( final String to )
         {
             this.target = to;
-            return this;
-        }
-
-        public Builder order( final int order )
-        {
-            this.order = order;
             return this;
         }
 
@@ -104,7 +88,7 @@ public class RewriteRule
     @Override
     public String toString()
     {
-        return "RewriteRule{" + "from='" + from + '\'' + ", target=" + target + ", type=" + type + ", order=" + order + '}';
+        return "RewriteRule{" + "from='" + from + '\'' + ", target=" + target + ", type=" + type + '}';
     }
 
     @Override
@@ -119,12 +103,12 @@ public class RewriteRule
             return false;
         }
         final RewriteRule that = (RewriteRule) o;
-        return order == that.order && Objects.equals( from, that.from ) && Objects.equals( target, that.target ) && type == that.type;
+        return Objects.equals( from, that.from ) && Objects.equals( target, that.target ) && type == that.type;
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( from, target, type, order );
+        return Objects.hash( from, target, type );
     }
 }

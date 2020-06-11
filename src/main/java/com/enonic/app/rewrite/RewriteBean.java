@@ -100,21 +100,7 @@ public class RewriteBean
 
     public Object createRule( final CreateRuleParams params )
     {
-        int order = 0;
-
-        if ( params.getInsertStrategy().equalsIgnoreCase( "Last" ) )
-        {
-            final RewriteMapping existing = this.rewriteService.getRewriteMapping( new RewriteContextKey( params.getContextKey() ) );
-            order = existing.getRewriteRules().size();
-        }
-
-        this.rewriteService.addRule( new RewriteContextKey( params.getContextKey() ), RewriteRule.create().
-            order( order ).
-            from( params.getFrom() ).
-            target( params.getTarget() ).
-            type( RedirectType.valueOf( params.getType() ) ).
-            build() );
-
+        this.rewriteService.createRule( params );
         return null;
     }
 

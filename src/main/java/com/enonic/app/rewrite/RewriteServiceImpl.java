@@ -180,16 +180,9 @@ public class RewriteServiceImpl
     }
 
     @Override
-    public void addRule( final RewriteContextKey rewriteContextKey, final RewriteRule rule )
-    {
-        this.doGetProvider( rewriteContextKey ).addRule( rewriteContextKey, rule );
-        doLoadRewriteMappings();
-    }
-
-    @Override
     public void createRule( final CreateRuleParams params )
     {
-        this.doGetProvider( RewriteContextKey.from( params.getContextKey()) ).createRule( rewriteContextKey, rule );
+        this.doGetProvider( params.getContextKey() ).createRule( params );
     }
 
     @Override
