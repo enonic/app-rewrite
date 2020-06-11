@@ -3,6 +3,7 @@ import {showError} from "./info-bar";
 import {createToolRendererUrl} from "./serviceRegistry";
 import {initDataTriggers} from "./dataTriggers";
 import {initActionsTriggers} from "./actions";
+import {initTableActions} from "./dataTableActions";
 
 
 export let initLoadableTools = function (svcUrl) {
@@ -43,5 +44,5 @@ let doLoadTool = function (svcUrl, toolKey) {
 let initAllToolTriggers = function (toolKey, svcUrl) {
     initModalTriggers(toolKey, svcUrl);
     initDataTriggers(toolKey, svcUrl);
-    initActionsTriggers(toolKey, svcUrl);
+    // initActionsTriggers(toolKey, svcUrl);
 };

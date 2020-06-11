@@ -19,6 +19,16 @@ exports.get = function (req) {
     };
 
     let result = rewriteDao.getRewriteMapping(contextKey);
+    log.info("#####RESULT: %s", JSON.stringify(result, null, 3));
+
+    if (!result.mapping) {
+        return {
+            status: 500,
+            contentType: 'text/plain',
+            body: "No mapping found: "
+        }
+    }
+
     model.data = result.mapping.rules;
 
     log.info("Model: %s", JSON.stringify(model, null, 4));

@@ -11,6 +11,11 @@ public class RewriteContextKey
         this.value = value;
     }
 
+    public static RewriteContextKey from( final String value )
+    {
+        return new RewriteContextKey( value );
+    }
+
     @Override
     public String toString()
     {

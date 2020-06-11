@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.engine.RewriteEngine;
+import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
 import com.enonic.app.rewrite.filter.RewriteFilterConfig;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
@@ -43,17 +44,50 @@ public class RewriteServiceImpl
 
     private List<RewriteMappingProvider> providers;
 
-    private RewriteConfigurations rewriteConfigurations;
-
     @Activate
     public void activate( final Map<String, String> map )
     {
         this.providers = this.rewriteRulesProviderFactory.getProviders( this.config );
         this.rewriteEngine = new RewriteEngine();
         LOG.info( "RewriteService initialized" );
+        doLoadRewriteMappings();
+    }
 
+    @Override
+    public RewriteRulesLoadResult load()
+    {
+        return doLoadRewriteMappings();
+    }
+
+    private RewriteRulesLoadResult doLoadRewriteMappings()
+    {
+        return this.rewriteEngine.load( doGetRewriteMappings() );
+    }
+
+
+    private RewriteMappings doGetRewriteMappings()
+    {
         final VirtualHostMappings mappings = this.vHostService.getMappings();
+        final RewriteConfigurations rewriteConfigurations = doGetRewriteConfigurations( mappings );
+        return doGetRewriteMappings( rewriteConfigurations );
+    }
 
+    private RewriteMappings doGetRewriteMappings( final RewriteConfigurations rewriteConfigurations )
+    {
+        final RewriteMappings.Builder builder = RewriteMappings.create();
+        final Map<RewriteContextKey, RewriteMappingProvider> configs = rewriteConfigurations.getConfigurations();
+        configs.forEach( ( context, provider ) -> {
+            if ( provider != null )
+            {
+                builder.add( provider.getRewriteMapping( context ) );
+            }
+        } );
+
+        return builder.build();
+    }
+
+    private RewriteConfigurations doGetRewriteConfigurations( final VirtualHostMappings mappings )
+    {
         final RewriteConfigurations.Builder configBuilder = RewriteConfigurations.create();
 
         mappings.forEach( vhost -> {
@@ -73,19 +107,7 @@ public class RewriteServiceImpl
             }
         } );
 
-        this.rewriteConfigurations = configBuilder.build();
-
-        final RewriteMappings.Builder builder = RewriteMappings.create();
-        final Map<RewriteContextKey, RewriteMappingProvider> configs = this.rewriteConfigurations.getConfigurations();
-        configs.forEach( ( context, provider ) -> {
-            if ( provider != null )
-            {
-                builder.add( provider.getRewriteMapping( context ) );
-            }
-        } );
-
-        final RewriteMappings rewriteMappings = builder.build();
-        this.rewriteEngine.load( rewriteMappings );
+        return configBuilder.build();
     }
 
     public List<RewriteMappingProvider> getProviders()
@@ -107,7 +129,7 @@ public class RewriteServiceImpl
     @Override
     public RewriteMapping getRewriteMapping( final RewriteContextKey key )
     {
-        final RewriteMappingProvider provider = this.rewriteConfigurations.getProvider( key );
+        final RewriteMappingProvider provider = doGetProvider( key );
 
         if ( provider == null )
         {
@@ -120,7 +142,7 @@ public class RewriteServiceImpl
     @Override
     public RewriteConfigurations getRewriteConfigurations()
     {
-        return this.rewriteConfigurations;
+        return doGetRewriteConfigurations( this.vHostService.getMappings() );
     }
 
     @Reference
@@ -137,20 +159,22 @@ public class RewriteServiceImpl
 
     public void store( final RewriteMapping rewriteMapping )
     {
-
         final RewriteContextKey contextKey = rewriteMapping.getContextKey();
         final RewriteMappingProvider provider = doGetProvider( contextKey );
-
         provider.store( rewriteMapping );
+        doLoadRewriteMappings();
     }
 
     private RewriteMappingProvider doGetProvider( final RewriteContextKey contextKey )
     {
-        final RewriteMappingProvider provider = this.rewriteConfigurations.getProvider( contextKey );
+        final VirtualHostMappings mappings = this.vHostService.getMappings();
+        final RewriteConfigurations rewriteConfigurations = doGetRewriteConfigurations( mappings );
+
+        final RewriteMappingProvider provider = rewriteConfigurations.getProvider( contextKey );
 
         if ( provider == null )
         {
-            throw new RewriteContextNotFoundException( contextKey );
+            return null;
         }
         return provider;
     }
@@ -159,12 +183,19 @@ public class RewriteServiceImpl
     public void addRule( final RewriteContextKey rewriteContextKey, final RewriteRule rule )
     {
         this.doGetProvider( rewriteContextKey ).addRule( rewriteContextKey, rule );
+        doLoadRewriteMappings();
+    }
+
+    @Override
+    public void createRule( final CreateRuleParams params )
+    {
+        this.doGetProvider( RewriteContextKey.from( params.getContextKey()) ).createRule( rewriteContextKey, rule );
     }
 
     @Override
     public void create( final RewriteContextKey rewriteContextKey )
     {
-        final RewriteMappingProvider existingProvider = this.rewriteConfigurations.getProvider( rewriteContextKey );
+        final RewriteMappingProvider existingProvider = doGetProvider( rewriteContextKey );
 
         if ( existingProvider != null )
         {

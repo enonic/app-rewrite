@@ -1,6 +1,7 @@
 import {showError} from "./info-bar";
+import {initTableActions} from "./dataTableActions";
 
-export let populateDataTable = function (serviceUrl, selector, dataFunction) {
+export let populateDataTable = function (toolKey, svcUrl, serviceUrl, selector, dataFunction) {
     jQuery.ajax({
         url: serviceUrl,
         cache: false,
@@ -12,6 +13,7 @@ export let populateDataTable = function (serviceUrl, selector, dataFunction) {
         success: function (response) {
             doPopulateData(selector, response, serviceUrl);
             storeTableData(selector, serviceUrl, dataFunction);
+            initTableActions(toolKey, svcUrl);
         }
     });
 };

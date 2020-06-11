@@ -3,17 +3,10 @@ const rewriteDao = require('/lib/rewrite-dao');
 exports.post = function (req) {
 
     let params = req.params;
-    let contextKey = params.createRuleContextKey;
 
-    log.info("Params: %s", JSON.stringify(params));
+    log.info("PARAMS: %s", JSON.stringify(params, null, 2));
 
-    let rule = {
-        source: params.createRuleSource,
-        target: params.createRuleTarget,
-        type: params.createRuleType,
-    };
-
-    let insertStrategy = params.insertStrategy;
+    let contextKey = params.actionContext;
 
     if (!contextKey) {
         let model = {
@@ -28,7 +21,7 @@ exports.post = function (req) {
     }
 
     try {
-        rewriteDao.createRule(contextKey, rule, insertStrategy);
+        rewriteDao.createRewriteContext(contextKey);
     } catch (e) {
         return {
             status: 500,
@@ -46,4 +39,5 @@ exports.post = function (req) {
         contentType: 'application/json',
         body: JSON.stringify(model)
     }
+
 };

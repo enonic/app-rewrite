@@ -3,6 +3,7 @@ package com.enonic.app.rewrite.provider.repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
@@ -154,6 +155,34 @@ public class RewriteRepoMappingProvider
     public void addRule( final RewriteContextKey key, final RewriteRule rule )
     {
         setRepoContext().runWith( () -> doAddRule( key, rule ) );
+    }
+
+    @Override
+    public void createRule( final CreateRuleParams params )
+    {
+        setRepoContext().runWith( () -> doCreateRule( params ) );
+    }
+
+    private void doCreateRule( final CreateRuleParams params )
+    {
+        final RewriteContextKey contextKey = params.getContextKey();
+
+        final Node existingNode = doGetContextNode( contextKey );
+
+        if ( existingNode == null )
+        {
+            throw new RewriteContextNotFoundException( contextKey );
+        }
+
+        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( existingNode );
+
+        final RewriteMapping newMapping = RewriteMapping.create().
+            contextKey( contextKey ).rewriteRules( RewriteRules.from( rewriteMapping.getRewriteRules() ).
+            addRule( rule ).
+            build() ).
+            build();
+
+        doUpdateContextNode( existingNode, newMapping );
     }
 
     private void doAddRule( final RewriteContextKey key, final RewriteRule rule )

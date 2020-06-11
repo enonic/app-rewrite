@@ -18,7 +18,7 @@ export let initDataTriggers = function (toolKey, svcUrl) {
             }
         };
 
-        populateDataTable(serviceUrl, targetSelector, dataFunction);
+        populateDataTable(toolKey, svcUrl, serviceUrl, targetSelector, dataFunction);
     });
 
     $(toolSelector).find(model.tool.dataTriggers.auto).each(function () {
@@ -31,7 +31,7 @@ export let initDataTriggers = function (toolKey, svcUrl) {
             return {}
         };
 
-        populateDataTable(serviceUrl, targetSelector, dataFunction);
+        populateDataTable(toolKey, svcUrl, serviceUrl, targetSelector, dataFunction);
     });
 
 };

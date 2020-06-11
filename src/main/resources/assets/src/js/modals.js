@@ -24,13 +24,19 @@ export let initModalTriggers = function (toolKey, svcUrl) {
     $(toolSelector).find(model.modals.triggers).click(function () {
         let modalTrigger = $(this);
         let modalType = modalTrigger.data("modal-type");
-        displayModal(svcUrl, toolKey, modalType);
+        let context;
+
+        let contextSelector = modalTrigger.data("modal-context-selector");
+        if (contextSelector) {
+            context = $(contextSelector).serialize();
+        }
+        displayModal(svcUrl, toolKey, modalType, context);
     });
 };
 
-export let displayModal = function (svcUrl, toolKey, modalType) {
+export let displayModal = function (svcUrl, toolKey, modalType, context) {
 
-    let data = {};
+    let data = context;
     let modalSelector = createModalSelector(toolKey, modalType);
 
     jQuery.ajax({

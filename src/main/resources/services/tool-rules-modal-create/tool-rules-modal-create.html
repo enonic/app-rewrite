@@ -2,14 +2,19 @@
 
     <div class="modal-content">
         <h1>Create rule</h1>
-        <form class="form-grid" data-th-id="${form.id}">
-            <label for="createRuleContextKey">ContextKey</label>
-            <input type="text" id="createRuleContextKey" name="createRuleContextKey"/>
 
-            <label for="createRuleSource">Source</label>
+        <form class="form-grid" data-th-id="${form.id}">
+            <label for="createRuleContextKey">VirtualHost</label>
+            <input type="text" id="createRuleContextKey" name="createRuleContextKey" data-th-value="${contextKey}"
+                   readonly="readonly"/>
+
+            <label for="sourceUrl">URL</label>
+            <input type="text" id="sourceUrl" disabled="disabled" readonly="readonly" data-th-value="${source.url}"/>
+
+            <label for="createRuleSource">Source path</label>
             <input type="text" id="createRuleSource" name="createRuleSource"/>
 
-            <label for="createRuleTarget">Target</label>
+            <label for="createRuleTarget">Target path</label>
             <input type="text" id="createRuleTarget" name="createRuleTarget"/>
 
             <label for="createRuleType">Type</label>
@@ -18,8 +23,11 @@
                 <option value="TEMPORARILY_REDIRECT">TEMPORARILY_REDIRECT</option>
             </select>
 
-            <label for="createRuleOrder">Order</label>
-            <input type="text" id="createRuleOrder" name="createRuleOrder"/>
+            <label for="insertStrategy">InsertStrategy</label>
+            <select id="insertStrategy" name="insertStrategy">
+                <option value="first">First</option>
+                <option value="last" selected="selected">Last</option>
+            </select>
 
             <button class="modal-action"
                     data-action-type="create"

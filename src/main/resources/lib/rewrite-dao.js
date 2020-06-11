@@ -38,16 +38,13 @@ exports.deleteRewriteContext = function (contextKey) {
     return __.toNativeObject(result);
 };
 
-exports.createRule = function (contextKey, rule) {
+exports.createRule = function (contextKey, rule, insertStrategy) {
     let params = __.newBean('com.enonic.app.rewrite.CreateRuleParams');
-    params.order = rule.order;
+    params.insertStrategy = insertStrategy;
     params.source = rule.source;
     params.target = rule.target;
     params.type = rule.type;
     params.contextKey = contextKey;
-
-    log.info("Storing rule with params: %s", rule);
-
     let result = bean.createRule(params);
     return __.toNativeObject(result);
 };

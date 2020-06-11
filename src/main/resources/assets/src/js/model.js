@@ -35,15 +35,12 @@ export const model = {
     tool: {
         dataTriggers: {
             select: ".data-trigger-select",
-            auto: ".auto-load"
+            auto: ".auto-load",
+            tableAction: ".table-action"
         },
         select: {
             selector: ".select"
-        },
-        table: {
-            action: ".tool-table-action"
         }
-
     }
 
 

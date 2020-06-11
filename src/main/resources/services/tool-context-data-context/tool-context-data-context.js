@@ -1,12 +1,15 @@
+const thymeleaf = require('/lib/thymeleaf');
 const rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 
     let result = rewriteDao.getRewriteConfigurations();
 
+    log.info("##### Fetching data from tool context: %s", JSON.stringify(result, null, 2));
+
     let model = {
         columns: [
-            {title: "ContextKey", data: "contextKey"},
+            {title: "VirtualHost", data: "contextKey"},
             {title: "Url", data: "url"},
             {title: "Provider", data: "provider"}
         ]
@@ -24,7 +27,7 @@ exports.get = function (req) {
             contextKey: contextKey,
             url: createUrl(rewriteContext),
             mapped: configuration.provider != null && configuration.provider !== "",
-            provider: configuration.provider
+            provider: configuration.provider ? configuration.provider : createAddProviderButton(contextKey)
         });
     });
 
@@ -33,6 +36,18 @@ exports.get = function (req) {
         status: 200,
         body: model
     };
+};
+
+let createAddProviderButton = function (contextKey) {
+
+    let view = resolve('add-provider-button.html');
+
+    let model = {
+        buttonText: "Enable",
+        contextKey: contextKey
+    };
+
+    return thymeleaf.render(view, model)
 };
 
 let createUrl = function (rewriteContext) {

@@ -10,14 +10,7 @@ let svcUrl;
 
 
 $(document).ready(function () {
-    console.log("Document ready...");
-
     svcUrl = CONFIG.svcUrl;
-
-    console.log("svcURL: " + svcUrl);
-
-    $('#myTable').DataTable();
-
     initListeners();
     initButtons();
     initToolbar();
