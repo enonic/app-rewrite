@@ -5,6 +5,18 @@ table.data-table {
   overflow-x: auto;
   width: 100%;
 
+  &.clickable-tr {
+
+    tbody {
+
+      tr.has-provider:hover {
+        cursor: pointer;
+        background: #aaa;
+      }
+    }
+  }
+
+
   tr {
     border-bottom: 1px solid $color-border-light;
   }
@@ -13,9 +25,24 @@ table.data-table {
     padding: 10px 5px;
   }
 
+
   td {
     padding: 10px 5px;
     font-size: 0.8em;
+  }
+
+  &.small {
+    td {
+      padding: 10px 5px;
+      font-size: 0.8em;
+    }
+  }
+
+  &.large {
+    td {
+      padding: 10px 5px;
+      font-size: 1.2em;
+    }
   }
 
   thead {

@@ -2,7 +2,7 @@ const rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 
-    let contextKey = req.params.id;
+    let contextKey = req.params.contextKey;
 
     if (!contextKey) {
         throw "contextKey is missing";

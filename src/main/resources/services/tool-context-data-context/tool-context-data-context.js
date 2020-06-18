@@ -9,9 +9,11 @@ exports.get = function (req) {
 
     let model = {
         columns: [
-            {title: "VirtualHost", data: "contextKey"},
+            {title: "Name", data: "contextKey"},
             {title: "Url", data: "url"},
-            {title: "Provider", data: "provider"}
+            {title: "Rules", data: "rules"},
+            {title: "Provider", data: "provider"},
+            {title: "Actions", data: "actions"}
         ]
     };
 
@@ -26,8 +28,9 @@ exports.get = function (req) {
         model.data.push({
             contextKey: contextKey,
             url: createUrl(rewriteContext),
-            mapped: configuration.provider != null && configuration.provider !== "",
-            provider: configuration.provider ? configuration.provider : createAddProviderButton(contextKey)
+            rules: 5,
+            provider: configuration.provider ? configuration.provider : "",
+            actions: configuration.provider ? "" : createAddProviderButton(contextKey)
         });
     });
 
@@ -43,7 +46,7 @@ let createAddProviderButton = function (contextKey) {
     let view = resolve('add-provider-button.html');
 
     let model = {
-        buttonText: "Enable",
+        buttonText: "Enable rewrite",
         contextKey: contextKey
     };
 

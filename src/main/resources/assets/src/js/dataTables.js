@@ -1,7 +1,8 @@
 import {showError} from "./info-bar";
 import {initTableActions} from "./dataTableActions";
 
-export let populateDataTable = function (toolKey, svcUrl, serviceUrl, selector, dataFunction) {
+
+export let populateDataTable = function (toolKey, serviceUrl, tableSelector, dataFunction, rowCallback, success) {
     jQuery.ajax({
         url: serviceUrl,
         cache: false,
@@ -11,9 +12,10 @@ export let populateDataTable = function (toolKey, svcUrl, serviceUrl, selector, 
             showError(response.responseText);
         },
         success: function (response) {
-            doPopulateData(selector, response, serviceUrl);
-            storeTableData(selector, serviceUrl, dataFunction);
-            initTableActions(toolKey, svcUrl);
+            doPopulateData(tableSelector, response, serviceUrl, rowCallback);
+            storeTableData(tableSelector, serviceUrl, dataFunction);
+            //initTableActions(toolKey, svcUrl);
+            success(response);
         }
     });
 };
@@ -45,7 +47,7 @@ export let refreshDataTable = function (selector) {
 };
 
 
-function doPopulateData(selector, response, serviceUrl) {
+function doPopulateData(selector, response, serviceUrl, rowCallback) {
     if ($.fn.DataTable.isDataTable(selector)) {
         doRefreshTable(selector, response);
     } else {
@@ -53,7 +55,8 @@ function doPopulateData(selector, response, serviceUrl) {
         tableElement.DataTable({
             pageLength: 50,
             data: response.data,
-            columns: response.columns
+            columns: response.columns,
+            rowCallback: rowCallback
         });
     }
 }
@@ -69,3 +72,4 @@ function storeTableData(selector, serviceUrl, dataFunction) {
     $(selector).data("serviceUrl", serviceUrl);
     $(selector).data("dataFunction", dataFunction);
 }
+

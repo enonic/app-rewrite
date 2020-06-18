@@ -39,7 +39,6 @@ let doExecuteToolActions = function (toolKey, actionType, actionId, svcUrl) {
                 showInfo(response.message);
                 closeModals();
                 closeOverlay();
-                refreshTool(svcUrl, toolKey);
             }
         });
     }
