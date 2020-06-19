@@ -1,8 +1,6 @@
 import {model} from "./model";
 import {showError, showInfo} from "./info-bar";
 import {createActionServiceUrl, createModalSelector, createModalUrl} from "./serviceRegistry";
-import {refreshDataTable} from "./dataTables";
-
 
 export let initModals = function (svcUrl) {
     initializeOverlay();
@@ -86,7 +84,7 @@ let initializeModalActions = function (svcUrl) {
                 showInfo(response.message);
                 closeModals();
                 toggleOverlay();
-                refreshDataTable(refreshDataSelector);
+                // refreshDataTable(refreshDataSelector);
             }
         });
 

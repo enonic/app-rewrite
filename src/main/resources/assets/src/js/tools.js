@@ -1,9 +1,4 @@
-import {initializeModalActions, initModalTriggers} from "./modals";
 import {showError} from "./info-bar";
-import {createToolRendererUrl} from "./serviceRegistry";
-import {initDataTriggers} from "./dataTriggers";
-import {initActionsTriggers} from "./actions";
-import {initTableActions} from "./dataTableActions";
 
 export let loadTool = function (toolRendererUrl, dataFunction, onToolLoaded) {
 

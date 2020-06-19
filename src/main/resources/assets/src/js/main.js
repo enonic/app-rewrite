@@ -1,8 +1,5 @@
 import '../css/main.scss';
-import {model} from "./model";
 import {initToolbar} from "./toolbar";
-import {initModals} from "./modals";
-import {initLoadableTools} from "./tools";
 import {initToolContext} from "./toolContext";
 import {initToolRules} from "./toolRules";
 

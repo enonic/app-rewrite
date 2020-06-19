@@ -1,9 +1,8 @@
 import {loadTool} from "./tools";
 import {createDataServiceUrl, createToolRendererUrl} from "./serviceRegistry";
-import {showError} from "./info-bar";
 import {selectTool} from "./toolbar";
 import {setRuleContext} from "./toolRules";
-import {populateDataTable} from "./dataTableTools";
+import {populateDataTable} from "./dataTables";
 
 const toolKey = "tool-context";
 const toolSelector = "#" + toolKey;

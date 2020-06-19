@@ -1,65 +1,37 @@
 import {showError} from "./info-bar";
-import {initTableActions} from "./dataTableActions";
 
 
-export let populateDataTable = function (toolKey, serviceUrl, tableSelector, dataFunction, rowCallback, success) {
+export let populateDataTable = function (serviceConfig, onTablePopulated) {
+
     jQuery.ajax({
-        url: serviceUrl,
+        url: serviceConfig.dataServiceUrl,
         cache: false,
         type: 'GET',
-        data: dataFunction(),
+        data: serviceConfig.dataFunction(),
         error: function (response) {
             showError(response.responseText);
         },
         success: function (response) {
-            doPopulateData(tableSelector, response, serviceUrl, rowCallback);
-            storeTableData(tableSelector, serviceUrl, dataFunction);
-            //initTableActions(toolKey, svcUrl);
-            success(response);
+            doPopulateData(serviceConfig.tableSelector, response, serviceConfig.tableConfig);
+            storeTableData(serviceConfig.tableSelector, serviceConfig.dataServiceUrl, serviceConfig.dataFunction);
+            onTablePopulated();
         }
     });
 };
 
-export let refreshDataTable = function (selector) {
-
-    console.log("Trying to refresh the selector " + selector);
-
-    if ($.fn.DataTable.isDataTable(selector)) {
-        let dataTableElement = $(selector);
-        let serviceUrl = dataTableElement.data("serviceUrl");
-        let dataFunction = dataTableElement.data("dataFunction");
-
-        jQuery.ajax({
-            url: serviceUrl,
-            cache: false,
-            type: 'GET',
-            data: dataFunction(),
-            error: function (response) {
-                showError(response.responseText);
-            },
-            success: function (response) {
-                doRefreshTable(selector, response);
-            }
-        });
-    } else {
-        throw "Cannot refresh non-data-table-instance";
-    }
-};
-
-
-function doPopulateData(selector, response, serviceUrl, rowCallback) {
+let doPopulateData = function (selector, response, tableConfig) {
     if ($.fn.DataTable.isDataTable(selector)) {
         doRefreshTable(selector, response);
     } else {
         let tableElement = $(selector);
-        tableElement.DataTable({
-            pageLength: 50,
-            data: response.data,
-            columns: response.columns,
-            rowCallback: rowCallback
-        });
+
+        tableConfig.data = response.data;
+        tableConfig.columns = response.columns;
+        tableElement.DataTable(
+            tableConfig
+        );
     }
-}
+};
 
 function doRefreshTable(selector, response) {
     let dataTable = $(selector).DataTable();
