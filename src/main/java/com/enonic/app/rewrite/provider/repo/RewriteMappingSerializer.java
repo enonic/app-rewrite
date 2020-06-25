@@ -16,6 +16,8 @@ import com.enonic.xp.node.NodeEditor;
 
 public class RewriteMappingSerializer
 {
+    private static final String RULE_IDENTIFIER = "identifier";
+
     private static final String RULE_FROM_KEY = "from";
 
     private static final String RULE_TARGET_KEY = "to";

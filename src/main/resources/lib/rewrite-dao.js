@@ -38,6 +38,11 @@ exports.deleteRewriteContext = function (contextKey) {
     return __.toNativeObject(result);
 };
 
+exports.getProviderInfo = function (contextKey) {
+    let result = bean.getProviderInfo(contextKey);
+    return __.toNativeObject(result).providerInfo;
+};
+
 exports.createRule = function (contextKey, rule, insertStrategy) {
     let params = __.newBean('com.enonic.app.rewrite.CreateRuleParams');
     params.insertStrategy = insertStrategy;
@@ -46,5 +51,13 @@ exports.createRule = function (contextKey, rule, insertStrategy) {
     params.type = rule.type;
     params.contextKey = contextKey;
     let result = bean.createRule(params);
+    return __.toNativeObject(result);
+};
+
+exports.deleteRule = function (contextKey, from) {
+    let params = __.newBean('com.enonic.app.rewrite.DeleteRuleParams');
+    params.contextKey = contextKey;
+    params.from = from;
+    let result = bean.deleteRule(params);
     return __.toNativeObject(result);
 };

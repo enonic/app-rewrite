@@ -1,0 +1,20 @@
+<div data-th-if="${!readOnly}">
+    <button
+            class="table-action"
+            data-th-attr='data-action-context=${contextKey}'
+            data-action-service-name=edit-rule
+            data-tool-key=tool-rules
+            data-target-selector="#ruleTableSelector"
+            title="Activate rewrite-repo for virtualhost">
+        <i class="material-icons">edit</i>
+    </button>
+    <button
+            class="table-action"
+            data-th-attr='data-action-context=${contextKey},data-action-identifier=${from}'
+            data-action-service-name=delete-rule
+            data-tool-key=tool-rules
+            data-target-selector="#ruleTableSelector"
+            title="Delete rule">
+        <i class="material-icons">delete</i>
+    </button>
+</div>

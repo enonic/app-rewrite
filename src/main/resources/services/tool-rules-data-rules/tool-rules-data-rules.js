@@ -1,4 +1,5 @@
 const rewriteDao = require('/lib/rewrite-dao');
+const thymeleaf = require('/lib/thymeleaf');
 
 exports.get = function (req) {
 
@@ -15,11 +16,11 @@ exports.get = function (req) {
             {title: "Target", data: "target.path"},
             {title: "External", data: "target.external"},
             {title: "Type", data: "type"},
+            {title: "Actions", data: "actions"}
         ]
     };
 
     let result = rewriteDao.getRewriteMapping(contextKey);
-    log.info("#####RESULT: %s", JSON.stringify(result, null, 3));
 
     if (!result.mapping) {
         return {
@@ -29,13 +30,36 @@ exports.get = function (req) {
         }
     }
 
-    model.data = result.mapping.rules;
+    model.data = [];
 
-    log.info("Model: %s", JSON.stringify(model, null, 4));
+
+    result.mapping.rules.forEach(function (rule) {
+        const actions = generateActions(contextKey, rule);
+        rule.actions = actions;
+        model.data.push(rule);
+    });
+
+    model.data = result.mapping.rules;
 
     return {
         contentType: 'application/json',
         status: 200,
         body: model
     };
+};
+
+
+let generateActions = function (contextKey, rule) {
+
+    let view = resolve('rules-tr-action.html');
+
+    let providerInfo = rewriteDao.getProviderInfo(contextKey);
+
+    let model = {
+        contextKey: contextKey,
+        from: rule.from,
+        readOnly: providerInfo ? providerInfo.readOnly : true
+    };
+
+    return thymeleaf.render(view, model)
 };

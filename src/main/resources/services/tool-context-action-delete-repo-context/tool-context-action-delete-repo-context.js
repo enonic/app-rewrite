@@ -3,12 +3,18 @@ let portal = require('/lib/xp/portal');
 let rewriteDao = require('/lib/rewrite-dao');
 
 exports.post = function (req) {
-    let contextKey = req.params.actionId;
+
+    let params = req.params;
+
+    log.info("PARAMS: %s", JSON.stringify(params, null, 2));
+
+    let contextKey = params.actionContext;
+
     if (!contextKey) {
         return {
             status: 500,
             contentType: 'application/json',
-            result: "missing contextKey"
+            body: "cannot delete context, param contextKey missing"
         }
     }
 

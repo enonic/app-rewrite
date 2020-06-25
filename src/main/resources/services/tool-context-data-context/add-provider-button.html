@@ -1,7 +1,18 @@
-<button class="table-action"
+<button data-th-if='${!hasProvider}'
+        class="table-action"
         data-th-attr='data-action-context=${contextKey}'
         data-action-service-name=create-repo-context
         data-tool-key=tool-context
         data-target-selector="#toolContextContextTable"
-        data-th-text="${buttonText}">
+        title="Activate rewrite-repo for virtualhost">
+    <i class="material-icons">add</i>
+</button>
+<button data-th-if="${hasProvider} and ${!readOnly}"
+        class="table-action"
+        data-th-attr='data-action-context=${contextKey}'
+        data-action-service-name=delete-repo-context
+        data-tool-key=tool-context
+        data-target-selector="#toolContextContextTable"
+        title="Delete repo and all rules">
+    <i class="material-icons">delete</i>
 </button>

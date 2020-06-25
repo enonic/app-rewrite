@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.CreateRuleParams;
+import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
@@ -158,18 +159,42 @@ public class RewriteRepoMappingProvider
         setRepoContext().runWith( () -> doCreateRule( params ) );
     }
 
+    @Override
+    public void deleteRule( final DeleteRuleParams params )
+    {
+        setRepoContext().runWith( () -> doDeleteRule( params ) );
+    }
+
+    private void doDeleteRule( final DeleteRuleParams params )
+    {
+        final RewriteContextKey contextKey = params.getContextKey();
+        final Node contextNode = getExistingContextNode( contextKey );
+
+        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( contextNode );
+
+        final RewriteRules.Builder newRules = RewriteRules.create();
+        for ( final RewriteRule rule : rewriteMapping.getRewriteRules() )
+        {
+            if ( !rule.getFrom().equals( params.getFrom() ) )
+            {
+                newRules.addRule( rule );
+            }
+        }
+
+        final RewriteMapping newMapping = RewriteMapping.create().
+            contextKey( contextKey ).rewriteRules( newRules.build() ).
+            build();
+
+        doUpdateContextNode( contextNode, newMapping );
+    }
+
     private void doCreateRule( final CreateRuleParams params )
     {
         final RewriteContextKey contextKey = params.getContextKey();
 
-        final Node existingNode = doGetContextNode( contextKey );
+        final Node contextNode = getExistingContextNode( contextKey );
 
-        if ( existingNode == null )
-        {
-            throw new RewriteContextNotFoundException( contextKey );
-        }
-
-        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( existingNode );
+        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( contextNode );
 
         final RewriteRule rule = RewriteRule.create().
             from( params.getFrom() ).
@@ -183,12 +208,26 @@ public class RewriteRepoMappingProvider
             build() ).
             build();
 
-        doUpdateContextNode( existingNode, newMapping );
+        doUpdateContextNode( contextNode, newMapping );
+    }
+
+    private Node getExistingContextNode( final RewriteContextKey contextKey )
+    {
+        final Node existingNode = doGetContextNode( contextKey );
+
+        if ( existingNode == null )
+        {
+            throw new RewriteContextNotFoundException( contextKey );
+        }
+        return existingNode;
     }
 
     private NodeIds doDelete( final RewriteContextKey rewriteContextKey )
     {
         final NodeIds nodeIds = this.nodeService.deleteByPath( createContextNodePath( rewriteContextKey ) );
+
+        System.out.println( "Deleting nodes with id" + nodeIds );
+
         this.nodeService.refresh( RefreshMode.ALL );
         return nodeIds;
     }

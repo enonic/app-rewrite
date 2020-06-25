@@ -19,6 +19,7 @@ public class ProviderInfoMapper
     {
         gen.map( "providerInfo" );
         gen.value( "name", providerInfo.getName() );
+        gen.value( "readOnly", providerInfo.isReadOnly() );
         gen.end();
     }
 }

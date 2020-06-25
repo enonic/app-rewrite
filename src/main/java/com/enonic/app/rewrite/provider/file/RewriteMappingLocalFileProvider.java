@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.CreateRuleParams;
+import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.format.RewriteFormatReader;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
@@ -107,7 +108,13 @@ public class RewriteMappingLocalFileProvider
     @Override
     public void createRule( final CreateRuleParams params )
     {
-        throw new RuntimeException( "Cannot add rule to provider " + this.getClass().getName() );
+        throw new RuntimeException( "Cannot create rule in provider " + this.getClass().getName() );
+    }
+
+    @Override
+    public void deleteRule( final DeleteRuleParams params )
+    {
+        throw new RuntimeException( "Cannot delete rule in provider " + this.getClass().getName() );
     }
 
     private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )

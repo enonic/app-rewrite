@@ -1,6 +1,7 @@
 import {model} from "./model";
 import {showError, showInfo} from "./info-bar";
 import {createActionServiceUrl, createModalSelector, createModalUrl} from "./serviceRegistry";
+import {refreshDataTable} from "./dataTables";
 
 export let initModals = function (svcUrl) {
     initializeOverlay();
@@ -13,35 +14,13 @@ let initializeOverlay = function () {
     });
 };
 
-export let initModalTriggers = function (toolKey, svcUrl) {
-
-    console.log("initializeTriggers for toolId", toolKey);
-
-    let toolSelector = "#" + toolKey;
-
-    $(toolSelector).find(model.modals.triggers).click(function () {
-        let modalTrigger = $(this);
-        let modalType = modalTrigger.data("modal-type");
-        let context;
-
-        let contextSelector = modalTrigger.data("modal-context-selector");
-        if (contextSelector) {
-            context = $(contextSelector).serialize();
-        }
-        displayModal(svcUrl, toolKey, modalType, context);
-    });
-};
-
-export let displayModal = function (svcUrl, toolKey, modalType, context) {
-
-    let data = context;
-    let modalSelector = createModalSelector(toolKey, modalType);
+export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, dataFunction) {
 
     jQuery.ajax({
-        url: createModalUrl(svcUrl, toolKey, modalType),
+        url: modalServiceUrl,
         cache: false,
         type: 'GET',
-        data: data,
+        data: dataFunction(),
         error: function (response, status, error) {
             console.log("Result: ", response.responseText);
             showError(response.responseText);
@@ -58,6 +37,12 @@ export let displayModal = function (svcUrl, toolKey, modalType, context) {
 let initializeModalActions = function (svcUrl) {
 
     console.log("Initialize modal-actions");
+
+    $(model.modals.modalCancel).click(function (event) {
+        event.preventDefault();
+        closeModals();
+        toggleOverlay();
+    });
 
     $(model.modals.modalAction).click(function (event) {
         event.preventDefault();
@@ -84,7 +69,7 @@ let initializeModalActions = function (svcUrl) {
                 showInfo(response.message);
                 closeModals();
                 toggleOverlay();
-                // refreshDataTable(refreshDataSelector);
+                refreshDataTable(refreshDataSelector);
             }
         });
 

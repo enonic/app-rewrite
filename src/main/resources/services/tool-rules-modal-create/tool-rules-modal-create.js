@@ -7,13 +7,13 @@ function createSourceUrl(result) {
 
 exports.get = function (req) {
     let params = req.params;
-    let contextKey = params.toolRulesContextSelector;
+    let contextKey = params.contextKey;
 
     if (!contextKey) {
         return {
             status: 500,
             contentType: 'text/plain',
-            body: "No context given"
+            body: "Missing context"
         }
     }
 

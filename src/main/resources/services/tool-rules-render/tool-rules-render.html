@@ -18,15 +18,17 @@
                     </div>
                 </select>
             </div>
+            <button id="btnCreateRule" class="action modal-trigger" data-tool-key="tool-rules" data-modal-type="create"
+                    data-modal-context-selector="#toolRulesContextSelect"><i
+                    class="material-icons">add</i><span>Add rule</span>
+            </button>
         </div>
     </div>
     <div class="tool-main">
-        <button class="action modal-trigger" data-tool-key="tool-rules" data-modal-type="create"
-                data-modal-context-selector="#toolRulesContextSelect"><i
-                class="material-icons">add</i><span>Add rule</span>
-        </button>
-        <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered">
-        </table>
+        <form id="toolRulesRulesTableForm">
+            <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered">
+            </table>
+        </form>
     </div>
 
     <div class="modals">

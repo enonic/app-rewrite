@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.enonic.app.rewrite.engine.RewriteEngine;
 import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
 import com.enonic.app.rewrite.filter.RewriteFilterConfig;
+import com.enonic.app.rewrite.provider.ProviderInfo;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
@@ -186,6 +187,12 @@ public class RewriteServiceImpl
     }
 
     @Override
+    public void deleteRule( final DeleteRuleParams params )
+    {
+        this.doGetProvider( params.getContextKey() ).deleteRule( params );
+    }
+
+    @Override
     public void create( final RewriteContextKey rewriteContextKey )
     {
         final RewriteMappingProvider existingProvider = doGetProvider( rewriteContextKey );
@@ -210,7 +217,25 @@ public class RewriteServiceImpl
     @Override
     public void delete( final RewriteContextKey rewriteContextKey )
     {
-        this.doGetProvider( rewriteContextKey ).delete( rewriteContextKey );
+        final RewriteMappingProvider provider = this.doGetProvider( rewriteContextKey );
+
+        if ( provider == null )
+        {
+            throw new IllegalArgumentException( "Provider with contextKey [" + rewriteContextKey + "] not found" );
+        }
+
+        provider.delete( rewriteContextKey );
+    }
+
+    @Override
+    public ProviderInfo getProviderInfo( final RewriteContextKey rewriteContextKey )
+    {
+        final RewriteMappingProvider rewriteMappingProvider = this.doGetProvider( rewriteContextKey );
+
+        return ProviderInfo.create().
+            name( rewriteMappingProvider.name() ).
+            readOnly( rewriteMappingProvider.readOnly() ).
+            build();
     }
 
     @Reference

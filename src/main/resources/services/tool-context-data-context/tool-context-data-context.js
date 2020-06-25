@@ -1,6 +1,29 @@
 const thymeleaf = require('/lib/thymeleaf');
 const rewriteDao = require('/lib/rewrite-dao');
 
+function getNumberOfRules(contextKey) {
+    const mappingResult = rewriteDao.getRewriteMapping(contextKey);
+
+    if (!mappingResult) {
+        return "";
+    }
+
+    return mappingResult.mapping ? mappingResult.mapping.rules.length : "N/A";
+}
+
+function getProviderInfo(configuration, contextKey) {
+
+    let providerInfo = {};
+
+    if (configuration.provider && configuration.provider !== "") {
+        providerInfo = rewriteDao.getProviderInfo(contextKey);
+    } else {
+        providerInfo.readOnly = true;
+    }
+
+    return providerInfo;
+}
+
 exports.get = function (req) {
 
     let result = rewriteDao.getRewriteConfigurations();
@@ -13,6 +36,7 @@ exports.get = function (req) {
             {title: "Url", data: "url"},
             {title: "Rules", data: "rules"},
             {title: "Provider", data: "provider"},
+            {title: "Read Only", data: "readOnly"},
             {title: "Actions", data: "actions"}
         ]
     };
@@ -25,12 +49,18 @@ exports.get = function (req) {
         let result = rewriteDao.getRewriteContext(contextKey);
         let rewriteContext = result.rewriteContext;
 
+        let providerInfo = getProviderInfo(configuration, contextKey);
+        const rules = getNumberOfRules(contextKey);
+
+        let hasProvider = configuration.provider && configuration.provider !== "";
+
         model.data.push({
             contextKey: contextKey,
             url: createUrl(rewriteContext),
-            rules: 5,
-            provider: configuration.provider ? configuration.provider : "",
-            actions: configuration.provider ? "" : createAddProviderButton(contextKey)
+            rules: rules,
+            provider: hasProvider ? configuration.provider : "",
+            readOnly: hasProvider ? providerInfo.readOnly : "",
+            actions: createActionButtons(contextKey, configuration)
         });
     });
 
@@ -41,13 +71,17 @@ exports.get = function (req) {
     };
 };
 
-let createAddProviderButton = function (contextKey) {
+let createActionButtons = function (contextKey, configuration) {
 
     let view = resolve('add-provider-button.html');
 
+    let providerInfo = getProviderInfo(configuration, contextKey);
+
+
     let model = {
-        buttonText: "Enable rewrite",
-        contextKey: contextKey
+        contextKey: contextKey,
+        readOnly: providerInfo ? providerInfo.readOnly : true,
+        hasProvider: configuration.provider && configuration.provider !== ""
     };
 
     return thymeleaf.render(view, model)

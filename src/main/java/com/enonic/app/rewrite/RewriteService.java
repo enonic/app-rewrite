@@ -3,6 +3,7 @@ package com.enonic.app.rewrite;
 import javax.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
+import com.enonic.app.rewrite.provider.ProviderInfo;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
@@ -24,9 +25,13 @@ public interface RewriteService
 
     void createRule( final CreateRuleParams params );
 
+    void deleteRule( final DeleteRuleParams params );
+
     void create( final RewriteContextKey rewriteContextKey );
 
     void delete( final RewriteContextKey rewriteContextKey );
+
+    ProviderInfo getProviderInfo( final RewriteContextKey rewriteContextKey );
 
     RewriteRulesLoadResult load();
 

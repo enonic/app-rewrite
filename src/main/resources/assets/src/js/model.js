@@ -24,6 +24,7 @@ export const model = {
         all: ".modal",
         overlay: "#modal-overlay",
         triggers: ".modal-trigger",
+        modalCancel: ".modal-cancel",
         modalAction: ".modal-action",
         contextCreate: {
             selector: "#modalContextCreate",
