@@ -72,11 +72,8 @@ exports.get = function (req) {
 };
 
 let createActionButtons = function (contextKey, configuration) {
-
-    let view = resolve('add-provider-button.html');
-
+    let view = resolve('action-buttons.html');
     let providerInfo = getProviderInfo(configuration, contextKey);
-
 
     let model = {
         contextKey: contextKey,

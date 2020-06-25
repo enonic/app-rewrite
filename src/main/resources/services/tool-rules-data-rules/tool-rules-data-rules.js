@@ -51,7 +51,7 @@ exports.get = function (req) {
 
 let generateActions = function (contextKey, rule) {
 
-    let view = resolve('rules-tr-action.html');
+    let view = resolve('action-buttons.html');
 
     let providerInfo = rewriteDao.getProviderInfo(contextKey);
 

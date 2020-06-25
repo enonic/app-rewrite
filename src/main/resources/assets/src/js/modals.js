@@ -1,6 +1,6 @@
 import {model} from "./model";
 import {showError, showInfo} from "./info-bar";
-import {createActionServiceUrl, createModalSelector, createModalUrl} from "./serviceRegistry";
+import {createActionServiceUrl} from "./serviceRegistry";
 import {refreshDataTable} from "./dataTables";
 
 export let initModals = function (svcUrl) {
@@ -26,22 +26,21 @@ export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, data
             showError(response.responseText);
         },
         success: function (result) {
+            console.log("Fetched modal " + modalServiceUrl);
             $(modalSelector).html(result);
             initializeModalActions(svcUrl);
-            $(modalSelector).toggleClass("closed");
-            toggleOverlay();
+            $(modalSelector).removeClass("closed");
+            openOverlay();
         }
     });
 };
 
 let initializeModalActions = function (svcUrl) {
 
-    console.log("Initialize modal-actions");
-
     $(model.modals.modalCancel).click(function (event) {
         event.preventDefault();
         closeModals();
-        toggleOverlay();
+        closeOverlay();
     });
 
     $(model.modals.modalAction).click(function (event) {
@@ -68,7 +67,7 @@ let initializeModalActions = function (svcUrl) {
                 console.log("SUCCESS: ", response, textStatus, jqXHR);
                 showInfo(response.message);
                 closeModals();
-                toggleOverlay();
+                closeOverlay();
                 refreshDataTable(refreshDataSelector);
             }
         });
@@ -83,6 +82,6 @@ export let closeModals = function () {
 export let closeOverlay = function () {
     $(model.modals.overlay).addClass("closed");
 };
-export let toggleOverlay = function () {
-    $(model.modals.overlay).toggleClass("closed");
+export let openOverlay = function () {
+    $(model.modals.overlay).removeClass("closed");
 };

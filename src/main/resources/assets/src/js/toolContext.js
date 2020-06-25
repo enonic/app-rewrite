@@ -1,9 +1,8 @@
 import {loadTool} from "./tools";
-import {createActionServiceUrl, createDataServiceUrl, createToolRendererUrl} from "./serviceRegistry";
+import {createDataServiceUrl, createToolRendererUrl} from "./serviceRegistry";
 import {selectTool} from "./toolbar";
 import {setRuleContext} from "./toolRules";
-import {populateDataTable, refreshDataTable} from "./dataTables";
-import {showError, showInfo} from "./info-bar";
+import {populateDataTable} from "./dataTables";
 import {enableActionButtons} from "./tableActions";
 
 const toolKey = "tool-context";
@@ -38,14 +37,17 @@ let onToolLoaded = function (result) {
         tableSelector: virtualHostDataTableSelector
     };
 
-    populateDataTable(serviceConfig, onDataPopulated)
+    populateDataTable(serviceConfig, onDataPopulated, onTableRefresh)
 };
 
 
 let onDataPopulated = function () {
     console.log("Data populated for " + virtualHostDataTableSelector);
+};
+
+let onTableRefresh = function () {
     makeRowsClickable();
-    enableActionButtons(toolConfig.svcUrl, toolSelector, toolKey, virtualHostDataTableSelector);
+    enableActionButtons(toolConfig.svcUrl, toolSelector, toolKey);
 };
 
 let makeRowsClickable = function () {

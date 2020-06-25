@@ -7,7 +7,7 @@
                 <select class="select data-trigger-select"
                         data-target-type="table"
                         data-service-name="rules"
-                        data-target-selector="#toolRulesRulesTable"
+                        data-refresh-data-selector="#toolRulesRulesTable"
                         id="toolRulesContextSelect"
                         name="toolRulesContextSelector">
                     <option disabled selected value> -- select a context --</option>
@@ -18,17 +18,18 @@
                     </div>
                 </select>
             </div>
-            <button id="btnCreateRule" class="action modal-trigger" data-tool-key="tool-rules" data-modal-type="create"
+            <button id="btnCreateRule" class="action modal-trigger"
+                    data-tool-key="tool-rules"
+                    data-modal-type="create"
+                    data-refresh-data-selector="#toolRulesRulesTable"
                     data-modal-context-selector="#toolRulesContextSelect"><i
                     class="material-icons">add</i><span>Add rule</span>
             </button>
         </div>
     </div>
     <div class="tool-main">
-        <form id="toolRulesRulesTableForm">
-            <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered">
-            </table>
-        </form>
+        <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered">
+        </table>
     </div>
 
     <div class="modals">

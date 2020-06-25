@@ -1,13 +1,12 @@
 import {createDataServiceUrl, createModalSelector, createModalUrl, createToolRendererUrl} from "./serviceRegistry";
 import {loadTool} from "./tools";
-import {populateDataTable, serializeDataTable} from "./dataTables";
+import {populateDataTable} from "./dataTables";
 import {displayModal} from "./modals";
 import {enableActionButtons} from "./tableActions";
 
 const toolKey = "tool-rules";
 const toolSelector = "#" + toolKey;
 const ruleTableSelector = "#toolRulesRulesTable";
-const ruleTableFormSelector = "#toolRulesRulesTableForm";
 const contextSelectorSelector = "#toolRulesContextSelect";
 
 const createRuleButton = "#btnCreateRule";
@@ -43,7 +42,6 @@ let createTableConfig = function () {
     };
 };
 
-
 let contextSelectorDataContext = function () {
     return {
         contextKey: $(contextSelectorSelector).val()
@@ -59,18 +57,22 @@ let loadRules = function () {
         tableSelector: ruleTableSelector
     };
 
-    populateDataTable(serviceConfig, onDataLoaded)
+    populateDataTable(serviceConfig, onDataLoaded, onTableRefreshed);
 };
 
 let onDataLoaded = function (response) {
     console.log("Rule-data loaded successfully");
     enableRuleButtons();
-    enableActionButtons(svcUrl, toolSelector, toolKey, ruleTableSelector);
+};
+
+let onTableRefreshed = function () {
+    enableActionButtons(svcUrl, toolSelector, toolKey);
 };
 
 let enableRuleButtons = function () {
 
     $(createRuleButton).click(function () {
+        console.log("Clicked CreateRuleButton");
         let modalSelector = createModalSelector(toolKey, "create");
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)

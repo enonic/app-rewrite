@@ -3,14 +3,14 @@ import {refreshDataTable} from "./dataTables";
 import {showError, showInfo} from "./info-bar";
 
 
-export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataTableSelector, dataFunction) {
+export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFunction) {
 
     let doEnableActionButtons = function () {
 
         let doExecuteToolActions = function (element, dataFunction, actionExecutedFunction) {
+
             const action = element.data('action-service-name');
             let serviceUrl = createActionServiceUrl(svcUrl, toolKey, action);
-            console.log("Created serviceUrk: " + serviceUrl);
             if (confirm("Are you sure that you want to " + action + "?")) {
                 jQuery.ajax({
                     url: serviceUrl,
@@ -22,10 +22,8 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataTa
                         showError(response.responseText);
                     },
                     success: function (response, textStatus, jqXHR) {
-                        console.log("SUCCESS: ", response, textStatus, jqXHR);
                         showInfo(response.message);
-                        console.log("Execute function actionExecutedFunction", actionExecutedFunction);
-                        actionExecutedFunction(svcUrl, toolSelector, toolKey, dataTableSelector);
+                        actionExecutedFunction(svcUrl, toolSelector, toolKey);
                     }
                 });
             }
@@ -35,6 +33,8 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataTa
             event.preventDefault();
             event.stopPropagation();
             let element = $(this);
+
+            let refreshDataSelector = element.data("refresh-data-selector");
 
             let df = dataFunction ? dataFunction : function (element) {
                 let actionContext = element.data("action-context");
@@ -46,8 +46,7 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataTa
             };
 
             let actionExecutedFunction = function (result) {
-                console.log("In actionExecutedFunction");
-                refreshDataTable(dataTableSelector, doEnableActionButtons);
+                refreshDataTable(refreshDataSelector, doEnableActionButtons);
             };
 
             doExecuteToolActions(element, df, actionExecutedFunction);
