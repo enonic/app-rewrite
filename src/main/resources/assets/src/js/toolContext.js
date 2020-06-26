@@ -26,13 +26,13 @@ let onToolLoaded = function (result) {
     console.log("Tool [" + toolKey + "] loaded");
     $(toolSelector).html(result);
 
-    let dataFunction = function () {
+    let df = function () {
     };
 
     let serviceConfig = {
         svcUrl: toolConfig.svcUrl,
         dataServiceUrl: createDataServiceUrl(toolConfig.svcUrl, toolKey, "context"),
-        dataFunction: dataFunction,
+        dataFunction: df,
         tableConfig: createTableConfig(),
         tableSelector: virtualHostDataTableSelector
     };
@@ -41,11 +41,11 @@ let onToolLoaded = function (result) {
 };
 
 
-let onDataPopulated = function () {
+let onDataPopulated = function (response) {
     console.log("Data populated for " + virtualHostDataTableSelector);
 };
 
-let onTableRefresh = function () {
+let onTableRefresh = function (response) {
     makeRowsClickable();
     enableActionButtons(toolConfig.svcUrl, toolSelector, toolKey);
 };

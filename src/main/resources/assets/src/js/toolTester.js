@@ -32,7 +32,6 @@ let testRequest = function () {
             $(model.elements.result).html(response.responseText);
         },
         success: function (result) {
-            console.log("Result: ", JSON.stringify(result));
             processResult(result);
         }
     });

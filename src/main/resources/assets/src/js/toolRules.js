@@ -3,6 +3,7 @@ import {loadTool} from "./tools";
 import {populateDataTable} from "./dataTables";
 import {displayModal} from "./modals";
 import {enableActionButtons} from "./tableActions";
+import {fetch} from "./dataService";
 
 const toolKey = "tool-rules";
 const toolSelector = "#" + toolKey;
@@ -25,15 +26,53 @@ export let setRuleContext = function (contextKey) {
     contextSelector.val(contextKey).change();
 };
 
+function triggerContextChanged() {
+    $(contextSelectorSelector).change(function () {
+        let context = $(contextSelectorSelector).val();
+        loadRules(context);
+        setRuleButtonState(context);
+    });
+}
+
+function setRuleButtonState(contextKey) {
+
+    function doSetButtonState(response) {
+
+        if (response.readOnly) {
+            $(createRuleButton).prop('disabled', true);
+        } else {
+            $(createRuleButton).prop('disabled', false);
+        }
+    }
+
+    let providerInfoUrl = createDataServiceUrl(svcUrl, toolKey, "provider-info");
+    let dataFunction = function () {
+        return {
+            contextKey: contextKey
+        }
+    };
+    fetch(providerInfoUrl, dataFunction, doSetButtonState);
+}
+
+function setContextSelectorData() {
+
+    let doPopulateSelectorValues = function (response) {
+        $(contextSelectorSelector).html(response);
+    };
+
+    let serviceUrl = createDataServiceUrl(svcUrl, toolKey, "context-selector");
+    let dataFunction = function () {
+    };
+
+    fetch(serviceUrl, dataFunction, doPopulateSelectorValues);
+}
+
+
 let onToolLoaded = function (result) {
     console.log("Tool [" + toolKey + "] loaded");
     $(toolSelector).html(result);
-
-    // Trigger data-table when context-selector is changing
-    $(contextSelectorSelector).change(function () {
-        console.log("Detected change in context selector = " + $(contextSelectorSelector).val());
-        loadRules($(contextSelectorSelector).val())
-    });
+    triggerContextChanged();
+    setContextSelectorData();
 };
 
 let createTableConfig = function () {
@@ -65,14 +104,12 @@ let onDataLoaded = function (response) {
     enableRuleButtons();
 };
 
-let onTableRefreshed = function () {
+let onTableRefreshed = function (response) {
     enableActionButtons(svcUrl, toolSelector, toolKey);
 };
 
 let enableRuleButtons = function () {
-
     $(createRuleButton).click(function () {
-        console.log("Clicked CreateRuleButton");
         let modalSelector = createModalSelector(toolKey, "create");
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)

@@ -8,7 +8,6 @@ import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
-import com.enonic.app.rewrite.provider.RewriteRuleException;
 import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
@@ -90,7 +89,7 @@ public class RewriteRepoMappingProvider
     @Override
     public String name()
     {
-        return "LocalRepo";
+        return "Repository";
     }
 
     public RewriteMappings getRewriteMappings()

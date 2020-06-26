@@ -28,8 +28,6 @@ exports.get = function (req) {
 
     let result = rewriteDao.getRewriteConfigurations();
 
-    log.info("##### Fetching data from tool context: %s", JSON.stringify(result, null, 2));
-
     let model = {
         columns: [
             {title: "Name", data: "contextKey"},

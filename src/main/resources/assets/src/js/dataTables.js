@@ -1,88 +1,40 @@
-import {showError} from "./info-bar";
-
-export let serializeDataTable = function (tableSelector) {
-    if ($.fn.DataTable.isDataTable(tableSelector)) {
-        return $(tableSelector).dataTable().$('input, select').serialize();
-    } else {
-        throw "Not a table"
-    }
-};
-
+import {populateDataElement, refreshDataElement} from "./dataElements";
 
 export let populateDataTable = function (serviceConfig, onTablePopulated, onTableRefresh) {
 
-    jQuery.ajax({
-        url: serviceConfig.dataServiceUrl,
-        cache: false,
-        type: 'GET',
-        data: serviceConfig.dataFunction(),
-        error: function (response) {
-            showError(response.responseText);
-        },
-        success: function (response) {
-            doPopulateData(serviceConfig.tableSelector, response, serviceConfig.tableConfig);
-            storeTableData(serviceConfig.tableSelector, serviceConfig.dataServiceUrl, serviceConfig.dataFunction, onTableRefresh);
-            onTableRefresh();
-            onTablePopulated();
-        }
-    });
-};
-
-let doPopulateData = function (selector, response, tableConfig) {
-    if ($.fn.DataTable.isDataTable(selector)) {
-        doRefreshTable($(selector).DataTable(), response);
-    } else {
-        let tableElement = $(selector);
-        tableConfig.data = response.data;
-        tableConfig.columns = response.columns;
-        tableElement.DataTable(
-            tableConfig
-        );
+    function doRefreshTable(tableElement, response) {
+        let dataTable = tableElement.DataTable();
+        dataTable.clear();
+        dataTable.rows.add(response.data);
+        dataTable.draw();
+        onTableRefresh(response);
     }
+
+    let doPopulateData = function (response) {
+        if ($.fn.DataTable.isDataTable(tableSelector)) {
+            doRefreshTable($(tableSelector).DataTable(), response);
+        } else {
+            let tableElement = $(tableSelector);
+            tableConfig.data = response.data;
+            tableConfig.columns = response.columns;
+            tableElement.DataTable(
+                tableConfig
+            );
+        }
+        onTablePopulated(response);
+        onTableRefresh(response);
+    };
+
+    let tableConfig = serviceConfig.tableConfig;
+    let tableSelector = serviceConfig.tableSelector;
+    let dataServiceUrl = serviceConfig.dataServiceUrl;
+    let dataFunction = serviceConfig.dataFunction;
+
+    populateDataElement(tableSelector, dataServiceUrl, dataFunction, doPopulateData, doRefreshTable)
 };
 
 export let refreshDataTable = function (refreshSelectors) {
-
-    $(refreshSelectors).each(function () {
-
-        let element = $(this);
-
-        if ($.fn.DataTable.isDataTable(element)) {
-            let dataTable = $(this).DataTable();
-            let serviceUrl = element.data("serviceUrl");
-            let dataFunction = element.data("dataFunction");
-            let onTableRefresh = element.data("onTableRefresh");
-
-            jQuery.ajax({
-                url: serviceUrl,
-                cache: false,
-                type: 'GET',
-                data: dataFunction(),
-                error: function (response) {
-                    showError(response.responseText);
-                },
-                success: function (response) {
-                    doRefreshTable(dataTable, response);
-                    onTableRefresh();
-                }
-            });
-        } else {
-            // ignore, not a DataTable
-        }
-    });
-
-
+    refreshDataElement(refreshSelectors);
 };
 
-function doRefreshTable(dataTable, response) {
-    dataTable.clear();
-    dataTable.rows.add(response.data);
-    dataTable.draw();
-}
-
-function storeTableData(selector, serviceUrl, dataFunction, onTableRefresh) {
-    $(selector).data("serviceUrl", serviceUrl);
-    $(selector).data("dataFunction", dataFunction);
-    $(selector).data("onTableRefresh", onTableRefresh)
-}
 

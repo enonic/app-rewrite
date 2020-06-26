@@ -52,7 +52,7 @@ public class RewriteMappingLocalFileProvider
     @Override
     public String name()
     {
-        return "LocalFile";
+        return "File";
     }
 
     @Override

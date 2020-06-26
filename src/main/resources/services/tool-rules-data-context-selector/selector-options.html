@@ -1,0 +1,6 @@
+<div data-th-each="config,iterStat : ${configs}" data-th-remove="tag">
+    <option data-th-value="${config.contextKey}"
+            data-th-text="${config.contextKey + ' (' + config.rules + ')'}">VirtualHost
+    </option>
+</div>
+  
