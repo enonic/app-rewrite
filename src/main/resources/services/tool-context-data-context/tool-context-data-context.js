@@ -33,7 +33,7 @@ exports.get = function (req) {
             {title: "Name", data: "contextKey"},
             {title: "Url", data: "url"},
             {title: "Rules", data: "rules"},
-            {title: "Provider", data: "provider"},
+            {title: "Source", data: "provider"},
             {title: "Read Only", data: "readOnly"},
             {title: "Actions", data: "actions"}
         ]

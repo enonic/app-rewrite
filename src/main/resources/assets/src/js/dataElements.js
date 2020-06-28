@@ -2,9 +2,6 @@ import {showError} from "./info-bar";
 
 
 export let populateDataElement = function (selector, serviceUrl, dataFunction, onPopulated, onRefreshed) {
-
-    console.log("Populating data-element", selector, serviceUrl, dataFunction, onPopulated, onRefreshed);
-
     jQuery.ajax({
         url: serviceUrl,
         cache: false,
@@ -21,15 +18,11 @@ export let populateDataElement = function (selector, serviceUrl, dataFunction, o
 };
 
 export let refreshDataElement = function (refreshSelectors) {
-
-    console.log("Refresh data-element for selector", refreshSelectors);
-
     $(refreshSelectors).each(function () {
-        let element = $(this);
-        let serviceUrl = element.data("serviceUrl");
-        let dataFunction = element.data("dataFunction");
-        let onDataRefresh = element.data("onDataRefresh");
-
+        let serviceUrl = $(this).data("serviceUrl");
+        let dataFunction = $(this).data("dataFunction");
+        let onDataRefresh = $(this).data("onDataRefresh");
+        let selector = $(this).data("selector");
         jQuery.ajax({
             url: serviceUrl,
             cache: false,
@@ -39,8 +32,7 @@ export let refreshDataElement = function (refreshSelectors) {
                 showError(response.responseText);
             },
             success: function (response) {
-                console.log("Element: ", element);
-                onDataRefresh(element, response);
+                onDataRefresh(selector, response);
             }
         });
     });
@@ -50,6 +42,7 @@ export let refreshDataElement = function (refreshSelectors) {
 function storeDataElementProperties(selector, serviceUrl, dataFunction, onTableRefresh) {
     $(selector).data("serviceUrl", serviceUrl);
     $(selector).data("dataFunction", dataFunction);
-    $(selector).data("onDataRefresh", onTableRefresh)
+    $(selector).data("onDataRefresh", onTableRefresh);
+    $(selector).data("selector", selector);
 }
 

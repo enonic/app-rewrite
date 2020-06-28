@@ -3,7 +3,7 @@ table.data-table {
   border: 1px solid $color-border-light;
   border-radius: 2px;
   overflow-x: auto;
-  max-width: 100% !important;
+  width: 100% !important;
 
   &.clickable-tr {
 

@@ -2,8 +2,8 @@ import {populateDataElement, refreshDataElement} from "./dataElements";
 
 export let populateDataTable = function (serviceConfig, onTablePopulated, onTableRefresh) {
 
-    function doRefreshTable(tableElement, response) {
-        let dataTable = tableElement.DataTable();
+    function doRefreshTable(selector, response) {
+        let dataTable = $(selector).DataTable();
         dataTable.clear();
         dataTable.rows.add(response.data);
         dataTable.draw();
@@ -12,7 +12,7 @@ export let populateDataTable = function (serviceConfig, onTablePopulated, onTabl
 
     let doPopulateData = function (response) {
         if ($.fn.DataTable.isDataTable(tableSelector)) {
-            doRefreshTable($(tableSelector).DataTable(), response);
+            refreshDataElement(tableSelector, response);
         } else {
             let tableElement = $(tableSelector);
             tableConfig.data = response.data;
@@ -31,10 +31,6 @@ export let populateDataTable = function (serviceConfig, onTablePopulated, onTabl
     let dataFunction = serviceConfig.dataFunction;
 
     populateDataElement(tableSelector, dataServiceUrl, dataFunction, doPopulateData, doRefreshTable)
-};
-
-export let refreshDataTable = function (refreshSelectors) {
-    refreshDataElement(refreshSelectors);
 };
 
 

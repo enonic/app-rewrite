@@ -1,6 +1,7 @@
 import {createActionServiceUrl} from "./serviceRegistry";
 import {refreshDataTable} from "./dataTables";
 import {showError, showInfo} from "./info-bar";
+import {refreshDataElement} from "./dataElements";
 
 
 export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFunction) {
@@ -46,7 +47,7 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFu
             };
 
             let actionExecutedFunction = function (result) {
-                refreshDataTable(refreshDataSelector, doEnableActionButtons);
+                refreshDataElement(refreshDataSelector);
             };
 
             doExecuteToolActions(element, df, actionExecutedFunction);

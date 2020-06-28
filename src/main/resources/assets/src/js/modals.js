@@ -1,16 +1,16 @@
 import {model} from "./model";
 import {showError, showInfo} from "./info-bar";
 import {createActionServiceUrl} from "./serviceRegistry";
-import {refreshDataTable} from "./dataTables";
+import {refreshDataElement} from "./dataElements";
 
-export let initModals = function (svcUrl) {
+export let initModals = function (toolUrl) {
     initializeOverlay();
 };
 
 let initializeOverlay = function () {
     $(model.modals.overlay).click(function () {
         closeModals();
-        toggleOverlay();
+        closeOverlay();
     });
 };
 
@@ -68,7 +68,7 @@ let initializeModalActions = function (svcUrl) {
                 showInfo(response.message);
                 closeModals();
                 closeOverlay();
-                refreshDataTable(refreshDataSelector);
+                refreshDataElement(refreshDataSelector);
             }
         });
 
