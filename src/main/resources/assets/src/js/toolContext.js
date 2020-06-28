@@ -4,6 +4,7 @@ import {selectTool} from "./toolbar";
 import {setRuleContext} from "./toolRules";
 import {populateDataTable} from "./dataTables";
 import {enableActionButtons} from "./tableActions";
+import {model} from "./model";
 
 const toolKey = "tool-context";
 const toolSelector = "#" + toolKey;
@@ -55,7 +56,7 @@ let makeRowsClickable = function () {
     $(virtualHostDataTableSelector + ' tbody').on('click', 'tr.has-provider', function () {
         let data = table.row(this).data();
         setRuleContext(data['contextKey']);
-        selectTool($("#nav-tool-rules"));
+        selectTool(model.toolbar.tools.rules);
     });
 };
 

@@ -1,11 +1,15 @@
-<div class="modal-guts create-context">
+<div class="modal-guts create-context" id="tool-rules-modal-create-rule">
 
     <div class="modal-content">
         <h1>Create rule</h1>
 
         <form class="form-grid" data-th-id="${form.id}">
-            <label for="createRuleContextKey">VirtualHost</label>
-            <input type="text" id="createRuleContextKey" name="createRuleContextKey" data-th-value="${contextKey}"
+            <label for="createRuleContextKeyShow">VirtualHost</label>
+            <input type="text" id="createRuleContextKeyShow" name="createRuleContextKeyShow" data-th-value="${contextKey}"
+                   disabled="disabled"
+                   readonly="readonly"/>
+
+            <input type="hidden" id="createRuleContextKey" name="createRuleContextKey" data-th-value="${contextKey}"
                    readonly="readonly"/>
 
             <label for="sourceUrl">URL</label>

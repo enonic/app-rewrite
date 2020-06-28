@@ -31,8 +31,18 @@ export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, data
             initializeModalActions(svcUrl);
             $(modalSelector).removeClass("closed");
             openOverlay();
+            setModalInputFocus(modalSelector);
         }
     });
+};
+
+export let modalOpen = function (selector) {
+    return $(selector).is(":visible");
+};
+
+let setModalInputFocus = function (modalSelector) {
+    $(modalSelector).focus();
+    $(modalSelector).find('input:enabled:visible:first').focus();
 };
 
 let initializeModalActions = function (svcUrl) {

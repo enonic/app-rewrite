@@ -1,3 +1,5 @@
+import {selectTool} from "./toolbar";
+
 export const model = {
 
     input: {
@@ -13,11 +15,18 @@ export const model = {
         tool: ".tool"
     },
     toolbar: {
-        toolNav: ".tool-nav"
+        toolNav: ".tool-nav",
+        tools: {
+            rules: "#nav-tool-rules",
+            virtualHosts: "#nav-tool-context"
+        }
     },
     buttons: {
         tool: {
             action: "button.action"
+        },
+        rule: {
+            create: "#btnCreateRule"
         }
     },
     modals: {
@@ -28,21 +37,16 @@ export const model = {
         modalAction: ".modal-action",
         contextCreate: {
             selector: "#modalContextCreate",
+        },
+        rule: {
+            create: "#tool-rules-modal-create-rule"
         }
+    },
+    selectors: {
+        contextSelectorSelector: "#toolRulesContextSelect"
     },
     infoBar: {
         selector: "#bottom-bar"
     },
-    tool: {
-        dataTriggers: {
-            select: ".data-trigger-select",
-            auto: ".auto-load",
-            tableAction: ".table-action"
-        },
-        select: {
-            selector: ".select"
-        }
-    }
-
 
 };

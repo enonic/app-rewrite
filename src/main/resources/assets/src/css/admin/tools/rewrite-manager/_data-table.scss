@@ -29,7 +29,10 @@ table.data-table {
   td {
     padding: 10px 5px;
     font-size: 0.8em;
+    //    max-width: 120px;
     text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: normal;
   }
 
   &.small {

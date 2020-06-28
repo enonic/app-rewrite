@@ -1,10 +1,10 @@
 import {model} from "./model";
 
-export let selectTool = function (selected) {
+export let selectTool = function (selector) {
     let allNavs = $(model.toolbar.toolNav);
     allNavs.removeClass("selected");
-    selected.addClass("selected");
-    let activates = selected.data("activator");
+    $(selector).addClass("selected");
+    let activates = $(selector).data("activator");
     toggleTool(activates);
 };
 

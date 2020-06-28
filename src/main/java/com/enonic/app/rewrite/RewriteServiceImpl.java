@@ -184,12 +184,14 @@ public class RewriteServiceImpl
     public void createRule( final CreateRuleParams params )
     {
         this.doGetProvider( params.getContextKey() ).createRule( params );
+        doLoadRewriteMappings();
     }
 
     @Override
     public void deleteRule( final DeleteRuleParams params )
     {
         this.doGetProvider( params.getContextKey() ).deleteRule( params );
+        doLoadRewriteMappings();
     }
 
     @Override
@@ -225,6 +227,7 @@ public class RewriteServiceImpl
         }
 
         provider.delete( rewriteContextKey );
+        doLoadRewriteMappings();
     }
 
     @Override

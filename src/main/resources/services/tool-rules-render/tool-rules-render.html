@@ -3,14 +3,14 @@
         <h2>Rewrite rules</h2>
         <div class="actions">
             <div class="large-selector">
-                <label for="toolRulesContextSelect">Context:</label>
+                <label for="toolRulesContextSelect">VirtualHost:</label>
                 <select class="select data-trigger-select"
                         data-target-type="table"
                         data-service-name="rules"
                         data-refresh-data-selector="#toolRulesRulesTable"
                         id="toolRulesContextSelect"
                         name="toolRulesContextSelector">
-                    <option disabled selected value> -- select a context --</option>
+                    <option disabled selected value> -- select a vhost --</option>
                     <!--
                     <div data-th-each="config,iterStat : ${configs}" data-th-remove="tag">
                         <option data-th-value="${config.contextKey}"
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="tool-main">
-        <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered">
+        <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered wrap">
         </table>
     </div>
 

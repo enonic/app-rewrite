@@ -5,15 +5,20 @@ import {displayModal} from "./modals";
 import {enableActionButtons} from "./tableActions";
 import {fetch} from "./dataService";
 import {populateDataElement} from "./dataElements";
+import {model} from "./model";
 
 const toolKey = "tool-rules";
 const toolSelector = "#" + toolKey;
 const ruleTableSelector = "#toolRulesRulesTable";
 const contextSelectorSelector = "#toolRulesContextSelect";
 
-const createRuleButton = "#btnCreateRule";
-
 let svcUrl;
+
+const rulesTableSettings = {
+    pageLength: 50,
+    autoWidth: false
+};
+
 
 export let initToolRules = function (svc) {
     svcUrl = svc;
@@ -40,9 +45,9 @@ function setRuleButtonState(contextKey) {
     function doSetButtonState(response) {
 
         if (response.readOnly) {
-            $(createRuleButton).prop('disabled', true);
+            $(model.buttons.rule.create).prop('disabled', true);
         } else {
-            $(createRuleButton).prop('disabled', false);
+            $(model.buttons.rule.create).prop('disabled', false);
         }
     }
 
@@ -57,11 +62,15 @@ function setRuleButtonState(contextKey) {
 
 function setContextSelectorData() {
     let doRefreshContextSelector = function (selector, response) {
-        $(selector).html(response);
+        let html = "<option disabled selected value> -- select a vhost --</option>";
+        html += response;
+        $(selector).html(html);
     };
 
     let doPopulateSelectorValues = function (response) {
-        $(contextSelectorSelector).html(response);
+        let html = "<option disabled selected value> -- select a vhost --</option>";
+        html += response;
+        $(contextSelectorSelector).html(html);
     };
 
     let serviceUrl = createDataServiceUrl(svcUrl, toolKey, "context-selector");
@@ -78,12 +87,6 @@ let onToolLoaded = function (result) {
     setContextSelectorData();
 };
 
-let createTableConfig = function () {
-    return {
-        pageLength: 10
-    };
-};
-
 let contextSelectorDataContext = function () {
     return {
         contextKey: $(contextSelectorSelector).val()
@@ -95,7 +98,7 @@ let loadRules = function () {
     let serviceConfig = {
         dataServiceUrl: createDataServiceUrl(svcUrl, toolKey, "rules"),
         dataFunction: contextSelectorDataContext,
-        tableConfig: createTableConfig(),
+        tableConfig: rulesTableSettings,
         tableSelector: ruleTableSelector
     };
 
@@ -112,7 +115,7 @@ let onTableRefreshed = function (response) {
 };
 
 let enableRuleButtons = function () {
-    $(createRuleButton).click(function () {
+    $(model.buttons.rule.create).click(function () {
         let modalSelector = createModalSelector(toolKey, "create");
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)
