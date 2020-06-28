@@ -3,7 +3,7 @@ import {showError, showInfo} from "./info-bar";
 import {createActionServiceUrl} from "./serviceRegistry";
 import {refreshDataElement} from "./dataElements";
 
-export let initModals = function (toolUrl) {
+export let initModals = function () {
     initializeOverlay();
 };
 

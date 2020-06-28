@@ -2,6 +2,7 @@ import '../css/main.scss';
 import {initToolbar} from "./toolbar";
 import {initToolContext} from "./toolContext";
 import {initToolRules} from "./toolRules";
+import {initModals} from "./modals";
 
 let dt = require('datatables.net');
 
@@ -14,6 +15,7 @@ $(document).ready(function () {
     initToolbar();
     initToolContext(svcUrl);
     initToolRules(svcUrl);
+    initModals();
 });
 
 

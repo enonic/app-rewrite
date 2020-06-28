@@ -5,9 +5,6 @@ let rewriteDao = require('/lib/rewrite-dao');
 exports.post = function (req) {
 
     let params = req.params;
-
-    log.info("PARAMS: %s", JSON.stringify(params, null, 2));
-
     let contextKey = params.actionContext;
 
     if (!contextKey) {

@@ -4,6 +4,7 @@ import {populateDataTable} from "./dataTables";
 import {displayModal} from "./modals";
 import {enableActionButtons} from "./tableActions";
 import {fetch} from "./dataService";
+import {populateDataElement} from "./dataElements";
 
 const toolKey = "tool-rules";
 const toolSelector = "#" + toolKey;
@@ -55,6 +56,9 @@ function setRuleButtonState(contextKey) {
 }
 
 function setContextSelectorData() {
+    let doRefreshContextSelector = function (selector, response) {
+        $(selector).html(response);
+    };
 
     let doPopulateSelectorValues = function (response) {
         $(contextSelectorSelector).html(response);
@@ -64,9 +68,8 @@ function setContextSelectorData() {
     let dataFunction = function () {
     };
 
-    fetch(serviceUrl, dataFunction, doPopulateSelectorValues);
+    populateDataElement(contextSelectorSelector, serviceUrl, dataFunction, doPopulateSelectorValues, doRefreshContextSelector);
 }
-
 
 let onToolLoaded = function (result) {
     console.log("Tool [" + toolKey + "] loaded");
