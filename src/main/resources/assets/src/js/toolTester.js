@@ -1,4 +1,27 @@
+import {loadTool} from "./tools";
+import {createToolRendererUrl} from "./serviceRegistry";
 import {model} from "./model";
+
+const toolKey = "tool-tester";
+const toolSelector = "#" + toolKey;
+let svcUrl;
+
+export let initToolTester = function (svc) {
+    svcUrl = svc;
+    let data = function () {
+    };
+    loadTool(createToolRendererUrl(svcUrl, toolKey), data, onToolLoaded);
+};
+
+
+let onToolLoaded = function (result) {
+    console.log("Tool [" + toolKey + "] loaded");
+
+    console.log("REULST", JSON.stringify(result));
+
+    $(toolSelector).html(result);
+    initListeners();
+};
 
 let initListeners = function () {
 
@@ -42,30 +65,6 @@ let processResult = function (data) {
 
     writeRequestRoute(data.results);
 
-    let anyResult = data.results[0] != null;
-    if (anyResult) {
-        data.results.forEach(function (result) {
-            doMarkMatch(result);
-        });
-    } else {
-        toggleMatch(model.elements.vhosts, null, false);
-        toggleMatch(model.elements.rows, null, false);
-    }
-};
-
-let doMarkMatch = function (result) {
-
-    console.log("Matching: ", result);
-
-    toggleMatch(model.elements.vhosts, "#vhost_" + result.virtualHost.name);
-
-    let matchingRule = result.rewrite ? result.rewrite.matchId : null;
-
-    if (matchingRule != null) {
-        toggleMatch(model.elements.rows, "#" + result.virtualHost.name + "_" + matchingRule, true);
-    } else {
-        toggleMatch(model.elements.rows, null)
-    }
 };
 
 let writeRequestRoute = function (results) {
@@ -74,31 +73,12 @@ let writeRequestRoute = function (results) {
 
     results.forEach(function (result) {
         if (result.rewrite && result.rewrite.target) {
-            html += " -> " + result.rewrite.target;
+            html += "<br/> -> " + result.rewrite.target;
         }
     });
 
     $("#resultPath").html(html);
 };
-
-let toggleMatch = function (selector, matchId, scrollTo) {
-
-    console.log("Toggeling match for selector", selector, matchId, scrollTo);
-
-    if (!matchId) {
-        $(selector).removeClass("match");
-        return;
-    }
-
-    let matching = $(matchId);
-    $(selector).not(matching).removeClass("match");
-    matching.addClass("match");
-
-    if (scrollTo) {
-        matching.get(0).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-    }
-};
-
 
 let delay = (function () {
     let timer = 0;
@@ -107,3 +87,4 @@ let delay = (function () {
         timer = setTimeout(callback, ms);
     };
 })();
+

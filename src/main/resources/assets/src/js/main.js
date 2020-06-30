@@ -4,6 +4,7 @@ import {initToolContext} from "./toolContext";
 import {initToolRules} from "./toolRules";
 import {initModals} from "./modals";
 import {defineShortcuts} from "./shortcuts";
+import {initToolTester} from "./toolTester";
 
 let dt = require('datatables.net');
 
@@ -16,6 +17,7 @@ $(document).ready(function () {
     initToolbar();
     initToolContext(svcUrl);
     initToolRules(svcUrl);
+    initToolTester(svcUrl);
     initModals();
     defineShortcuts();
 });

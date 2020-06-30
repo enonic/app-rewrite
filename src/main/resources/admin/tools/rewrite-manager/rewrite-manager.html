@@ -41,7 +41,7 @@
                 <div class="toolName"><p>Rules</p></div>
             </div>
 
-            <div class="tool-nav" id="nav-tool-tester" data-activator="tool-request-tester">
+            <div class="tool-nav" id="nav-tool-tester" data-activator="tool-tester">
                 <div class="toolIcon"><i class="material-icons">flight_takeoff</i></div>
                 <div class="toolName"><p>Request-tester</p></div>
             </div>
@@ -61,29 +61,14 @@
 
             <div id="tool-rules" class="tool loadable-tool"></div>
 
+            <div id="tool-tester" class="tool loadable-tool"></div>
+
             <div id="tool-import-export" class="tool">
                 <div class="tool-context-bar">
                     <h2>Import / Export</h2>
                 </div>
             </div>
 
-            <div id="tool-request-tester" class="tool">
-                <div class="tool-context-bar">
-                    <h2>Request tester</h2>
-                </div>
-                <div class="request-tester-input">
-                    <div class="input">
-                        <input type="text" id="requestURL" name="requestURL" placeholder="https://url.to.test/here">
-                    </div>
-                    <div id="result" class="result">
-                        <p>Result: <span id="resultPath" class="result-path"></span></p>
-                    </div>
-                </div>
-
-                <div class="request-tester-result">
-                    <h2>Rules</h2>
-                </div>
-            </div>
         </div>
 
         <div class="modal-overlay closed" id="modal-overlay"></div>
