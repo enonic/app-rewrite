@@ -1,25 +1,38 @@
 <div class="tool-wrapper">
     <div class="tool-context-bar">
-        <h2>Rewrite rules</h2>
+        <div class="large-selector">
+            <label for="toolRulesContextSelect">VirtualHost:</label>
+            <select class="select data-trigger-select"
+                    data-target-type="table"
+                    data-service-name="rules"
+                    data-refresh-data-selector="#toolRulesRulesTable"
+                    id="toolRulesContextSelect"
+                    name="toolRulesContextSelector">
+                <option disabled selected value> -- select a vhost --</option>
+                <!--
+                <div data-th-each="config,iterStat : ${configs}" data-th-remove="tag">
+                    <option data-th-value="${config.contextKey}"
+                            data-th-text="${config.contextKey + ' (' + config.rules + ')'}">VirtualHost
+                    </option>
+                </div>
+                -->
+            </select>
+        </div>
         <div class="actions">
-            <div class="large-selector">
-                <label for="toolRulesContextSelect">VirtualHost:</label>
-                <select class="select data-trigger-select"
-                        data-target-type="table"
-                        data-service-name="rules"
-                        data-refresh-data-selector="#toolRulesRulesTable"
-                        id="toolRulesContextSelect"
-                        name="toolRulesContextSelector">
-                    <option disabled selected value> -- select a vhost --</option>
-                    <!--
-                    <div data-th-each="config,iterStat : ${configs}" data-th-remove="tag">
-                        <option data-th-value="${config.contextKey}"
-                                data-th-text="${config.contextKey + ' (' + config.rules + ')'}">VirtualHost
-                        </option>
-                    </div>
-                    -->
-                </select>
-            </div>
+            <button id="btnImportRule" class="action modal-trigger"
+                    data-tool-key="tool-rules"
+                    data-modal-type="import"
+                    data-refresh-data-selector="#toolRulesRulesTable"
+                    data-modal-context-selector="#toolRulesContextSelect"><i
+                    class="material-icons">south</i><span>Import rules</span>
+            </button>
+            <button id="btnExportRule" class="action modal-trigger"
+                    data-tool-key="tool-rules"
+                    data-modal-type="export"
+                    data-refresh-data-selector="#toolRulesRulesTable"
+                    data-modal-context-selector="#toolRulesContextSelect"><i
+                    class="material-icons">north</i><span>Exports rules</span>
+            </button>
             <button id="btnCreateRule" class="action modal-trigger"
                     data-tool-key="tool-rules"
                     data-modal-type="create"

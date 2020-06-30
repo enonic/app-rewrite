@@ -12,6 +12,20 @@ const virtualHostDataTableSelector = "#toolContextContextTable";
 
 let toolConfig = {};
 
+let rowCallbackFunction = function (row, data) {
+    if (data.provider && data.provider !== "") {
+        $(row).addClass('has-provider');
+    }
+};
+
+const tableSettings = {
+    pageLength: 50,
+    autoWidth: false,
+    rowCallback: rowCallbackFunction,
+    dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+         "<'row'<'col-sm-12'tr>>" +
+         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+};
 
 export let initToolContext = function (svcUrl) {
     toolConfig.svcUrl = svcUrl;
@@ -34,7 +48,7 @@ let onToolLoaded = function (result) {
         svcUrl: toolConfig.svcUrl,
         dataServiceUrl: createDataServiceUrl(toolConfig.svcUrl, toolKey, "context"),
         dataFunction: df,
-        tableConfig: createTableConfig(),
+        tableConfig: tableSettings,
         tableSelector: virtualHostDataTableSelector
     };
 
@@ -58,17 +72,4 @@ let makeRowsClickable = function () {
         setRuleContext(data['contextKey']);
         selectTool(model.toolbar.tools.rules);
     });
-};
-
-let rowCallbackFunction = function (row, data) {
-    if (data.provider && data.provider !== "") {
-        $(row).addClass('has-provider');
-    }
-};
-
-let createTableConfig = function () {
-    return {
-        pageLength: 10,
-        rowCallback: rowCallbackFunction
-    };
 };

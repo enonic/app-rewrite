@@ -58,3 +58,26 @@ table.data-table {
   }
 
 }
+
+
+.dataTables_wrapper {
+
+  table {
+    width: 100%;
+  }
+
+  div.dataTables_info {
+    padding: 0
+  }
+
+
+  div.dataTables_paginate {
+
+    a.paginate_button {
+      padding: 0 5px;
+    }
+
+  }
+
+
+}

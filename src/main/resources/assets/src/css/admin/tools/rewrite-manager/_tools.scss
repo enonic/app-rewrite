@@ -18,6 +18,16 @@
       padding: 40px;
 
 
+      .tool-main-bar {
+
+        padding: 5px;
+        height: $tool-nav-height;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
       .tool-table-action {
 
         display: inline;

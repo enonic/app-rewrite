@@ -12,14 +12,6 @@ export let defineShortcuts = function () {
         const key = event.key; // "a", "1", "Shift", etc.
 
         if (key === 'R') {
-            selectTool(model.toolbar.tools.rules);
-        }
-
-        if (key === 'V') {
-            selectTool(model.toolbar.tools.virtualHosts);
-        }
-
-        if (key === 'r') {
             if (!modalOpen(model.modals.rule.create)) {
                 $(model.buttons.rule.create).trigger("click");
             }
