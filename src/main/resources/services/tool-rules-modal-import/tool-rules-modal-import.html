@@ -1,0 +1,40 @@
+<div class="modal-guts create-context" id="tool-rules-modal-create-rule">
+
+    <div class="modal-content">
+        <h1>Import rules</h1>
+
+        <form class="form-grid" data-th-id="${form.id}" method="post" enctype="multipart/form-data">
+            <label for="createRuleContextKeyShow">VirtualHost</label>
+            <input type="text" id="createRuleContextKeyShow" name="createRuleContextKeyShow" data-th-value="${contextKey}"
+                   disabled="disabled"
+                   readonly="readonly"/>
+
+            <input type="hidden" id="importRulesContextKey" name="importRulesContextKey" data-th-value="${contextKey}"
+                   readonly="readonly"/>
+
+            <input type="hidden" id="importRulesDryRun" name="importRulesDryRun" data-th-value="false"/>
+
+            <label for="toolRulesImportFile">Rules file</label>
+            <input type="file"
+                   id="toolRulesImportFile" name="file">
+
+            <label for="toolRulesMergeStrategy">Merge strategy</label>
+            <select name="toolRulesMergeStrategy" id="toolRulesMergeStrategy">
+                <option value="delete">Delete all existing, then import</option>
+                <!--<option value="merge">Merge, update same sources</option>
+                <option value="fail">Fail if same sources</option>-->
+            </select>
+
+            <button class="modal-action"
+                    data-action-type="import"
+                    data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Import
+            </button>
+            <button class="modal-cancel">Cancel
+            </button>
+        </form>
+        <div id="tool-rules-import-result">
+        </div>
+    </div>
+
+</div>

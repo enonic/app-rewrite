@@ -18,6 +18,8 @@ import com.google.common.collect.Lists;
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.format.RewriteFormatReader;
+import com.enonic.app.rewrite.format.RewriteReaderResult;
+import com.enonic.app.rewrite.format.RewriteReaderState;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
@@ -124,14 +126,18 @@ public class RewriteMappingLocalFileProvider
 
         LOG.info( "Fetching rewrite-config from file: [{}]", item.path );
 
-        final AtomicInteger i = new AtomicInteger( 0 );
         try (final Stream<String> stream = Files.lines( Paths.get( item.path.toString() ) ))
         {
             stream.forEach( line -> {
-                final RewriteRule rule = RewriteFormatReader.read( line, i.getAndIncrement() );
-                if ( rule != null )
+                final RewriteReaderResult result = RewriteFormatReader.read( line );
+                final RewriteReaderState state = result.getState();
+                if ( state.equals( RewriteReaderState.OK ) )
                 {
-                    rewritesBuilder.addRule( rule );
+                    rewritesBuilder.addRule( result.getRule() );
+                }
+                else if ( state.equals( RewriteReaderState.FAILED ) )
+                {
+                    LOG.warn( "Could not resolve rules from line {}", line );
                 }
             } );
         }

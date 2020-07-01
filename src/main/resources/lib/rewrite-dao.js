@@ -1,6 +1,5 @@
 let bean = __.newBean('com.enonic.app.rewrite.RewriteBean');
 
-
 exports.store = function (rule) {
 
     let params = __.newBean('com.enonic.app.rewrite.StoreRuleParams');
@@ -61,3 +60,13 @@ exports.deleteRule = function (contextKey, from) {
     let result = bean.deleteRule(params);
     return __.toNativeObject(result);
 };
+
+exports.importRules = function (contextKey, mergeStrategy, byteSource, dryRun) {
+    let params = __.newBean('com.enonic.app.rewrite.ImportRulesParams');
+    params.contextKey = contextKey;
+    params.mergeStrategy = mergeStrategy;
+    params.byteSource = byteSource;
+    params.dryRun = dryRun;
+    let result = bean.importRules(params);
+    return __.toNativeObject(result);
+}

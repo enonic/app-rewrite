@@ -14,7 +14,7 @@ let initializeOverlay = function () {
     });
 };
 
-export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, dataFunction) {
+export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, dataFunction, onDisplayed) {
 
     jQuery.ajax({
         url: modalServiceUrl,
@@ -32,6 +32,9 @@ export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, data
             $(modalSelector).removeClass("closed");
             openOverlay();
             setModalInputFocus(modalSelector);
+            if (onDisplayed) {
+                onDisplayed();
+            }
         }
     });
 };
@@ -43,6 +46,26 @@ export let modalOpen = function (selector) {
 let setModalInputFocus = function (modalSelector) {
     $(modalSelector).focus();
     $(modalSelector).find('input:enabled:visible:first').focus();
+};
+
+export let postActionForm = function (formSelector, serviceUrl, successFunction) {
+    let form = $(formSelector)[0];
+    let data = new FormData(form);
+    jQuery.ajax({
+        url: serviceUrl,
+        cache: false,
+        type: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        error: function (response, status, error) {
+            console.log("ERROR: ", response);
+            showError(response.responseText);
+        },
+        success: function (response, textStatus, jqXHR) {
+            successFunction(response, textStatus, jqXHR);
+        }
+    });
 };
 
 let initializeModalActions = function (svcUrl) {
@@ -58,30 +81,20 @@ let initializeModalActions = function (svcUrl) {
         let thisElem = $(this);
         let toolKey = thisElem.data("tool-key");
         let actionType = thisElem.data("action-type");
-        let formId = thisElem.data("form");
-        let refreshDataSelector = thisElem.data("refresh-data-selector");
-        let data = $("#" + formId).serialize();
 
         let actionServiceUrl = createActionServiceUrl(svcUrl, toolKey, actionType);
+        let formId = thisElem.data("form");
+        const formSelector = "#" + formId;
+        let refreshDataSelector = thisElem.data("refresh-data-selector");
 
-        jQuery.ajax({
-            url: actionServiceUrl,
-            cache: false,
-            type: 'POST',
-            data: data,
-            error: function (response, status, error) {
-                console.log("ERROR: ", response);
-                showError(response.responseText);
-            },
-            success: function (response, textStatus, jqXHR) {
-                console.log("SUCCESS: ", response, textStatus, jqXHR);
-                showInfo(response.message);
-                closeModals();
-                closeOverlay();
-                refreshDataElement(refreshDataSelector);
-            }
-        });
-
+        let onSuccess = function (response, textStatus, jqXHR) {
+            console.log("SUCCESS: ", response);
+            showInfo(response.message);
+            closeModals();
+            closeOverlay();
+            refreshDataElement(refreshDataSelector);
+        };
+        postActionForm(formSelector, actionServiceUrl, onSuccess);
     });
 };
 

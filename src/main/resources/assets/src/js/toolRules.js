@@ -1,7 +1,7 @@
-import {createDataServiceUrl, createModalSelector, createModalUrl, createToolRendererUrl} from "./serviceRegistry";
+import {createActionServiceUrl, createDataServiceUrl, createModalSelector, createModalUrl, createToolRendererUrl} from "./serviceRegistry";
 import {loadTool} from "./tools";
 import {populateDataTable} from "./dataTables";
-import {displayModal} from "./modals";
+import {displayModal, postActionForm} from "./modals";
 import {enableActionButtons} from "./tableActions";
 import {fetch} from "./dataService";
 import {populateDataElement} from "./dataElements";
@@ -111,6 +111,7 @@ let loadRules = function () {
 let onDataLoaded = function (response) {
     console.log("Rule-data loaded successfully");
     enableRuleButtons();
+    enableImportButton();
 };
 
 let onTableRefreshed = function (response) {
@@ -119,9 +120,37 @@ let onTableRefreshed = function (response) {
 
 let enableRuleButtons = function () {
     $(model.buttons.rule.create).click(function () {
-        let modalSelector = createModalSelector(toolKey, "create");
+        let modalSelector = createModalSelector(toolKey);
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)
     });
 };
 
+let enableImportButton = function () {
+    $(model.buttons.rule.import).click(function () {
+        let modalSelector = createModalSelector(toolKey);
+        let modalServiceUrl = createModalUrl(svcUrl, toolKey, "import");
+        displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, dryRunImportOnChange);
+    });
+};
+
+let setImportDryRun = function (dryRun) {
+    $("#importRulesDryRun").val(dryRun);
+};
+
+let dryRunImportOnChange = function () {
+    $(model.modals.forms.importRules).find(':input').change(function (index, value) {
+        if ($("#toolRulesImportFile").val()) {
+
+            let showDryRunInfo = function (response) {
+                console.log("Response: %s", JSON.stringify(response));
+                $("#tool-rules-import-result").html("<p>" + JSON.stringify(response, "<br/>", 2) + "</p>");
+                setImportDryRun(false);
+            };
+
+            let actionServiceUrl = createActionServiceUrl(svcUrl, toolKey, "import");
+            setImportDryRun(true);
+            postActionForm(model.modals.forms.importRules, actionServiceUrl, showDryRunInfo);
+        }
+    });
+};

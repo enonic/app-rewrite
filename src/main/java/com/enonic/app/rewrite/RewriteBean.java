@@ -1,6 +1,11 @@
 package com.enonic.app.rewrite;
 
+import com.google.common.io.ByteSource;
+
+import com.enonic.app.rewrite.io.ImportResult;
+import com.enonic.app.rewrite.io.ImportService;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
+import com.enonic.app.rewrite.mapping.ImportResultMapper;
 import com.enonic.app.rewrite.mapping.ProviderInfoMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteConfigurationsMapper;
@@ -27,12 +32,15 @@ public class RewriteBean
 
     private VHostService vHostService;
 
+    private ImportService importService;
+
     @Override
     public void initialize( final BeanContext context )
     {
         this.rewriteService = context.getService( RewriteService.class ).get();
         this.requestTester = context.getService( RequestTester.class ).get();
         this.vHostService = context.getService( VHostService.class ).get();
+        this.importService = context.getService( ImportService.class ).get();
     }
 
 
@@ -113,4 +121,11 @@ public class RewriteBean
     {
         return new ProviderInfoMapper( this.rewriteService.getProviderInfo( RewriteContextKey.from( contextKey ) ) );
     }
+
+    public Object importRules( final ImportRulesParams params )
+    {
+        final ImportResult importResult = this.importService.importRules( params );
+        return new ImportResultMapper( importResult );
+    }
+
 }

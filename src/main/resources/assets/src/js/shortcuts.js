@@ -12,7 +12,7 @@ export let defineShortcuts = function () {
         const key = event.key; // "a", "1", "Shift", etc.
 
         if (key === 'R') {
-            if (!modalOpen(model.modals.rule.create)) {
+            if (!modalOpen(model.modals.all)) {
                 $(model.buttons.rule.create).trigger("click");
             }
         }

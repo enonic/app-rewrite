@@ -26,6 +26,8 @@ export const model = {
             action: "button.action"
         },
         rule: {
+            import: "#btnImportRules",
+            export: "#btnExportRules",
             create: "#btnCreateRule"
         }
     },
@@ -38,8 +40,9 @@ export const model = {
         contextCreate: {
             selector: "#modalContextCreate",
         },
-        rule: {
-            create: "#tool-rules-modal-create-rule"
+        rules: "#tool-rules-modal",
+        forms: {
+            importRules: "#tool-rules-action-import-form"
         }
     },
     selectors: {
