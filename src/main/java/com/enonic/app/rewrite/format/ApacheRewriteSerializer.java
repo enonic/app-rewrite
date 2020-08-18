@@ -26,7 +26,7 @@ public class ApacheRewriteSerializer
 
     private static final String REDIRECT_CODE_KEY = "R";
 
-    private static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
+    public static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
 
     private final static Logger LOG = LoggerFactory.getLogger( ApacheRewriteSerializer.class );
 

@@ -17,7 +17,7 @@ public class SourceReader
 
             case CVS:
             {
-                return CvsSerializer.read( reader );
+                return CSVSerializer.read( reader );
             }
 
             default:
