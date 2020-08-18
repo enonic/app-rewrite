@@ -1,13 +1,20 @@
-package com.enonic.app.rewrite.io;
+package com.enonic.app.rewrite.ie;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Charsets;
+
 import com.enonic.app.rewrite.ImportRulesParams;
 import com.enonic.app.rewrite.RewriteService;
-import com.enonic.app.rewrite.format.RewriteFormatReader;
+import com.enonic.app.rewrite.format.SourceFormat;
+import com.enonic.app.rewrite.format.SourceReadResult;
+import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 
 @Component(immediate = true)
@@ -22,20 +29,26 @@ public class ImportServiceImpl
     {
         LOG.info( "Importing rules into " + params.getContextKey() + ", dryRun: " + params.isDryRun() );
 
-        final ReadRulesResult result = RewriteFormatReader.read( params.getByteSource() );
-
-        return handleStrategy( params, result );
+        try (final BufferedReader reader = params.getByteSource().asCharSource( Charsets.UTF_8 ).openBufferedStream())
+        {
+            final SourceReadResult result = SourceReader.read( reader, SourceFormat.APACHE_REWRITE );
+            return handleStrategy( params, result );
+        }
+        catch ( IOException e )
+        {
+            return ImportResult.failed();
+        }
     }
 
-    private ImportResult handleStrategy( final ImportRulesParams params, final ReadRulesResult readResult )
+    private ImportResult handleStrategy( final ImportRulesParams params, final SourceReadResult result )
     {
         //if ( params.getMergeStrategy().equals( "delete" ) )
         //{
-        return handleDeleteStrategy( params, readResult );
+        return handleDeleteStrategy( params, result );
         // }
     }
 
-    private ImportResult handleDeleteStrategy( final ImportRulesParams params, final ReadRulesResult readResult )
+    private ImportResult handleDeleteStrategy( final ImportRulesParams params, final SourceReadResult result )
     {
         final ImportResult.Builder builder = ImportResult.create();
 
@@ -49,11 +62,13 @@ public class ImportServiceImpl
         else
         {
             this.rewriteService.store( RewriteMapping.create().
-                rewriteRules( readResult.getRules() ).
+                rewriteRules( result.getRules() ).
                 contextKey( params.getContextKey() ).
                 build() );
         }
-        builder.setNew( readResult.getRules().size() );
+        builder.setNew( result.getOk() );
+        builder.setUnsupported( result.getUnsupported() );
+        builder.setErrors( result.getFailed() );
 
         return builder.build();
     }

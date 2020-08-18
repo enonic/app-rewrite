@@ -1,9 +1,7 @@
 package com.enonic.app.rewrite;
 
-import com.google.common.io.ByteSource;
-
-import com.enonic.app.rewrite.io.ImportResult;
-import com.enonic.app.rewrite.io.ImportService;
+import com.enonic.app.rewrite.ie.ImportResult;
+import com.enonic.app.rewrite.ie.ImportService;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
 import com.enonic.app.rewrite.mapping.ImportResultMapper;
 import com.enonic.app.rewrite.mapping.ProviderInfoMapper;

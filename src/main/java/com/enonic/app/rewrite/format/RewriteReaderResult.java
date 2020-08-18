@@ -6,9 +6,9 @@ public class RewriteReaderResult
 {
     private final RewriteRule rule;
 
-    private final RewriteReaderState state;
+    private final RewriteRuleReadResult state;
 
-    public RewriteReaderResult( final RewriteRule rule, final RewriteReaderState state )
+    public RewriteReaderResult( final RewriteRule rule, final RewriteRuleReadResult state )
     {
         this.rule = rule;
         this.state = state;
@@ -19,7 +19,7 @@ public class RewriteReaderResult
         return rule;
     }
 
-    public RewriteReaderState getState()
+    public RewriteRuleReadResult getState()
     {
         return state;
     }

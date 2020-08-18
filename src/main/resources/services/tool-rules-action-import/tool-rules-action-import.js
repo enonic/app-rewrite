@@ -3,12 +3,10 @@ const ioLib = require('/lib/xp/io');
 const portalLib = require('/lib/xp/portal');
 
 exports.post = function (req) {
-
     let params = req.params;
     let contextKey = params.importRulesContextKey;
     let dryRun = params.importRulesDryRun === 'true';
-
-    log.info("$$$$$$$$$$$$$$$$PARAMS: %s", JSON.stringify(params, null, 2));
+    let mergeStrategy = params.toolRulesMergeStrategy ? params.toolRulesMergeStrategy : "delete";
 
     if (!contextKey) {
         return {
@@ -20,7 +18,7 @@ exports.post = function (req) {
 
     let byteSource = portalLib.getMultipartStream("file");
 
-    const importResult = rewriteDao.importRules(contextKey, params.toolRulesMergeStrategy, byteSource, dryRun);
+    const importResult = rewriteDao.importRules(contextKey, mergeStrategy, byteSource, dryRun);
 
     let model = {
         message: "imported rules to virtualHost [" + contextKey + "]",

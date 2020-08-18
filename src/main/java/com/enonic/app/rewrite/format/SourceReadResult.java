@@ -1,20 +1,23 @@
-package com.enonic.app.rewrite.io;
+package com.enonic.app.rewrite.format;
 
 import com.enonic.app.rewrite.rewrite.RewriteRules;
 
-public class ReadRulesResult
+public class SourceReadResult
 {
     private final Integer ok;
 
     private final Integer failed;
 
+    private final Integer unsupported;
+
     private final RewriteRules rules;
 
-    private ReadRulesResult( final ReadRulesResult.Builder builder )
+    private SourceReadResult( final SourceReadResult.Builder builder )
     {
         ok = builder.ok;
         failed = builder.failed;
         rules = builder.rules;
+        unsupported = builder.unsupported;
     }
 
     public Integer getOk()
@@ -32,14 +35,19 @@ public class ReadRulesResult
         return ok + failed;
     }
 
+    public Integer getUnsupported()
+    {
+        return unsupported;
+    }
+
     public RewriteRules getRules()
     {
         return rules;
     }
 
-    public static ReadRulesResult.Builder create()
+    public static SourceReadResult.Builder create()
     {
-        return new ReadRulesResult.Builder();
+        return new SourceReadResult.Builder();
     }
 
     public static final class Builder
@@ -48,33 +56,41 @@ public class ReadRulesResult
 
         private Integer failed = 0;
 
+        private Integer unsupported = 0;
+
         private RewriteRules rules;
 
         private Builder()
         {
         }
 
-        public ReadRulesResult.Builder addNew()
+        public SourceReadResult.Builder addNew()
         {
             this.ok++;
             return this;
         }
 
-        public ReadRulesResult.Builder addFailed()
+        public SourceReadResult.Builder addFailed()
         {
             this.failed++;
             return this;
         }
 
-        public ReadRulesResult.Builder rules( final RewriteRules rules )
+        public SourceReadResult.Builder addUnsupported()
+        {
+            this.unsupported++;
+            return this;
+        }
+
+        public SourceReadResult.Builder rules( final RewriteRules rules )
         {
             this.rules = rules;
             return this;
         }
 
-        public ReadRulesResult build()
+        public SourceReadResult build()
         {
-            return new ReadRulesResult( this );
+            return new SourceReadResult( this );
         }
     }
 }

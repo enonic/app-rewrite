@@ -1,0 +1,4756 @@
+{
+  "rules": [
+    {
+      "order": 0,
+      "from": "^/pensjon/offentlig-tjenestepensjon/hva-skjer-om-du-bytter-jobb-blir-syk-eller-tar-ut-permisjon-1.37288$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/hva-skjer-om-du-bytter-jobb-blir-syk-eller-tar-ut-permisjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 1,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-for-ansatte-1.38306$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/kurs-for-ansatte",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 2,
+      "from": "^/sparing-og-fond/spar-i-fond/kostnadsoversikt-for-privatkunder-1.37807$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/kostnadsoversikt-for-privatkunder",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 3,
+      "from": "^/bank-og-lan/betaling/betaling-og-overf-ring/straksbetaling-i-mobilbank-og-nettbank-1.39491$",
+      "target": {
+        "path": "/bank-og-lan/betaling/betaling-og-overf-ring/straksbetaling-i-mobilbank-og-nettbank",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 4,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-offentlig-tjenestepensjon-1.37787$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 5,
+      "from": "^/sparing-og-fond/spar-i-fond/nye-flerfaktorfond-1.42044$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/nye-flerfaktorfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 6,
+      "from": "^/om-klp/samfunnsansvar/vi-er-en-engasjert-og-ansvarlig-eier-1.40632$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/vi-er-en-engasjert-og-ansvarlig-eier",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 7,
+      "from": "^/offentlig/bank/vil-du-snakke-med-oss-1.38017$",
+      "target": {
+        "path": "/offentlig/bank/vil-du-snakke-med-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 8,
+      "from": "^/om-klp/samfunnsansvar/klp-ekskluderer-tre-selskaper-1.42348$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-ekskluderer-tre-selskaper",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 9,
+      "from": "^/pensjon/hvilke-valg-om-jobb-og-penger-pavirker-pensjonen-din-1.40710$",
+      "target": {
+        "path": "/pensjon/hvilke-valg-om-jobb-og-penger-pavirker-pensjonen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 10,
+      "from": "^/sparing-og-fond/spar-i-fond/aktive-aksjefond/klp-aksjeglobal-mer-samfunnsansvar-1.40450$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/aktive-aksjefond/klp-aksjeglobal-mer-samfunnsansvar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 11,
+      "from": "^/om-klp/hurra-for-arbeidsgledeprisen-1.40322$",
+      "target": {
+        "path": "/om-klp/hurra-for-arbeidsgledeprisen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 12,
+      "from": "^/offentlig/forsikring/unnga-un-dvendige-bilskader-1.40384$",
+      "target": {
+        "path": "/offentlig/forsikring/unnga-un-dvendige-bilskader",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 13,
+      "from": "^/sparing-og-fond/klp-tenker-over-hva-som-er-det-beste-for-kunden-1.37772$",
+      "target": {
+        "path": "/sparing-og-fond/klp-tenker-over-hva-som-er-det-beste-for-kunden",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 14,
+      "from": "^/sparing-og-fond/spar-i-fond/retningslinjer-for-klp-fondene-1.37758$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/retningslinjer-for-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 15,
+      "from": "^/pensjon/offentlig-tjenestepensjon/pensjonsutbetalinger-datoer-og-skatt-1.37602$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/pensjonsutbetalinger-datoer-og-skatt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 16,
+      "from": "^/forsikring/campingvognforsikring/slik-unngar-du-skade-pa-campingvognen-1.37748$",
+      "target": {
+        "path": "/forsikring/campingvognforsikring/slik-unngar-du-skade-pa-campingvognen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 17,
+      "from": "^/offentlig/offentlig-tjenestepensjon/vedtekter-og-skjemaer-for-offentlig-tjenestepensjon-1.38253$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/vedtekter-og-skjemaer-for-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 18,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/temadager-1.38066$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/temadager",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 19,
+      "from": "^/sparing-og-fond/spar-i-fond/ansvarlig-fondssparing-1.37129$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/ansvarlig-fondssparing",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 20,
+      "from": "^/meld-skade-eller-tyveri-1.38868$",
+      "target": {
+        "path": "/meld-skade-eller-tyveri",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 21,
+      "from": "^/ofte-stilte-sp-rsmal-1.38446$",
+      "target": {
+        "path": "/ofte-stilte-sp-rsmal",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 22,
+      "from": "^/pensjon/vi-lever-ut-gardsdr-mmen-1.40220$",
+      "target": {
+        "path": "/pensjon/vi-lever-ut-gardsdr-mmen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 23,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/vi-gj-r-oslo-gr-nnere-1.42164$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/vi-gj-r-oslo-gr-nnere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 24,
+      "from": "^/offentlig/kommunesammenslaaing/tips-om-infoskriv-til-ansatte-om-sammenslaingen-1.42004$",
+      "target": {
+        "path": "/offentlig/kommunesammenslaaing/tips-om-infoskriv-til-ansatte-om-sammenslaingen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 25,
+      "from": "^/forsikring/ga-trygt-inn-i-bunadssesongen-1.40226$",
+      "target": {
+        "path": "/forsikring/ga-trygt-inn-i-bunadssesongen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 26,
+      "from": "^/om-klp/samfunnsansvar/det-handler-om-a-gi-bakkenivaet-tilbake-til-byen-1.40327$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/det-handler-om-a-gi-bakkenivaet-tilbake-til-byen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 27,
+      "from": "^/forsikring/halvparten-vet-ikke-om-barna-er-innboforsikret-1.38347$",
+      "target": {
+        "path": "/forsikring/halvparten-vet-ikke-om-barna-er-innboforsikret",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 28,
+      "from": "^/om-klp/klp-ekskluderer-fire-selskaper-1.40441$",
+      "target": {
+        "path": "/om-klp/klp-ekskluderer-fire-selskaper",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 29,
+      "from": "^/offentlig/kommunesammenslaaing/banken-1.41208$",
+      "target": {
+        "path": "/offentlig/kommunesammenslaaing/banken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 30,
+      "from": "^/bedrift/fond/valuta-og-regionseksponering-1.38123$",
+      "target": {
+        "path": "/bedrift/fond/valuta-og-regionseksponering",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 31,
+      "from": "^/forsikring/flytteskader-kan-dekkes-av-innboforsikringen-1.40247$",
+      "target": {
+        "path": "/forsikring/flytteskader-kan-dekkes-av-innboforsikringen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 32,
+      "from": "^/om-klp/samfunnsansvar/to-nye-skip-dumpet-pa-strand-i-bangladesh-1.42030$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/to-nye-skip-dumpet-pa-strand-i-bangladesh",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 33,
+      "from": "^/forsikring/har-du-behov-for-veihjelp-1.38032$",
+      "target": {
+        "path": "/forsikring/har-du-behov-for-veihjelp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 34,
+      "from": "^/pensjon/regulering-av-pensjon-1.38228$",
+      "target": {
+        "path": "/pensjon/regulering-av-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 35,
+      "from": "^/sparing-og-fond/spar-i-fond/nordmenn-sparer-mer-i-verdipapirfond-1.39484$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/nordmenn-sparer-mer-i-verdipapirfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 36,
+      "from": "^/forsikring/husforsikring/slik-unngar-du-skader-pa-huset-1.37287$",
+      "target": {
+        "path": "/forsikring/husforsikring/slik-unngar-du-skader-pa-huset",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 37,
+      "from": "^/bedrift/forsikring/ofte-stilte-sp-rsmal-fra-forsikringskundene-vare-1.38352$",
+      "target": {
+        "path": "/bedrift/forsikring/ofte-stilte-sp-rsmal-fra-forsikringskundene-vare",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 38,
+      "from": "^/om-klp/samfunnsansvar/norges-f-rste-senter-for-sosial-innovasjon-1.40293$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/norges-f-rste-senter-for-sosial-innovasjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 39,
+      "from": "^/pensjon/afp/inntekt-og-afp-1.36758$",
+      "target": {
+        "path": "/pensjon/afp/inntekt-og-afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 40,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/refleksjonsverkt-y-om-n-rv-r-og-frav-r-1.39196$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/refleksjonsverkt-y-om-n-rv-r-og-frav-r",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 41,
+      "from": "^/bank-og-lan/jeg-var-aldri-i-tvil-om-hva-jeg-skulle-gj-re-1.41095$",
+      "target": {
+        "path": "/bank-og-lan/jeg-var-aldri-i-tvil-om-hva-jeg-skulle-gj-re",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 42,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/kurs-og-konferanser-1.37434$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/kurs-og-konferanser",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 43,
+      "from": "^/forsikring/bilforsikring/slik-kan-du-unnga-skader-pa-bilen-din-1.37106$",
+      "target": {
+        "path": "/forsikring/bilforsikring/slik-kan-du-unnga-skader-pa-bilen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 44,
+      "from": "^/pensjon/offentlig-tjenestepensjon/medlemskapet-ditt-i-klp-1.36833$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/medlemskapet-ditt-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 45,
+      "from": "^/om-klp/godt-resultat-selv-med-svak-avkastning-i-kvartalet-1.40360$",
+      "target": {
+        "path": "/om-klp/godt-resultat-selv-med-svak-avkastning-i-kvartalet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 46,
+      "from": "^/pensjon/ny-i-jobben-fire-ting-du-b-r-vite-om-pensjon-1.40677$",
+      "target": {
+        "path": "/pensjon/ny-i-jobben-fire-ting-du-b-r-vite-om-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 47,
+      "from": "^/sparing-og-fond/spar-i-fond/l-r-om-fond-1.37107$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/l-r-om-fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 48,
+      "from": "^/bank-og-lan/vare-boliglan/boliglan/for-deg-som-har-boliglan-hos-oss-i-dag-1.37455$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan/for-deg-som-har-boliglan-hos-oss-i-dag",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 49,
+      "from": "^/om-klp/samfunnsansvar/klima-som-en-finansiell-risiko-1.40883$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klima-som-en-finansiell-risiko",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 50,
+      "from": "^/pensjon/innskuddspensjon/pensjon-er-langsiktig-sparing-1.42024$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/pensjon-er-langsiktig-sparing",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 51,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/fremtidstanke-velse-1.42574$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/fremtidstanke-velse",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 52,
+      "from": "^/om-klp/samfunnsansvar/sann-investerer-vi-1.40631$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/sann-investerer-vi",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 53,
+      "from": "^/pensjon/offentlig-tjenestepensjon/nye-samordningsregler-for-offentlig-tjenestepensjon-1.40088$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/nye-samordningsregler-for-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 54,
+      "from": "^/offentlig/forsikring/skadeforebyggende-tiltak-for-h-sten-1.41063$",
+      "target": {
+        "path": "/offentlig/forsikring/skadeforebyggende-tiltak-for-h-sten",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 55,
+      "from": "^/om-klp/personvern/informasjonskapsler-cookies-1.39578$",
+      "target": {
+        "path": "/om-klp/personvern/informasjonskapsler-cookies",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 56,
+      "from": "^/om-klp/a-jobbe-er-bra-for-helsa-1.40488$",
+      "target": {
+        "path": "/om-klp/a-jobbe-er-bra-for-helsa",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 57,
+      "from": "^/bedrift/pensjon/innskuddspensjon-for-selvstendig-n-ringsdrivende/forbund-og-foreninger-med-samarbeidsavtaler-1.38209$",
+      "target": {
+        "path": "/bedrift/pensjon/innskuddspensjon-for-selvstendig-n-ringsdrivende/forbund-og-foreninger-med-samarbeidsavtaler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 58,
+      "from": "^/offentlig/forsikring/slik-begrenser-du-flomskadene-1.42572$",
+      "target": {
+        "path": "/offentlig/forsikring/slik-begrenser-du-flomskadene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 59,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/olje-og-gass-1.41184$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/olje-og-gass",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 60,
+      "from": "^/pensjon/du-skal-fa-en-dag-i-morgen-1.42125$",
+      "target": {
+        "path": "/pensjon/du-skal-fa-en-dag-i-morgen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 61,
+      "from": "^/pensjon/alderspensjon/jobbe-etter-67-ar-dette-b-r-du-vite-om-pensjonen-din-1.36385$",
+      "target": {
+        "path": "/pensjon/alderspensjon/jobbe-etter-67-ar-dette-b-r-du-vite-om-pensjonen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 62,
+      "from": "^/medlemsfordeler/ips/fem-tips-du-b-r-tenke-pa-f-r-du-sparer-i-ips-1.40440$",
+      "target": {
+        "path": "/medlemsfordeler/ips/fem-tips-du-b-r-tenke-pa-f-r-du-sparer-i-ips",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 63,
+      "from": "^/om-klp/endres-reglene-kan-en-av-dem-fa-mer-i-pensjon-1.40423$",
+      "target": {
+        "path": "/om-klp/endres-reglene-kan-en-av-dem-fa-mer-i-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 64,
+      "from": "^/sparing-og-fond/spar-i-fond/nytt-indeksfond-fra-klp-kapitalforvaltning-1.39031$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/nytt-indeksfond-fra-klp-kapitalforvaltning",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 65,
+      "from": "^/sparing-og-fond/liten-jobb-mye-a-spare-1.40391$",
+      "target": {
+        "path": "/sparing-og-fond/liten-jobb-mye-a-spare",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 66,
+      "from": "^/forsikring/reiseforsikring/trygg-pa-tur-med-reiseapp-1.38697$",
+      "target": {
+        "path": "/forsikring/reiseforsikring/trygg-pa-tur-med-reiseapp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 67,
+      "from": "^/offentlig/forsikring/kontaktpersoner-skadeforsikring-1.37668$",
+      "target": {
+        "path": "/offentlig/forsikring/kontaktpersoner-skadeforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 68,
+      "from": "^/forsikring/innboforsikring/slik-kan-du-unnga-skader-og-tap-1.37331$",
+      "target": {
+        "path": "/forsikring/innboforsikring/slik-kan-du-unnga-skader-og-tap",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 69,
+      "from": "^/logg-inn/feilmelding-eller-tekniske-problemer-ved-innlogging-1.37997$",
+      "target": {
+        "path": "/logg-inn/feilmelding-eller-tekniske-problemer-ved-innlogging",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 70,
+      "from": "^/bank-og-lan/vare-boliglan/boliglan/finanstilsynets-retningslinjer-1.36818$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan/finanstilsynets-retningslinjer",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 71,
+      "from": "^/om-klp/generalforsamling-og-nytt-styre-1.40362$",
+      "target": {
+        "path": "/om-klp/generalforsamling-og-nytt-styre",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 72,
+      "from": "^/pensjon/offentlig-tjenestepensjon/hvor-mye-ma-du-jobbe-f-r-du-blir-medlem-i-klp-1.36400$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/hvor-mye-ma-du-jobbe-f-r-du-blir-medlem-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 73,
+      "from": "^/pensjon/offentlig-tjenestepensjon/anbefaler-pensjonerte-sykepleiere-a-jobbe-f-rre-timer-1.41966$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/anbefaler-pensjonerte-sykepleiere-a-jobbe-f-rre-timer",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 74,
+      "from": "^/om-klp/klp-bidrar-til-europeisk-milj-samarbeid-1.40417$",
+      "target": {
+        "path": "/om-klp/klp-bidrar-til-europeisk-milj-samarbeid",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 75,
+      "from": "^/pensjon/pensjon-for-nybegynnere/dette-skjer-med-pensjonen-din-nar-du-skifter-jobb-1.39039$",
+      "target": {
+        "path": "/pensjon/dette-skjer-med-pensjonen-din-nar-du-skifter-jobb",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 76,
+      "from": "^/bank-og-lan/kredittkort/ut-pa-tur-v-r-kort-lur-1.40263$",
+      "target": {
+        "path": "/bank-og-lan/kredittkort/ut-pa-tur-v-r-kort-lur",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 77,
+      "from": "^/om-klp/avkastning-og-lave-gebyrer-viktigst-1.39530$",
+      "target": {
+        "path": "/om-klp/avkastning-og-lave-gebyrer-viktigst",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 78,
+      "from": "^/pensjon/offentlig-tjenestepensjon/offentlig-tjenestepensjon-for-nybegynnere-1.42001$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/offentlig-tjenestepensjon-for-nybegynnere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 79,
+      "from": "^/bank-og-lan/l-nnsom-bsu-innspurt-f-r-nyttar-1.39522$",
+      "target": {
+        "path": "/bank-og-lan/l-nnsom-bsu-innspurt-f-r-nyttar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 80,
+      "from": "^/sparing-og-fond/spar-i-fond/indeksfond-i-vinden-1.36813$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/indeksfond-i-vinden",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 81,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/tar-vare-pa-kulturarven-1.39470$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/tar-vare-pa-kulturarven",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 82,
+      "from": "^/om-klp/samfunnsansvar/klp-gar-ut-av-kull-for-3-2-milliarder-kroner-1.42536$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-gar-ut-av-kull-for-3-2-milliarder-kroner",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 83,
+      "from": "^/sparing-og-fond/klp-investerer-i-nytt-sakornfond-1.42497$",
+      "target": {
+        "path": "/sparing-og-fond/klp-investerer-i-nytt-sakornfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 84,
+      "from": "^/om-klp/gar-inn-i-oslofjord-varme-1.39825$",
+      "target": {
+        "path": "/om-klp/gar-inn-i-oslofjord-varme",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 85,
+      "from": "^/pensjon/uf-repensjon/vilkar-for-a-fa-uf-repensjon-1.36738$",
+      "target": {
+        "path": "/pensjon/uf-repensjon/vilkar-for-a-fa-uf-repensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 86,
+      "from": "^/bank-og-lan/ofte-stilte-sp-rsmal-fra-bankkundene-vare-1.38249$",
+      "target": {
+        "path": "/bank-og-lan/ofte-stilte-sp-rsmal-fra-bankkundene-vare",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 87,
+      "from": "^/om-klp/skulle-nske-jeg-hadde-begynt-f-r-1.41050$",
+      "target": {
+        "path": "/om-klp/skulle-nske-jeg-hadde-begynt-f-r",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 88,
+      "from": "^/sparing-og-fond/topprentekonto/ny-medlemsfordel-topprentekonto-1.40251$",
+      "target": {
+        "path": "/sparing-og-fond/topprentekonto/ny-medlemsfordel-topprentekonto",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 89,
+      "from": "^/pensjon/uf-repensjon/etteroppgj-r-for-uf-repensjon-1.37433$",
+      "target": {
+        "path": "/pensjon/uf-repensjon/etteroppgj-r-for-uf-repensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 90,
+      "from": "^/om-klp/klp-utelukker-selskapene-tilknyttet-dakota-access-pipeline-1.38721$",
+      "target": {
+        "path": "/om-klp/klp-utelukker-selskapene-tilknyttet-dakota-access-pipeline",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 91,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/n-ringseiendom-1.41181$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/n-ringseiendom",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 92,
+      "from": "^/om-klp/satser-pa-solceller-i-egypt-1.38766$",
+      "target": {
+        "path": "/om-klp/satser-pa-solceller-i-egypt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 93,
+      "from": "^/om-klp/aksjefond-for-nybegynnere-1.38734$",
+      "target": {
+        "path": "/om-klp/aksjefond-for-nybegynnere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 94,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/slik-skal-de-fa-ned-sykefrav-ret-1.40994$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/slik-skal-de-fa-ned-sykefrav-ret",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 95,
+      "from": "^/forsikring/gj-r-hus-og-hytte-klar-for-vinteren-1.38348$",
+      "target": {
+        "path": "/forsikring/gj-r-hus-og-hytte-klar-for-vinteren",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 96,
+      "from": "^/om-klp/samfunnsansvar/investeringer-i-utviklingsland-1.40634$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/investeringer-i-utviklingsland",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 97,
+      "from": "^/sparing-og-fond/spar-i-fond/fondssparing-gj-r-det-enkelt-1.40309$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/fondssparing-gj-r-det-enkelt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 98,
+      "from": "^/offentlig/forsikring/unnga-skader-pa-skolene-i-pasken-1.39928$",
+      "target": {
+        "path": "/offentlig/forsikring/unnga-skader-pa-skolene-i-pasken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 99,
+      "from": "^/bedrift/forsikring/raskt-oppgj-r-sikret-sommersesongen-1.38950$",
+      "target": {
+        "path": "/bedrift/forsikring/raskt-oppgj-r-sikret-sommersesongen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 100,
+      "from": "^/om-klp/finans-og-ir/klp-inviterer-til-eierm-ter-1.39541$",
+      "target": {
+        "path": "/om-klp/finans-og-ir/klp-inviterer-til-eierm-ter",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 101,
+      "from": "^/pensjon/offentlig-tjenestepensjon/hva-med-de-som-har-s-raldersgrense-1.42458$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/hva-med-de-som-har-s-raldersgrense",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 102,
+      "from": "^/bank-og-lan/klp-banken-setter-opp-rentene-1.42330$",
+      "target": {
+        "path": "/bank-og-lan/klp-banken-setter-opp-rentene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 103,
+      "from": "^/om-klp/vil-vurdere-konsekvensene-av-oljesand-1.38764$",
+      "target": {
+        "path": "/om-klp/vil-vurdere-konsekvensene-av-oljesand",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 104,
+      "from": "^/offentlig/offentlig-tjenestepensjon/fakta-om-pensjonsordningen-1.38158$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/fakta-om-pensjonsordningen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 105,
+      "from": "^/bank-og-lan/vare-boliglan/8-tips-til-deg-som-vil-inn-pa-boligmarkedet-1.41007$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/8-tips-til-deg-som-vil-inn-pa-boligmarkedet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 106,
+      "from": "^/om-klp/oslo-b-rs-er-i-spill-1.41968$",
+      "target": {
+        "path": "/om-klp/oslo-b-rs-er-i-spill",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 107,
+      "from": "^/logg-inn/tekniske-problemer-ved-innlogging-pa-min-side-1.40748$",
+      "target": {
+        "path": "/logg-inn/tekniske-problemer-ved-innlogging-pa-min-side",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 108,
+      "from": "^/bank-og-lan/bankid/derfor-ma-du-ikke-dele-bankid-og-passord-med-andre-1.41159$",
+      "target": {
+        "path": "/bank-og-lan/bankid/derfor-ma-du-ikke-dele-bankid-og-passord-med-andre",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 109,
+      "from": "^/om-klp/klp-og-oljer-rledningen-i-nord-dakota-1.38720$",
+      "target": {
+        "path": "/om-klp/klp-og-oljer-rledningen-i-nord-dakota",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 110,
+      "from": "^/pensjon/offentlig-tjenestepensjon/tidligere-innmeldingsregler-i-klp-1.40502$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/tidligere-innmeldingsregler-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 111,
+      "from": "^/om-klp/solid-avkastning-i-tredje-kvartal-1.41082$",
+      "target": {
+        "path": "/om-klp/solid-avkastning-i-tredje-kvartal",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 112,
+      "from": "^/pensjon/offentlig-tjenestepensjon/vilkar-og-vedtekter-om-offentlig-tjenestepensjon-1.38224$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/vilkar-og-vedtekter-om-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 113,
+      "from": "^/om-klp/agentinformasjon-klp-skadeforsikring-as-1.39468$",
+      "target": {
+        "path": "/om-klp/agentinformasjon-klp-skadeforsikring-as",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 114,
+      "from": "^/om-klp/dette-b-r-du-vite-om-pensjon-som-ung-1.40258$",
+      "target": {
+        "path": "/om-klp/dette-b-r-du-vite-om-pensjon-som-ung",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 115,
+      "from": "^/sparing-og-fond/spar-i-fond/rapporter-1.37221$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/rapporter",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 116,
+      "from": "^/om-klp/spare-i-fond-til-pensjon-hva-er-lurt-da-1.40017$",
+      "target": {
+        "path": "/om-klp/spare-i-fond-til-pensjon-hva-er-lurt-da",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 117,
+      "from": "^/sparing-og-fond/studenten-nora-kom-seg-inn-pa-boligmarkedet-1.39969$",
+      "target": {
+        "path": "/sparing-og-fond/studenten-nora-kom-seg-inn-pa-boligmarkedet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 118,
+      "from": "^/bedrift/forsikring/nye-personvernregler-fra-2018-1.38960$",
+      "target": {
+        "path": "/bedrift/forsikring/nye-personvernregler-fra-2018",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 119,
+      "from": "^/om-klp/klp-ut-ver-eierskap-pa-borneo-1.38731$",
+      "target": {
+        "path": "/om-klp/klp-ut-ver-eierskap-pa-borneo",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 120,
+      "from": "^/om-klp/sammen-kan-vi-gj-re-oslo-til-verdens-f-rste-nullutslippshovedstad-1.42410$",
+      "target": {
+        "path": "/om-klp/sammen-kan-vi-gj-re-oslo-til-verdens-f-rste-nullutslippshovedstad",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 121,
+      "from": "^/pensjon/dette-ma-l-ses-f-r-egen-pensjonskonto-lanseres-1.42377$",
+      "target": {
+        "path": "/pensjon/dette-ma-l-ses-f-r-egen-pensjonskonto-lanseres",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 122,
+      "from": "^/offentlig/offentlig-tjenestepensjon/vedtak-i-klps-foretaksforsamling-2017-1.38664$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/vedtak-i-klps-foretaksforsamling-2017",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 123,
+      "from": "^/forsikring/vi-har-ingen-a-miste-i-juleh-ytiden-1.39032$",
+      "target": {
+        "path": "/forsikring/vi-har-ingen-a-miste-i-juleh-ytiden",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 124,
+      "from": "^/forsikring/husforsikring/6-sikkerhetstips-til-deg-som-eier-bolig-1.41009$",
+      "target": {
+        "path": "/forsikring/husforsikring/6-sikkerhetstips-til-deg-som-eier-bolig",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 125,
+      "from": "^/om-klp/klp-seier-for-avhending-av-skip-1.41220$",
+      "target": {
+        "path": "/om-klp/klp-seier-for-avhending-av-skip",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 126,
+      "from": "^/forsikring/flytt-forsikringene-dine-til-klp-1.37220$",
+      "target": {
+        "path": "/forsikring/flytt-forsikringene-dine-til-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 127,
+      "from": "^/offentlig/fond/valuta-og-regionseksponering-1.38144$",
+      "target": {
+        "path": "/offentlig/fond/valuta-og-regionseksponering",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 128,
+      "from": "^/pensjon/hvor-h-y-pensjon-kan-du-forvente-a-fa-1.42462$",
+      "target": {
+        "path": "/pensjon/hvor-h-y-pensjon-kan-du-forvente-a-fa",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 129,
+      "from": "^/sparing-og-fond/klp-har-presset-prisene-i-fondsmarkedet-i-20-ar-1.42222$",
+      "target": {
+        "path": "/sparing-og-fond/klp-har-presset-prisene-i-fondsmarkedet-i-20-ar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 130,
+      "from": "^/om-klp/klp-ekskluderer-fire-nye-selskaper-1.40840$",
+      "target": {
+        "path": "/om-klp/klp-ekskluderer-fire-nye-selskaper",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 131,
+      "from": "^/om-klp/ri-ansatte-smilte-fra-re-til-re-1.40370$",
+      "target": {
+        "path": "/om-klp/ri-ansatte-smilte-fra-re-til-re",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 132,
+      "from": "^/forsikring/alt-du-ma-vite-for-en-stressfri-sommerferie-1.40210$",
+      "target": {
+        "path": "/forsikring/alt-du-ma-vite-for-en-stressfri-sommerferie",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 133,
+      "from": "^/om-klp/samfunnsansvar/klp-investerer-i-verdens-st-rste-solpark-1.42419$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-investerer-i-verdens-st-rste-solpark",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 134,
+      "from": "^/offentlig/forsikring/d-dsbranner-i-kommunale-boliger-kan-forhindres-med-kt-kunnskap-1.42231$",
+      "target": {
+        "path": "/offentlig/forsikring/d-dsbranner-i-kommunale-boliger-kan-forhindres-med-kt-kunnskap",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 135,
+      "from": "^/om-klp/norske-bedrifter-er-fortsatt-mest-forn-yd-med-klp-1.39502$",
+      "target": {
+        "path": "/om-klp/norske-bedrifter-er-fortsatt-mest-forn-yd-med-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 136,
+      "from": "^/sparing-og-fond/klp-lanserer-norges-f-rste-svanemerkede-fond-1.40516$",
+      "target": {
+        "path": "/sparing-og-fond/klp-lanserer-norges-f-rste-svanemerkede-fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 137,
+      "from": "^/pensjon/afp/vilkar-for-a-ta-ut-afp-1.37409$",
+      "target": {
+        "path": "/pensjon/afp/vilkar-for-a-fa-afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 138,
+      "from": "^/pensjon/lav-pensjonsregulering-i-2017-1.36412$",
+      "target": {
+        "path": "/pensjon/lav-pensjonsregulering-i-2017",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 139,
+      "from": "^/om-klp/organisasjon-og-ledelse/eierforhold-1.38997$",
+      "target": {
+        "path": "/om-klp/organisasjon-og-ledelse/eierforhold",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 140,
+      "from": "^/klp-banken-justerer-boliglansrentene-1.38714$",
+      "target": {
+        "path": "/klp-banken-justerer-boliglansrentene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 141,
+      "from": "^/bank-og-lan/kredittkort/6-tips-til-en-sikker-netthandel-1.41032$",
+      "target": {
+        "path": "/bank-og-lan/kredittkort/6-tips-til-en-sikker-netthandel",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 142,
+      "from": "^/sparing-og-fond/spar-i-fond/gode-valg-og-konomisk-avkastning-1.41015$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/gode-valg-og-konomisk-avkastning",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 143,
+      "from": "^/om-klp/samfunnsansvar/klp-blant-topper-pa-klimatoppm-te-1.41305$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-blant-topper-pa-klimatoppm-te",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 144,
+      "from": "^/pensjon/uf-repensjon/pensjonsutbetalinger-datoer-og-skatt-1.37599$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/pensjonsutbetalinger-datoer-og-skatt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 145,
+      "from": "^/bank-og-lan/kredittkort/trygg-ferie-med-egenandelsforsikring-1.40264$",
+      "target": {
+        "path": "/bank-og-lan/kredittkort/trygg-ferie-med-egenandelsforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 146,
+      "from": "^/forsikring/er-du-forsikret-i-skibakken-1.42110$",
+      "target": {
+        "path": "/forsikring/er-du-forsikret-i-skibakken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 147,
+      "from": "^/offentlig/fond/sp-rsmal-og-svar-om-klp-fondene-1.37336$",
+      "target": {
+        "path": "/offentlig/fond/sp-rsmal-og-svar-om-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 148,
+      "from": "^/bank-og-lan/bli-bankkunde/dette-b-r-du-tenke-pa-etter-a-ha-byttet-bank-1.40548$",
+      "target": {
+        "path": "/bank-og-lan/bli-bankkunde/dette-b-r-du-tenke-pa-etter-a-ha-byttet-bank",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 149,
+      "from": "^/forsikring/meld-skade-og-tyveri/hva-skjer-etter-at-jeg-har-meldt-en-skade-eller-et-tyveri-1.37101$",
+      "target": {
+        "path": "/forsikring/meld-skade-og-tyveri/hva-skjer-etter-at-jeg-har-meldt-en-skade-eller-et-tyveri",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 150,
+      "from": "^/pensjon/sa-mye-koster-det-a-jobbe-deltid-1.41179$",
+      "target": {
+        "path": "/pensjon/sa-mye-koster-det-a-jobbe-deltid",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 151,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/en-stor-takk-til-wenche-1.41049$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/en-stor-takk-til-wenche",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 152,
+      "from": "^/offentlig/offentlig-tjenestepensjon/slik-fungerer-finansieringen-av-pensjon-1.37936$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/slik-fungerer-finansieringen-av-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 153,
+      "from": "^/om-klp/finans-og-ir/kontakt-finans-1.39901$",
+      "target": {
+        "path": "/om-klp/finans-og-ir/kontakt-finans",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 154,
+      "from": "^/om-klp/samfunnsansvar/kampen-for-jernslavene-pa-d-dsstrendene-1.42166$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/kampen-for-jernslavene-pa-d-dsstrendene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 155,
+      "from": "^/pensjon/regjeringen-fremmer-lovforslag-om-offentlig-tjenestepensjon-1.42418$",
+      "target": {
+        "path": "/pensjon/regjeringen-fremmer-lovforslag-om-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 156,
+      "from": "^/om-klp/sterkt-arsresultat-for-klp-1.39715$",
+      "target": {
+        "path": "/om-klp/sterkt-arsresultat-for-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 157,
+      "from": "^/om-klp/samfunnsansvar/vare-investeringer-i-norge-1.40635$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/vare-investeringer-i-norge",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 158,
+      "from": "^/forsikring/reiseforsikring/slik-kan-du-unnga-skader-1.37286$",
+      "target": {
+        "path": "/forsikring/reiseforsikring/slik-kan-du-unnga-skader",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 159,
+      "from": "^/om-klp/god-start-pa-aret-1.38735$",
+      "target": {
+        "path": "/om-klp/god-start-pa-aret",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 160,
+      "from": "^/om-klp/personvern/slik-sikrer-vi-din-informasjon-1.40016$",
+      "target": {
+        "path": "/om-klp/personvern/slik-sikrer-vi-din-informasjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 161,
+      "from": "^/forsikring/ekstra-penger-til-bat-og-bobil-1.39378$",
+      "target": {
+        "path": "/forsikring/ekstra-penger-til-bat-og-bobil",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 162,
+      "from": "^/pensjon/offentlig-tjenestepensjon/skatt-og-pensjon-1.37620$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/skatt-og-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 163,
+      "from": "^/pensjon/livet-er-bra-som-pensjonist-1.40225$",
+      "target": {
+        "path": "/pensjon/livet-er-bra-som-pensjonist",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 164,
+      "from": "^/om-klp/nye-120-millioner-til-utviklingsland-1.40515$",
+      "target": {
+        "path": "/om-klp/nye-120-millioner-til-utviklingsland",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 165,
+      "from": "^/sparing-og-fond/spar-i-fond/hva-b-r-jeg-gj-re-med-sparepengene-mine-1.37125$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/hva-b-r-jeg-gj-re-med-sparepengene-mine",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 166,
+      "from": "^/pensjon/offentlig-tjenestepensjon/kt-minsteniva-i-folketrygden-og-lavere-pensjon-fra-klp-1.37625$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/kt-minsteniva-i-folketrygden-og-lavere-pensjon-fra-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 167,
+      "from": "^/pensjon/regjeringen-foreslar-egen-pensjonskonto-for-1-4-millioner-arbeidstakere-1.41336$",
+      "target": {
+        "path": "/pensjon/regjeringen-foreslar-egen-pensjonskonto-for-1-4-millioner-arbeidstakere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 168,
+      "from": "^/om-klp/samfunnsansvar/et-felles-l-ft-1.41035$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/et-felles-l-ft",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 169,
+      "from": "^/forsikring/bilforsikring/10-tips-som-gj-r-bilen-din-trygg-1.41013$",
+      "target": {
+        "path": "/forsikring/bilforsikring/10-tips-som-gj-r-bilen-din-trygg",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 170,
+      "from": "^/sparing-og-fond/spar-i-fond/kostnader-og-avkastning-1.36864$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/kostnader-og-avkastning",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 171,
+      "from": "^/offentlig/forsikring/ta-brannsjekken-hos-en-som-trenger-det-1.39147$",
+      "target": {
+        "path": "/offentlig/forsikring/ta-brannsjekken-hos-en-som-trenger-det",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 172,
+      "from": "^/om-klp/140-000-nordmenn-jobber-julekvelden-1.39523$",
+      "target": {
+        "path": "/om-klp/140-000-nordmenn-jobber-julekvelden",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 173,
+      "from": "^/offentlig/fond/rapporter-fra-klp-fondene-1.38114$",
+      "target": {
+        "path": "/offentlig/fond/rapporter-fra-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 174,
+      "from": "^/om-klp/samfunnsansvar/klp-investerer-870-millioner-kroner-i-fornybarfond-1.42591$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-investerer-870-millioner-kroner-i-fornybarfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 175,
+      "from": "^/nye-regler-for-innmelding-i-2016-1.40586$",
+      "target": {
+        "path": "/nye-regler-for-innmelding-i-2016",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 176,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/kommuneansatte-vil-samarbeide-pa-tvers-1.39325$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/kommuneansatte-vil-samarbeide-pa-tvers",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 177,
+      "from": "^/sparing-og-fond/vi-sparer-til-det-vi-nsker-oss-1.39968$",
+      "target": {
+        "path": "/sparing-og-fond/vi-sparer-til-det-vi-nsker-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 178,
+      "from": "^/om-klp/godt-arsresultat-for-klp-1.38719$",
+      "target": {
+        "path": "/om-klp/godt-arsresultat-for-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 179,
+      "from": "^/om-klp/klp-banken-setter-ned-rentene-1.39528$",
+      "target": {
+        "path": "/om-klp/klp-banken-setter-ned-rentene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 180,
+      "from": "^/bank-og-lan/bankkort/kortvett-og-sikkerhetstips-1.36549$",
+      "target": {
+        "path": "/bank-og-lan/bankkort/kortvett-og-sikkerhetstips",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 181,
+      "from": "^/om-klp/klp-ekskluderer-fire-og-inkluderer-to-selskaper-1.41253$",
+      "target": {
+        "path": "/om-klp/klp-ekskluderer-fire-og-inkluderer-to-selskaper",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 182,
+      "from": "^/om-klp/klp-blir-med-i-finansinitiativet-i-fns-milj-program-1.40295$",
+      "target": {
+        "path": "/om-klp/klp-blir-med-i-finansinitiativet-i-fns-milj-program",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 183,
+      "from": "^/bedrift/bank/markedskommentar-fra-klp-banken-1.38058$",
+      "target": {
+        "path": "/bedrift/bank/markedskommentar-fra-klp-banken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 184,
+      "from": "^/forsikring/motorsykkel-eller-mopedforsikring/slik-unngar-du-skade-pa-motorsykkelen-1.37802$",
+      "target": {
+        "path": "/forsikring/motorsykkel-eller-mopedforsikring/slik-unngar-du-skade-pa-motorsykkelen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 185,
+      "from": "^/bank-og-lan/har-ikke-angret-ett-sekund-pa-at-jeg-byttet-bank-1.39146$",
+      "target": {
+        "path": "/bank-og-lan/har-ikke-angret-ett-sekund-pa-at-jeg-byttet-bank",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 186,
+      "from": "^/offentlig/kompensasjon-for-historiske-pensjonskostnader-for-visse-ideelle-virksomheter-1.42156$",
+      "target": {
+        "path": "/offentlig/kompensasjon-for-historiske-pensjonskostnader-for-visse-ideelle-virksomheter",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 187,
+      "from": "^/bedrift/fond/rapporter-fra-klp-fondene-1.38078$",
+      "target": {
+        "path": "/bedrift/fond/rapporter-fra-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 188,
+      "from": "^/forsikring/gi-barna-en-trafikksikker-skolegang-1.36660$",
+      "target": {
+        "path": "/forsikring/gi-barna-en-trafikksikker-skolegang",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 189,
+      "from": "^/offentlig/kvinners-jobbtilknytning-en-forklaring-pa-frav-r-1.36676$",
+      "target": {
+        "path": "/offentlig/kvinners-jobbtilknytning-en-forklaring-pa-frav-r",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 190,
+      "from": "^/sparing-og-fond/stor-variasjon-i-spareradene-fra-bankene-1.40007$",
+      "target": {
+        "path": "/sparing-og-fond/stor-variasjon-i-spareradene-fra-bankene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 191,
+      "from": "^/bank-og-lan/vare-boliglan/boliglan-ung-medlem/gode-rad-til-f-rstegangskj-pere-1.41979$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan-ung-medlem/gode-rad-til-f-rstegangskj-pere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 192,
+      "from": "^/bedrift/fond/vilkar-for-fondskj-p-1.38073$",
+      "target": {
+        "path": "/bedrift/fond/vilkar-for-fondskj-p",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 193,
+      "from": "^/om-klp/m-t-klp-pa-arendalsuka-2018-1.40436$",
+      "target": {
+        "path": "/om-klp/m-t-klp-pa-arendalsuka-2018",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 194,
+      "from": "^/pensjon/halverte-l-nnen-fikk-bedre-konomi-1.40261$",
+      "target": {
+        "path": "/pensjon/halverte-l-nnen-fikk-bedre-konomi",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 195,
+      "from": "^/pensjon/offentlig-tjenestepensjon/ja-alderspensjon-fra-klp-skal-samordnes-med-privat-afp-1.40540$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/ja-alderspensjon-fra-klp-skal-samordnes-med-privat-afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 196,
+      "from": "^/offentlig/offentlig-tjenestepensjon/leveranseplan-2019-1.38283$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/leveranseplan-2019",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 197,
+      "from": "^/pensjon/offentlig-tjenestepensjon/betaler-jeg-skatt-pa-pensjon-1.37619$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/betaler-jeg-skatt-pa-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 198,
+      "from": "^/om-klp/lurt-a-vite-hva-deltid-betyr-for-pensjonen-1.39784$",
+      "target": {
+        "path": "/om-klp/lurt-a-vite-hva-deltid-betyr-for-pensjonen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 199,
+      "from": "^/offentlig/kommunesammenslaaing/pensjon-1.41207$",
+      "target": {
+        "path": "/offentlig/kommunesammenslaaing/pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 200,
+      "from": "^/pensjon/vet-du-at-noen-sannsynligvis-spiser-for-mye-av-pensjonen-din-1.40200$",
+      "target": {
+        "path": "/pensjon/vet-du-at-noen-sannsynligvis-spiser-for-mye-av-pensjonen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 201,
+      "from": "^/sparing-og-fond/kraftig-kning-for-indeksfond-1.41984$",
+      "target": {
+        "path": "/sparing-og-fond/kraftig-kning-for-indeksfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 202,
+      "from": "^/sparing-og-fond/spar-i-fond/store-prisforskjeller-mellom-indeksfond-1.40409$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/store-prisforskjeller-mellom-indeksfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 203,
+      "from": "^/om-klp/samfunnsansvar/frokostseminar-hva-er-klimarisikoen-for-norske-bedrifter-1.41108$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/frokostseminar-hva-er-klimarisikoen-for-norske-bedrifter",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 204,
+      "from": "^/pensjon/pensjon-for-nybegynnere/dette-skjer-med-pensjonen-din-nar-du-bytter-jobb-1.39037$",
+      "target": {
+        "path": "/pensjon/dette-skjer-med-pensjonen-din-nar-du-skifter-jobb",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 205,
+      "from": "^/pensjon/de-nye-pensjonistene-1.41054$",
+      "target": {
+        "path": "/pensjon/de-nye-pensjonistene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 206,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/enkle-strikk-velser-1.37486$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/enkle-strikk-velser",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 207,
+      "from": "^/sparing-og-fond/spar-i-fond/kj-p-og-selg-fond-uten-bankid-1.37808$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/kj-p-og-selg-fond-uten-bankid",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 208,
+      "from": "^/sparing-og-fond/spar-i-fond/vare-fondspakker-1.37112$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/vare-fondspakker",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 209,
+      "from": "^/medlemsfordeler/rabatt-hos-stavanger-konserthus-1.38444$",
+      "target": {
+        "path": "/medlemsfordeler/rabatt-hos-stavanger-konserthus",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 210,
+      "from": "^/om-klp/solid-avkastning-i-f-rste-kvartal-1.42530$",
+      "target": {
+        "path": "/om-klp/solid-avkastning-i-f-rste-kvartal",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 211,
+      "from": "^/pensjon/uf-repensjon/inntekt-og-uf-repensjon-1.36503$",
+      "target": {
+        "path": "/pensjon/uf-repensjon/inntekt-og-uf-repensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 212,
+      "from": "^/bedrift/bank/lan/lan-til-idrettslag-forening/enkelt-sikkert-og-trygt-1.40819$",
+      "target": {
+        "path": "/bedrift/bank/lan/lan-til-idrettslag-forening/enkelt-sikkert-og-trygt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 213,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/kraftsektoren-og-kraftforedlende-industri-1.41183$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/kraftsektoren-og-kraftforedlende-industri",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 214,
+      "from": "^/pensjon/offentlig-tjenestepensjon/medlemskap-i-klp-1.36834$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/medlemskap-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 215,
+      "from": "^/sparing-og-fond/slik-blir-du-million-r-som-pensjonist-1.40489$",
+      "target": {
+        "path": "/sparing-og-fond/slik-blir-du-million-r-som-pensjonist",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 216,
+      "from": "^/om-klp/klp-investerer-i-skog-1.40569$",
+      "target": {
+        "path": "/om-klp/klp-investerer-i-skog",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 217,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/jeg-er-helt-mall-s-1.42154$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/jeg-er-helt-mall-s",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 218,
+      "from": "^/klp-skarer-best-i-gebyrsjekken-1.38715$",
+      "target": {
+        "path": "/klp-skarer-best-i-gebyrsjekken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 219,
+      "from": "^/bank-og-lan/kredittkort/smart-kredittkortbruk-1.37037$",
+      "target": {
+        "path": "/bank-og-lan/kredittkort/smart-kredittkortbruk",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 220,
+      "from": "^/offentlig/kommunesammenslaaing/kapitalforvaltning-1.41206$",
+      "target": {
+        "path": "/offentlig/kommunesammenslaaing/kapitalforvaltning",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 221,
+      "from": "^/om-klp/det-brenner-hos-mange-eldre-1.38744$",
+      "target": {
+        "path": "/om-klp/det-brenner-hos-mange-eldre",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 222,
+      "from": "^/bedrift/pensjon/innskuddspensjon/innskuddspensjon-for-selvstendig-n-ringsdrivende-1.38185$",
+      "target": {
+        "path": "/bedrift/pensjon/innskuddspensjon/innskuddspensjon-for-selvstendig-n-ringsdrivende",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 223,
+      "from": "^/om-klp/nyhetssenter/fra-kaos-til-kontroll-1.42045$",
+      "target": {
+        "path": "/om-klp/nyhetssenter/fra-kaos-til-kontroll",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 224,
+      "from": "^/offentlig/fond/vilkar-for-fondskj-p-1.37343$",
+      "target": {
+        "path": "/offentlig/fond/vilkar-for-fondskj-p",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 225,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/transportn-ringen-1.41201$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/transportn-ringen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 226,
+      "from": "^/pensjon/foretakspensjon-1.37379$",
+      "target": {
+        "path": "/pensjon/foretakspensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 227,
+      "from": "^/pensjon/et-enkelt-grep-som-gir-deg-mer-i-pensjon-1.40052$",
+      "target": {
+        "path": "/pensjon/et-enkelt-grep-som-gir-deg-mer-i-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 228,
+      "from": "^/bank-og-lan/tips-til-sommerferien-1.40403$",
+      "target": {
+        "path": "/bank-og-lan/tips-til-sommerferien",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 229,
+      "from": "^/pensjon/klp-natalias-beste-pensjonstips-1.40471$",
+      "target": {
+        "path": "/pensjon/klp-natalias-beste-pensjonstips",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 230,
+      "from": "^/velkommen-til-klp-1.42575$",
+      "target": {
+        "path": "/velkommen-til-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 231,
+      "from": "^/forsikring/na-blir-jeg-hos-dere-for-alltid-1.37777$",
+      "target": {
+        "path": "/forsikring/na-blir-jeg-hos-dere-for-alltid",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 232,
+      "from": "^/pensjon/alderspensjon/aldersgrenser-i-klp-1.36587$",
+      "target": {
+        "path": "/pensjon/alderspensjon/aldersgrenser-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 233,
+      "from": "^/om-klp/klp-utelukker-selskaper-pa-grunn-av-skraping-av-skip-1.39623$",
+      "target": {
+        "path": "/om-klp/klp-utelukker-selskaper-pa-grunn-av-skraping-av-skip",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 234,
+      "from": "^/om-klp/pensjonskonto-vil-gj-re-det-enklere-a-fa-oversikt-1.39519$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/pensjonskonto-vil-gj-re-det-enklere-a-fa-oversikt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 235,
+      "from": "^/pensjon/seks-tips-som-kan-gi-bedre-pensjon-1.40081$",
+      "target": {
+        "path": "/pensjon/seks-tips-som-kan-gi-bedre-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 236,
+      "from": "^/bedrift/fond/spesialfond/rapporter-for-spesialfond-1.38596$",
+      "target": {
+        "path": "/bedrift/fond/spesialfond/rapporter-for-spesialfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 237,
+      "from": "^/om-klp/samfunnsansvar/klp-best-pa-temaet-apenhet-og-ansvar-1.42029$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-best-pa-temaet-apenhet-og-ansvar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 238,
+      "from": "^/logg-inn/hjelp-til-innlogging-pa-min-side-1.40747$",
+      "target": {
+        "path": "/logg-inn/hjelp-til-innlogging-pa-min-side",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 239,
+      "from": "^/om-klp/sjekk-skattefradragene-for-pensjon-og-pensjonssparing-1.40032$",
+      "target": {
+        "path": "/om-klp/sjekk-skattefradragene-for-pensjon-og-pensjonssparing",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 240,
+      "from": "^/forsikring/pass-pa-sa-du-ikke-forsikrer-smuglerkunst-1.37327$",
+      "target": {
+        "path": "/forsikring/pass-pa-sa-du-ikke-forsikrer-smuglerkunst",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 241,
+      "from": "^/om-klp/velkommen-til-klp-1.40846$",
+      "target": {
+        "path": "/om-klp/velkommen-til-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 242,
+      "from": "^/sparing-og-fond/nar-barna-er-ute-av-redet-1.39970$",
+      "target": {
+        "path": "/sparing-og-fond/nar-barna-er-ute-av-redet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 243,
+      "from": "^/om-klp/moderat-avkastning-i-urolige-markeder-1.42133$",
+      "target": {
+        "path": "/om-klp/moderat-avkastning-i-urolige-markeder",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 244,
+      "from": "^/pensjon/ips/generelle-vilkar-for-ips-i-klp-1.38165$",
+      "target": {
+        "path": "/pensjon/ips/generelle-vilkar-for-ips-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 245,
+      "from": "^/bank-og-lan/boligdr-mmen-henger-h-yt-1.41056$",
+      "target": {
+        "path": "/bank-og-lan/boligdr-mmen-henger-h-yt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 246,
+      "from": "^/kontakt-oss/sosiale-medier-1.39611$",
+      "target": {
+        "path": "/kontakt-oss/sosiale-medier",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 247,
+      "from": "^/pensjon/nar-utbetales-pensjoner-fra-klp-1.37604$",
+      "target": {
+        "path": "/pensjon/nar-utbetales-pensjoner-fra-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 248,
+      "from": "^/om-klp/lisa-marie-16-overtok-direkt-rstolen-1.38763$",
+      "target": {
+        "path": "/om-klp/lisa-marie-16-overtok-direkt-rstolen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 249,
+      "from": "^/bedrift/fond/innkalling-til-valgm-te-1.42290$",
+      "target": {
+        "path": "/bedrift/fond/innkalling-til-valgm-te",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 250,
+      "from": "^/pensjon/a-planlegge-hvordan-livet-mitt-skal-v-re-nar-jeg-blir-80-virker-fjernt-1.40463$",
+      "target": {
+        "path": "/pensjon/a-planlegge-hvordan-livet-mitt-skal-v-re-nar-jeg-blir-80-virker-fjernt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 251,
+      "from": "^/kontakt-oss/kritikkverdige-forhold-1.38521$",
+      "target": {
+        "path": "/kontakt-oss/kritikkverdige-forhold",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 252,
+      "from": "^/sparing-og-fond/spar-i-fond/vilkar-for-fondskj-p-1.37205$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/vilkar-for-fondskj-p",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 253,
+      "from": "^/sparing-og-fond/spar-i-fond/handel-og-rapportering-ved-arsslutt-1.41247$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/handel-og-rapportering-ved-arsslutt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 254,
+      "from": "^/forsikring/forsikring-i-klp/hvor-lenge-er-barna-innboforsikret-1.38342$",
+      "target": {
+        "path": "/forsikring/forsikring-i-klp/hvor-lenge-er-barna-innboforsikret",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 255,
+      "from": "^/sparing-og-fond/spar-i-fond/fondsbransjen-melker-norske-smasparere-1.36797$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/fondsbransjen-melker-norske-smasparere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 256,
+      "from": "^/offentlig/forsikring/forbered-sommerstenging-av-barnehager-og-skoler-1.40385$",
+      "target": {
+        "path": "/offentlig/forsikring/forbered-sommerstenging-av-barnehager-og-skoler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 257,
+      "from": "^/forsikring/fjern-sn-og-istapper-fra-taket-1.39679$",
+      "target": {
+        "path": "/forsikring/fjern-sn-og-istapper-fra-taket",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 258,
+      "from": "^/pensjon/offentlig-tjenestepensjon/slik-slar-pensjonsendringene-ut-for-lilian-og-grete-i-50-arene-1.42460$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/slik-slar-pensjonsendringene-ut-for-lilian-og-grete-i-50-arene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 259,
+      "from": "^/forsikring/forsikring-er-viktig-men-trenger-du-virkelig-a-forsikre-alt-du-eier-1.40257$",
+      "target": {
+        "path": "/forsikring/forsikring-er-viktig-men-trenger-du-virkelig-a-forsikre-alt-du-eier",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 260,
+      "from": "^/bank-og-lan/klp-banken-setter-opp-rentene-og-lanserer-gr-nt-boliglan-1.40844$",
+      "target": {
+        "path": "/bank-og-lan/klp-banken-setter-opp-rentene-og-lanserer-gr-nt-boliglan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 261,
+      "from": "^/om-klp/finnmarksykehuset-gikk-helt-til-topps-1.40282$",
+      "target": {
+        "path": "/om-klp/finnmarksykehuset-gikk-helt-til-topps",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 262,
+      "from": "^/om-klp/samfunnsansvar/b-rekraftige-eiendommer-1.40633$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/b-rekraftige-eiendommer",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 263,
+      "from": "^/om-klp/gj-r-hus-og-hytte-klare-for-vinteren-1.38757$",
+      "target": {
+        "path": "/om-klp/gj-r-hus-og-hytte-klare-for-vinteren",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 264,
+      "from": "^/pensjon/uf-repensjon/slik-beregnes-uf-repensjonen-din-1.36757$",
+      "target": {
+        "path": "/pensjon/uf-repensjon/slik-beregnes-uf-repensjonen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 265,
+      "from": "^/pensjon/offentlig-tjenestepensjon/slik-levealdersjusteres-pensjonen-1.41969$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/slik-levealdersjusteres-pensjonen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 266,
+      "from": "^/sparing-og-fond/spar-i-fond/billig-er-best-i-fondsmarkedet-1.39733$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/billig-er-best-i-fondsmarkedet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 267,
+      "from": "^/pensjon/hvilken-tjenestepensjon-har-du-1.41921$",
+      "target": {
+        "path": "/pensjon/hvilken-tjenestepensjon-har-du",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 268,
+      "from": "^/sparing-og-fond/velg-indeksfond-fremfor-darlige-aktive-fond-1.42153$",
+      "target": {
+        "path": "/sparing-og-fond/velg-indeksfond-fremfor-darlige-aktive-fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 269,
+      "from": "^/om-klp/bytt-ut-dyre-og-middelmadige-fond-1.38759$",
+      "target": {
+        "path": "/om-klp/bytt-ut-dyre-og-middelmadige-fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 270,
+      "from": "^/bedrift/fond/sp-rsmal-og-svar-om-klp-fondene-1.38072$",
+      "target": {
+        "path": "/bedrift/fond/sp-rsmal-og-svar-om-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 271,
+      "from": "^/om-klp/sier-ja-til-ny-tjenestepensjon-1.40402$",
+      "target": {
+        "path": "/om-klp/sier-ja-til-ny-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 272,
+      "from": "^/pensjon/offentlig-tjenestepensjon/jobb-etter-67-ar-og-sikre-deg-h-yere-pensjon-1.41034$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/jobb-etter-67-ar-og-sikre-deg-h-yere-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 273,
+      "from": "^/offentlig/kommunesammenslaaing/skadeforsikring-1.41205$",
+      "target": {
+        "path": "/offentlig/kommunesammenslaaing/skadeforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 274,
+      "from": "^/sparing-og-fond/spar-i-fond/avtale-om-aksjesparekonto-i-klp-kapitalforvaltning-as-1.37219$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/avtale-om-aksjesparekonto-i-klp-kapitalforvaltning-as",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 275,
+      "from": "^/pensjon/afp/etteroppgj-ret-pa-afp-1.39660$",
+      "target": {
+        "path": "/pensjon/afp/etteroppgj-ret-pa-afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 276,
+      "from": "^/om-klp/velger-deltid-1.39803$",
+      "target": {
+        "path": "/om-klp/velger-deltid",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 277,
+      "from": "^/forsikring/hvilke-forsikringer-trenger-du-som-student-1.42293$",
+      "target": {
+        "path": "/forsikring/hvilke-forsikringer-trenger-du-som-student",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 278,
+      "from": "^/forsikring/varen-er-storbytid-1.42477$",
+      "target": {
+        "path": "/forsikring/varen-er-storbytid",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 279,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/maler-og-verkt-y-1.37534$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/maler-og-verkt-y",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 280,
+      "from": "^/forsikring/bilforsikring/hva-skjer-etter-at-jeg-har-meldt-en-skade-1.36619$",
+      "target": {
+        "path": "/forsikring/bilforsikring/hva-skjer-etter-at-jeg-har-meldt-en-skade",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 281,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/5-rad-for-et-godt-arbeidsmilj-1.39756$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/5-rad-for-et-godt-arbeidsmilj",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 282,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/den-snilleste-og-mest-omtenksomme-sjefen-man-kan-ha-1.42118$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/den-snilleste-og-mest-omtenksomme-sjefen-man-kan-ha",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 283,
+      "from": "^/om-klp/far-gitt-mer-omsorg-om-natta-1.40692$",
+      "target": {
+        "path": "/om-klp/far-gitt-mer-omsorg-om-natta",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 284,
+      "from": "^/om-klp/nyhetssenter/klp-presser-ned-andres-fondspriser-1.42062$",
+      "target": {
+        "path": "/om-klp/nyhetssenter/klp-presser-ned-andres-fondspriser",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 285,
+      "from": "^/pensjon/offentlig-tjenestepensjon/anslag-for-reguleringspremie-2019-1.40704$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/anslag-for-reguleringspremie-2019",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 286,
+      "from": "^/om-klp/klp-aksepterer-nasdaqs-bud-pa-oslo-b-rs-vps-1.42032$",
+      "target": {
+        "path": "/om-klp/klp-aksepterer-nasdaqs-bud-pa-oslo-b-rs-vps",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 287,
+      "from": "^/forsikring/verdigjenstandforsikring/pass-pa-sa-du-ikke-forsikrer-smuglerkunst-1.37075$",
+      "target": {
+        "path": "/forsikring/verdigjenstandforsikring/pass-pa-sa-du-ikke-forsikrer-smuglerkunst",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 288,
+      "from": "^/bank-og-lan/vare-boliglan/enklere-blir-det-ikke-1.41068$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/enklere-blir-det-ikke",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 289,
+      "from": "^/pensjon/ips/informasjon-til-kunder-med-ips-som-n-rmer-seg-pensjonsalder-1.41977$",
+      "target": {
+        "path": "/pensjon/ips/informasjon-til-kunder-med-ips-som-n-rmer-seg-pensjonsalder",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 290,
+      "from": "^/om-klp/flytt-urealiserte-gevinster-til-aksjesparekonto-1.38741$",
+      "target": {
+        "path": "/om-klp/flytt-urealiserte-gevinster-til-aksjesparekonto",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 291,
+      "from": "^/bedrift/pensjon/innskuddspensjon-for-selvstendig-n-ringsdrivende/k-sparingen-din-1.38732$",
+      "target": {
+        "path": "/bedrift/pensjon/innskuddspensjon-for-selvstendig-n-ringsdrivende/k-sparingen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 292,
+      "from": "^/pensjon/offentlig-tjenestepensjon/hva-er-individuell-garanti-og-hvordan-skal-den-fases-ut-1.41077$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/hva-er-individuell-garanti-og-hvordan-skal-den-fases-ut",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 293,
+      "from": "^/offentlig/fond/tema-artikler-1.38120$",
+      "target": {
+        "path": "/offentlig/fond/tema-artikler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 294,
+      "from": "^/om-klp/klp-inkluderer-fire-selskaper-og-ekskluderer-tre-nye-selskaper-1.39520$",
+      "target": {
+        "path": "/om-klp/klp-inkluderer-fire-selskaper-og-ekskluderer-tre-nye-selskaper",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 295,
+      "from": "^/forsikring/bilforsikring/bilkj-p-for-begynnere-1.41967$",
+      "target": {
+        "path": "/forsikring/bilforsikring/bilkj-p-for-begynnere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 296,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/alle-skulle-hatt-en-zeljko-1.42101$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk/alle-skulle-hatt-en-zeljko",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 297,
+      "from": "^/om-klp/klp-blir-medeier-i-nytt-nettkonsern-1.40983$",
+      "target": {
+        "path": "/om-klp/klp-blir-medeier-i-nytt-nettkonsern",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 298,
+      "from": "^/om-klp/slik-far-du-mest-ut-av-feriepengene-1.38746$",
+      "target": {
+        "path": "/om-klp/slik-far-du-mest-ut-av-feriepengene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 299,
+      "from": "^/bedrift/forsikring/norske-bedrifter-er-fortsatt-mest-forn-yd-med-klp-1.38919$",
+      "target": {
+        "path": "/bedrift/forsikring/norske-bedrifter-er-fortsatt-mest-forn-yd-med-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 300,
+      "from": "^/om-klp/godt-kunderesultat-i-f-rste-halvar-1.40674$",
+      "target": {
+        "path": "/om-klp/godt-kunderesultat-i-f-rste-halvar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 301,
+      "from": "^/offentlig/offentlig-tjenestepensjon/eierm-ter-2019-1.38619$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/eierm-ter-2019",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 302,
+      "from": "^/dine-muligheter-pa-min-side-1.38251$",
+      "target": {
+        "path": "/dine-muligheter-pa-min-side",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 303,
+      "from": "^/om-klp/arbeidsglede-i-finnmark-1.40461$",
+      "target": {
+        "path": "/om-klp/arbeidsglede-i-finnmark",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 304,
+      "from": "^/forsikring/fritidsbatforsikring/slik-unngar-du-skade-pa-baten-1.37763$",
+      "target": {
+        "path": "/forsikring/fritidsbatforsikring/slik-unngar-du-skade-pa-baten",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 305,
+      "from": "^/forsikring/rettshjelp-1.37137$",
+      "target": {
+        "path": "/forsikring/rettshjelp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 306,
+      "from": "^/bank-og-lan/bankid/gode-sikkerhetstips-1.36724$",
+      "target": {
+        "path": "/bank-og-lan/bankid/gode-sikkerhetstips",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 307,
+      "from": "^/om-klp/forbrukerradet-roser-klp-fondene-1.38737$",
+      "target": {
+        "path": "/om-klp/forbrukerradet-roser-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 308,
+      "from": "^/om-klp/spar-litt-i-dag-fa-bedre-konomi-som-pensjonist-1.40092$",
+      "target": {
+        "path": "/om-klp/spar-litt-i-dag-fa-bedre-konomi-som-pensjonist",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 309,
+      "from": "^/sparing-og-fond/spar-i-fond/temaartikler-1.37825$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/temaartikler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 310,
+      "from": "^/pensjon/a-jobbe-deltid-pavirker-pensjonen-din-1.42223$",
+      "target": {
+        "path": "/pensjon/a-jobbe-deltid-pavirker-pensjonen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 311,
+      "from": "^/om-klp/klp-selger-seg-ut-av-oljesand-1.39524$",
+      "target": {
+        "path": "/om-klp/klp-selger-seg-ut-av-oljesand",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 312,
+      "from": "^/offentlig/offentlig-tjenestepensjon/ansatte-s-ker-om-pensjon-pa-min-side-1.37659$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/ansatte-s-ker-om-pensjon-pa-min-side",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 313,
+      "from": "^/om-klp/eksperter-om-fremtidens-pensjonsordninger-1.38724$",
+      "target": {
+        "path": "/om-klp/eksperter-om-fremtidens-pensjonsordninger",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 314,
+      "from": "^/offentlig/offentlig-tjenestepensjon/oversikt-over-kontaktpersoner-1.37977$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/oversikt-over-kontaktpersoner",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 315,
+      "from": "^/bedrift/fond/retningslinjer-1.38109$",
+      "target": {
+        "path": "/bedrift/fond/retningslinjer",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 316,
+      "from": "^/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/finansn-ringen-1.41185$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/klimarisiko/finansn-ringen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 317,
+      "from": "^/sparing-og-fond/spar-i-fond/risiko-1.37131$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/risiko",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 318,
+      "from": "^/bedrift/pa-kundeside-har-du-full-oversikt-1.38159$",
+      "target": {
+        "path": "/bedrift/pa-kundeside-har-du-full-oversikt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 319,
+      "from": "^/om-klp/hvordan-blir-endret-offentlig-tjenestepensjon-for-deg-som-er-ung-1.40236$",
+      "target": {
+        "path": "/om-klp/hvordan-blir-endret-offentlig-tjenestepensjon-for-deg-som-er-ung",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 320,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/herlige-minner-fra-f-deavdelingen-1.39758$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/herlige-minner-fra-f-deavdelingen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 321,
+      "from": "^/stadig-flere-velger-indeksfond-1.38716$",
+      "target": {
+        "path": "/stadig-flere-velger-indeksfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 322,
+      "from": "^/pensjon/7-rad-som-gir-deg-bedre-pensjon-1.41014$",
+      "target": {
+        "path": "/pensjon/7-rad-som-gir-deg-bedre-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 323,
+      "from": "^/sparing-og-fond/spar-i-fond/l-nner-det-seg-a-velge-vinnerfond-1.41942$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/l-nner-det-seg-a-velge-vinnerfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 324,
+      "from": "^/bank-og-lan/vare-boliglan/seniorlan/pensjonister-nysgjerrige-pa-seniorlan-1.42482$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/seniorlan/pensjonister-nysgjerrige-pa-seniorlan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 325,
+      "from": "^/om-klp/klps-historie-1.39320$",
+      "target": {
+        "path": "/om-klp/klps-historie",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 326,
+      "from": "^/medlemsfordeler/grete-vant-sitt-livs-reise-1.42214$",
+      "target": {
+        "path": "/medlemsfordeler/grete-vant-sitt-livs-reise",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 327,
+      "from": "^/om-klp/godt-resultat-i-f-rste-halvar-for-klp-1.38748$",
+      "target": {
+        "path": "/om-klp/godt-resultat-i-f-rste-halvar-for-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 328,
+      "from": "^/bedrift/fond/aktive-aksjefond/klp-aksjeglobal-mer-samfunnsansvar-1.40522$",
+      "target": {
+        "path": "/bedrift/fond/aktive-aksjefond/klp-aksjeglobal-mer-samfunnsansvar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 329,
+      "from": "^/forsikring/har-du-elbil-eller-hybridbil-1.42155$",
+      "target": {
+        "path": "/forsikring/har-du-elbil-eller-hybridbil",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 330,
+      "from": "^/om-klp/dette-er-viktigst-nar-nordmenn-skal-lane-penger-1.38742$",
+      "target": {
+        "path": "/om-klp/dette-er-viktigst-nar-nordmenn-skal-lane-penger",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 331,
+      "from": "^/om-klp/investeringer-i-okkuperte-omrader-hvor-gar-grensen-1.38726$",
+      "target": {
+        "path": "/om-klp/investeringer-i-okkuperte-omrader-hvor-gar-grensen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 332,
+      "from": "^/om-klp/stolte-vinnere-i-vekstbedrift-1.40232$",
+      "target": {
+        "path": "/om-klp/stolte-vinnere-i-vekstbedrift",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 333,
+      "from": "^/bank-og-lan/klp-tenker-over-hva-som-er-det-beste-for-kunden-1.37768$",
+      "target": {
+        "path": "/bank-og-lan/klp-tenker-over-hva-som-er-det-beste-for-kunden",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 334,
+      "from": "^/pensjon/foreldre-kan-ga-i-pensjonsfella-1.41061$",
+      "target": {
+        "path": "/pensjon/foreldre-kan-ga-i-pensjonsfella",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 335,
+      "from": "^/om-klp/klp-investerer-i-solenergifond-1.41231$",
+      "target": {
+        "path": "/om-klp/klp-investerer-i-solenergifond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 336,
+      "from": "^/om-klp/klp-banken-lanserer-gr-nt-boliglan-1.40842$",
+      "target": {
+        "path": "/om-klp/klp-banken-lanserer-gr-nt-boliglan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 337,
+      "from": "^/forsikring/meld-skade-og-tyveri/hjelp-ved-skade-eller-tyveri-fra-innbo-1.37182$",
+      "target": {
+        "path": "/forsikring/meld-skade-og-tyveri/hjelp-ved-skade-eller-tyveri-fra-innbo",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 338,
+      "from": "^/om-klp/klp-ekskluderer-ti-nye-selskaper-1.38743$",
+      "target": {
+        "path": "/om-klp/klp-ekskluderer-ti-nye-selskaper",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 339,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/verdt-a-vite-kurs-1.40276$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/verdt-a-vite-kurs",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 340,
+      "from": "^/sparing-og-fond/spar-i-fond/ofte-stilte-sp-rsmal-1.38368$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/ofte-stilte-sp-rsmal",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 341,
+      "from": "^/offentlig/offentlig-tjenestepensjon/leverer-pensjonskasse-til-asker-kommune-1.37672$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/leverer-pensjonskasse-til-asker-kommune",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 342,
+      "from": "^/offentlig/offentlig-tjenestepensjon/representanter-i-generalforsamlingen-2018-2020-1.38626$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/representanter-i-generalforsamlingen-2018-2020",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 343,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/klps-arbeidsmilj-nettverk-1.37524$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/klps-arbeidsmilj-nettverk",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 344,
+      "from": "^/om-klp/samfunnsansvar/rapporter-og-resultater/klp-n-ytraliserer-avkastningsavviket-1.39561$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/rapporter-og-resultater/klp-n-ytraliserer-avkastningsavviket",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 345,
+      "from": "^/sparing-og-fond/rentefond-i-20-ar-1.42496$",
+      "target": {
+        "path": "/sparing-og-fond/rentefond-i-20-ar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 346,
+      "from": "^/sparing-og-fond/spar-i-fond/klp-har-lav-pris-pa-ips-1.37757$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/klp-har-lav-pris-pa-ips",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 347,
+      "from": "^/bank-og-lan/7-smarte-kredittkorttips-til-ferien-1.40553$",
+      "target": {
+        "path": "/bank-og-lan/7-smarte-kredittkorttips-til-ferien",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 348,
+      "from": "^/om-klp/klp-investerer-i-sakornfond-1.40449$",
+      "target": {
+        "path": "/om-klp/klp-investerer-i-sakornfond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 349,
+      "from": "^/bedrift/fond/forvaltningskostnader-klp-fondene-1.37038$",
+      "target": {
+        "path": "/bedrift/fond/forvaltningskostnader-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 350,
+      "from": "^/om-klp/samfunnsansvar/vurderer-a-trekke-seg-ut-etter-demningskollaps-1.42136$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/vurderer-a-trekke-seg-ut-etter-demningskollaps",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 351,
+      "from": "^/pensjon/innskuddspensjon/du-kan-tjene-pa-a-flytte-pensjonskapitalbevis-til-oss-1.36658$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/du-kan-tjene-pa-a-flytte-pensjonskapitalbevis-til-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 352,
+      "from": "^/forsikring/tips-og-rad-til-paskeferien-1.39957$",
+      "target": {
+        "path": "/forsikring/tips-og-rad-til-paskeferien",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 353,
+      "from": "^/markedsrapporter-fra-klp-banken-1.36685$",
+      "target": {
+        "path": "/offentlig/bank/markedsrapporter-fra-klp-banken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 354,
+      "from": "^/om-klp/klp-inn-som-eier-i-svensk-vindkraft-1.40564$",
+      "target": {
+        "path": "/om-klp/klp-inn-som-eier-i-svensk-vindkraft",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 355,
+      "from": "^/pensjon/offentlig-tjenestepensjon/folkevalgte-1.36790$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/folkevalgte",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 356,
+      "from": "^/pensjon/offentlig-tjenestepensjon/far-du-med-deg-pensjon-fra-ekstravakter-1.40796$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/far-du-med-deg-pensjon-fra-ekstravakter",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 357,
+      "from": "^/forsikring/5-tips-for-a-unnga-bulking-i-desember-1.41242$",
+      "target": {
+        "path": "/forsikring/5-tips-for-a-unnga-bulking-i-desember",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 358,
+      "from": "^/bank-og-lan/ung-og-nyutdannet-slik-kommer-du-deg-inn-pa-boligmarkedet-1.40650$",
+      "target": {
+        "path": "/bank-og-lan/ung-og-nyutdannet-slik-kommer-du-deg-inn-pa-boligmarkedet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 359,
+      "from": "^/om-klp/klp-i-verdenstoppen-pa-klima-1.38733$",
+      "target": {
+        "path": "/om-klp/klp-i-verdenstoppen-pa-klima",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 360,
+      "from": "^/om-klp/nyhetssenter/nytt-signalbygg-klar-til-innflytting-1.42379$",
+      "target": {
+        "path": "/om-klp/nyhetssenter/nytt-signalbygg-klar-til-innflytting",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 361,
+      "from": "^/forsikring/verdigjenstandforsikring/slik-unngar-du-skader-pa-verdigjenstander-1.37785$",
+      "target": {
+        "path": "/forsikring/verdigjenstandforsikring/slik-unngar-du-skader-pa-verdigjenstander",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 362,
+      "from": "^/om-klp/klps-investeringer-i-oljer-rledningen-keystone-xl-1.39526$",
+      "target": {
+        "path": "/om-klp/klps-investeringer-i-oljer-rledningen-keystone-xl",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 363,
+      "from": "^/kontakt-oss/adresser-kart-og-kj-rerute-1.38524$",
+      "target": {
+        "path": "/kontakt-oss/adresser-kart-og-kj-rerute",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 364,
+      "from": "^/bedrift/fond/tema-artikler-1.38119$",
+      "target": {
+        "path": "/bedrift/fond/tema-artikler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 365,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/frokostseminar-1.40338$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/frokostseminar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 366,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/skadeforebygging-1.37528$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/skadeforebygging",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 367,
+      "from": "^/om-klp/kundenes-dom-klp-helt-til-topps-1.40499$",
+      "target": {
+        "path": "/om-klp/kundenes-dom-klp-helt-til-topps",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 368,
+      "from": "^/om-klp/klps-investeringer-i-selskaper-med-lisens-i-verdensarvomrader-1.39531$",
+      "target": {
+        "path": "/om-klp/klps-investeringer-i-selskaper-med-lisens-i-verdensarvomrader",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 369,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/disse-passer-godt-pa-offentlige-bygg-1.38412$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/disse-passer-godt-pa-offentlige-bygg",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 370,
+      "from": "^/forsikring/sn-scooterforsikring/slik-unngar-du-skade-pa-sn-scooteren-1.37710$",
+      "target": {
+        "path": "/forsikring/sn-scooterforsikring/slik-unngar-du-skade-pa-sn-scooteren",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 371,
+      "from": "^/bank-og-lan/smarte-konomitips-til-pasken-1.39964$",
+      "target": {
+        "path": "/bank-og-lan/smarte-konomitips-til-pasken",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 372,
+      "from": "^/sparing-og-fond/spar-i-fond/svingprising-i-klp-fondene-1.41101$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/svingprising-i-klp-fondene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 373,
+      "from": "^/forsikring/dette-b-r-du-huske-pa-nar-du-skal-kj-re-bil-i-utlandet-1.36994$",
+      "target": {
+        "path": "/forsikring/dette-b-r-du-huske-pa-nar-du-skal-kj-re-bil-i-utlandet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 374,
+      "from": "^/pensjon/innskuddspensjon/pensjonskonto-vil-gj-re-det-enklere-a-fa-oversikt-1.38966$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/pensjonskonto-vil-gj-re-det-enklere-a-fa-oversikt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 375,
+      "from": "^/bank-og-lan/bankkort/sperring-av-kort-1.38027$",
+      "target": {
+        "path": "/bank-og-lan/bankkort/sperring-av-kort",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 376,
+      "from": "^/bedrift/forsikring/utvid-huseierforsikringen-til-a-omfatte-skadedyr-1.39929$",
+      "target": {
+        "path": "/bedrift/forsikring/utvid-huseierforsikringen-til-a-omfatte-skadedyr",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 377,
+      "from": "^/pensjon/offentlig-tjenestepensjon/ny-offentlig-tjenestepensjon-1.39759$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/ny-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 378,
+      "from": "^/pensjon/offentlig-tjenestepensjon/hva-skjer-med-pensjonen-min-nar-jeg-slutter-i-offentlig-sektor-1.41922$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/hva-skjer-med-pensjonen-min-nar-jeg-slutter-i-offentlig-sektor",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 379,
+      "from": "^/forsikring/ofte-stilte-sp-rsmal-fra-forsikringskundene-vare-1.38025$",
+      "target": {
+        "path": "/forsikring/ofte-stilte-sp-rsmal-fra-forsikringskundene-vare",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 380,
+      "from": "^/forsikring/bilforsikring/hva-er-bonus-1.36620$",
+      "target": {
+        "path": "/forsikring/bilforsikring/hva-er-bonus",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 381,
+      "from": "^/pensjon/alderspensjon/slik-beregnes-pensjonen-din-fra-klp-1.37468$",
+      "target": {
+        "path": "/pensjon/alderspensjon/slik-beregnes-pensjonen-din-fra-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 382,
+      "from": "^/offentlig/offentlig-tjenestepensjon/anslag-for-reguleringspremie-2018-1.40201$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/anslag-for-reguleringspremie-2018",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 383,
+      "from": "^/pensjon/hvor-mye-sparer-arbeidsgiveren-din-for-deg-1.41060$",
+      "target": {
+        "path": "/pensjon/hvor-mye-sparer-arbeidsgiveren-din-for-deg",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 384,
+      "from": "^/sparing-og-fond/spar-i-fond/hvordan-spare-til-barn-1.36820$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/hvordan-spare-til-barn",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 385,
+      "from": "^/forsikring/vi-har-ingen-a-miste-1.39030$",
+      "target": {
+        "path": "/forsikring/vi-har-ingen-a-miste",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 386,
+      "from": "^/om-klp/eiendomsprisen-2017-til-abels-hus-1.38769$",
+      "target": {
+        "path": "/om-klp/eiendomsprisen-2017-til-abels-hus",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 387,
+      "from": "^/pensjon/afp/vilkar-for-a-fa-afp-1.37408$",
+      "target": {
+        "path": "/pensjon/afp/vilkar-for-a-fa-afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 388,
+      "from": "^/om-klp/klp-tar-en-stor-del-av-ips-tegningen-1.39529$",
+      "target": {
+        "path": "/om-klp/klp-tar-en-stor-del-av-ips-tegningen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 389,
+      "from": "^/bank-og-lan/kommunen-klp-banken-100-prosent-boliglan-1.42161$",
+      "target": {
+        "path": "/bank-og-lan/kommunen-klp-banken-100-prosent-boliglan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 390,
+      "from": "^/sparing-og-fond/enkel-guide-til-fondssparing-1.40009$",
+      "target": {
+        "path": "/sparing-og-fond/enkel-guide-til-fondssparing",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 391,
+      "from": "^/pensjon/pensjon-er-innmari-abstrakt-1.40219$",
+      "target": {
+        "path": "/pensjon/pensjon-er-innmari-abstrakt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 392,
+      "from": "^/forsikring/fritidshusforsikring/slik-unngar-du-skader-pa-hytta-1.37752$",
+      "target": {
+        "path": "/forsikring/fritidshusforsikring/slik-unngar-du-skader-pa-hytta",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 393,
+      "from": "^/pensjon/alderspensjon/hvor-lenge-ma-jeg-jobbe-for-a-fa-maksimal-offentlig-tjenestepensjon-1.41261$",
+      "target": {
+        "path": "/pensjon/alderspensjon/hvor-lenge-ma-jeg-jobbe-for-a-fa-maksimal-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 394,
+      "from": "^/forsikring/forsikringer-koster-jo-bare-penger-eller-1.40538$",
+      "target": {
+        "path": "/forsikring/forsikringer-koster-jo-bare-penger-eller",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 395,
+      "from": "^/pensjon/innskuddspensjon/avkastning-1.37981$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/avkastning",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 396,
+      "from": "^/om-klp/aktive-fond-er-dyrere-og-darligere-1.38747$",
+      "target": {
+        "path": "/om-klp/aktive-fond-er-dyrere-og-darligere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 397,
+      "from": "^/forsikring/selvsagt-nsker-jeg-gode-betingelser-1.40852$",
+      "target": {
+        "path": "/forsikring/selvsagt-nsker-jeg-gode-betingelser",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 398,
+      "from": "^/om-klp/samfunnsansvar/natalia-tar-pensjonspraten-1.40383$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/natalia-tar-pensjonspraten",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 399,
+      "from": "^/sparing-og-fond/spar-i-fond/bytt-ut-dyre-og-middelmadige-fond-1.36673$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/bytt-ut-dyre-og-middelmadige-fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 400,
+      "from": "^/pensjon/offentlig-tjenestepensjon/pensjon-for-folkevalgte-1.36789$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/pensjon-for-folkevalgte",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 401,
+      "from": "^/om-klp/grunderen-sylvia-investerer-i-sin-egen-klinikk-1.40266$",
+      "target": {
+        "path": "/om-klp/grunderen-sylvia-investerer-i-sin-egen-klinikk",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 402,
+      "from": "^/om-klp/klp-inn-som-eier-i-istad-1.41269$",
+      "target": {
+        "path": "/om-klp/klp-inn-som-eier-i-istad",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 403,
+      "from": "^/pensjon/alderspensjon/hva-er-levealdersjustering-1.37503$",
+      "target": {
+        "path": "/pensjon/alderspensjon/hva-er-levealdersjustering",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 404,
+      "from": "^/om-klp/samfunnsansvar/klp-utelukker-gruveselskapet-vale-1.42498$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/klp-utelukker-gruveselskapet-vale",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 405,
+      "from": "^/om-klp/f-rste-vinner-karet-1.40083$",
+      "target": {
+        "path": "/om-klp/f-rste-vinner-karet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 406,
+      "from": "^/om-klp/godt-resultat-i-tredje-kvartal-for-klp-1.38768$",
+      "target": {
+        "path": "/om-klp/godt-resultat-i-tredje-kvartal-for-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 407,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/pensjons-konomikurs-1.40429$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/pensjons-konomikurs",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 408,
+      "from": "^/offentlig/forsikring/ansvarsforsikringer/slik-er-saksgangen-ved-samleskader-1.36787$",
+      "target": {
+        "path": "/offentlig/forsikring/ansvarsforsikringer/slik-er-saksgangen-ved-samleskader",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 409,
+      "from": "^/pensjon/klp-jakter-kvinnelige-talenter-til-a-forvalte-pensjonspengene-1.42207$",
+      "target": {
+        "path": "/pensjon/klp-jakter-kvinnelige-talenter-til-a-forvalte-pensjonspengene",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 410,
+      "from": "^/pensjon/innskuddspensjon/klp-optimal-livsfase-1.38590$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/klp-optimal-livsfase",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 411,
+      "from": "^/offentlig/fond/retningslinjer-1.38115$",
+      "target": {
+        "path": "/offentlig/fond/retningslinjer",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 412,
+      "from": "^/offentlig/helse-milj-og-sikkerhet-hms/nytt-ar-mer-arbeidsglede-1.39757$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/nytt-ar-mer-arbeidsglede",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 413,
+      "from": "^/sparing-og-fond/spar-til-andre-1.36523$",
+      "target": {
+        "path": "/sparing-og-fond/spar-til-andre",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 414,
+      "from": "^/forsikring/meld-skade-og-tyveri/hjelp-ved-skade-eller-tyveri-fra-bil-1.37078$",
+      "target": {
+        "path": "/forsikring/meld-skade-og-tyveri/hjelp-ved-skade-eller-tyveri-fra-bil",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 415,
+      "from": "^/pensjon/pensjonsrad-for-ulike-livsfaser-1.39157$",
+      "target": {
+        "path": "/pensjon/pensjonsrad-for-ulike-livsfaser",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 416,
+      "from": "^/forsikring/trafikkforsikringsavgift-til-staten-1.37194$",
+      "target": {
+        "path": "/forsikring/trafikkforsikringsavgift-til-staten",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 417,
+      "from": "^/forsikring/meld-skade-og-tyveri/hjelp-ved-skade-eller-tyveri-fra-hus-1.37170$",
+      "target": {
+        "path": "/forsikring/meld-skade-og-tyveri/hjelp-ved-skade-eller-tyveri-fra-hus",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 418,
+      "from": "^/om-klp/husk-dette-nar-du-skifter-til-vinterdekk-1.38760$",
+      "target": {
+        "path": "/om-klp/husk-dette-nar-du-skifter-til-vinterdekk",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 419,
+      "from": "^/om-klp/organisasjon-og-ledelse/innkj-p-i-klp-1.40549$",
+      "target": {
+        "path": "/om-klp/organisasjon-og-ledelse/innkj-p-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 420,
+      "from": "^/pensjon/alderspensjon/jobb-og-alderspensjon-1.36489$",
+      "target": {
+        "path": "/pensjon/alderspensjon/jobb-og-alderspensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 421,
+      "from": "^/om-klp/mest-milj-vennlige-kontorbygg-i-midt-norge-1.38729$",
+      "target": {
+        "path": "/om-klp/mest-milj-vennlige-kontorbygg-i-midt-norge",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 422,
+      "from": "^/bedrift/forsikring/sp-rsmal-og-svar-om-forsikring-1.38155$",
+      "target": {
+        "path": "/bedrift/forsikring/ofte-stilte-sp-rsmal-fra-forsikringskundene-vare",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 423,
+      "from": "^/offentlig/forsikring/hvor-mye-sn-taler-takene-pa-byggene-dine-1.42099$",
+      "target": {
+        "path": "/offentlig/forsikring/hvor-mye-sn-taler-takene-pa-byggene-dine",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 424,
+      "from": "^/pensjon/offentlig-tjenestepensjon/jobbe-etter-67-ar-dette-b-r-du-vite-om-pensjonen-din-1.31335$",
+      "target": {
+        "path": "/pensjon/alderspensjon/jobbe-etter-67-ar-dette-b-r-du-vite-om-pensjonen-din$",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 425,
+      "from": "^/cmlink/klp-no$",
+      "target": {
+        "path": "/",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 426,
+      "from": "^/IPS$",
+      "target": {
+        "path": "/pensjon/ips",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 427,
+      "from": "^/afp$",
+      "target": {
+        "path": "/pensjon/afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 428,
+      "from": "^/afpetteroppgjor$",
+      "target": {
+        "path": "/pensjon/afp/etteroppgj-ret-pa-afp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 429,
+      "from": "^/alderspensjon$",
+      "target": {
+        "path": "/pensjon/alderspensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 430,
+      "from": "^/angrerett$",
+      "target": {
+        "path": "/kontakt-oss/angrerett-og-klageadgang",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 431,
+      "from": "^/ask$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/aksjesparekonto",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 432,
+      "from": "^/bank$",
+      "target": {
+        "path": "/bank-og-lan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 433,
+      "from": "^/barneforsikring$",
+      "target": {
+        "path": "/forsikring/personforsikringer/barneforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 434,
+      "from": "^/barnepensjon$",
+      "target": {
+        "path": "/pensjon/etterlattepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 435,
+      "from": "^/ektefellepensjon$",
+      "target": {
+        "path": "/pensjon/etterlattepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 436,
+      "from": "^/etterlattepensjon$",
+      "target": {
+        "path": "/pensjon/etterlattepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 437,
+      "from": "^/bilforsikring$",
+      "target": {
+        "path": "/forsikring/bilforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 438,
+      "from": "^/blikunde$",
+      "target": {
+        "path": "/bank-og-lan/bli-bankkunde",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 439,
+      "from": "^/boliglan$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 440,
+      "from": "^/boliglansoknad$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan/s-k-om-boliglan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 441,
+      "from": "^/boliglanung$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan-ung-medlem",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 442,
+      "from": "^/bonus$",
+      "target": {
+        "path": "/forsikring/bilforsikring/hva-er-bonus",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 443,
+      "from": "^/brosjyrer$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/vilkar-og-vedtekter-om-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 444,
+      "from": "^/vedtekter$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/vilkar-og-vedtekter-om-offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 445,
+      "from": "^/bsu$",
+      "target": {
+        "path": "/sparing-og-fond/bsu",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 446,
+      "from": "^/eiermoter2019$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/eierm-ter-2019",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 447,
+      "from": "^/elskedeby$",
+      "target": {
+        "path": "/om-klp/sammen-kan-vi-gj-re-oslo-til-verdens-f-rste-nullutslippshovedstad",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 448,
+      "from": "^/enstortakk$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/en-stor-takk",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 449,
+      "from": "^/etter67$",
+      "target": {
+        "path": "/pensjon/alderspensjon/jobbe-etter-67-ar-dette-b-r-du-vite-om-pensjonen-din",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 450,
+      "from": "^/fond$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 451,
+      "from": "^/forsikringer$",
+      "target": {
+        "path": "/forsikring/forsikring-er-viktig-men-trenger-du-virkelig-a-forsikre-alt-du-eier",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 452,
+      "from": "^/goderaad$",
+      "target": {
+        "path": "/medlemsfordeler/husk-a-leve-hele-livet/ditt-klokeste-rad",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 453,
+      "from": "^/godtarbeidsmiljo$",
+      "target": {
+        "path": "/medlemsfordeler/godt-arbeidsmilj",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 454,
+      "from": "^/hms-torget$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 455,
+      "from": "^/hms-prosjekter$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/klps-arbeidsmilj-nettverk",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 456,
+      "from": "^/husforsikring$",
+      "target": {
+        "path": "/forsikring/husforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 457,
+      "from": "^/ikkeforpyser$",
+      "target": {
+        "path": "/offentlig/helse-milj-og-sikkerhet-hms/frokostseminar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 458,
+      "from": "^/innboforsikring$",
+      "target": {
+        "path": "/forsikring/innboforsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 459,
+      "from": "^/innkjop$",
+      "target": {
+        "path": "/om-klp/organisasjon-og-ledelse/innkj-p-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 460,
+      "from": "^/innskuddspensjon$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 461,
+      "from": "^/jobb$",
+      "target": {
+        "path": "/om-klp/jobb",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 462,
+      "from": "^/julestemning$",
+      "target": {
+        "path": "/medlemsfordeler/takk-til-deg-som-jobber-i-jula",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 463,
+      "from": "^/klimarisiko$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima/klimarisiko",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 464,
+      "from": "^/miljo-og-klima$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar/milj-og-klima",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 465,
+      "from": "^/kommunekreditt$",
+      "target": {
+        "path": "/offentlig/bank/lan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 466,
+      "from": "^/kontakt$",
+      "target": {
+        "path": "/kontakt-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 467,
+      "from": "^/kontaktpersoner$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/oversikt-over-kontaktpersoner",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 468,
+      "from": "^/kredittkort$",
+      "target": {
+        "path": "/bank-og-lan/kredittkort",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 469,
+      "from": "^/lanekalkulator$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/boliglan/lanekalkulator",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 470,
+      "from": "^/medlem$",
+      "target": {
+        "path": "/medlemsfordeler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 471,
+      "from": "^/medlemskap$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/medlemskap-i-klp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 472,
+      "from": "^/nattevakt$",
+      "target": {
+        "path": "/medlemsfordeler/nattevakten",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 473,
+      "from": "^/omkundeside$",
+      "target": {
+        "path": "/bedrift/pa-kundeside-har-du-full-oversikt",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 474,
+      "from": "^/pensjonskapitalbevis$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/du-kan-tjene-pa-a-flytte-pensjonskapitalbevis-til-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 475,
+      "from": "^/pensjon/innskuddspensjon/pensjonskapitalbevis$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/du-kan-tjene-pa-a-flytte-pensjonskapitalbevis-til-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 476,
+      "from": "^/pensjonsokonomikurs$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/pensjons-konomikurs",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 477,
+      "from": "^/pensjonssparing$",
+      "target": {
+        "path": "/pensjon/hvordan-spare-til-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 478,
+      "from": "^/personforsikringer$",
+      "target": {
+        "path": "/forsikring/personforsikringer",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 479,
+      "from": "^/personvern$",
+      "target": {
+        "path": "/om-klp/personvern",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 480,
+      "from": "^/premie2019$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/anslag-for-reguleringspremie-2019",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 481,
+      "from": "^/reguleringspremie2019$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/anslag-for-reguleringspremie-2019",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 482,
+      "from": "^/presse$",
+      "target": {
+        "path": "/om-klp/nyhetssenter/pressekontakter",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 483,
+      "from": "^/reiseapp$",
+      "target": {
+        "path": "/forsikring/reiseforsikring/trygg-pa-tur-med-reiseapp",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 484,
+      "from": "^/samfunnsansvar$",
+      "target": {
+        "path": "/om-klp/samfunnsansvar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 485,
+      "from": "^/seniorlan$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/seniorlan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 486,
+      "from": "^/seniorlanseminar$",
+      "target": {
+        "path": "/bank-og-lan/vare-boliglan/seniorlan/pamelding-seniorlan",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 487,
+      "from": "^/signering$",
+      "target": {
+        "path": "/bank-og-lan/elektronisk-signering",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 488,
+      "from": "^/skatt$",
+      "target": {
+        "path": "/pensjon/offentlig-tjenestepensjon/skatt-og-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 489,
+      "from": "^/sparekonto$",
+      "target": {
+        "path": "/sparing-og-fond/sparekonto",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 490,
+      "from": "^/svanefond$",
+      "target": {
+        "path": "/sparing-og-fond/spar-i-fond/aktive-aksjefond/klp-aksjeglobal-mer-samfunnsansvar",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 491,
+      "from": "^/tfa$",
+      "target": {
+        "path": "/forsikring/trafikkforsikringsavgift-til-staten",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 492,
+      "from": "^/uforeoppgjor$",
+      "target": {
+        "path": "/pensjon/uf-repensjon/etteroppgj-r-for-uf-repensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 493,
+      "from": "^/uforepensjon$",
+      "target": {
+        "path": "/pensjon/uf-repensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 494,
+      "from": "^/ungdomskonto$",
+      "target": {
+        "path": "/bank-og-lan/barne-og-ungdomskonto",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 495,
+      "from": "^/ungsparing$",
+      "target": {
+        "path": "/sparing-og-fond/sparekonto-barn",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 496,
+      "from": "^/verdt-aa-vite$",
+      "target": {
+        "path": "/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/verdt-a-vite-kurs",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 497,
+      "from": "^/utlogget$",
+      "target": {
+        "path": "/kundeside/utlogget",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 498,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon$",
+      "target": {
+        "path": "/kurs-og-konferanser",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 499,
+      "from": "^/offentlig-tjenestepensjon/kurs-for-ansatte$",
+      "target": {
+        "path": "/kurs-og-konferanser/for-ansatte",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 500,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/pensjons-konomikurs$",
+      "target": {
+        "path": "/kurs-og-konferanser/for-kommuner/pensjonsokonomikurs",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 501,
+      "from": "^/offentlig/offentlig-tjenestepensjon/kurs-og-m-ter-om-pensjon/verdt-a-vite-kurs$",
+      "target": {
+        "path": "/kurs-og-konferanser/for-kommuner/verdt-a-vite-kurs",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 502,
+      "from": "^/klp-kommunekonferansen-2019$",
+      "target": {
+        "path": "/kurs-og-konferanser/kommunekonferansen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 503,
+      "from": "^/klp-kommunekonferansen-2018$",
+      "target": {
+        "path": "/kurs-og-konferanser/kommunekonferansen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 504,
+      "from": "^/person/pensjon/innskuddspensjon/pensjonskapitalbevis$",
+      "target": {
+        "path": "/pensjon/innskuddspensjon/du-kan-tjene-pa-a-flytte-pensjonskapitalbevis-til-oss",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 505,
+      "from": "^/klpmagasinet$",
+      "target": {
+        "path": "/om-klp/nyhetssenter#!klpmagasinet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 506,
+      "from": "^/bedrift/fagseminar-for-meglere$",
+      "target": {
+        "path": "/kurs-og-konferanser/fagseminar-for-meglere",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 507,
+      "from": "(.*)",
+      "target": {
+        "path": "/offentlig/forsikring/forbered-sommerstenging-av-barnehager-og-skoler",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 508,
+      "from": "(.*)",
+      "target": {
+        "path": "/bedrift/forsikring/asvo-bedrift-roser-kundeoppfolgingen",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 509,
+      "from": "^/minside/forsikringsdokumenter$",
+      "target": {
+        "path": "https://klpinteraktiv.klp.no/person/minside#forsikring/forsikringsdokumenter",
+        "external": true
+      },
+      "type": "FOUND"
+    },
+    {
+      "order": 510,
+      "from": "^/bedrift/pensjon/(.*)$",
+      "target": {
+        "path": "/virksomhet/pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 511,
+      "from": "^/bedrift/bank/(.*)$",
+      "target": {
+        "path": "/virksomhet/bank",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 512,
+      "from": "^/bedrift/forsikring/(.*)$",
+      "target": {
+        "path": "/virksomhet/forsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 513,
+      "from": "^/bedrift/fond/(.*)$",
+      "target": {
+        "path": "/virksomhet/fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 514,
+      "from": "^/bedrift/palogging-og-tilgang-til-kundeside$",
+      "target": {
+        "path": "virksomhet/palogging-og-tilgang-til-kundeside",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 515,
+      "from": "^/offentlig$",
+      "target": {
+        "path": "/virksomhet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 516,
+      "from": "^/offentlig/bank/(.*)$",
+      "target": {
+        "path": "/virksomhet/bank",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 517,
+      "from": "^/offentlig/offentlig-tjenestepensjon/(.*)$",
+      "target": {
+        "path": "/virksomhet/pensjon/offentlig-tjenestepensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 518,
+      "from": "^/offentlig/forsikring/(.*)$",
+      "target": {
+        "path": "/virksomhet/forsikring",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 519,
+      "from": "^/offentlig/fond/(.*)$",
+      "target": {
+        "path": "/virksomhet/fond",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 520,
+      "from": "^/offentlig/skjema-bedrift-offentlig$",
+      "target": {
+        "path": "/virksomhet/skjema",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 521,
+      "from": "^/bedrift/(.*)$",
+      "target": {
+        "path": "/virksomhet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 522,
+      "from": "^/offentlig/(.*)$",
+      "target": {
+        "path": "/virksomhet",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 523,
+      "from": "^/kundeside/oftp/haroftp/pensjons-konomi",
+      "target": {
+        "path": "/kundeside/pensjonsokonomi",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 524,
+      "from": "^/kundeside/oftp/haroftp/pensjonsrettigheter-og-hvordan-s-ke-pensjon",
+      "target": {
+        "path": "/kundeside/pensjonsrettigheter-og-hvordan-soke-pensjon",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 525,
+      "from": "^/kundeside/oftp/haroftp/brukerhandbok",
+      "target": {
+        "path": "/kundeside/brukerhandbok",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 526,
+      "from": "^/arbeidsgiver/hr-ressursside$",
+      "target": {
+        "path": "/virksomhet/hr-ressursside",
+        "external": false
+      },
+      "type": "MOVED_PERMANENTLY"
+    },
+    {
+      "order": 527,
+      "from": "^/bekreftid$",
+      "target": {
+        "path": "https://klpinteraktiv.klp.no/person/enkel#fond-id",
+        "external": true
+      },
+      "type": "FOUND"
+    }
+  ]
+}

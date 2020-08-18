@@ -1,31 +1,29 @@
 package com.enonic.app.rewrite.provider.file;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
-import com.enonic.app.rewrite.format.RewriteFormatReader;
-import com.enonic.app.rewrite.format.RewriteReaderResult;
-import com.enonic.app.rewrite.format.RewriteReaderState;
+import com.enonic.app.rewrite.format.SourceFormat;
+import com.enonic.app.rewrite.format.SourceReadResult;
+import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
 import com.enonic.app.rewrite.rewrite.RewriteMappings;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
 
 
 public class RewriteMappingLocalFileProvider
@@ -122,34 +120,19 @@ public class RewriteMappingLocalFileProvider
     private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )
     {
         final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );
-        final RewriteRules.Builder rewritesBuilder = RewriteRules.create();
 
-        LOG.info( "Fetching rewrite-config from file: [{}]", item.path );
-
-        try (final Stream<String> stream = Files.lines( Paths.get( item.path.toString() ) ))
+        try (final BufferedReader reader = Files.newBufferedReader( Paths.get( item.path.toString() ), Charsets.UTF_8 ))
         {
-            stream.forEach( line -> {
-                final RewriteReaderResult result = RewriteFormatReader.read( line );
-                final RewriteReaderState state = result.getState();
-                if ( state.equals( RewriteReaderState.OK ) )
-                {
-                    rewritesBuilder.addRule( result.getRule() );
-                }
-                else if ( state.equals( RewriteReaderState.FAILED ) )
-                {
-                    LOG.warn( "Could not resolve rules from line {}", line );
-                }
-            } );
+            final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormat.APACHE_REWRITE );
+            builder.add( RewriteMapping.create().
+                contextKey( contextKey ).
+                rewriteRules( rewriteRules.getRules() ).
+                build() );
         }
         catch ( IOException e )
         {
             throw new RuntimeException( "Cannot read rewrite-config from file [" + item.path + "]", e );
         }
-
-        builder.add( RewriteMapping.create().
-            contextKey( contextKey ).
-            rewriteRules( rewritesBuilder.build() ).
-            build() );
     }
 
     private List<Path> findFiles( final Path base, final String ruleFilePattern )

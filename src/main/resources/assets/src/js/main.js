@@ -6,6 +6,7 @@ import {initModals} from "./modals";
 import {defineShortcuts} from "./shortcuts";
 import {initToolTester} from "./toolTester";
 
+
 let dt = require('datatables.net');
 
 let svcUrl;

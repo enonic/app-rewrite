@@ -17,11 +17,11 @@ let svcUrl;
 const rulesTableSettings = {
     pageLength: 50,
     autoWidth: false,
-    dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-         "<'row'<'col-sm-12'tr>>" +
-         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+    dom: 'Bfrtip',
+    buttons: [
+        'copyHtml5', 'excelHtml5', 'pdfHtml5', 'csvHtml5'
+    ]
 };
-
 
 export let initToolRules = function (svc) {
     svcUrl = svc;
@@ -97,7 +97,6 @@ let contextSelectorDataContext = function () {
 };
 
 let loadRules = function () {
-
     let serviceConfig = {
         dataServiceUrl: createDataServiceUrl(svcUrl, toolKey, "rules"),
         dataFunction: contextSelectorDataContext,
@@ -112,6 +111,7 @@ let onDataLoaded = function (response) {
     console.log("Rule-data loaded successfully");
     enableRuleButtons();
     enableImportButton();
+    enableExportButton();
 };
 
 let onTableRefreshed = function (response) {
@@ -131,6 +131,13 @@ let enableImportButton = function () {
         let modalSelector = createModalSelector(toolKey);
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "import");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, dryRunImportOnChange);
+    });
+};
+
+let enableExportButton = function () {
+    $(model.buttons.rule.export).click(function () {
+        let dataServiceUrl = createDataServiceUrl(svcUrl, toolKey, "export");
+        $(this).attr('href', dataServiceUrl + "?contextKey=" + $(contextSelectorSelector).val());
     });
 };
 
