@@ -11,6 +11,8 @@ public interface RewriteMappingProvider
 {
     RewriteMapping getRewriteMapping( final RewriteContextKey contextKey );
 
+    boolean providesForContext( final RewriteContextKey contextKey );
+
     void store( final RewriteMapping rewriteMapping );
 
     void create( final RewriteContextKey rewriteContext );

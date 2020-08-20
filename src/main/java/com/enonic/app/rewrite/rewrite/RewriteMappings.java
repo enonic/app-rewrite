@@ -1,7 +1,10 @@
 package com.enonic.app.rewrite.rewrite;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 
@@ -9,7 +12,6 @@ public class RewriteMappings
     implements Iterable<RewriteMapping>
 {
     private List<RewriteMapping> rewriteMappingList;
-
 
     public static Builder create()
     {
@@ -19,6 +21,11 @@ public class RewriteMappings
     public RewriteMappings( final Builder builder )
     {
         this.rewriteMappingList = builder.rewriteMappings;
+    }
+
+    public RewriteMappings( final Collection<RewriteMapping> mappings )
+    {
+        this.rewriteMappingList = new ArrayList<>( mappings );
     }
 
     public RewriteMapping getRewriteMapping( final RewriteContextKey contextKey )
@@ -48,6 +55,11 @@ public class RewriteMappings
     public List<RewriteMapping> getRewriteMappings()
     {
         return rewriteMappingList;
+    }
+
+    public static RewriteMappings from( final Collection<RewriteMapping> collection )
+    {
+        return new RewriteMappings( collection );
     }
 
     public static final class Builder

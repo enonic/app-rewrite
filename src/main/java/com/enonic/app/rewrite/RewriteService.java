@@ -1,9 +1,12 @@
 package com.enonic.app.rewrite;
 
+import java.util.concurrent.ConcurrentMap;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
 import com.enonic.app.rewrite.provider.ProviderInfo;
+import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
@@ -17,7 +20,7 @@ public interface RewriteService
 
     RewriteMapping getRewriteMapping( final RewriteContextKey rewriteContextKey );
 
-    RewriteConfigurations getRewriteConfigurations();
+    ConcurrentMap<RewriteContextKey, RewriteMappingProvider> getRewriteConfigurations();
 
     VirtualHostMapping getRewriteContext( final RewriteContextKey contextKey );
 

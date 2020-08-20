@@ -85,4 +85,11 @@ public class RewriteMapping
     {
         return Objects.hash( contextKey, rewriteRules );
     }
+
+
+    @Override
+    public String toString()
+    {
+        return "RewriteMapping{" + "contextKey=" + contextKey + ", rewriteRules=" + rewriteRules + '}';
+    }
 }

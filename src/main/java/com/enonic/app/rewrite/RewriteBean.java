@@ -1,5 +1,8 @@
 package com.enonic.app.rewrite;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
+
 import com.enonic.app.rewrite.ie.ImportResult;
 import com.enonic.app.rewrite.ie.ImportService;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
@@ -10,6 +13,7 @@ import com.enonic.app.rewrite.mapping.RewriteConfigurationsMapper;
 import com.enonic.app.rewrite.mapping.RewriteContextMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingMapper;
 import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
+import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
@@ -45,7 +49,7 @@ public class RewriteBean
     @SuppressWarnings("unused")
     public Object getRewriteConfigurations()
     {
-        final RewriteConfigurations rewriteConfigurations = this.rewriteService.getRewriteConfigurations();
+        final Map<RewriteContextKey, RewriteMappingProvider> rewriteConfigurations = this.rewriteService.getRewriteConfigurations();
         return new RewriteConfigurationsMapper( rewriteConfigurations );
     }
 

@@ -47,7 +47,16 @@ public class RewriteFilter
     protected void doHandle( final HttpServletRequest req, final HttpServletResponse res, final FilterChain chain )
         throws Exception
     {
-        final boolean responseCommitted = doRewriteURL( req, res );
+        boolean responseCommitted = false;
+        try
+        {
+            responseCommitted = doRewriteURL( req, res );
+        }
+        catch ( Exception e )
+        {
+            LOG.error( "Rewritefilter failed", e );
+        }
+
         if ( !responseCommitted )
         {
             chain.doFilter( req, res );

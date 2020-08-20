@@ -16,10 +16,6 @@ public class VHostServiceImpl
     public void activate()
     {
         this.virtualHostMappings = virtualHostConfig.getMappings();
-
-        this.virtualHostConfig.getMappings().forEach( mapping -> {
-            System.out.println( "############## VHOSTNAME: " + mapping.getName() );
-        } );
     }
 
     @Reference

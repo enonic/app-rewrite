@@ -58,6 +58,12 @@ public class RewriteEngine
             return null;
         }
 
+        if ( this.rewriteMap == null )
+        {
+            LOG.warn( "Rewrite-map not initialized" );
+            return null;
+        }
+
         final RulePatterns rulePatterns = this.rewriteMap.get( rewriteContext.getKey() );
 
         if ( rulePatterns == null )

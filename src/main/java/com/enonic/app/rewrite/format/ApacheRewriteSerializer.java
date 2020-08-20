@@ -20,6 +20,8 @@ import com.enonic.app.rewrite.rewrite.RewriteRules;
 
 public class ApacheRewriteSerializer
 {
+    private final static Logger LOG = LoggerFactory.getLogger( ApacheRewriteSerializer.class );
+
     private final static Pattern ruleFormat = Pattern.compile( "^\\s*RewriteRule\\s+(\\S+)\\s+(\\S+)(\\s+\\[(.*)])?" );
 
     private final static Pattern conditionFormat = Pattern.compile( "^\\s*RewriteCond\\s+(.*)" );
@@ -28,11 +30,10 @@ public class ApacheRewriteSerializer
 
     public static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
 
-    private final static Logger LOG = LoggerFactory.getLogger( ApacheRewriteSerializer.class );
-
-
     static SourceReadResult read( final BufferedReader reader )
     {
+        LOG.info( "Loading apache rewriteConfigurations from file" );
+
         try
         {
             return doReadLines( reader );

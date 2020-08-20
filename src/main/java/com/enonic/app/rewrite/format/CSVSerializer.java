@@ -2,7 +2,6 @@ package com.enonic.app.rewrite.format;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -18,9 +17,7 @@ public class CSVSerializer
 {
     public static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.MOVED_PERMANENTLY;
 
-
     static SourceReadResult read( final BufferedReader reader )
-
     {
         try
         {

@@ -100,4 +100,10 @@ public class RewriteRules
     {
         return Objects.hash( ruleList );
     }
+
+    @Override
+    public String toString()
+    {
+        return "RewriteRules{" + "ruleList=" + ruleList + '}';
+    }
 }

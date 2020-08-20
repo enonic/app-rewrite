@@ -19,6 +19,6 @@ class CSVSerializerTest
         final SourceReadResult result =
             CSVSerializer.read( ByteSource.wrap( testData.getBytes() ).asCharSource( Charsets.UTF_8 ).openBufferedStream() );
 
-        assertEquals( 2, result.getOk() );
+        assertEquals( 3, result.getOk() );
     }
 }

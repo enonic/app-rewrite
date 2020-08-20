@@ -14,7 +14,8 @@ app {
 dependencies {
     compile "com.enonic.xp:core-api:${xpVersion}"
     compile "com.enonic.xp:portal-api:${xpVersion}"
-    compile 'org.apache.commons:commons-csv:1.8'
+
+    include 'org.apache.commons:commons-csv:1.8'
 
     include "com.enonic.xp:lib-content:${xpVersion}"
     include "com.enonic.xp:lib-portal:${xpVersion}"
@@ -36,10 +37,6 @@ dependencies {
     //include "com.enonic.xp:lib-websocket:${xpVersion}"
     //include "com.enonic.lib:lib-mustache:2.0.0"
     //include "com.enonic.lib:lib-util:2.0.0"
-}
-
-test {
-    useJUnitPlatform()
 }
 
 repositories {

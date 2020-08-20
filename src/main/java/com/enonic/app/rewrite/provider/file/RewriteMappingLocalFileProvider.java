@@ -1,6 +1,5 @@
 package com.enonic.app.rewrite.provider.file;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +16,7 @@ import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
-import com.enonic.app.rewrite.format.SourceFormat;
+import com.enonic.app.rewrite.format.SourceFormatResolver;
 import com.enonic.app.rewrite.format.SourceReadResult;
 import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
@@ -56,32 +55,72 @@ public class RewriteMappingLocalFileProvider
     }
 
     @Override
+    public boolean providesForContext( final RewriteContextKey contextKey )
+    {
+        final String pattern = createContextPattern( ruleFilePattern, contextKey.toString() );
+
+        try
+        {
+            final List<Path> files = findFiles( this.base, pattern );
+            return files.size() > 0;
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException( "Cannot search for files", e );
+        }
+    }
+
+    private String createContextPattern( final String ruleFilePattern, final String s )
+    {
+        return ruleFilePattern.replace( "{{vhost}}", s );
+    }
+
+    @Override
     public RewriteMapping getRewriteMapping( final RewriteContextKey contextKey )
     {
-        if ( this.rewriteMappings == null )
-        {
-            this.rewriteMappings = doGetAllRewriteMappings();
-        }
+        final String pattern = createContextPattern( ruleFilePattern, contextKey.toString() );
 
-        return rewriteMappings.getRewriteMapping( contextKey );
+        try
+        {
+            final List<Path> files = findFiles( this.base, pattern );
+            if ( files.size() > 0 )
+            {
+                final Path path = files.get( 0 );
+                LOG.info( "Loading rewrite-mapping for contextKey [{}] from file: [{}]", contextKey, path );
+
+                try (final BufferedReader reader = Files.newBufferedReader( Paths.get( path.toString() ), Charsets.UTF_8 ))
+                {
+                    final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormatResolver.resolve( path.toFile() ) );
+                    return RewriteMapping.create().
+                        contextKey( contextKey ).
+                        rewriteRules( rewriteRules.getRules() ).
+                        build();
+                }
+                catch ( IOException e )
+                {
+                    throw new RuntimeException( "Cannot read rewrite-config from file [" + path + "]", e );
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException( "Cannot search for files", e );
+        }
     }
 
     private RewriteMappings doGetAllRewriteMappings()
     {
         final RewriteMappings.Builder builder = RewriteMappings.create();
 
-        try
-        {
-            final List<VHostAndPath> items = getHostsAndPaths( this.base, this.ruleFilePattern );
+        final List<VHostAndPath> items = getHostsAndPaths( this.base, this.ruleFilePattern );
 
-            for ( final VHostAndPath item : items )
-            {
-                handleRewriteItem( builder, item );
-            }
-        }
-        catch ( IOException e )
+        for ( final VHostAndPath item : items )
         {
-            throw new RuntimeException( "Cannot configure rewrite-filter" );
+            handleRewriteItem( builder, item );
         }
 
         return builder.build();
@@ -121,9 +160,11 @@ public class RewriteMappingLocalFileProvider
     {
         final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );
 
+        LOG.info( "handleRewriteItem for item: " + item );
+
         try (final BufferedReader reader = Files.newBufferedReader( Paths.get( item.path.toString() ), Charsets.UTF_8 ))
         {
-            final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormat.APACHE_REWRITE );
+            final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormatResolver.resolve( item.path.toFile() ) );
             builder.add( RewriteMapping.create().
                 contextKey( contextKey ).
                 rewriteRules( rewriteRules.getRules() ).
@@ -143,13 +184,20 @@ public class RewriteMappingLocalFileProvider
 
 
     private List<VHostAndPath> getHostsAndPaths( final Path base, final String ruleFilePattern )
-        throws IOException
     {
-        List<VHostAndPath> hostsAndPaths = Lists.newArrayList();
+        final List<VHostAndPath> hostsAndPaths = Lists.newArrayList();
 
-        final String regExpPattern = ruleFilePattern.replace( "{{vhost}}", "([\\w|-]+)" );
+        final String regExpPattern = createContextPattern( ruleFilePattern, "([\\w|-]+)" );
 
-        final List<Path> fileNames = findFiles( base, regExpPattern );
+        final List<Path> fileNames;
+        try
+        {
+            fileNames = findFiles( base, regExpPattern );
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException( "Cannot configure rewrite-filter", e );
+        }
 
         fileNames.forEach( file -> {
             final String vhostName = FileNameMatcher.getMatch( file, regExpPattern, 1 );

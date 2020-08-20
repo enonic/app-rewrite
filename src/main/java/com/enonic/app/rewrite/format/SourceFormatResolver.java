@@ -4,16 +4,14 @@ import java.io.File;
 
 public class SourceFormatResolver
 {
-    SourceFormat resolve( final File file )
+    public static SourceFormat resolve( final File file )
     {
         final String extension = getFileExtension( file );
-
-        if ( extension.equals( ".conf" ) )
+        if ( extension.equals( "conf" ) )
         {
             return SourceFormat.APACHE_REWRITE;
         }
-
-        if ( extension.equals( ".csv" ) )
+        else if ( extension.equals( "csv" ) )
         {
             return SourceFormat.CVS;
         }
@@ -21,8 +19,7 @@ public class SourceFormatResolver
         return SourceFormat.CVS;
     }
 
-
-    private String getFileExtension( File file )
+    private static String getFileExtension( File file )
     {
         String name = file.getName();
         int lastIndexOf = name.lastIndexOf( "." );

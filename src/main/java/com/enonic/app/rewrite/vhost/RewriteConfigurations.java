@@ -41,8 +41,6 @@ public class RewriteConfigurations
 
         public Builder add( final RewriteContextKey contextKey, final RewriteMappingProvider provider )
         {
-            System.out.println(
-                "Adding RewriteConfiguration: " + contextKey + " for provider " + ( provider != null ? provider.name() : "" ) );
             this.configurations.put( contextKey, provider );
             return this;
         }

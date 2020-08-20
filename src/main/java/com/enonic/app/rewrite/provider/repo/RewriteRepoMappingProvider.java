@@ -63,6 +63,12 @@ public class RewriteRepoMappingProvider
     }
 
     @Override
+    public boolean providesForContext( final RewriteContextKey contextKey )
+    {
+        return setRepoContext().callWith( () -> doGetContextNode( contextKey ) != null );
+    }
+
+    @Override
     public RewriteMapping getRewriteMapping( final RewriteContextKey contextKey )
     {
         return setRepoContext().callWith( () -> doGetRewriteMapping( contextKey ) );
@@ -71,12 +77,10 @@ public class RewriteRepoMappingProvider
     private RewriteMapping doGetRewriteMapping( final RewriteContextKey contextKey )
     {
         final Node node = doGetContextNode( contextKey );
-
         if ( node == null )
         {
             return null;
         }
-
         return RewriteMappingSerializer.fromNode( node );
     }
 

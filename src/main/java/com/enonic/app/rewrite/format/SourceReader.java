@@ -1,12 +1,10 @@
 package com.enonic.app.rewrite.format;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class SourceReader
 {
     public static SourceReadResult read( final BufferedReader reader, final SourceFormat format )
-        throws IOException
     {
         switch ( format )
         {
