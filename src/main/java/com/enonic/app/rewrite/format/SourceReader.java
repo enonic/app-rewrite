@@ -13,7 +13,7 @@ public class SourceReader
                 return ApacheRewriteSerializer.read( reader );
             }
 
-            case CVS:
+            case CSV:
             {
                 return CSVSerializer.read( reader );
             }

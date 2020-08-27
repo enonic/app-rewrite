@@ -4,6 +4,9 @@ const portalLib = require('/lib/xp/portal');
 
 exports.post = function (req) {
     let params = req.params;
+
+    log.info("PARAMS %s", JSON.stringify(params, null, 4));
+
     let contextKey = params.importRulesContextKey;
     let dryRun = params.importRulesDryRun === 'true';
     let mergeStrategy = params.toolRulesMergeStrategy ? params.toolRulesMergeStrategy : "delete";
@@ -17,8 +20,8 @@ exports.post = function (req) {
     }
 
     let byteSource = portalLib.getMultipartStream("file");
-
-    const importResult = rewriteDao.importRules(contextKey, mergeStrategy, byteSource, dryRun);
+    const multipartItem = portalLib.getMultipartItem('file');
+    const importResult = rewriteDao.importRules(contextKey, mergeStrategy, byteSource, multipartItem.fileName, dryRun);
 
     let model = {
         message: "imported rules to virtualHost [" + contextKey + "]",

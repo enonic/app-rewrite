@@ -1,0 +1,30 @@
+<div class="modal-guts export" id="tool-rules-modal-export">
+
+    <div class="modal-content">
+        <h1>Export rules</h1>
+
+        <form class="form-grid" data-th-id="${form.id}" method="post" enctype="multipart/form-data">
+            <label for="createRuleContextKeyShow">VirtualHost</label>
+            <input type="text" id="createRuleContextKeyShow" name="createRuleContextKeyShow" data-th-value="${contextKey}"
+                   disabled="disabled"
+                   readonly="readonly"/>
+
+            <input type="hidden" id="exportRulesContextKey" name="exportRulesContextKey" data-th-value="${contextKey}"
+                   readonly="readonly"/>
+
+            <label for="exportFormat">Export-format</label>
+            <select name="exportFormat" id="exportFormat">
+                <option value="csv">CSV</option>
+                <option value="apache_rewrite">Apache rewrite</option>
+            </select>
+
+            <button class="modal-action"
+                    data-action-type="export"
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Export
+            </button>
+            <button class="modal-cancel">Cancel
+            </button>
+        </form>
+    </div>
+
+</div>

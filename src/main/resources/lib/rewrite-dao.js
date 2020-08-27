@@ -61,12 +61,21 @@ exports.deleteRule = function (contextKey, from) {
     return __.toNativeObject(result);
 };
 
-exports.importRules = function (contextKey, mergeStrategy, byteSource, dryRun) {
+exports.importRules = function (contextKey, mergeStrategy, byteSource, fileName, dryRun) {
     let params = __.newBean('com.enonic.app.rewrite.ImportRulesParams');
     params.contextKey = contextKey;
     params.mergeStrategy = mergeStrategy;
     params.byteSource = byteSource;
+    params.fileName = fileName;
     params.dryRun = dryRun;
     let result = bean.importRules(params);
     return __.toNativeObject(result);
-}
+};
+
+exports.serializeRules = function (contextKey, format) {
+    let params = __.newBean('com.enonic.app.rewrite.ExportRulesParams');
+    params.contextKey = contextKey;
+    params.format = format;
+    let result = bean.serializeRules(params);
+    return result;
+};

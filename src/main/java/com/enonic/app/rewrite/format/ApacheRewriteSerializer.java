@@ -30,6 +30,32 @@ public class ApacheRewriteSerializer
 
     public static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
 
+    static String serialize( final RewriteRules rewriteRules )
+    {
+        final StringBuilder builder = new StringBuilder();
+
+        rewriteRules.forEach( rule -> {
+            builder.append( serialize( rule ) );
+            builder.append( System.lineSeparator() );
+        } );
+
+        return builder.toString();
+    }
+
+    private static String serialize( final RewriteRule rule )
+    {
+        final StringBuilder builder = new StringBuilder();
+        builder.append( "RewriteRule" );
+        builder.append( "\t" );
+        builder.append( "\"" + rule.getFrom() + "\"" );
+        builder.append( "\t" );
+        builder.append( "\"" + rule.getTarget().path() + "\"" );
+        builder.append( "\t" );
+        builder.append( "[R=" + rule.getType().getHttpCode() + "]" );
+
+        return builder.toString();
+    }
+
     static SourceReadResult read( final BufferedReader reader )
     {
         LOG.info( "Loading apache rewriteConfigurations from file" );

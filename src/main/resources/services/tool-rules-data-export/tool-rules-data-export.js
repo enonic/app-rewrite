@@ -7,9 +7,10 @@ function createSourceUrl(result) {
 
 exports.get = function (req) {
     let params = req.params;
-    let contextKey = params.contextKey;
-
-    log.info("############# Exporting rules");
+    let data = JSON.parse(params.data);
+    let contextKey = data.contextKey;
+    let exportFormat = data.exportFormat;
+    let fileName = data.fileName;
 
     if (!contextKey) {
         return {
@@ -19,12 +20,12 @@ exports.get = function (req) {
         }
     }
 
-    let result = rewriteDao.getRewriteMapping(contextKey);
+    let result = rewriteDao.serializeRules(contextKey, exportFormat);
 
     return {
         contentType: 'text/plain',
         headers: {
-            'Content-Disposition': 'attachment'
+            'Content-Disposition': 'attachment;filename="' + fileName + '"'
         },
         status: 200,
         body: result

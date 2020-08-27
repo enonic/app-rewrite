@@ -90,7 +90,8 @@ public class RewriteMappingLocalFileProvider
 
                 try (final BufferedReader reader = Files.newBufferedReader( Paths.get( path.toString() ), Charsets.UTF_8 ))
                 {
-                    final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormatResolver.resolve( path.toFile() ) );
+                    final SourceReadResult rewriteRules =
+                        SourceReader.read( reader, SourceFormatResolver.resolve( path.toFile().getName() ) );
                     return RewriteMapping.create().
                         contextKey( contextKey ).
                         rewriteRules( rewriteRules.getRules() ).
@@ -164,7 +165,7 @@ public class RewriteMappingLocalFileProvider
 
         try (final BufferedReader reader = Files.newBufferedReader( Paths.get( item.path.toString() ), Charsets.UTF_8 ))
         {
-            final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormatResolver.resolve( item.path.toFile() ) );
+            final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormatResolver.resolve( item.path.toFile().getName() ) );
             builder.add( RewriteMapping.create().
                 contextKey( contextKey ).
                 rewriteRules( rewriteRules.getRules() ).

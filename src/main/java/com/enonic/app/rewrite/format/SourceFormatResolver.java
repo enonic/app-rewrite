@@ -4,29 +4,28 @@ import java.io.File;
 
 public class SourceFormatResolver
 {
-    public static SourceFormat resolve( final File file )
+    public static SourceFormat resolve( final String fileName )
     {
-        final String extension = getFileExtension( file );
+        final String extension = getFileExtension( fileName );
         if ( extension.equals( "conf" ) )
         {
             return SourceFormat.APACHE_REWRITE;
         }
         else if ( extension.equals( "csv" ) )
         {
-            return SourceFormat.CVS;
+            return SourceFormat.CSV;
         }
 
-        return SourceFormat.CVS;
+        return SourceFormat.CSV;
     }
 
-    private static String getFileExtension( File file )
+    private static String getFileExtension( final String filename )
     {
-        String name = file.getName();
-        int lastIndexOf = name.lastIndexOf( "." );
+        int lastIndexOf = filename.lastIndexOf( "." );
         if ( lastIndexOf == -1 )
         {
             return ""; // empty extension
         }
-        return name.substring( lastIndexOf + 1 );
+        return filename.substring( lastIndexOf + 1 );
     }
 }

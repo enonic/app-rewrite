@@ -63,7 +63,6 @@ public class RewriteServiceImpl
         LOG.info( "RewriteService initialized" );
     }
 
-
     @Override
     public RewriteRulesLoadResult load()
     {

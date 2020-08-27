@@ -1,8 +1,8 @@
 package com.enonic.app.rewrite;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
+import com.enonic.app.rewrite.ie.ExportResult;
 import com.enonic.app.rewrite.ie.ImportResult;
 import com.enonic.app.rewrite.ie.ImportService;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
@@ -18,7 +18,6 @@ import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.vhost.RewriteConfigurations;
 import com.enonic.app.rewrite.vhost.VHostService;
 import com.enonic.app.rewrite.vhost.VirtualHostMapping;
 import com.enonic.app.rewrite.vhost.VirtualHostMappings;
@@ -128,6 +127,11 @@ public class RewriteBean
     {
         final ImportResult importResult = this.importService.importRules( params );
         return new ImportResultMapper( importResult );
+    }
+
+    public Object serializeRules( final ExportRulesParams params )
+    {
+        return this.importService.serializeRules( params );
     }
 
 }

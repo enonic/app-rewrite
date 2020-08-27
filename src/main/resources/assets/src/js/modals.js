@@ -14,7 +14,7 @@ let initializeOverlay = function () {
     });
 };
 
-export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, dataFunction, onDisplayed) {
+export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, dataFunction, onDisplayed, onActionSuccess) {
 
     jQuery.ajax({
         url: modalServiceUrl,
@@ -28,7 +28,7 @@ export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, data
         success: function (result) {
             console.log("Fetched modal " + modalServiceUrl);
             $(modalSelector).html(result);
-            initializeModalActions(svcUrl);
+            initializeModalActions(svcUrl, onActionSuccess);
             $(modalSelector).removeClass("closed");
             openOverlay();
             setModalInputFocus(modalSelector);
@@ -49,8 +49,10 @@ let setModalInputFocus = function (modalSelector) {
 };
 
 export let postActionForm = function (formSelector, serviceUrl, successFunction) {
+
     let form = $(formSelector)[0];
     let data = new FormData(form);
+
     jQuery.ajax({
         url: serviceUrl,
         cache: false,
@@ -68,7 +70,7 @@ export let postActionForm = function (formSelector, serviceUrl, successFunction)
     });
 };
 
-let initializeModalActions = function (svcUrl) {
+let initializeModalActions = function (svcUrl, onActionSuccess) {
 
     $(model.modals.modalCancel).click(function (event) {
         event.preventDefault();
@@ -88,12 +90,18 @@ let initializeModalActions = function (svcUrl) {
         let refreshDataSelector = thisElem.data("refresh-data-selector");
 
         let onSuccess = function (response, textStatus, jqXHR) {
-            console.log("SUCCESS: ", response);
-            showInfo(response.message);
-            closeModals();
-            closeOverlay();
-            refreshDataElement(refreshDataSelector);
+
+            if (onActionSuccess) {
+                onActionSuccess(response);
+            } else {
+                console.log("SUCCESS: ", response);
+                showInfo(response.message);
+                closeModals();
+                closeOverlay();
+                refreshDataElement(refreshDataSelector);
+            }
         };
+
         postActionForm(formSelector, actionServiceUrl, onSuccess);
     });
 };

@@ -6,6 +6,7 @@ import {enableActionButtons} from "./tableActions";
 import {fetch} from "./dataService";
 import {populateDataElement} from "./dataElements";
 import {model} from "./model";
+import {showInfo} from "./info-bar";
 
 const toolKey = "tool-rules";
 const toolSelector = "#" + toolKey;
@@ -136,10 +137,19 @@ let enableImportButton = function () {
 
 let enableExportButton = function () {
     $(model.buttons.rule.export).click(function () {
-        let dataServiceUrl = createDataServiceUrl(svcUrl, toolKey, "export");
-        $(this).attr('href', dataServiceUrl + "?contextKey=" + $(contextSelectorSelector).val());
+        let modalSelector = createModalSelector(toolKey);
+        let modalServiceUrl = createModalUrl(svcUrl, toolKey, "export");
+        displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, function () {
+        }, function (response) {
+            let dataServiceUrl = createDataServiceUrl(svcUrl, toolKey, "export");
+            $("body").append(
+                "<iframe src='" + dataServiceUrl + "?data=" + response.data + "&fisk=ost" + "' style='display: none;' ></iframe>");
+        });
     });
+
+
 };
+
 
 let setImportDryRun = function (dryRun) {
     $("#importRulesDryRun").val(dryRun);

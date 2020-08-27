@@ -6,7 +6,6 @@ import com.enonic.app.rewrite.rewrite.RewriteContextKey;
 
 public class ImportRulesParams
 {
-
     private String mergeStrategy;
 
     private boolean dryRun;
@@ -14,6 +13,8 @@ public class ImportRulesParams
     private ByteSource byteSource;
 
     private RewriteContextKey contextKey;
+
+    private String fileName;
 
     public void setContextKey( final String contextKey )
     {
@@ -53,5 +54,20 @@ public class ImportRulesParams
     public ByteSource getByteSource()
     {
         return byteSource;
+    }
+
+    public void setContextKey( final RewriteContextKey contextKey )
+    {
+        this.contextKey = contextKey;
+    }
+
+    public String getFileName()
+    {
+        return fileName;
+    }
+
+    public void setFileName( final String fileName )
+    {
+        this.fileName = fileName;
     }
 }
