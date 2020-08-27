@@ -48,7 +48,7 @@ let testRequest = function () {
         type: 'GET',
         data: data,
         error: function (response, status, error) {
-            $(model.elements.result).html(response.responseText);
+            $(model.elements.redirectSteps).html(response.responseText);
         },
         success: function (result) {
             processResult(result);
@@ -71,7 +71,7 @@ let writeRequestRoute = function (results) {
         }
     });
 
-    $(model.elements.result).html(html);
+    $(model.elements.redirectSteps).html(html);
 };
 
 let renderInitial = function (url) {
