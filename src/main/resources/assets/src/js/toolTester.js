@@ -16,9 +16,6 @@ export let initToolTester = function (svc) {
 
 let onToolLoaded = function (result) {
     console.log("Tool [" + toolKey + "] loaded");
-
-    console.log("REULST", JSON.stringify(result));
-
     $(toolSelector).html(result);
     initListeners();
 };
@@ -51,7 +48,6 @@ let testRequest = function () {
         type: 'GET',
         data: data,
         error: function (response, status, error) {
-            console.log("Result: ", response.responseText);
             $(model.elements.result).html(response.responseText);
         },
         success: function (result) {
@@ -62,22 +58,47 @@ let testRequest = function () {
 };
 
 let processResult = function (data) {
-
     writeRequestRoute(data.results);
-
 };
 
 let writeRequestRoute = function (results) {
-
-    let html = $(model.input.requestURL).val();
+    let html = renderInitial($(model.input.requestURL).val());
 
     results.forEach(function (result) {
         if (result.rewrite && result.rewrite.target) {
-            html += "<br/> -> " + result.rewrite.target;
+            html += renderStepTransition(result.rewrite.code);
+            html += renderStep(result.rewrite.target);
         }
     });
 
-    $("#resultPath").html(html);
+    $(model.elements.result).html(html);
+};
+
+let renderInitial = function (url) {
+    let html = "<div class='redirect-step'>";
+    html += "<p class='initial'> " + url + " </p>";
+    html += "</div>";
+    return html;
+};
+
+let renderStep = function (target) {
+
+    if (!target) {
+        return "";
+    }
+
+    let html = "<div class='redirect-step'>";
+    html += "<p class='" + target.type + "'> " + target.url + " </p>";
+    html += "</div>";
+    return html;
+};
+
+let renderStepTransition = function (code) {
+    let html = "<div class='transition'>";
+    html += "<p>" + code + "</p>";
+    html += "<i class=\"material-icons\">arrow_forward</i>";
+    html += "</div>";
+    return html;
 };
 
 let delay = (function () {

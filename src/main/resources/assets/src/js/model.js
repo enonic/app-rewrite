@@ -7,7 +7,7 @@ export const model = {
     },
     elements: {
         vhosts: ".vhost",
-        result: "#result",
+        result: "#request-tester-result",
         rows: "tr",
         errorMsg: "#errorMsg"
     },

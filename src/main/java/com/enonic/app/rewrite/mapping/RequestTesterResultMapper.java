@@ -1,6 +1,8 @@
 package com.enonic.app.rewrite.mapping;
 
+import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectTarget;
 import com.enonic.app.rewrite.requesttester.RedirectTestResult;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.xp.script.serializer.MapGenerator;
@@ -58,9 +60,18 @@ public class RequestTesterResultMapper
         if ( match != null )
         {
             gen.value( "matchId", match.getMatchId() );
-            gen.value( "target", match.getRedirect().getRedirectTarget() );
             gen.value( "type", match.getRedirect().getType() );
+            gen.value( "code", match.getRedirect().getType().getHttpCode() );
+            serialize( gen, match.getRedirect().getRedirectTarget() );
         }
+        gen.end();
+    }
+
+    private void serialize( final MapGenerator gen, final RedirectTarget target )
+    {
+        gen.map( "target" );
+        gen.value( "url", target.getTargetPath() );
+        gen.value( "type", target instanceof RedirectExternal ? "external" : "internal" );
         gen.end();
     }
 }
