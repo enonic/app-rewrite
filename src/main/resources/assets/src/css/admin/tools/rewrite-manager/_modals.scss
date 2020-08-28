@@ -70,5 +70,20 @@
 
   }
 
+  #tool-rules-import-result {
+
+    margin-top: 20px;
+
+    .import-preview-stats {
+      list-style: circle;
+      margin-left: 0;
+      padding-left: 20px;
+
+      .label {
+        font-weight: bold;
+      }
+    }
+  }
+
 }
 

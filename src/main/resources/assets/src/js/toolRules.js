@@ -156,12 +156,35 @@ let setImportDryRun = function (dryRun) {
 };
 
 let dryRunImportOnChange = function () {
+    function renderImportPreview(response) {
+
+        function renderImportResult(result) {
+            function renderStatItem(label, value) {
+                html += "<li><span class='label'>" + label + ": </span><span class='value'>" + value + "</span></li>";
+            }
+
+            let html = "<ul class='import-preview-stats'>";
+            renderStatItem("New", result.importResult.new);
+            renderStatItem("Error", result.importResult.errors);
+            renderStatItem("Deleted", result.importResult.deleted);
+            renderStatItem("Unsupported", result.importResult.unsupported);
+            renderStatItem("Total", result.importResult.total);
+            html += "</ul>";
+            return html;
+        }
+
+        let html = "";
+        html += "<p class='message'>" + response.message + ":</p>";
+        html += renderImportResult(response.result);
+        $("#tool-rules-import-result").html(html);
+    }
+
+
     $(model.modals.forms.importRules).find(':input').change(function (index, value) {
         if ($("#toolRulesImportFile").val()) {
-
             let showDryRunInfo = function (response) {
-                console.log("Response: %s", JSON.stringify(response));
-                $("#tool-rules-import-result").html("<p>" + JSON.stringify(response, "<br/>", 2) + "</p>");
+                console.log("Response", response);
+                renderImportPreview(response);
                 setImportDryRun(false);
             };
 

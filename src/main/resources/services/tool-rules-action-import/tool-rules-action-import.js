@@ -24,13 +24,13 @@ exports.post = function (req) {
     const importResult = rewriteDao.importRules(contextKey, mergeStrategy, byteSource, multipartItem.fileName, dryRun);
 
     let model = {
-        message: "imported rules to virtualHost [" + contextKey + "]",
+        message: "Importing rules to virtualHost [" + contextKey + "] preview",
         result: importResult
     };
 
     return {
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(model)
+        body: model
     }
 };
