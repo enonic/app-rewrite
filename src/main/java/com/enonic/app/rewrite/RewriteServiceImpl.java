@@ -1,7 +1,9 @@
 package com.enonic.app.rewrite;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +50,7 @@ public class RewriteServiceImpl
 
     private List<RewriteMappingProvider> providers;
 
-    private Cache<RewriteContextKey, RewriteMappingProvider> contextProviders;
+    private Cache<RewriteContextKey, Optional<RewriteMappingProvider>> contextProviders;
 
     private Cache<RewriteContextKey, RewriteMapping> rewriteMappings;
 
@@ -87,11 +89,17 @@ public class RewriteServiceImpl
     @Override
     public RewriteMapping getRewriteMapping( final RewriteContextKey key )
     {
+        if ( key == null )
+        {
+            LOG.info( "Key is null, this sucks" );
+            return null;
+        }
+
         return this.rewriteMappings.getIfPresent( key );
     }
 
     @Override
-    public ConcurrentMap<RewriteContextKey, RewriteMappingProvider> getRewriteConfigurations()
+    public ConcurrentMap<RewriteContextKey, Optional<RewriteMappingProvider>> getRewriteConfigurations()
     {
         return this.contextProviders.asMap();
     }
@@ -125,6 +133,7 @@ public class RewriteServiceImpl
             if ( !provider.readOnly() )
             {
                 provider.create( rewriteContextKey );
+                doReload();
                 return;
             }
         }
@@ -177,25 +186,26 @@ public class RewriteServiceImpl
         LOG.info( "Finding rewrite-mappings for configurations" );
 
         this.contextProviders.asMap().forEach( ( context, provider ) -> {
-            if ( provider != null )
+
+            if ( provider.isPresent() )
             {
-                LOG.info( "Loading rewrites for contextKey [{}] from provider [{}]", context, provider.name() );
-                map.put( context, provider.getRewriteMapping( context ) );
+                LOG.info( "Loading rewrites for contextKey [{}] from provider [{}]", context, provider.get().name() );
+                map.put( context, provider.get().getRewriteMapping( context ) );
             }
         } );
 
         return map;
     }
 
-    private Map<RewriteContextKey, RewriteMappingProvider> getVHostProviderConfig( final VirtualHostMappings mappings )
+    private Map<RewriteContextKey, Optional<RewriteMappingProvider>> getVHostProviderConfig( final VirtualHostMappings mappings )
     {
-        final Map<RewriteContextKey, RewriteMappingProvider> providerMap = Maps.newHashMap();
+        final Map<RewriteContextKey, Optional<RewriteMappingProvider>> providerMap = new HashMap<>();
 
         LOG.info( "Finding rewrite-configurations for vhosts" );
         mappings.forEach( vhost -> {
             final RewriteContextKey contextKey = new RewriteContextKey( vhost.getName() );
             final RewriteMappingProvider provider = fetchContextProvider( contextKey );
-            providerMap.put( contextKey, provider );
+            providerMap.put( contextKey, Optional.ofNullable( provider ) );
         } );
 
         return providerMap;
@@ -219,7 +229,7 @@ public class RewriteServiceImpl
 
     private RewriteMappingProvider doGetProvider( final RewriteContextKey contextKey )
     {
-        return this.contextProviders.getIfPresent( contextKey );
+        return this.contextProviders.getIfPresent( contextKey ).orElse( null );
     }
 
     @Reference

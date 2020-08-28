@@ -1,6 +1,7 @@
 package com.enonic.app.rewrite;
 
 import java.util.Map;
+import java.util.Optional;
 
 import com.enonic.app.rewrite.ie.ExportResult;
 import com.enonic.app.rewrite.ie.ImportResult;
@@ -48,7 +49,8 @@ public class RewriteBean
     @SuppressWarnings("unused")
     public Object getRewriteConfigurations()
     {
-        final Map<RewriteContextKey, RewriteMappingProvider> rewriteConfigurations = this.rewriteService.getRewriteConfigurations();
+        final Map<RewriteContextKey, Optional<RewriteMappingProvider>> rewriteConfigurations =
+            this.rewriteService.getRewriteConfigurations();
         return new RewriteConfigurationsMapper( rewriteConfigurations );
     }
 
