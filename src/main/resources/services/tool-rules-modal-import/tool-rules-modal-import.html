@@ -26,6 +26,13 @@
                 <option value="fail">Fail if same sources</option>-->
             </select>
 
+            <label for="importFormat">Import-format</label>
+            <select name="importFormat" id="importFormat">
+                <option value="csv" selected="selected">Auto-detect based on postfix</option>
+                <option value="csv">CSV (.csv, .txt)</option>
+                <option value="apache_rewrite">Apache rewrite (.conf)</option>
+            </select>
+
             <button class="modal-action"
                     data-action-type="import"
                     data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
