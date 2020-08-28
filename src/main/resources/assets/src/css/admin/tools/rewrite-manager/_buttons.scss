@@ -15,6 +15,7 @@
     justify-content: space-between;
     align-items: center;
 
+
     &:hover {
       background-color: $color-selected-3-active;
     }
@@ -39,4 +40,23 @@
 
   }
 
+}
+
+.tool-main {
+
+  button.table-action {
+
+    &.create, &.create:active, &.create:hover {
+      background: $color-button-create;
+      border-radius: 0;
+    }
+
+
+    &.delete, &.delete:active, &.delete:hover {
+      background-color: $color-button-delete;
+      color: white;
+      border-radius: 0;
+    }
+
+  }
 }

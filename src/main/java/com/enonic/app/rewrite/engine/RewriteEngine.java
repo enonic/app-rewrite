@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
+
 import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectInternal;
@@ -53,6 +55,8 @@ public class RewriteEngine
 
     private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath )
     {
+        LOG.debug( "REQUEST_PATH: [" + requestPath + "]" );
+
         if ( requestPath == null )
         {
             return null;
@@ -73,8 +77,12 @@ public class RewriteEngine
 
         final String urlInContext = removeContextPrefix( rewriteContext, requestPath );
 
+        LOG.debug( "URL-IN-CONTEXT: [" + urlInContext + "]" );
+
         for ( final RulePattern rulePattern : rulePatterns )
         {
+            LOG.debug( "rulePattern: [" + rulePattern.getPattern() + "]" );
+
             final Matcher matcher = rulePattern.getPattern().matcher( urlInContext );
             if ( !matcher.matches() )
             {
@@ -101,6 +109,9 @@ public class RewriteEngine
 
     private String removeContextPrefix( final RewriteContext context, final String path )
     {
-        return path.replaceFirst( context.getTargetContext(), "" );
+
+        final String replaced = path.replaceFirst( context.getTargetContext(), "" );
+
+        return Strings.isNullOrEmpty( replaced ) ? "/" : replaced;
     }
 }
