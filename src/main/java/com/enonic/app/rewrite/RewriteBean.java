@@ -120,6 +120,13 @@ public class RewriteBean
         return null;
     }
 
+    public Object editRule( final EditRuleParams params )
+    {
+        System.out.println( "########################### IN EDIT RULE" + "  - PARAMS: " + params.getContextKey() );
+        this.rewriteService.editRule( params );
+        return null;
+    }
+
     public Object getProviderInfo( final String contextKey )
     {
         return new ProviderInfoMapper( this.rewriteService.getProviderInfo( RewriteContextKey.from( contextKey ) ) );

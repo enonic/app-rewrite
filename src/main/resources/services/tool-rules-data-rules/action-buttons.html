@@ -9,13 +9,20 @@
          <i class="material-icons">edit</i>
      </button>
      -->
-    <button
-            class="table-action"
+    <button class="table-action"
             data-th-attr='data-action-context=${contextKey},data-action-identifier=${from}'
             data-action-service-name=delete-rule
             data-tool-key=tool-rules
             data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
             title="Delete rule">
         <i class="material-icons">delete</i>
+    </button>
+    <button class="table-modal"
+            data-th-attr='data-action-context=${contextKey},data-action-identifier=${from}'
+            data-modal-type="edit"
+            data-tool-key="tool-rules"
+            data-refresh-data-selector="#toolRulesRulesTable"
+            data-modal-context-selector="#toolRulesContextSelect"><i
+            class="material-icons">edit</i>
     </button>
 </div>

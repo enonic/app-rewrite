@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
+import com.enonic.app.rewrite.EditRuleParams;
 import com.enonic.app.rewrite.format.SourceFormatResolver;
 import com.enonic.app.rewrite.format.SourceReadResult;
 import com.enonic.app.rewrite.format.SourceReader;
@@ -155,6 +156,12 @@ public class RewriteMappingLocalFileProvider
     public void deleteRule( final DeleteRuleParams params )
     {
         throw new RuntimeException( "Cannot delete rule in provider " + this.getClass().getName() );
+    }
+
+    @Override
+    public void editRule( final EditRuleParams params )
+    {
+        throw new RuntimeException( "Cannot edit rule in provider " + this.getClass().getName() );
     }
 
     private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )

@@ -156,6 +156,20 @@ public class RewriteServiceImpl
     }
 
     @Override
+    public void editRule( final EditRuleParams params )
+    {
+        final RewriteMappingProvider provider = this.doGetProvider( params.getContextKey() );
+
+        if ( provider == null )
+        {
+            throw new IllegalArgumentException( "Provider with contextKey [" + params.getContextKey() + "] not found" );
+        }
+
+        provider.editRule( params );
+        doReload();
+    }
+
+    @Override
     public ProviderInfo getProviderInfo( final RewriteContextKey rewriteContextKey )
     {
         final RewriteMappingProvider rewriteMappingProvider = this.doGetProvider( rewriteContextKey );

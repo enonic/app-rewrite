@@ -1,0 +1,61 @@
+<div class="modal-guts create-context" id="tool-rules-modal-create-rule">
+
+    <div class="modal-content">
+        <h1>Edit rule</h1>
+
+        <form class="form-grid" data-th-id="${form.id}">
+            <label for="editRuleContextKeyShow">VirtualHost</label>
+            <input type="text" id="editRuleContextKeyShow" name="editRuleContextKeyShow" data-th-value="${contextKey}"
+                   disabled="disabled"
+                   readonly="readonly"/>
+
+            <input type="hidden" id="editRuleContextKey" name="editRuleContextKey" data-th-value="${contextKey}"
+                   readonly="readonly"/>
+
+            <label for="sourceUrl">URL</label>
+            <input type="text" id="sourceUrl" disabled="disabled" readonly="readonly" data-th-value="${source.url}"/>
+
+            <input type="hidden" id="originalRulePattern" name="originalRulePattern" data-th-value="${rule.pattern}"/>
+
+            <label for="editRulePattern">Pattern (source path)</label>
+            <input type="text" id="editRulePattern" name="editRulePattern" data-th-value="${rule.pattern}"/>
+
+            <label for="editRuleSubstitution">Substitution (target path)</label>
+            <input type="text" id="editRuleSubstitution" name="editRuleSubstitution" data-th-value="${rule.substitution}"/>
+
+            <label for="editRuleType">Redirect-type</label>
+            <select id="editRuleType" name="editRuleType">
+                <!-- TODO: FIX SELECTED FROM DATA -->
+                <option value="MOVED_PERMANENTLY" selected="selected">MOVED_PERMANENTLY</option>
+                <option value="TEMPORARILY_REDIRECT">TEMPORARILY_REDIRECT</option>
+            </select>
+
+            <button class="modal-action"
+                    data-action-type="edit-rule"
+                    data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Edit Rule
+            </button>
+            <button class="modal-cancel">Cancel
+            </button>
+        </form>
+
+        <div class="helptext">
+            <ul>
+                <li><span class="symbol">.</span>Matches any single character
+                <li><span class="symbol">+</span>Repeats the previous match one or more times
+                <li><span class="symbol">*</span>Repeats the previous match zero or more times
+                <li><span class="symbol">?</span>Makes the match optional
+                <li><span class="symbol">\</span>Escape the next character
+                <li><span class="symbol">^</span>Matches the beginning of the string
+                <li><span class="symbol">$</span>Matches the end of the string
+                <li><span class="symbol">( )</span>Groups several characters into a single unit, and captures a match for use in a
+                    backreference
+                <li><span class="symbol">[ ]</span>A character class - matches one of the characters
+                <li><span class="symbol">[^]</span>Negative character class - matches any character not specified
+            </ul>
+        </div>
+
+
+    </div>
+
+</div>

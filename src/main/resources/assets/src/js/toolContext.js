@@ -19,7 +19,7 @@ let rowCallbackFunction = function (row, data) {
 };
 
 const tableSettings = {
-    pageLength: 50,
+    pageLength: 20,
     autoWidth: false,
     rowCallback: rowCallbackFunction,
     dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +

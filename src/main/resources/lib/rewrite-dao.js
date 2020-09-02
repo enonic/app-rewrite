@@ -61,6 +61,18 @@ exports.deleteRule = function (contextKey, from) {
     return __.toNativeObject(result);
 };
 
+exports.editRule = function (contextKey, pattern, rule) {
+    let params = __.newBean('com.enonic.app.rewrite.EditRuleParams');
+    params.contextKey = contextKey;
+    params.pattern = pattern;
+    params.newPattern = rule.pattern;
+    params.substitution = rule.substitution;
+    params.type = rule.type;
+    let result = bean.editRule(params);
+    return __.toNativeObject(result);
+};
+
+
 exports.importRules = function (contextKey, mergeStrategy, byteSource, fileName, dryRun) {
     let params = __.newBean('com.enonic.app.rewrite.ImportRulesParams');
     params.contextKey = contextKey;

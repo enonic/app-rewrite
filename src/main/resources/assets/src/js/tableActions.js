@@ -1,7 +1,8 @@
-import {createActionServiceUrl} from "./serviceRegistry";
+import {createActionServiceUrl, createModalSelector, createModalUrl} from "./serviceRegistry";
 import {refreshDataTable} from "./dataTables";
 import {showError, showInfo} from "./info-bar";
 import {refreshDataElement} from "./dataElements";
+import {displayModal, displayTableModal, initializeModalActions, openOverlay, setModalInputFocus} from "./modals";
 
 
 export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFunction) {
@@ -51,6 +52,27 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFu
             };
 
             doExecuteToolActions(element, df, actionExecutedFunction);
+        });
+
+        $(toolSelector).find("button.table-modal").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let element = $(this);
+
+            let modalType = element.data('modal-type');
+
+            let df = dataFunction ? dataFunction : function () {
+                let actionContext = element.data("action-context");
+                let identifier = element.data("action-identifier");
+                return {
+                    actionContext: actionContext,
+                    identifier: identifier
+                }
+            };
+
+            let modalSelector = createModalSelector(toolKey);
+            let modalServiceUrl = createModalUrl(svcUrl, toolKey, modalType);
+            displayTableModal(modalServiceUrl, svcUrl, modalSelector, df, element);
         });
     };
 

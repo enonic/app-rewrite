@@ -31,6 +31,8 @@ public interface RewriteService
 
     void deleteRule( final DeleteRuleParams params );
 
+    void editRule( final EditRuleParams params );
+
     void create( final RewriteContextKey rewriteContextKey );
 
     void delete( final RewriteContextKey rewriteContextKey );

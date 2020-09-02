@@ -39,6 +39,30 @@ export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, data
     });
 };
 
+export let displayTableModal = function (modalServiceUrl, svcUrl, modalSelector, dataFunction, element, onDisplayed, onActionSuccess) {
+    jQuery.ajax({
+        url: modalServiceUrl,
+        cache: false,
+        type: 'GET',
+        data: dataFunction(element),
+        error: function (response, status, error) {
+            console.log("Result: ", response.responseText);
+            showError(response.responseText);
+        },
+        success: function (result) {
+            console.log("Fetched modal " + modalServiceUrl);
+            $(modalSelector).html(result);
+            initializeModalActions(svcUrl, onActionSuccess);
+            $(modalSelector).removeClass("closed");
+            openOverlay();
+            setModalInputFocus(modalSelector);
+            if (onDisplayed) {
+                onDisplayed();
+            }
+        }
+    });
+};
+
 export let modalOpen = function (selector) {
     return $(selector).is(":visible");
 };
@@ -90,7 +114,6 @@ let initializeModalActions = function (svcUrl, onActionSuccess) {
         let refreshDataSelector = thisElem.data("refresh-data-selector");
 
         let onSuccess = function (response, textStatus, jqXHR) {
-
             if (onActionSuccess) {
                 onActionSuccess(response);
             } else {

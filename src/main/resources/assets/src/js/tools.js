@@ -18,8 +18,16 @@ export let loadTool = function (toolRendererUrl, dataFunction, onToolLoaded) {
 };
 
 export let enableHelp = function (parentSelector) {
-    $(parentSelector).find(".helptext").click(function () {
+    $(parentSelector).find(".helptext > .heading").click(function (event) {
+        event.preventDefault();
         console.log("Clicking on help");
-        $(this).toggleClass("collapsed");
+        const heading = $(this);
+        const helptext = heading.parent();
+        helptext.toggleClass("collapsed");
+        if (helptext.hasClass("collapsed")) {
+            heading.text("[ display help ]");
+        } else {
+            heading.text("[ hide help ]");
+        }
     });
 };

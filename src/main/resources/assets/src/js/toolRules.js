@@ -16,7 +16,7 @@ const contextSelectorSelector = "#toolRulesContextSelect";
 let svcUrl;
 
 const rulesTableSettings = {
-    pageLength: 50,
+    pageLength: 20,
     autoWidth: false,
     dom: 'Bfrtip',
     buttons: [
