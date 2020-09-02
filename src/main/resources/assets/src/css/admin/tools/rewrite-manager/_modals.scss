@@ -33,7 +33,7 @@
     // sizing
     width: 600px;
     max-width: 100%;
-    height: 600px;
+    height: 700px;
     max-height: 100%;
 
     // looks
@@ -64,7 +64,7 @@
 
     .modal-content {
       padding: 20px;
-      height: 100%;
+      min-height: 100%;
       display: flex;
     }
 
@@ -81,6 +81,25 @@
 
       .label {
         font-weight: bold;
+      }
+    }
+  }
+
+  .helptext {
+    margin-top: 20px;
+    font-size: 0.8em;
+    border: 1px solid silver;
+    padding: 10px;
+
+    ul {
+
+
+      li {
+        span.symbol {
+          font-weight: bold;
+          display: inline-block;
+          width: 20px;
+        }
       }
     }
   }

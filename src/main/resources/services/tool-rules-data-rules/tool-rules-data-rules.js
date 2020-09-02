@@ -12,9 +12,9 @@ exports.get = function (req) {
     let model = {
         columns: [
             {width: "30px", title: "Order", data: "order"},
-            {title: "From", data: "from"},
-            {title: "Target", data: "target.path"},
-            {title: "Type", data: "type"},
+            {title: "Pattern", data: "from"},
+            {title: "Substitution", data: "target.path"},
+            {title: "Redirect-type", data: "type"},
             {title: "Actions", data: "actions"}
         ]
     };

@@ -4,13 +4,33 @@
     </div>
 
     <div class="tool-main">
-        <div id="virtualHostList"></div>
+        <div class="helptext collapsed">
+            <div class="heading">
+                <i class="material-icons">help</i>
+                <p> [help] </p>
+            </div>
+            <div class="content">
+                <ul>
+                    <li>This is the list of vhosts defined in your installation
+                        (See <a href="https://developer.enonic.com/docs/xp/stable/deployment/vhosts" target="_blank">documentation</a>)
+                    </li>
+                    <li>Each vhost can have a number of rewrite-rules configured in a source, a source is either a file or a repository</li>
+                    <li>File is named according to the following pattern: <span
+                            class="mono">com.enonic.app.rewrite.VHOST-NAME.(conf|csv|txt)</span><br/>
+                        e.g <span class="mono">com.enonic.app.rewrite.myvhost.conf</span>
+                    </li>
+                    <li>If a file defining rewrite-rules for a vhost exists, this will take precedence over any repository</li>
+                </ul>
+            </div>
+        </div>
+
         <table id="toolContextContextTable"
                data-target-type="table"
                data-service-name="context"
                data-target-selector="#toolContextContextTable"
                class="data-table auto-load table table-striped table-bordered clickable-tr large">
         </table>
+
     </div>
 
     <div class="modals">
@@ -18,5 +38,6 @@
             <p>Hello, I am context-create modal</p>
         </div>
     </div>
+
 
 </div>

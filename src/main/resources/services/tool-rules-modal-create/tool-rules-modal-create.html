@@ -15,13 +15,13 @@
             <label for="sourceUrl">URL</label>
             <input type="text" id="sourceUrl" disabled="disabled" readonly="readonly" data-th-value="${source.url}"/>
 
-            <label for="createRuleSource">Source path</label>
-            <input type="text" id="createRuleSource" name="createRuleSource"/>
+            <label for="createRuleSource">Pattern (source path)</label>
+            <input type="text" id="createRuleSource" name="createRuleSource" placeholder="regexp, e.g /my/path/.*"/>
 
-            <label for="createRuleTarget">Target path</label>
-            <input type="text" id="createRuleTarget" name="createRuleTarget"/>
+            <label for="createRuleTarget">Substitution (target path)</label>
+            <input type="text" id="createRuleTarget" name="createRuleTarget" placeholder="regexp-replace, e.g /redirected/($1)"/>
 
-            <label for="createRuleType">Type</label>
+            <label for="createRuleType">Redirect-type</label>
             <select id="createRuleType" name="createRuleType">
                 <option value="MOVED_PERMANENTLY" selected="selected">MOVED_PERMANENTLY</option>
                 <option value="TEMPORARILY_REDIRECT">TEMPORARILY_REDIRECT</option>
@@ -36,11 +36,29 @@
             <button class="modal-action"
                     data-action-type="create"
                     data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
-                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Add Rule
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Create Rule
             </button>
             <button class="modal-cancel">Cancel
             </button>
         </form>
+
+        <div class="helptext">
+            <ul>
+                <li><span class="symbol">.</span>Matches any single character
+                <li><span class="symbol">+</span>Repeats the previous match one or more times
+                <li><span class="symbol">*</span>Repeats the previous match zero or more times
+                <li><span class="symbol">?</span>Makes the match optional
+                <li><span class="symbol">\</span>Escape the next character
+                <li><span class="symbol">^</span>Matches the beginning of the string
+                <li><span class="symbol">$</span>Matches the end of the string
+                <li><span class="symbol">( )</span>Groups several characters into a single unit, and captures a match for use in a
+                    backreference
+                <li><span class="symbol">[ ]</span>A character class - matches one of the characters
+                <li><span class="symbol">[^]</span>Negative character class - matches any character not specified
+            </ul>
+        </div>
+
+
     </div>
 
 </div>

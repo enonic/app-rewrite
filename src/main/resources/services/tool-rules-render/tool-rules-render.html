@@ -31,13 +31,53 @@
                     data-modal-type="create"
                     data-refresh-data-selector="#toolRulesRulesTable"
                     data-modal-context-selector="#toolRulesContextSelect"><i
-                    class="material-icons">add</i><span>Add rule</span>
+                    class="material-icons">add</i><span>Create rule</span>
             </button>
         </div>
     </div>
     <div class="tool-main">
+
+        <div class="helptext collapsed">
+            <div class="heading">
+                <i class="material-icons">help</i>
+                <p> [help] </p>
+            </div>
+            <div class="content">
+                <ul>
+                    <li>This is the list of rewrite-rules for a selected vhost</li>
+                    <li>The import-format supports a simplified version of <a
+                            href="https://httpd.apache.org/docs/current/mod/mod_rewrite.html"
+                            target="_blank">Apache
+                        mod_rewrite</a> and CSV
+                    </li>
+                    <li>The <span class="mono">Pattern</span> is a regexp-pattern defining which incoming URLs should be affected by the
+                        rule
+                    </li>
+                    <li>The <span class="mono">Substitution</span> is where should the matching requests be sent. A substitution could be:
+                        <ul>
+                            <li>A modified version of the pattern (regexp-substitution)</li>
+                            <li>A full URL redirect statement</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Examples:
+                        <ul>
+                            <li><strong>Redirect one url to another</strong><br/>
+                                <span class="mono">/test/pattern/url -> /redirected/anotherUrl</span></li>
+                            <li><strong> Redirect children to another base-path, e.g
+                                /test/pattern/product to /redirected/product</strong><br/>
+                                <span class="mono">/test/pattern/.* -> /redirected/$1</span></li>
+                            <li><strong>Redirect to external</strong><br/>
+                                <span class="mono">/test/pattern/.* -> https://enonic.com</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <table id="toolRulesRulesTable" class="data-table table table-striped table-bordered wrap">
         </table>
+
     </div>
 
     <div class="modals">

@@ -17,6 +17,10 @@
     .tool-main {
       padding: 40px;
 
+      > div:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
 
       .tool-main-bar {
 
@@ -40,6 +44,61 @@
           font-size: 28px;
         }
 
+      }
+
+    }
+
+    .helptext {
+
+      font-size: 1.0em;
+
+      .heading {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background-color: #ccc;
+          cursor: pointer;
+        }
+
+        i {
+          font-size: 2em;
+          color: $color-selected-2;
+        }
+      }
+
+      .content {
+        border: 1px solid silver;
+        padding: 10px;
+      }
+
+      &.collapsed {
+        .content {
+          display: none;
+          overflow: hidden;
+        }
+      }
+
+      ul {
+        list-style: disc;
+        padding-left: 20px;
+
+        li {
+          span.symbol {
+            font-weight: bold;
+            display: inline-block;
+            width: 20px;
+          }
+        }
+
+        ul {
+          list-style: circle;
+        }
+      }
+
+      .mono {
+        font-family: 'Lucida Console', monospace;
       }
 
     }
@@ -102,5 +161,6 @@
       }
     }
   }
+
 
 }
