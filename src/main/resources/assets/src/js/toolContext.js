@@ -1,4 +1,4 @@
-import {loadTool} from "./tools";
+import {enableHelp, loadTool} from "./tools";
 import {createDataServiceUrl, createToolRendererUrl} from "./serviceRegistry";
 import {selectTool} from "./toolbar";
 import {setRuleContext} from "./toolRules";
@@ -52,7 +52,8 @@ let onToolLoaded = function (result) {
         tableSelector: virtualHostDataTableSelector
     };
 
-    populateDataTable(serviceConfig, onDataPopulated, onTableRefresh)
+    populateDataTable(serviceConfig, onDataPopulated, onTableRefresh);
+    enableHelp(toolSelector);
 };
 
 

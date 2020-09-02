@@ -13,19 +13,13 @@ export let loadTool = function (toolRendererUrl, dataFunction, onToolLoaded) {
         },
         success: function (result) {
             onToolLoaded(result);
-            enableHelp();
         }
     });
+};
 
-
-    let enableHelp = function () {
-
-        $(".helptext").click(function () {
-            $(this).toggleClass("collapsed");
-        });
-
-
-    }
-
-
+export let enableHelp = function (parentSelector) {
+    $(parentSelector).find(".helptext").click(function () {
+        console.log("Clicking on help");
+        $(this).toggleClass("collapsed");
+    });
 };

@@ -1,4 +1,4 @@
-import {loadTool} from "./tools";
+import {enableHelp, loadTool} from "./tools";
 import {createToolRendererUrl} from "./serviceRegistry";
 import {model} from "./model";
 
@@ -18,6 +18,7 @@ let onToolLoaded = function (result) {
     console.log("Tool [" + toolKey + "] loaded");
     $(toolSelector).html(result);
     initListeners();
+    enableHelp(toolSelector);
 };
 
 let initListeners = function () {

@@ -1,5 +1,5 @@
 import {createActionServiceUrl, createDataServiceUrl, createModalSelector, createModalUrl, createToolRendererUrl} from "./serviceRegistry";
-import {loadTool} from "./tools";
+import {enableHelp, loadTool} from "./tools";
 import {populateDataTable} from "./dataTables";
 import {displayModal, postActionForm} from "./modals";
 import {enableActionButtons} from "./tableActions";
@@ -50,8 +50,11 @@ function setRuleButtonState(contextKey) {
 
         if (response.readOnly) {
             $(model.buttons.rule.create).prop('disabled', true);
+            $(model.buttons.rule.import).prop('disabled', true);
         } else {
             $(model.buttons.rule.create).prop('disabled', false);
+            $(model.buttons.rule.import).prop('disabled', false);
+            $(model.buttons.rule.export).prop('disabled', false);
         }
     }
 
@@ -89,6 +92,7 @@ let onToolLoaded = function (result) {
     $(toolSelector).html(result);
     triggerContextChanged();
     setContextSelectorData();
+    enableHelp(toolSelector);
 };
 
 let contextSelectorDataContext = function () {
