@@ -1,6 +1,6 @@
 package com.enonic.app.rewrite.format;
 
-import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRule;
 
 public class RewriteReaderResult
 {

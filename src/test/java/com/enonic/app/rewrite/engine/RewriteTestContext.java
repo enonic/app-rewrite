@@ -1,7 +1,7 @@
 package com.enonic.app.rewrite.engine;
 
-import com.enonic.app.rewrite.rewrite.RewriteContext;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteContext;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class RewriteTestContext
     implements RewriteContext

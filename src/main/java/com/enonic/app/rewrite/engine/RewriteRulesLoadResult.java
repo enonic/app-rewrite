@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class RewriteRulesLoadResult
 {

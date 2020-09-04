@@ -1,7 +1,6 @@
 package com.enonic.app.rewrite.ie;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 
 import org.osgi.service.component.annotations.Component;
@@ -14,12 +13,11 @@ import com.google.common.base.Charsets;
 import com.enonic.app.rewrite.ExportRulesParams;
 import com.enonic.app.rewrite.ImportRulesParams;
 import com.enonic.app.rewrite.RewriteService;
-import com.enonic.app.rewrite.format.SourceFormat;
 import com.enonic.app.rewrite.format.SourceFormatResolver;
 import com.enonic.app.rewrite.format.SourceReadResult;
 import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.format.SourceWriter;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 
 @Component(immediate = true)
 public class ImportServiceImpl

@@ -4,9 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.vhost.RewriteConfigurations;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 

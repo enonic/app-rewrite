@@ -8,11 +8,11 @@ import org.mockito.Mockito;
 import com.enonic.app.rewrite.MockHttpRequest;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteMappings;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteMappings;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.web.vhost.VirtualHost;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

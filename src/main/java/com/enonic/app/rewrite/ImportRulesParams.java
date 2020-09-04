@@ -2,7 +2,7 @@ package com.enonic.app.rewrite;
 
 import com.google.common.io.ByteSource;
 
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class ImportRulesParams
 {

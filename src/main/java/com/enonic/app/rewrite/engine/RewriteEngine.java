@@ -14,11 +14,11 @@ import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectInternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.app.rewrite.rewrite.RewriteContext;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMappings;
-import com.enonic.app.rewrite.rewrite.RewriteTarget;
-import com.enonic.app.rewrite.rewrite.RewriteVirtualHostContext;
+import com.enonic.app.rewrite.domain.RewriteContext;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMappings;
+import com.enonic.app.rewrite.domain.RewriteTarget;
+import com.enonic.app.rewrite.domain.RewriteVirtualHostContext;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
 
@@ -55,8 +55,6 @@ public class RewriteEngine
 
     private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath )
     {
-        LOG.debug( "REQUEST_PATH: [" + requestPath + "]" );
-
         if ( requestPath == null )
         {
             return null;
@@ -64,7 +62,6 @@ public class RewriteEngine
 
         if ( this.rewriteMap == null )
         {
-            LOG.warn( "Rewrite-map not initialized" );
             return null;
         }
 
@@ -77,17 +74,16 @@ public class RewriteEngine
 
         final String urlInContext = removeContextPrefix( rewriteContext, requestPath );
 
-        LOG.debug( "URL-IN-CONTEXT: [" + urlInContext + "]" );
-
         for ( final RulePattern rulePattern : rulePatterns )
         {
-            LOG.debug( "rulePattern: [" + rulePattern.getPattern() + "]" );
-
             final Matcher matcher = rulePattern.getPattern().matcher( urlInContext );
             if ( !matcher.matches() )
             {
                 continue;
             }
+
+            LOG.debug( "Redirect-match found: [{}] : [{}]", requestPath, rulePattern.getTarget() );
+
             return new RedirectMatch( createRedirect( rewriteContext, rulePattern, matcher ), rulePattern.getOrder() );
         }
 

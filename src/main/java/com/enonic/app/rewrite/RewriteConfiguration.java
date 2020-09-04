@@ -1,7 +1,7 @@
 package com.enonic.app.rewrite;
 
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class RewriteConfiguration
 {

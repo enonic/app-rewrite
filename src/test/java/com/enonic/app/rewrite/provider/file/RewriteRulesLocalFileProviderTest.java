@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 
 class RewriteRulesLocalFileProviderTest
 {

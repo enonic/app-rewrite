@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import com.enonic.app.rewrite.rewrite.RewriteContext;
+import com.enonic.app.rewrite.domain.RewriteContext;
 
 public class RedirectInternal
     implements RedirectTarget

@@ -2,7 +2,6 @@ package com.enonic.app.rewrite.format;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringWriter;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -12,8 +11,8 @@ import org.apache.commons.csv.CSVRecord;
 import com.google.common.base.Strings;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 
 public class CSVSerializer
 {

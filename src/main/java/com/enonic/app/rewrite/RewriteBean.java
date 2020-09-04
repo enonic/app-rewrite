@@ -3,7 +3,6 @@ package com.enonic.app.rewrite;
 import java.util.Map;
 import java.util.Optional;
 
-import com.enonic.app.rewrite.ie.ExportResult;
 import com.enonic.app.rewrite.ie.ImportResult;
 import com.enonic.app.rewrite.ie.ImportService;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
@@ -17,8 +16,8 @@ import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.vhost.VHostService;
 import com.enonic.app.rewrite.vhost.VirtualHostMapping;
 import com.enonic.app.rewrite.vhost.VirtualHostMappings;

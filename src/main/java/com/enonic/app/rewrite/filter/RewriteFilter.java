@@ -12,6 +12,8 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Stopwatch;
+
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.context.ContextResolver;
 import com.enonic.app.rewrite.redirect.Redirect;
@@ -92,7 +94,6 @@ public class RewriteFilter
             return false;
         }
         final RedirectMatch match = rewriteService.process( hsRequest );
-
         if ( match == null )
         {
             LOG.debug( "No matching rules: " + hsRequest.getRequestURI() );

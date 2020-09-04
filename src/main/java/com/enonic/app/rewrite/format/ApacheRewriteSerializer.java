@@ -15,8 +15,8 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 
 public class ApacheRewriteSerializer
 {

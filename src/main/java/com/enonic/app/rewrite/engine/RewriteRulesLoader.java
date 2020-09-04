@@ -4,10 +4,10 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteMappings;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteMappings;
+import com.enonic.app.rewrite.domain.RewriteRule;
 
 class RewriteRulesLoader
 {

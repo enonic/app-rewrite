@@ -4,9 +4,8 @@ package com.enonic.app.rewrite.provider;
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.EditRuleParams;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 
 public interface RewriteMappingProvider
 {

@@ -1,4 +1,4 @@
-package com.enonic.app.rewrite.rewrite;
+package com.enonic.app.rewrite.domain;
 
 import java.util.Objects;
 

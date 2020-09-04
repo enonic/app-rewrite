@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.index.IndexService;
 import com.enonic.xp.node.CreateNodeParams;
 import com.enonic.xp.node.Node;

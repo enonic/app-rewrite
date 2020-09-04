@@ -21,9 +21,9 @@ import com.enonic.app.rewrite.format.SourceFormatResolver;
 import com.enonic.app.rewrite.format.SourceReadResult;
 import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
-import com.enonic.app.rewrite.rewrite.RewriteMapping;
-import com.enonic.app.rewrite.rewrite.RewriteMappings;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteMappings;
 
 
 public class RewriteMappingLocalFileProvider

@@ -3,7 +3,7 @@ package com.enonic.app.rewrite.engine;
 import java.util.regex.Pattern;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.rewrite.RewriteTarget;
+import com.enonic.app.rewrite.domain.RewriteTarget;
 
 class RulePattern
     implements Comparable<RulePattern>

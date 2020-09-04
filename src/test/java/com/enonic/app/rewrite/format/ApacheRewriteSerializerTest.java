@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
 
-import com.enonic.app.rewrite.rewrite.RewriteRule;
-import com.enonic.app.rewrite.rewrite.RewriteRules;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

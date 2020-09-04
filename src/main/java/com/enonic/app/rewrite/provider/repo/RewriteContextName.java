@@ -1,6 +1,6 @@
 package com.enonic.app.rewrite.provider.repo;
 
-import com.enonic.app.rewrite.rewrite.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class RewriteContextName
 {
