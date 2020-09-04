@@ -16,7 +16,7 @@ const contextSelectorSelector = "#toolRulesContextSelect";
 let svcUrl;
 
 const rulesTableSettings = {
-    pageLength: 20,
+    pageLength: 25,
     autoWidth: false
 };
 
@@ -126,35 +126,35 @@ let enableRuleButtons = function () {
     $(model.buttons.rule.create)
         .off()
         .click(function () {
-        let modalSelector = createModalSelector(toolKey);
-        let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
-        displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)
-    });
+            let modalSelector = createModalSelector(toolKey);
+            let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
+            displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)
+        });
 };
 
 let enableImportButton = function () {
     $(model.buttons.rule.import)
         .off()
         .click(function () {
-        let modalSelector = createModalSelector(toolKey);
-        let modalServiceUrl = createModalUrl(svcUrl, toolKey, "import");
-        displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, dryRunImportOnChange);
-    });
+            let modalSelector = createModalSelector(toolKey);
+            let modalServiceUrl = createModalUrl(svcUrl, toolKey, "import");
+            displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, dryRunImportOnChange);
+        });
 };
 
 let enableExportButton = function () {
     $(model.buttons.rule.export)
         .off()
         .click(function () {
-        let modalSelector = createModalSelector(toolKey);
-        let modalServiceUrl = createModalUrl(svcUrl, toolKey, "export");
-        displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, function () {
-        }, function (response) {
-            let dataServiceUrl = createDataServiceUrl(svcUrl, toolKey, "export");
-            $("body").append(
-                "<iframe src='" + dataServiceUrl + "?data=" + response.data + "&fisk=ost" + "' style='display: none;' ></iframe>");
+            let modalSelector = createModalSelector(toolKey);
+            let modalServiceUrl = createModalUrl(svcUrl, toolKey, "export");
+            displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, function () {
+            }, function (response) {
+                let dataServiceUrl = createDataServiceUrl(svcUrl, toolKey, "export");
+                $("body").append(
+                    "<iframe src='" + dataServiceUrl + "?data=" + response.data + "&fisk=ost" + "' style='display: none;' ></iframe>");
+            });
         });
-    });
 
 
 };

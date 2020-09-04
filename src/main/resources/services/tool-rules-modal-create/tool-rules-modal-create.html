@@ -16,10 +16,10 @@
             <input type="text" id="sourceUrl" disabled="disabled" readonly="readonly" data-th-value="${source.url}"/>
 
             <label for="createRuleSource">Pattern (source path)</label>
-            <input type="text" id="createRuleSource" name="createRuleSource" placeholder="regexp, e.g /my/path/.*"/>
+            <input type="text" id="createRuleSource" name="createRuleSource" placeholder="regexp, e.g /my/path/(.+)"/>
 
             <label for="createRuleTarget">Substitution (target path)</label>
-            <input type="text" id="createRuleTarget" name="createRuleTarget" placeholder="regexp-replace, e.g /redirected/($1)"/>
+            <input type="text" id="createRuleTarget" name="createRuleTarget" placeholder="regexp-replace, e.g /redirected/$1"/>
 
             <label for="createRuleType">Redirect-type</label>
             <select id="createRuleType" name="createRuleType">
