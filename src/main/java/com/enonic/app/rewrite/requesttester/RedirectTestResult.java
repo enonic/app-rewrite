@@ -2,26 +2,25 @@ package com.enonic.app.rewrite.requesttester;
 
 
 import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.xp.web.vhost.VirtualHost;
 
 public class RedirectTestResult
 {
-    private VirtualHost virtualHost;
+    private IncomingRequest incomingRequest;
 
     private RedirectMatch match;
 
-    public RedirectTestResult( final VirtualHost virtualHost, final RedirectMatch match )
+    public RedirectTestResult( final IncomingRequest incomingRequest, final RedirectMatch match )
     {
-        this.virtualHost = virtualHost;
+        this.incomingRequest = incomingRequest;
         this.match = match;
     }
 
-    public VirtualHost getVirtualHost()
+    public IncomingRequest getIncomingRequest()
     {
-        return virtualHost;
+        return incomingRequest;
     }
 
-    public RedirectMatch getMatch()
+    public RedirectMatch redirectMatch()
     {
         return match;
     }
@@ -29,7 +28,7 @@ public class RedirectTestResult
     @Override
     public String toString()
     {
-        return "RedirectTestResult{" + "virtualHost=" + virtualHost + ", match=" + match;
+        return "RedirectTestResult{" + "incomingRequest=" + incomingRequest + ", match=" + match + '}';
     }
 }
 

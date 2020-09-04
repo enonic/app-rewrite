@@ -122,7 +122,6 @@ public class RewriteBean
 
     public Object editRule( final EditRuleParams params )
     {
-        System.out.println( "########################### IN EDIT RULE" + "  - PARAMS: " + params.getContextKey() );
         this.rewriteService.editRule( params );
         return null;
     }

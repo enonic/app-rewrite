@@ -8,7 +8,7 @@ export let loadTool = function (toolRendererUrl, dataFunction, onToolLoaded) {
         type: 'GET',
         data: dataFunction(),
         error: function (response, status, error) {
-            console.log("Error: ", response.responseText);
+            console.error(response.responseText);
             showError("Cannot load tool: " + response.responseText)
         },
         success: function (result) {
@@ -20,7 +20,6 @@ export let loadTool = function (toolRendererUrl, dataFunction, onToolLoaded) {
 export let enableHelp = function (parentSelector) {
     $(parentSelector).find(".helptext > .heading").click(function (event) {
         event.preventDefault();
-        console.log("Clicking on help");
         const heading = $(this);
         const helptext = heading.parent();
         helptext.toggleClass("collapsed");

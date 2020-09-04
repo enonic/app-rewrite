@@ -1,6 +1,7 @@
 import {populateDataElement, refreshDataElement} from "./dataElements";
+import {add} from "ramda";
 
-export let populateDataTable = function (serviceConfig, onTablePopulated, onTableRefresh) {
+export let populateDataTable = function (serviceConfig, onTablePopulated, onTableRefresh, onRedraw) {
 
     function doRefreshTable(selector, response) {
         let dataTable = $(selector).DataTable();
@@ -30,7 +31,17 @@ export let populateDataTable = function (serviceConfig, onTablePopulated, onTabl
     let dataServiceUrl = serviceConfig.dataServiceUrl;
     let dataFunction = serviceConfig.dataFunction;
 
+    addOnRedrawEventHandler(tableSelector, onRedraw);
+
     populateDataElement(tableSelector, dataServiceUrl, dataFunction, doPopulateData, doRefreshTable)
+};
+
+let addOnRedrawEventHandler = function (tableSelector, onFiltering) {
+    $(tableSelector)
+        .off('draw.dt')
+        .on('draw.dt', function () {
+            onFiltering();
+        });
 };
 
 

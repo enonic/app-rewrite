@@ -1,6 +1,5 @@
 package com.enonic.app.rewrite.requesttester;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -12,7 +11,9 @@ import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.redirect.Redirect;
+import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectTarget;
 import com.enonic.app.rewrite.vhost.VirtualHostConfig;
 import com.enonic.app.rewrite.vhost.VirtualHostMapping;
 import com.enonic.xp.web.vhost.VirtualHost;
@@ -31,7 +32,7 @@ public class RequestTesterImpl
     @Override
     public RequestTesterResult testRequest( final String requestURL )
     {
-        List<Redirect> redirectedTargets = Lists.newArrayList();
+        final List<Redirect> redirectedTargets = Lists.newArrayList();
 
         final RequestTesterResult.Builder builder = RequestTesterResult.create();
 
@@ -41,31 +42,31 @@ public class RequestTesterImpl
         }
 
         RedirectTestResult redirectTestResult = doTest( requestURL );
+        builder.add( redirectTestResult );
 
         int counter = 0;
 
-        while ( redirectTestResult != null )
+        while ( redirectTestResult.redirectMatch() != null )
         {
-            builder.add( redirectTestResult );
-
-            final RedirectMatch match = redirectTestResult.getMatch();
+            final RedirectMatch match = redirectTestResult.redirectMatch();
 
             if ( match != null )
             {
                 final Redirect redirect = match.getRedirect();
 
-                System.out.println( "Current redirect: " + redirect );
-
-                if ( counter++ > 100 || redirectedTargets.contains( redirect ) )
+                if ( redirectedTargets.contains( redirect ) )
                 {
-                    throw new RedirectLoopException( redirectedTargets, redirect );
+                    return builder.loop().build();
+                }
+                else if ( counter > THRESHOLD )
+                {
+                    return builder.error().build();
                 }
 
                 redirectedTargets.add( redirect );
-
-                final Path newPath =
-                    Paths.get( redirectTestResult.getVirtualHost().getHost(), redirect.getRedirectTarget().getTargetPath() );
-                redirectTestResult = doTest( newPath.toString() );
+                String newTargetPath = getNextTargetPath( redirectTestResult, redirect );
+                redirectTestResult = doTest( newTargetPath );
+                builder.add( redirectTestResult );
             }
             else
             {
@@ -76,20 +77,44 @@ public class RequestTesterImpl
         return builder.build();
     }
 
+    private String getNextTargetPath( final RedirectTestResult redirectTestResult, final Redirect redirect )
+    {
+        final RedirectTarget newTarget = redirect.getRedirectTarget();
+        String newTargetPath;
+
+        if ( newTarget instanceof RedirectExternal )
+        {
+            newTargetPath = newTarget.getTargetPath();
+        }
+        else
+        {
+            final IncomingRequest incomingRequest = redirectTestResult.getIncomingRequest();
+            newTargetPath = Paths.get( incomingRequest.getMatchingVHost().getHost(), newTarget.getTargetPath() ).toString();
+        }
+        return newTargetPath;
+    }
+
     private RedirectTestResult doTest( final String requestURL )
     {
-
         final RewriteTesterRequest req = new RewriteTesterRequest( requestURL );
         getAndSetVHost( req );
-        final VirtualHost virtualHost = VirtualHostHelper.getVirtualHost( req );
-        final RedirectMatch redirect = this.rewriteService.process( req );
 
-        if ( virtualHost == null && redirect == null )
+        final IncomingRequest incomingRequest = createIncomingRequest( requestURL, req );
+
+        RedirectMatch redirect = null;
+
+        if ( incomingRequest.getMatchingVHost() != null )
         {
-            return null;
+            redirect = this.rewriteService.process( req );
         }
 
-        return new RedirectTestResult( virtualHost, redirect );
+        return new RedirectTestResult( incomingRequest, redirect );
+    }
+
+    private IncomingRequest createIncomingRequest( final String requestURL, final RewriteTesterRequest req )
+    {
+        final VirtualHost virtualHost = VirtualHostHelper.getVirtualHost( req );
+        return new IncomingRequest( requestURL, virtualHost );
     }
 
     private void getAndSetVHost( final RewriteTesterRequest req )

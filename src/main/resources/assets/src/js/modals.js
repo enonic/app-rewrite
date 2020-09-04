@@ -22,11 +22,10 @@ export let displayModal = function (modalServiceUrl, svcUrl, modalSelector, data
         type: 'GET',
         data: dataFunction(),
         error: function (response, status, error) {
-            console.log("Result: ", response.responseText);
+            console.error("Error: ", response.responseText);
             showError(response.responseText);
         },
         success: function (result) {
-            console.log("Fetched modal " + modalServiceUrl);
             $(modalSelector).html(result);
             initializeModalActions(svcUrl, onActionSuccess);
             $(modalSelector).removeClass("closed");
@@ -46,11 +45,10 @@ export let displayTableModal = function (modalServiceUrl, svcUrl, modalSelector,
         type: 'GET',
         data: dataFunction(element),
         error: function (response, status, error) {
-            console.log("Result: ", response.responseText);
+            console.error("Result: ", response.responseText);
             showError(response.responseText);
         },
         success: function (result) {
-            console.log("Fetched modal " + modalServiceUrl);
             $(modalSelector).html(result);
             initializeModalActions(svcUrl, onActionSuccess);
             $(modalSelector).removeClass("closed");

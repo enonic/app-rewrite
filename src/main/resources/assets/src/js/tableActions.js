@@ -10,7 +10,6 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFu
     let doEnableActionButtons = function () {
 
         let doExecuteToolActions = function (element, dataFunction, actionExecutedFunction) {
-
             const action = element.data('action-service-name');
             let serviceUrl = createActionServiceUrl(svcUrl, toolKey, action);
             if (confirm("Are you sure that you want to " + action + "?")) {
@@ -31,49 +30,53 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFu
             }
         };
 
-        $(toolSelector).find("button.table-action").click(function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            let element = $(this);
+        $(toolSelector).find("button.table-action")
+            .off()
+            .click(function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let element = $(this);
 
-            let refreshDataSelector = element.data("refresh-data-selector");
+                let refreshDataSelector = element.data("refresh-data-selector");
 
-            let df = dataFunction ? dataFunction : function (element) {
-                let actionContext = element.data("action-context");
-                let identifier = element.data("action-identifier");
-                return {
-                    actionContext: actionContext,
-                    identifier: identifier
-                }
-            };
+                let df = dataFunction ? dataFunction : function (element) {
+                    let actionContext = element.data("action-context");
+                    let identifier = element.data("action-identifier");
+                    return {
+                        actionContext: actionContext,
+                        identifier: identifier
+                    }
+                };
 
-            let actionExecutedFunction = function (result) {
-                refreshDataElement(refreshDataSelector);
-            };
+                let actionExecutedFunction = function (result) {
+                    refreshDataElement(refreshDataSelector);
+                };
 
-            doExecuteToolActions(element, df, actionExecutedFunction);
-        });
+                doExecuteToolActions(element, df, actionExecutedFunction);
+            });
 
-        $(toolSelector).find("button.table-modal").click(function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            let element = $(this);
+        $(toolSelector).find("button.table-modal")
+            .off()
+            .click(function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let element = $(this);
 
-            let modalType = element.data('modal-type');
+                let modalType = element.data('modal-type');
 
-            let df = dataFunction ? dataFunction : function () {
-                let actionContext = element.data("action-context");
-                let identifier = element.data("action-identifier");
-                return {
-                    actionContext: actionContext,
-                    identifier: identifier
-                }
-            };
+                let df = dataFunction ? dataFunction : function () {
+                    let actionContext = element.data("action-context");
+                    let identifier = element.data("action-identifier");
+                    return {
+                        actionContext: actionContext,
+                        identifier: identifier
+                    }
+                };
 
-            let modalSelector = createModalSelector(toolKey);
-            let modalServiceUrl = createModalUrl(svcUrl, toolKey, modalType);
-            displayTableModal(modalServiceUrl, svcUrl, modalSelector, df, element);
-        });
+                let modalSelector = createModalSelector(toolKey);
+                let modalServiceUrl = createModalUrl(svcUrl, toolKey, modalType);
+                displayTableModal(modalServiceUrl, svcUrl, modalSelector, df, element);
+            });
     };
 
     doEnableActionButtons();

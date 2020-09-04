@@ -3,6 +3,7 @@ package com.enonic.app.rewrite.mapping;
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectTarget;
+import com.enonic.app.rewrite.requesttester.IncomingRequest;
 import com.enonic.app.rewrite.requesttester.RedirectTestResult;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.xp.script.serializer.MapGenerator;
@@ -22,7 +23,9 @@ public class RequestTesterResultMapper
     @Override
     public void serialize( final MapGenerator gen )
     {
-        gen.array( "results" );
+
+        gen.value( "state", result.getResultState().name() );
+        gen.array( "steps" );
         result.getMatchList().forEach( redirectMatch -> {
             serialize( gen, redirectMatch );
         } );
@@ -33,22 +36,31 @@ public class RequestTesterResultMapper
     private void serialize( final MapGenerator gen, final RedirectTestResult testResult )
     {
         gen.map();
-        serialize( gen, testResult.getVirtualHost() );
-        serialize( gen, testResult.getMatch() );
+        serialize( gen, testResult.getIncomingRequest() );
+        serialize( gen, testResult.redirectMatch() );
         gen.end();
     }
 
-    private void serialize( final MapGenerator gen, final VirtualHost virtualHost )
+    private void serialize( final MapGenerator gen, final IncomingRequest incomingRequest )
     {
-        gen.map( "virtualHost" );
+        gen.map( "incomingRequest" );
 
-        if ( virtualHost != null )
+        if ( incomingRequest != null )
         {
-            gen.value( "name", virtualHost.getName() );
-            gen.value( "source", virtualHost.getSource() );
-            gen.value( "target", virtualHost.getTarget() );
-            gen.value( "host", virtualHost.getHost() );
-            gen.value( "defaultIdProvider", virtualHost.getDefaultIdProviderKey() );
+            gen.value( "url", incomingRequest.getRequestUrl() );
+
+            final VirtualHost matchingVHost = incomingRequest.getMatchingVHost();
+
+            if ( matchingVHost != null )
+            {
+                gen.map( "matchingVHost" );
+                gen.value( "name", matchingVHost.getName() );
+                gen.value( "source", matchingVHost.getSource() );
+                gen.value( "target", matchingVHost.getTarget() );
+                gen.value( "host", matchingVHost.getHost() );
+                gen.value( "defaultIdProvider", matchingVHost.getDefaultIdProviderKey() );
+                gen.end();
+            }
         }
 
         gen.end();

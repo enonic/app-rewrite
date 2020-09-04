@@ -6,12 +6,24 @@ import com.google.common.collect.Lists;
 
 public class RequestTesterResult
 {
+    public enum TestResultState
+    {
+        OK, LOOP, ERROR
+    }
+
+    public TestResultState getResultState()
+    {
+        return resultState;
+    }
 
     private final List<RedirectTestResult> matchList;
+
+    private final TestResultState resultState;
 
     private RequestTesterResult( final Builder builder )
     {
         matchList = builder.matchList;
+        resultState = builder.resultState;
     }
 
     public List<RedirectTestResult> getMatchList()
@@ -28,8 +40,22 @@ public class RequestTesterResult
     {
         private List<RedirectTestResult> matchList = Lists.newArrayList();
 
+        private TestResultState resultState = TestResultState.OK;
+
         private Builder()
         {
+        }
+
+        public Builder loop()
+        {
+            this.resultState = TestResultState.LOOP;
+            return this;
+        }
+
+        public Builder error()
+        {
+            this.resultState = TestResultState.ERROR;
+            return this;
         }
 
         public Builder add( final RedirectTestResult result )

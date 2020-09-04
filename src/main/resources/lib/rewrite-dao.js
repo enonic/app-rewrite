@@ -91,3 +91,8 @@ exports.serializeRules = function (contextKey, format) {
     let result = bean.serializeRules(params);
     return result;
 };
+
+exports.testRequest = function (requestURL) {
+    let result = bean.requestTester(requestURL);
+    return __.toNativeObject(result);
+};

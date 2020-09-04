@@ -17,11 +17,7 @@ let svcUrl;
 
 const rulesTableSettings = {
     pageLength: 20,
-    autoWidth: false,
-    dom: 'Bfrtip',
-    buttons: [
-        'copyHtml5', 'excelHtml5', 'pdfHtml5', 'csvHtml5'
-    ]
+    autoWidth: false
 };
 
 export let initToolRules = function (svc) {
@@ -109,11 +105,14 @@ let loadRules = function () {
         tableSelector: ruleTableSelector
     };
 
-    populateDataTable(serviceConfig, onDataLoaded, onTableRefreshed);
+    populateDataTable(serviceConfig, onDataLoaded, onTableRefreshed, onRedraw);
+};
+
+let onRedraw = function () {
+    enableActionButtons(svcUrl, toolSelector, toolKey);
 };
 
 let onDataLoaded = function (response) {
-    console.log("Rule-data loaded successfully");
     enableRuleButtons();
     enableImportButton();
     enableExportButton();
@@ -187,7 +186,6 @@ let dryRunImportOnChange = function () {
     $(model.modals.forms.importRules).find(':input').change(function (index, value) {
         if ($("#toolRulesImportFile").val()) {
             let showDryRunInfo = function (response) {
-                console.log("Response", response);
                 renderImportPreview(response);
                 setImportDryRun(false);
             };

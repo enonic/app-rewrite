@@ -1,5 +1,4 @@
-let rewriteService = require('/lib/rewrite-service');
-
+let rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 
@@ -15,7 +14,7 @@ exports.get = function (req) {
         }
     }
 
-    let result = rewriteService.testRequest(requestURL);
+    let result = rewriteDao.testRequest(requestURL);
 
     if (result.error) {
 

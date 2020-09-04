@@ -69,7 +69,7 @@
                                 <span class="mono">/test/pattern/url -> /redirected/anotherUrl</span></li>
                             <li><strong> Redirect children to another base-path, e.g
                                 /test/pattern/product to /redirected/product</strong><br/>
-                                <span class="mono">/test/pattern/.* -> /redirected/$1</span></li>
+                                <span class="mono">/test/pattern/(.*) -> /redirected/$1</span></li>
                             <li><strong>Redirect to external</strong><br/>
                                 <span class="mono">/test/pattern/.* -> https://enonic.com</span></li>
                         </ul>

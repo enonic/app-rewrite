@@ -19,12 +19,9 @@ let rowCallbackFunction = function (row, data) {
 };
 
 const tableSettings = {
-    pageLength: 20,
+    pageLength: 25,
     autoWidth: false,
-    rowCallback: rowCallbackFunction,
-    dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-         "<'row'<'col-sm-12'tr>>" +
-         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+    rowCallback: rowCallbackFunction
 };
 
 export let initToolContext = function (svcUrl) {
@@ -52,13 +49,16 @@ let onToolLoaded = function (result) {
         tableSelector: virtualHostDataTableSelector
     };
 
-    populateDataTable(serviceConfig, onDataPopulated, onTableRefresh);
+    populateDataTable(serviceConfig, onDataPopulated, onTableRefresh, onRedraw);
     enableHelp(toolSelector);
 };
 
+let onRedraw = function () {
+    enableActionButtons(toolConfig.svcUrl, toolSelector, toolKey);
+};
 
 let onDataPopulated = function (response) {
-    console.log("Data populated for " + virtualHostDataTableSelector);
+    //
 };
 
 let onTableRefresh = function (response) {
@@ -68,9 +68,11 @@ let onTableRefresh = function (response) {
 
 let makeRowsClickable = function () {
     let table = $(virtualHostDataTableSelector).DataTable();
-    $(virtualHostDataTableSelector + ' tbody').on('click', 'tr.has-provider', function () {
-        let data = table.row(this).data();
-        setRuleContext(data['contextKey']);
-        selectTool(model.toolbar.tools.rules);
-    });
+    $(virtualHostDataTableSelector + ' tbody')
+        .off('click')
+        .on('click', 'tr.has-provider', function () {
+            let data = table.row(this).data();
+            setRuleContext(data['contextKey']);
+            selectTool(model.toolbar.tools.rules);
+        });
 };
