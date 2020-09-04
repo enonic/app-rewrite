@@ -5,9 +5,8 @@ $stepMaxWidth: 80vw;
   width: 100%;
   position: sticky;
   top: 0;
-  border-bottom: 1px solid $color-border-light;
   z-index: 100;
-  padding: 20px;
+  padding-bottom: 20px;
 
   input[type="text"] {
     width: 100%;
