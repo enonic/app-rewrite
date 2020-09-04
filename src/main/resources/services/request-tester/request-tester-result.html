@@ -1,0 +1,34 @@
+<h2 data-th-text="${heading.text}" data-th-class="${heading.class}"></h2>
+<div id="request-tester-steps">
+    <div data-th-each="step,iterStat : ${steps}" data-th-remove="tag">
+        <div class='redirect-step'>
+            <div class='step-result-box incoming-request'>
+                <div class='vhost'>
+                    <p class='label'>vhost:</p>
+                    <p data-th-text="${step.request.vhost}" class='value'></p>
+                </div>
+                <div class='url'>
+                    <p class='label'>request:</p>
+                    <p data-th-text=${step.request.url} class='value'></p>
+                </div>
+            </div>
+            <div data-th-if="${step.rewrite}" class='transition'>
+                <i class="material-icons">arrow_forward</i>
+                <p data-th-text="${step.rewrite.code}"></p>
+            </div>
+            <div data-th-if="${step.target}" class='step-result-box rewrite-target'>
+                <div data-th-class="${'type ' + step.target.class}">
+                    <p class='label'>type:</p>
+                    <p data-th-text="${step.target.type}" class='value'></p>
+                </div>
+                <div class='target'>
+                    <p class='label'>target:</p>
+                    <p data-th-text="${step.target.url}" class='value'></p>
+                </div>
+            </div>
+        </div>
+        <div data-th-if="${step.nextTransition.hasNext}" class='stepTransition'>
+            <i class="material-icons">arrow_drop_down</i>
+        </div>
+    </div>
+</div>

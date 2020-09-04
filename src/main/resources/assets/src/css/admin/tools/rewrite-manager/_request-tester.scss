@@ -1,3 +1,4 @@
+$stepMaxWidth: 80vw;
 
 .request-tester-input {
 
@@ -16,6 +17,8 @@
 
 .request-tester-result {
 
+  width: 100%;
+
   h2 {
     margin-bottom: 20px !important;
   }
@@ -30,9 +33,9 @@
     .redirect-step {
       flex: 0 0 auto;
       display: flex;
-
-      padding: 0;
-      margin: 0;
+      flex-wrap: wrap;
+      max-width: $stepMaxWidth;
+      margin-bottom: 20px;
 
       &.state-looping {
         border: 2px solid red;
@@ -51,7 +54,9 @@
         border: 2px solid #333;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        margin-bottom: 10px;
+
       }
 
       div.incoming-request {
@@ -78,11 +83,11 @@
           display: flex;
           flex-direction: column;
 
-          &.type-internal {
+          &.internal {
             background: $color-selected-2-active;
           }
 
-          &.type-external {
+          &.external {
             background: $color-selected-1-active;
           }
 
@@ -98,12 +103,13 @@
 
       .transition {
         flex: 0 0 auto;
-        margin: 0 20px;
+        margin: 0 20px 10px 20px;
         border-radius: 25%;
 
         display: flex;
         flex-direction: row;
         align-items: center;
+
 
         i {
           font-size: 4rem;
