@@ -18,7 +18,6 @@ exports.get = function (req) {
     }
 
     let result = rewriteDao.getRewriteContext(contextKey);
-    log.info("getRewriteContext: %s", JSON.stringify(result, null, 2));
 
     let url = createSourceUrl(result);
 

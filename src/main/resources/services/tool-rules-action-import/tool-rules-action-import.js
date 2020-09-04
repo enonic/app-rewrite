@@ -10,6 +10,7 @@ exports.post = function (req) {
     let contextKey = params.importRulesContextKey;
     let dryRun = params.importRulesDryRun === 'true';
     let mergeStrategy = params.toolRulesMergeStrategy ? params.toolRulesMergeStrategy : "delete";
+    let importFormat = params.importFormat;
 
     if (!contextKey) {
         return {
@@ -21,7 +22,8 @@ exports.post = function (req) {
 
     let byteSource = portalLib.getMultipartStream("file");
     const multipartItem = portalLib.getMultipartItem('file');
-    const importResult = rewriteDao.importRules(contextKey, mergeStrategy, byteSource, multipartItem.fileName, dryRun);
+    const importResult = rewriteDao.importRules(contextKey, mergeStrategy, byteSource, multipartItem.fileName, dryRun,
+        importFormat === "auto" ? null : importFormat);
 
     let model = {
         message: "Importing rules to virtualHost [" + contextKey + "] preview",

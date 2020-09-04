@@ -73,13 +73,16 @@ exports.editRule = function (contextKey, pattern, rule) {
 };
 
 
-exports.importRules = function (contextKey, mergeStrategy, byteSource, fileName, dryRun) {
+exports.importRules = function (contextKey, mergeStrategy, byteSource, fileName, dryRun, format) {
     let params = __.newBean('com.enonic.app.rewrite.ImportRulesParams');
     params.contextKey = contextKey;
     params.mergeStrategy = mergeStrategy;
     params.byteSource = byteSource;
     params.fileName = fileName;
     params.dryRun = dryRun;
+    if (format) {
+        params.format = format;
+    }
     let result = bean.importRules(params);
     return __.toNativeObject(result);
 };

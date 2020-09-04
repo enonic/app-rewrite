@@ -13,6 +13,7 @@ import com.google.common.base.Charsets;
 import com.enonic.app.rewrite.ExportRulesParams;
 import com.enonic.app.rewrite.ImportRulesParams;
 import com.enonic.app.rewrite.RewriteService;
+import com.enonic.app.rewrite.format.SourceFormat;
 import com.enonic.app.rewrite.format.SourceFormatResolver;
 import com.enonic.app.rewrite.format.SourceReadResult;
 import com.enonic.app.rewrite.format.SourceReader;
@@ -40,7 +41,9 @@ public class ImportServiceImpl
 
         try (final BufferedReader reader = params.getByteSource().asCharSource( Charsets.UTF_8 ).openBufferedStream())
         {
-            final SourceReadResult result = SourceReader.read( reader, SourceFormatResolver.resolve( params.getFileName() ) );
+            final SourceReadResult result = SourceReader.read( reader, params.getFormat() != null
+                ? SourceFormat.get( params.getFormat() )
+                : SourceFormatResolver.resolve( params.getFileName() ) );
             return handleStrategy( params, result );
         }
         catch ( IOException e )

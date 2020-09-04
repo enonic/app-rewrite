@@ -16,6 +16,8 @@ public class ImportRulesParams
 
     private String fileName;
 
+    private String format;
+
     public void setContextKey( final String contextKey )
     {
         this.contextKey = RewriteContextKey.from( contextKey );
@@ -69,5 +71,15 @@ public class ImportRulesParams
     public void setFileName( final String fileName )
     {
         this.fileName = fileName;
+    }
+
+    public String getFormat()
+    {
+        return format;
+    }
+
+    public void setFormat( final String format )
+    {
+        this.format = format;
     }
 }
