@@ -5,12 +5,12 @@
   button {
 
     font-family: $monserrat;
-    background-color: $color-selected-3;
+    background-color: $color-button-create;
     border: 1px solid $color-border-light;
-    color: white;
+    color: #333;
     padding: 10px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,18 +44,22 @@
 
 .tool-main {
 
-  button.table-action {
+  button.table-action, button.table-modal {
+
+    border: 1px solid $color-border-dark;
+    border-radius: 0;
+    color: #333;
 
     &.create, &.create:active, &.create:hover {
       background: $color-button-create;
-      border-radius: 0;
     }
-
 
     &.delete, &.delete:active, &.delete:hover {
       background-color: $color-button-delete;
-      color: white;
-      border-radius: 0;
+    }
+
+    &.edit, &.edit:active, &.edit:hover {
+      background-color: $color-button-edit;
     }
 
   }
