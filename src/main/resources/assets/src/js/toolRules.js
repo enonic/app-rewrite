@@ -123,7 +123,9 @@ let onTableRefreshed = function (response) {
 };
 
 let enableRuleButtons = function () {
-    $(model.buttons.rule.create).click(function () {
+    $(model.buttons.rule.create)
+        .off()
+        .click(function () {
         let modalSelector = createModalSelector(toolKey);
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "create");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext)
@@ -131,7 +133,9 @@ let enableRuleButtons = function () {
 };
 
 let enableImportButton = function () {
-    $(model.buttons.rule.import).click(function () {
+    $(model.buttons.rule.import)
+        .off()
+        .click(function () {
         let modalSelector = createModalSelector(toolKey);
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "import");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, dryRunImportOnChange);
@@ -139,7 +143,9 @@ let enableImportButton = function () {
 };
 
 let enableExportButton = function () {
-    $(model.buttons.rule.export).click(function () {
+    $(model.buttons.rule.export)
+        .off()
+        .click(function () {
         let modalSelector = createModalSelector(toolKey);
         let modalServiceUrl = createModalUrl(svcUrl, toolKey, "export");
         displayModal(modalServiceUrl, svcUrl, modalSelector, contextSelectorDataContext, function () {

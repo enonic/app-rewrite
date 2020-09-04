@@ -55,7 +55,6 @@ let testRequest = function () {
             processResult(result);
         }
     });
-
 };
 
 let processResult = function (result) {
