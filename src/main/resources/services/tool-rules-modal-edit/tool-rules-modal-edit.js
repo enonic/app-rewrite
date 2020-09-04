@@ -31,6 +31,7 @@ exports.get = function (req) {
 
     let url = createSourceUrl(rewriteDao.getRewriteContext(contextKey));
 
+
     let model = {
         form: {
             id: "tool-rules-action-edit-form",
@@ -41,8 +42,10 @@ exports.get = function (req) {
         },
         rule: {
             pattern: rule.from,
-            substitution: rule.target.path
-        }
+            substitution: rule.target.path,
+            type: rule.type
+        },
+        selected: rule.type
     };
 
     let view = resolve('tool-rules-modal-edit.html');
