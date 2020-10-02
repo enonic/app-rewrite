@@ -37,6 +37,8 @@ export const model = {
         triggers: ".modal-trigger",
         modalCancel: ".modal-cancel",
         modalAction: ".modal-action",
+        insertStrategy: "#insertStrategy",
+        insertPosition: "insertPosition",
         contextCreate: {
             selector: "#modalContextCreate",
         },

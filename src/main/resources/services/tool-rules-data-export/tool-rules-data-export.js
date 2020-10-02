@@ -1,9 +1,4 @@
-let thymeleaf = require('/lib/thymeleaf');
 const rewriteDao = require('/lib/rewrite-dao');
-
-function createSourceUrl(result) {
-    return "https://" + result.rewriteContext.host + "" + result.rewriteContext.source;
-}
 
 exports.get = function (req) {
     let params = req.params;

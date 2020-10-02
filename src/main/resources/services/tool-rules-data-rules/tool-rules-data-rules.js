@@ -56,7 +56,7 @@ let generateActions = function (contextKey, rule) {
 
     let model = {
         contextKey: contextKey,
-        from: rule.from,
+        identifier: rule.ruleId,
         readOnly: providerInfo ? providerInfo.readOnly : true
     };
 

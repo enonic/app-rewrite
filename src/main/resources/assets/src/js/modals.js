@@ -115,7 +115,6 @@ let initializeModalActions = function (svcUrl, onActionSuccess) {
             if (onActionSuccess) {
                 onActionSuccess(response);
             } else {
-                console.log("SUCCESS: ", response);
                 showInfo(response.message);
                 closeModals();
                 closeOverlay();
@@ -124,6 +123,15 @@ let initializeModalActions = function (svcUrl, onActionSuccess) {
         };
 
         postActionForm(formSelector, actionServiceUrl, onSuccess);
+    });
+
+    $(model.modals.insertStrategy).change(function () {
+        let $elements = $('label[for="' + model.modals.insertPosition + '"], #' + model.modals.insertPosition);
+        if ('position' === $(this).val()) {
+            $elements.toggle();
+        } else {
+            $elements.hide();
+        }
     });
 };
 

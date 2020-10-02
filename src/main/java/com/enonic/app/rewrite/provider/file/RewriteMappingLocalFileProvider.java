@@ -2,6 +2,8 @@ package com.enonic.app.rewrite.provider.file;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,19 +13,15 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.Lists;
-
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.EditRuleParams;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.format.SourceFormatResolver;
 import com.enonic.app.rewrite.format.SourceReadResult;
 import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
-import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteMappings;
 
 
 public class RewriteMappingLocalFileProvider
@@ -34,8 +32,6 @@ public class RewriteMappingLocalFileProvider
     private final Path base;
 
     private final String ruleFilePattern;
-
-    private RewriteMappings rewriteMappings;
 
     private RewriteMappingLocalFileProvider( final Builder builder )
     {
@@ -67,7 +63,7 @@ public class RewriteMappingLocalFileProvider
         }
         catch ( IOException e )
         {
-            throw new RuntimeException( "Cannot search for files", e );
+            throw new UncheckedIOException( "Cannot search for files", e );
         }
     }
 
@@ -89,7 +85,7 @@ public class RewriteMappingLocalFileProvider
                 final Path path = files.get( 0 );
                 LOG.info( "Loading rewrite-mapping for contextKey [{}] from file: [{}]", contextKey, path );
 
-                try (final BufferedReader reader = Files.newBufferedReader( Paths.get( path.toString() ), Charsets.UTF_8 ))
+                try (final BufferedReader reader = Files.newBufferedReader( Paths.get( path.toString() ), StandardCharsets.UTF_8 ))
                 {
                     final SourceReadResult rewriteRules =
                         SourceReader.read( reader, SourceFormatResolver.resolve( path.toFile().getName() ) );
@@ -100,7 +96,7 @@ public class RewriteMappingLocalFileProvider
                 }
                 catch ( IOException e )
                 {
-                    throw new RuntimeException( "Cannot read rewrite-config from file [" + path + "]", e );
+                    throw new UncheckedIOException( "Cannot read rewrite-config from file [" + path + "]", e );
                 }
             }
             else
@@ -110,78 +106,44 @@ public class RewriteMappingLocalFileProvider
         }
         catch ( IOException e )
         {
-            throw new RuntimeException( "Cannot search for files", e );
+            throw new UncheckedIOException( "Cannot search for files", e );
         }
-    }
-
-    private RewriteMappings doGetAllRewriteMappings()
-    {
-        final RewriteMappings.Builder builder = RewriteMappings.create();
-
-        final List<VHostAndPath> items = getHostsAndPaths( this.base, this.ruleFilePattern );
-
-        for ( final VHostAndPath item : items )
-        {
-            handleRewriteItem( builder, item );
-        }
-
-        return builder.build();
     }
 
     @Override
     public void store( final RewriteMapping rewriteMapping )
     {
-        throw new RuntimeException( "Cannot store to provider " + this.getClass().getName() );
+        throw new UnsupportedOperationException( "Cannot store to provider " + this.getClass().getName() );
     }
 
     @Override
     public void create( final RewriteContextKey rewriteContextKey )
     {
-        throw new RuntimeException( "Cannot create context " + this.getClass().getName() );
+        throw new UnsupportedOperationException( "Cannot create context " + this.getClass().getName() );
     }
 
     @Override
     public void delete( final RewriteContextKey rewriteContextKey )
     {
-        throw new RuntimeException( "Cannot delete from provider " + this.getClass().getName() );
+        throw new UnsupportedOperationException( "Cannot delete from provider " + this.getClass().getName() );
     }
 
     @Override
     public void createRule( final CreateRuleParams params )
     {
-        throw new RuntimeException( "Cannot create rule in provider " + this.getClass().getName() );
+        throw new UnsupportedOperationException( "Cannot create rule in provider " + this.getClass().getName() );
     }
 
     @Override
     public void deleteRule( final DeleteRuleParams params )
     {
-        throw new RuntimeException( "Cannot delete rule in provider " + this.getClass().getName() );
+        throw new UnsupportedOperationException( "Cannot delete rule in provider " + this.getClass().getName() );
     }
 
     @Override
     public void editRule( final EditRuleParams params )
     {
-        throw new RuntimeException( "Cannot edit rule in provider " + this.getClass().getName() );
-    }
-
-    private void handleRewriteItem( final RewriteMappings.Builder builder, final VHostAndPath item )
-    {
-        final RewriteContextKey contextKey = new RewriteContextKey( item.vHostName );
-
-        LOG.info( "handleRewriteItem for item: " + item );
-
-        try (final BufferedReader reader = Files.newBufferedReader( Paths.get( item.path.toString() ), Charsets.UTF_8 ))
-        {
-            final SourceReadResult rewriteRules = SourceReader.read( reader, SourceFormatResolver.resolve( item.path.toFile().getName() ) );
-            builder.add( RewriteMapping.create().
-                contextKey( contextKey ).
-                rewriteRules( rewriteRules.getRules() ).
-                build() );
-        }
-        catch ( IOException e )
-        {
-            throw new RuntimeException( "Cannot read rewrite-config from file [" + item.path + "]", e );
-        }
+        throw new UnsupportedOperationException( "Cannot edit rule in provider " + this.getClass().getName() );
     }
 
     private List<Path> findFiles( final Path base, final String ruleFilePattern )
@@ -190,48 +152,11 @@ public class RewriteMappingLocalFileProvider
         return Files.walk( base ).filter( f -> FileNameMatcher.matches( f, ruleFilePattern ) ).collect( Collectors.toList() );
     }
 
-
-    private List<VHostAndPath> getHostsAndPaths( final Path base, final String ruleFilePattern )
-    {
-        final List<VHostAndPath> hostsAndPaths = Lists.newArrayList();
-
-        final String regExpPattern = createContextPattern( ruleFilePattern, "([\\w|-]+)" );
-
-        final List<Path> fileNames;
-        try
-        {
-            fileNames = findFiles( base, regExpPattern );
-        }
-        catch ( IOException e )
-        {
-            throw new RuntimeException( "Cannot configure rewrite-filter", e );
-        }
-
-        fileNames.forEach( file -> {
-            final String vhostName = FileNameMatcher.getMatch( file, regExpPattern, 1 );
-            hostsAndPaths.add( new VHostAndPath( file, vhostName ) );
-        } );
-
-        return hostsAndPaths;
-    }
-
     public static Builder create()
     {
         return new Builder();
     }
 
-    private final static class VHostAndPath
-    {
-        private final Path path;
-
-        private final String vHostName;
-
-        VHostAndPath( final Path path, final String vHostName )
-        {
-            this.path = path;
-            this.vHostName = vHostName;
-        }
-    }
 
     public static final class Builder
     {
@@ -249,7 +174,7 @@ public class RewriteMappingLocalFileProvider
             return this;
         }
 
-        public Builder ruleFilePattern( final String ruleFilePattern )
+        public Builder ruleFileNameTemplate( final String ruleFilePattern )
         {
             this.ruleFilePattern = ruleFilePattern;
             return this;

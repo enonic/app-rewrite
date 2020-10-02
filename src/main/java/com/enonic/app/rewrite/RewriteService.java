@@ -5,13 +5,13 @@ import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
 import com.enonic.app.rewrite.provider.ProviderInfo;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.vhost.VirtualHostMapping;
+import com.enonic.xp.web.vhost.VirtualHost;
 
 public interface RewriteService
 {
@@ -21,7 +21,7 @@ public interface RewriteService
 
     ConcurrentMap<RewriteContextKey, Optional<RewriteMappingProvider>> getRewriteConfigurations();
 
-    VirtualHostMapping getRewriteContext( final RewriteContextKey contextKey );
+    VirtualHost getRewriteContext( final RewriteContextKey contextKey );
 
     void store( final RewriteMapping rewriteMapping );
 

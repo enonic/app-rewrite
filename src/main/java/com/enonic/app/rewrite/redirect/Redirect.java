@@ -2,8 +2,6 @@ package com.enonic.app.rewrite.redirect;
 
 import java.util.Objects;
 
-import com.google.common.base.Preconditions;
-
 public class Redirect
 {
     private RedirectTarget redirectTarget;
@@ -12,8 +10,8 @@ public class Redirect
 
     public Redirect( final RedirectTarget redirectTarget, final RedirectType type )
     {
-        Preconditions.checkNotNull( redirectTarget, "redirectTarget cannot be null" );
-        Preconditions.checkNotNull( type, "type cannot be null for target [%s]", redirectTarget );
+        Objects.requireNonNull( redirectTarget, "redirectTarget cannot be null" );
+        Objects.requireNonNull( type, String.format( "type cannot be null for target [%s]", redirectTarget ) );
 
         this.redirectTarget = redirectTarget;
         this.type = type;

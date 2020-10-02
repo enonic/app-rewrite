@@ -15,16 +15,12 @@ export let initToolTester = function (svc) {
 
 
 let onToolLoaded = function (result) {
-    console.log("Tool [" + toolKey + "] loaded");
     $(toolSelector).html(result);
     initListeners();
     enableHelp(toolSelector);
 };
 
 let initListeners = function () {
-
-    console.log("Adding listeners...");
-
     $(model.input.requestURL).keyup(function () {
         delay(function () {
             testRequest();

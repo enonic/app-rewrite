@@ -84,7 +84,6 @@ function setContextSelectorData() {
 }
 
 let onToolLoaded = function (result) {
-    console.log("Tool [" + toolKey + "] loaded");
     $(toolSelector).html(result);
     triggerContextChanged();
     setContextSelectorData();

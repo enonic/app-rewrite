@@ -19,6 +19,10 @@ exports.get = function (req) {
 
     let result = rewriteDao.getRewriteContext(contextKey);
 
+    let ruleMappings = rewriteDao.getRewriteMapping(contextKey);
+
+    let maxPosition = ruleMappings.mapping ? ruleMappings.mapping.rules.length : 0;
+
     let url = createSourceUrl(result);
 
     let model = {
@@ -27,7 +31,8 @@ exports.get = function (req) {
         },
         contextKey: contextKey,
         source: {
-            url: url
+            url: url,
+            maxPosition: maxPosition
         }
     };
 

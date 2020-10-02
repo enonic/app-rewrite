@@ -3,6 +3,7 @@ package com.enonic.app.rewrite.format;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -11,24 +12,21 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
-
-import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
+import com.enonic.app.rewrite.redirect.RedirectType;
 
 public class ApacheRewriteSerializer
 {
-    private final static Logger LOG = LoggerFactory.getLogger( ApacheRewriteSerializer.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ApacheRewriteSerializer.class );
 
-    private final static Pattern ruleFormat = Pattern.compile( "^\\s*RewriteRule\\s+(\\S+)\\s+(\\S+)(\\s+\\[(.*)])?" );
+    private static final Pattern RULE_FORMAT = Pattern.compile( "^\\s*RewriteRule\\s+(\\S+)\\s+(\\S+)(\\s+\\[(.*)])?" );
 
-    private final static Pattern conditionFormat = Pattern.compile( "^\\s*RewriteCond\\s+(.*)" );
+    private static final Pattern CONDITION_FORMAT = Pattern.compile( "^\\s*RewriteCond\\s+(.*)" );
 
     private static final String REDIRECT_CODE_KEY = "R";
 
-    public static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
+    private static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
 
     static String serialize( final RewriteRules rewriteRules )
     {
@@ -120,12 +118,12 @@ public class ApacheRewriteSerializer
 
     private static ParseLineResult read( final String value )
     {
-        if ( Strings.isNullOrEmpty( value ) )
+        if ( value == null || value.isBlank() )
         {
             return new ParseLineResult( false, null );
         }
 
-        final Matcher ruleMatcher = ruleFormat.matcher( value );
+        final Matcher ruleMatcher = RULE_FORMAT.matcher( value );
 
         if ( ruleMatcher.matches() )
         {
@@ -170,7 +168,7 @@ public class ApacheRewriteSerializer
                 build() );
         }
 
-        final Matcher conditionMatcher = conditionFormat.matcher( value );
+        final Matcher conditionMatcher = CONDITION_FORMAT.matcher( value );
 
         if ( conditionMatcher.matches() )
         {
@@ -183,9 +181,9 @@ public class ApacheRewriteSerializer
 
     private static Map<String, String> parseFlags( final String value )
     {
-        Map<String, String> flags = Maps.newHashMap();
+        Map<String, String> flags = new HashMap<>();
 
-        if ( Strings.isNullOrEmpty( value ) )
+        if ( value == null || value.isBlank() )
         {
             return flags;
         }

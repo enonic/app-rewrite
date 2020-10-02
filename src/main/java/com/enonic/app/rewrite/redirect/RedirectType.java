@@ -11,16 +11,8 @@ public enum RedirectType
 
     private int httpCode;
 
-    private final static Map<Integer, RedirectType> map =
+    private final static Map<Integer, RedirectType> MAP =
         stream( RedirectType.values() ).collect( toMap( type -> type.httpCode, leg -> leg ) );
-
-    static
-    {
-        for ( RedirectType redirect : RedirectType.values() )
-        {
-            map.put( redirect.httpCode, redirect );
-        }
-    }
 
     RedirectType( final int httpCode )
     {
@@ -30,14 +22,12 @@ public enum RedirectType
 
     public static RedirectType valueOf( int httpCode )
     {
-        return map.get( httpCode );
+        return MAP.get( httpCode );
     }
 
     public int getHttpCode()
     {
         return httpCode;
     }
-
-
 
 }

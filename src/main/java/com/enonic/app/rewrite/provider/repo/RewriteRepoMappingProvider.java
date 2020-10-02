@@ -1,37 +1,37 @@
 package com.enonic.app.rewrite.provider.repo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.EditRuleParams;
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteContextNotFoundException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteMappings;
-import com.enonic.app.rewrite.domain.RewriteRule;
-import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.context.Context;
 import com.enonic.xp.context.ContextAccessor;
 import com.enonic.xp.context.ContextBuilder;
 import com.enonic.xp.data.PropertyTree;
-import com.enonic.xp.index.IndexService;
 import com.enonic.xp.node.CreateNodeParams;
-import com.enonic.xp.node.FindNodesByParentParams;
-import com.enonic.xp.node.FindNodesByParentResult;
 import com.enonic.xp.node.Node;
 import com.enonic.xp.node.NodeIds;
 import com.enonic.xp.node.NodePath;
 import com.enonic.xp.node.NodeService;
 import com.enonic.xp.node.RefreshMode;
 import com.enonic.xp.node.UpdateNodeParams;
-import com.enonic.xp.repository.RepositoryService;
-
-import static com.enonic.app.rewrite.provider.repo.RewriteMappingRepoInitializer.BRANCH;
+import com.enonic.xp.security.RoleKeys;
+import com.enonic.xp.security.User;
+import com.enonic.xp.security.auth.AuthenticationInfo;
 
 public class RewriteRepoMappingProvider
     implements RewriteMappingProvider
@@ -40,27 +40,11 @@ public class RewriteRepoMappingProvider
 
     public final static NodePath MAPPING_ROOT_NODE = NodePath.create( "/vhosts" ).build();
 
-    private final RepositoryService repositoryService;
-
-    private final IndexService indexService;
-
     private final NodeService nodeService;
 
-    public RewriteRepoMappingProvider( final RepositoryService repositoryService, final IndexService indexService,
-                                       final NodeService nodeService )
+    public RewriteRepoMappingProvider( final NodeService nodeService )
     {
-        this.repositoryService = repositoryService;
-        this.indexService = indexService;
         this.nodeService = nodeService;
-
-        LOG.info( "Initializing rewrite-mapping repo" );
-
-        RewriteMappingRepoInitializer.create().
-            repositoryService( repositoryService ).
-            nodeService( nodeService ).
-            setIndexService( indexService ).
-            build().
-            initialize();
     }
 
     @Override
@@ -97,26 +81,7 @@ public class RewriteRepoMappingProvider
         return "Repository";
     }
 
-    public RewriteMappings getRewriteMappings()
-    {
-        return setRepoContext().callWith( this::doGetMappings );
-    }
-
-    private RewriteMappings doGetMappings()
-    {
-        final RewriteMappings.Builder builder = RewriteMappings.create();
-
-        final FindNodesByParentResult vHostsResults = doGetChildren( MAPPING_ROOT_NODE );
-
-        vHostsResults.getNodeIds().stream().
-            forEach( nodeId -> {
-                final Node vHostNode = nodeService.getById( nodeId );
-                builder.add( RewriteMappingSerializer.fromNode( vHostNode ) );
-            } );
-
-        return builder.build();
-    }
-
+    @Override
     public void store( final RewriteMapping rewriteMapping )
     {
         final NodePath mappingNodePath = createContextNodePath( rewriteMapping.getContextKey() );
@@ -176,22 +141,24 @@ public class RewriteRepoMappingProvider
 
         final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( contextNode );
 
-        final RewriteRules.Builder newRules = RewriteRules.create();
+        final List<RewriteRule> rules = new ArrayList<>();
+
         for ( final RewriteRule rule : rewriteMapping.getRewriteRules() )
         {
-            if ( rule.getFrom().equals( params.getPattern() ) )
+            if ( !Objects.equals( rule.getRuleId(), params.getRuleId() ) )
             {
-                newRules.addRule( RewriteRule.create().
-                    type( RedirectType.valueOf( params.getType() ) ).
-                    target( params.getSubstitution() ).
-                    from( params.getNewPattern() ).
-                    build() );
-            }
-            else
-            {
-                newRules.addRule( rule );
+                rules.add( rule );
             }
         }
+
+        rules.add( params.getPosition(), RewriteRule.create().
+            ruleId( params.getRuleId() ).
+            type( RedirectType.valueOf( params.getType() ) ).
+            target( params.getSubstitution() ).
+            from( params.getNewPattern() ).
+            build() );
+
+        final RewriteRules.Builder newRules = RewriteRules.create().rules( rules );
 
         final RewriteMapping newMapping = RewriteMapping.create().
             contextKey( contextKey ).rewriteRules( newRules.build() ).
@@ -216,7 +183,7 @@ public class RewriteRepoMappingProvider
         final RewriteRules.Builder newRules = RewriteRules.create();
         for ( final RewriteRule rule : rewriteMapping.getRewriteRules() )
         {
-            if ( !rule.getFrom().equals( params.getFrom() ) )
+            if ( !rule.getRuleId().equals( params.getRuleId() ) )
             {
                 newRules.addRule( rule );
             }
@@ -243,10 +210,20 @@ public class RewriteRepoMappingProvider
             type( RedirectType.valueOf( params.getType() ) ).
             build();
 
+        final RewriteRules.Builder rewriteRuleBuilder = RewriteRules.from( rewriteMapping.getRewriteRules() );
+
+        if ( "position".equalsIgnoreCase( params.getInsertStrategy() ) )
+        {
+            rewriteRuleBuilder.addRule( params.getPosition(), rule );
+        }
+        else
+        {
+            rewriteRuleBuilder.addRule( rule, "first".equalsIgnoreCase( params.getInsertStrategy() ) );
+        }
+
         final RewriteMapping newMapping = RewriteMapping.create().
-            contextKey( contextKey ).rewriteRules( RewriteRules.from( rewriteMapping.getRewriteRules() ).
-            addRule( rule, params.getInsertStrategy().equalsIgnoreCase( "First" ) ).
-            build() ).
+            contextKey( contextKey ).
+            rewriteRules( rewriteRuleBuilder.build() ).
             build();
 
         doUpdateContextNode( contextNode, newMapping );
@@ -319,19 +296,20 @@ public class RewriteRepoMappingProvider
 
     private Context setRepoContext()
     {
+        final User admin = User.create().
+            key( RewriteMappingRepoInitializer.SUPER_USER ).
+            login( RewriteMappingRepoInitializer.SUPER_USER.getId() ).
+            build();
+        final AuthenticationInfo authInfo = AuthenticationInfo.create().
+            principals( RoleKeys.ADMIN ).
+            user( admin ).
+            build();
+
         return ContextBuilder.from( ContextAccessor.current() ).
             repositoryId( RewriteMappingRepoInitializer.REPO_ID ).
-            branch( BRANCH ).
+            authInfo( authInfo ).
+            branch( RewriteMappingRepoInitializer.BRANCH ).
             build();
-    }
-
-    private FindNodesByParentResult doGetChildren( final NodePath parentPath )
-    {
-        //TODO: Ah, what the hell, fetch 10_000 and pretend its a good way of doing it for now
-        return this.nodeService.findByParent( FindNodesByParentParams.create().
-            parentPath( parentPath ).
-            size( 10_000 ).
-            build() );
     }
 
 }

@@ -1,17 +1,5 @@
 let bean = __.newBean('com.enonic.app.rewrite.RewriteBean');
 
-exports.store = function (rule) {
-
-    let params = __.newBean('com.enonic.app.rewrite.StoreRuleParams');
-    params.order = rule.order;
-    params.target = rule.target;
-    params.from = rule.from;
-    params.contextKey = rule.contextKey;
-
-    let result = bean.store(params);
-    return __.toNativeObject(result);
-};
-
 exports.getRewriteConfigurations = function () {
     let result = bean.getRewriteConfigurations();
     return __.toNativeObject(result);
@@ -42,21 +30,22 @@ exports.getProviderInfo = function (contextKey) {
     return __.toNativeObject(result).providerInfo;
 };
 
-exports.createRule = function (contextKey, rule, insertStrategy) {
+exports.createRule = function (contextKey, rule, insertStrategy, position) {
     let params = __.newBean('com.enonic.app.rewrite.CreateRuleParams');
     params.insertStrategy = insertStrategy;
     params.source = rule.source;
     params.target = rule.target;
     params.type = rule.type;
     params.contextKey = contextKey;
+    params.position = position;
     let result = bean.createRule(params);
     return __.toNativeObject(result);
 };
 
-exports.deleteRule = function (contextKey, from) {
+exports.deleteRule = function (contextKey, ruleId) {
     let params = __.newBean('com.enonic.app.rewrite.DeleteRuleParams');
     params.contextKey = contextKey;
-    params.from = from;
+    params.ruleId = ruleId;
     let result = bean.deleteRule(params);
     return __.toNativeObject(result);
 };
@@ -68,6 +57,9 @@ exports.editRule = function (contextKey, pattern, rule) {
     params.newPattern = rule.pattern;
     params.substitution = rule.substitution;
     params.type = rule.type;
+    params.position = rule.position;
+    params.ruleId = rule.ruleId;
+
     let result = bean.editRule(params);
     return __.toNativeObject(result);
 };

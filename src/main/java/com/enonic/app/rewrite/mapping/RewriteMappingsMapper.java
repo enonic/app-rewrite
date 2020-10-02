@@ -1,25 +1,24 @@
 package com.enonic.app.rewrite.mapping;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
-import com.enonic.app.rewrite.vhost.VirtualHostMapping;
-import com.enonic.app.rewrite.vhost.VirtualHostMappings;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteMappings;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
+import com.enonic.xp.web.vhost.VirtualHost;
 
 public class RewriteMappingsMapper
     implements MapSerializable
 {
     private final RewriteMappings rewriteMappings;
 
-    private final Map<String, VirtualHostMapping> virtualHostMappingMap = Maps.newHashMap();
+    private final Map<String, VirtualHost> virtualHostMappingMap = new HashMap<>(  );
 
-    public RewriteMappingsMapper( final RewriteMappings rewriteMappings, final VirtualHostMappings virtualHostMappings )
+    public RewriteMappingsMapper( final RewriteMappings rewriteMappings, final List<VirtualHost> virtualHostMappings )
     {
         this.rewriteMappings = rewriteMappings;
 
@@ -45,7 +44,7 @@ public class RewriteMappingsMapper
 
     private void mapContext( final MapGenerator gen, final RewriteMapping rewriteMapping )
     {
-        final VirtualHostMapping virtualHostMapping = this.virtualHostMappingMap.get( rewriteMapping.getContextKey().toString() );
+        final VirtualHost virtualHostMapping = this.virtualHostMappingMap.get( rewriteMapping.getContextKey().toString() );
         if ( virtualHostMapping != null )
         {
             gen.value( "type", "virtualHost" );

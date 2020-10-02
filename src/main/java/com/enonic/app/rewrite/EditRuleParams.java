@@ -6,6 +6,8 @@ public class EditRuleParams
 {
     private RewriteContextKey contextKey;
 
+    private String ruleId;
+
     private String newPattern;
 
     private String pattern;
@@ -13,6 +15,18 @@ public class EditRuleParams
     private String substitution;
 
     private String type;
+
+    private Integer position;
+
+    public String getRuleId()
+    {
+        return ruleId;
+    }
+
+    public void setRuleId( final String ruleId )
+    {
+        this.ruleId = ruleId;
+    }
 
     public RewriteContextKey getContextKey()
     {
@@ -62,6 +76,16 @@ public class EditRuleParams
     public void setType( final String type )
     {
         this.type = type;
+    }
+
+    public Integer getPosition()
+    {
+        return position;
+    }
+
+    public void setPosition( final Integer position )
+    {
+        this.position = position;
     }
 
 }

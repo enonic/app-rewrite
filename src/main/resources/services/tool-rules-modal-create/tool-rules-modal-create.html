@@ -23,20 +23,24 @@
 
             <label for="createRuleType">Redirect-type</label>
             <select id="createRuleType" name="createRuleType">
-                <option value="MOVED_PERMANENTLY" selected="selected">MOVED_PERMANENTLY</option>
-                <option value="TEMPORARILY_REDIRECT">TEMPORARILY_REDIRECT</option>
+                <option value="MOVED_PERMANENTLY">MOVED_PERMANENTLY</option>
+                <option value="TEMPORARILY_REDIRECT" selected="selected">TEMPORARILY_REDIRECT</option>
             </select>
 
             <label for="insertStrategy">InsertStrategy</label>
             <select id="insertStrategy" name="insertStrategy">
                 <option value="first">First</option>
                 <option value="last" selected="selected">Last</option>
+                <option value="position">Position</option>
             </select>
+
+            <label for="insertPosition" style="display: none;">Position</label>
+            <input id="insertPosition" name="insertPosition" type="number" min="0" data-th-max="${source.maxPosition}" style="display: none;">
 
             <button class="modal-action"
                     data-action-type="create"
                     data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
-                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Create Rule
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Save
             </button>
             <button class="modal-cancel">Cancel
             </button>

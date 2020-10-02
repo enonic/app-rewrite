@@ -22,7 +22,7 @@ class RewriteRulesLocalFileProviderTest
 
         final RewriteMappingLocalFileProvider provider = RewriteMappingLocalFileProvider.create().
             base( file.getParentFile().toPath() ).
-            ruleFilePattern( "com.enonic.app.rewrite.{{vhost}}.txt" ).
+            ruleFileNameTemplate( "com.enonic.app.rewrite.{{vhost}}.txt" ).
             build();
 
         final RewriteMapping rewriteMapping = provider.getRewriteMapping( new RewriteContextKey( "myvhost" ) );

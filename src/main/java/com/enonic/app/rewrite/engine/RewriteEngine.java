@@ -8,17 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Strings;
-
-import com.enonic.app.rewrite.redirect.Redirect;
-import com.enonic.app.rewrite.redirect.RedirectExternal;
-import com.enonic.app.rewrite.redirect.RedirectInternal;
-import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMappings;
 import com.enonic.app.rewrite.domain.RewriteTarget;
 import com.enonic.app.rewrite.domain.RewriteVirtualHostContext;
+import com.enonic.app.rewrite.redirect.Redirect;
+import com.enonic.app.rewrite.redirect.RedirectExternal;
+import com.enonic.app.rewrite.redirect.RedirectInternal;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
 
@@ -108,6 +106,6 @@ public class RewriteEngine
 
         final String replaced = path.replaceFirst( context.getTargetContext(), "" );
 
-        return Strings.isNullOrEmpty( replaced ) ? "/" : replaced;
+        return replaced.isEmpty() ? "/" : replaced;
     }
 }

@@ -25,11 +25,13 @@ import com.enonic.xp.security.auth.AuthenticationInfo;
 public class RewriteMappingRepoInitializer
     extends ExternalInitializer
 {
-    public static final PrincipalKey SUPER_USER = PrincipalKey.ofSuperUser();
+    private static final Logger LOG = LoggerFactory.getLogger( RewriteMappingRepoInitializer.class );
 
-    public final static RepositoryId REPO_ID = RepositoryId.from( "com.enonic.app.rewrite" );
+    static final PrincipalKey SUPER_USER = PrincipalKey.ofSuperUser();
 
-    public final static Branch BRANCH = Branch.from( "master" );
+    static final RepositoryId REPO_ID = RepositoryId.from( "com.enonic.app.rewrite" );
+
+    static final Branch BRANCH = Branch.from( "master" );
 
     private static final AccessControlList DEFAULT_ACL = AccessControlList.create().
         add( AccessControlEntry.create().
@@ -37,8 +39,6 @@ public class RewriteMappingRepoInitializer
             principal( RoleKeys.ADMIN ).
             build() ).
         build();
-
-    private final Logger LOG = LoggerFactory.getLogger( RewriteMappingRepoInitializer.class );
 
     private RepositoryService repositoryService;
 
@@ -59,7 +59,7 @@ public class RewriteMappingRepoInitializer
     @Override
     protected void doInitialize()
     {
-        createAdminContext().runWith( () -> doCreateRepo() );
+        createAdminContext().runWith( this::doCreateRepo );
     }
 
     @Override
@@ -102,6 +102,7 @@ public class RewriteMappingRepoInitializer
         return ContextBuilder.from( ContextAccessor.current() ).
             authInfo( authInfo ).
             repositoryId( REPO_ID ).
+            branch( BRANCH ).
             build();
     }
 

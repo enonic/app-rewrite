@@ -1,65 +1,44 @@
 package com.enonic.app.rewrite.filter;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
-import com.enonic.xp.config.ConfigBuilder;
-import com.enonic.xp.config.ConfigInterpolator;
-import com.enonic.xp.config.Configuration;
+import com.enonic.app.rewrite.RewriteConfig;
 
-@Component(immediate = true, configurationPid = "com.enonic.app.rewrite")
+@Component(enabled = false, configurationPid = "com.enonic.app.rewrite")
 public class RewriteFilterConfigImpl
     implements RewriteFilterConfig
 {
-    private Configuration config;
+    private RewriteConfig rewriteConfig;
+
+    @Activate
+    public void activate( final RewriteConfig rewriteConfig )
+    {
+        this.rewriteConfig = rewriteConfig;
+    }
 
     @Override
     public boolean enabled()
     {
-        return Boolean.valueOf( this.config.get( "enabled" ) );
-    }
-
-    public List<String> excludePatterns()
-    {
-        return doGetCommaSeparatedPropAsList( "excludePatterns" );
-    }
-
-    public List<String> includePatterns()
-    {
-        return doGetCommaSeparatedPropAsList( "includePatterns" );
-    }
-
-    private List<String> doGetCommaSeparatedPropAsList( final String propertyName )
-    {
-        return Stream.of( this.config.get( propertyName ).split( "," ) ).collect( Collectors.toList() );
+        return rewriteConfig.enabled();
     }
 
     @Override
-    public String provider()
+    public String excludePattern()
     {
-        return this.config.get( "provider" );
+        return rewriteConfig.excludePattern();
     }
 
     @Override
-    public String ruleFilePattern()
+    public String includePattern()
     {
-        return this.config.get( "ruleFilePattern" );
+        return rewriteConfig.includePattern();
     }
 
-    @Activate
-    public void activate( final Map<String, String> map )
+    @Override
+    public String ruleFileNameTemplate()
     {
-
-        this.config = ConfigBuilder.create().
-            load( getClass(), "default.properties" ).
-            addAll( map ).
-            build();
-
-        this.config = new ConfigInterpolator().interpolate( this.config );
+        return rewriteConfig.ruleFileNameTemplate();
     }
+
 }

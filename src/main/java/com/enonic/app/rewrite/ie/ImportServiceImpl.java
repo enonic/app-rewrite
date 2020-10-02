@@ -2,13 +2,12 @@ package com.enonic.app.rewrite.ie;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Charsets;
 
 import com.enonic.app.rewrite.ExportRulesParams;
 import com.enonic.app.rewrite.ImportRulesParams;
@@ -20,7 +19,7 @@ import com.enonic.app.rewrite.format.SourceReader;
 import com.enonic.app.rewrite.format.SourceWriter;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 
-@Component(immediate = true)
+@Component(enabled = false)
 public class ImportServiceImpl
     implements ImportService
 {
@@ -28,6 +27,7 @@ public class ImportServiceImpl
 
     private RewriteService rewriteService;
 
+    @Override
     public String serializeRules( final ExportRulesParams params )
     {
         LOG.info( "Exporting rules from " + params.getContextKey() );
@@ -35,11 +35,12 @@ public class ImportServiceImpl
         return SourceWriter.serialize( rewriteMapping.getRewriteRules(), params.getFormat() );
     }
 
+    @Override
     public ImportResult importRules( final ImportRulesParams params )
     {
         LOG.info( "Importing rules into " + params.getContextKey() + ", dryRun: " + params.isDryRun() );
 
-        try (final BufferedReader reader = params.getByteSource().asCharSource( Charsets.UTF_8 ).openBufferedStream())
+        try (final BufferedReader reader = params.getByteSource().asCharSource( StandardCharsets.UTF_8 ).openBufferedStream())
         {
             final SourceReadResult result = SourceReader.read( reader, params.getFormat() != null
                 ? SourceFormat.get( params.getFormat() )

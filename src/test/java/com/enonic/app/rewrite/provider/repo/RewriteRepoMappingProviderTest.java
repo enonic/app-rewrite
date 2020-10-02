@@ -4,11 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
+import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.xp.index.IndexService;
 import com.enonic.xp.node.CreateNodeParams;
 import com.enonic.xp.node.Node;
@@ -20,6 +20,7 @@ import static com.enonic.app.rewrite.provider.repo.RewriteMappingRepoInitializer
 import static com.enonic.app.rewrite.provider.repo.RewriteRepoMappingProvider.MAPPING_ROOT_NODE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class RewriteRepoMappingProviderTest
 {
@@ -51,8 +52,7 @@ class RewriteRepoMappingProviderTest
     void testCreateRewriteMapping()
     {
 
-        final RewriteRepoMappingProvider service =
-            new RewriteRepoMappingProvider( this.repositoryService, this.indexService, this.nodeService );
+        final RewriteRepoMappingProvider service = new RewriteRepoMappingProvider( this.nodeService );
 
         final RewriteMapping rewriteMapping = RewriteMapping.create().
             contextKey( new RewriteContextKey( "myVHost" ) ).
@@ -70,6 +70,24 @@ class RewriteRepoMappingProviderTest
         final Node storedNode = this.nodeService.getByPath( NodePath.create( MAPPING_ROOT_NODE, "myVHost" ).build() );
         assertNotNull( storedNode );
         final RewriteMapping storedRewriteMapping = RewriteMappingSerializer.fromNode( storedNode );
-        assertEquals( storedRewriteMapping, rewriteMapping );
+
+        assertEquals( storedRewriteMapping.getContextKey(), rewriteMapping.getContextKey() );
+
+        final RewriteRules expectedRewriteRules = storedRewriteMapping.getRewriteRules();
+
+        final RewriteRules actualRewriteRules = rewriteMapping.getRewriteRules();
+
+        assertEquals( storedRewriteMapping.getContextKey(), rewriteMapping.getContextKey() );
+
+        assertEquals( expectedRewriteRules.size(), actualRewriteRules.size() );
+        assertEquals( expectedRewriteRules.size(), actualRewriteRules.size() );
+
+        final RewriteRule expectedRule = expectedRewriteRules.iterator().next();
+        final RewriteRule actualRule = actualRewriteRules.iterator().next();
+
+        assertEquals( expectedRule.getFrom(), actualRule.getFrom() );
+        assertEquals( expectedRule.getRuleId(), actualRule.getRuleId() );
+        assertEquals( expectedRule.getTarget(), actualRule.getTarget() );
+        assertSame( expectedRule.getType(), actualRule.getType() );
     }
 }

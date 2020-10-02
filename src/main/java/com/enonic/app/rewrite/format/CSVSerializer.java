@@ -2,13 +2,12 @@ package com.enonic.app.rewrite.format;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
-
-import com.google.common.base.Strings;
 
 import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteRule;
@@ -16,7 +15,7 @@ import com.enonic.app.rewrite.domain.RewriteRules;
 
 public class CSVSerializer
 {
-    public static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.MOVED_PERMANENTLY;
+    private static final RedirectType DEFAULT_REDIRECT_TYPE = RedirectType.FOUND;
 
     private static final CSVFormat FORMAT = CSVFormat.DEFAULT.
         withHeader( "From", "Target", "Type" );
@@ -45,7 +44,7 @@ public class CSVSerializer
         }
         catch ( IOException e )
         {
-            throw new RuntimeException( "Failed to serialize to CSV", e );
+            throw new UncheckedIOException( "Failed to serialize to CSV", e );
         }
 
         return stringBuilder.toString();
@@ -104,7 +103,7 @@ public class CSVSerializer
 
     private static RedirectType parseType( final String value )
     {
-        if ( Strings.isNullOrEmpty( value ) )
+        if ( value == null || value.isBlank() )
         {
             return DEFAULT_REDIRECT_TYPE;
         }

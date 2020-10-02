@@ -20,8 +20,6 @@ exports.get = function (req) {
 
     if (result.error) {
 
-        log.error("Error in request tester: %s", JSON.stringify(result.error, null, 2));
-
         let view = resolve('request-tester-error.html');
 
         let model = {

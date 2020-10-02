@@ -1,8 +1,12 @@
 package com.enonic.app.rewrite;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
+import com.enonic.app.rewrite.domain.RewriteContextKey;
+import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.ie.ImportResult;
 import com.enonic.app.rewrite.ie.ImportService;
 import com.enonic.app.rewrite.mapping.ErrorMapper;
@@ -16,32 +20,29 @@ import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
-import com.enonic.app.rewrite.domain.RewriteContextKey;
-import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.vhost.VHostService;
-import com.enonic.app.rewrite.vhost.VirtualHostMapping;
-import com.enonic.app.rewrite.vhost.VirtualHostMappings;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
+import com.enonic.xp.web.vhost.VirtualHost;
+import com.enonic.xp.web.vhost.VirtualHostService;
 
 public class RewriteBean
     implements ScriptBean
 {
-    private RewriteService rewriteService;
+    private Supplier<RewriteService> rewriteServiceSupplier;
 
-    private RequestTester requestTester;
+    private Supplier<RequestTester> requestTesterSupplier;
 
-    private VHostService vHostService;
+    private Supplier<VirtualHostService> virtualHostServiceSupplier;
 
-    private ImportService importService;
+    private Supplier<ImportService> importServiceSupplier;
 
     @Override
     public void initialize( final BeanContext context )
     {
-        this.rewriteService = context.getService( RewriteService.class ).get();
-        this.requestTester = context.getService( RequestTester.class ).get();
-        this.vHostService = context.getService( VHostService.class ).get();
-        this.importService = context.getService( ImportService.class ).get();
+        this.rewriteServiceSupplier = context.getService( RewriteService.class );
+        this.requestTesterSupplier = context.getService( RequestTester.class );
+        this.virtualHostServiceSupplier = context.getService( VirtualHostService.class );
+        this.importServiceSupplier = context.getService( ImportService.class );
     }
 
 
@@ -49,20 +50,20 @@ public class RewriteBean
     public Object getRewriteConfigurations()
     {
         final Map<RewriteContextKey, Optional<RewriteMappingProvider>> rewriteConfigurations =
-            this.rewriteService.getRewriteConfigurations();
+            this.rewriteServiceSupplier.get().getRewriteConfigurations();
         return new RewriteConfigurationsMapper( rewriteConfigurations );
     }
 
     public Object getRewriteContext( final String contextKey )
     {
-        final VirtualHostMapping rewriteContext = this.rewriteService.getRewriteContext( new RewriteContextKey( contextKey ) );
+        final VirtualHost rewriteContext = this.rewriteServiceSupplier.get().getRewriteContext( new RewriteContextKey( contextKey ) );
 
         return new RewriteContextMapper( rewriteContext );
     }
 
     public Object getRewriteMapping( final String contextKey )
     {
-        final RewriteMapping rewriteMapping = this.rewriteService.getRewriteMapping( new RewriteContextKey( contextKey ) );
+        final RewriteMapping rewriteMapping = this.rewriteServiceSupplier.get().getRewriteMapping( new RewriteContextKey( contextKey ) );
 
         if ( rewriteMapping == null )
         {
@@ -77,7 +78,7 @@ public class RewriteBean
         final RequestTesterResult requestTesterResult;
         try
         {
-            requestTesterResult = this.requestTester.testRequest( requestURI );
+            requestTesterResult = this.requestTesterSupplier.get().testRequest( requestURI );
         }
         catch ( Exception e )
         {
@@ -90,55 +91,55 @@ public class RewriteBean
 
     public Object getVirtualHosts()
     {
-        final VirtualHostMappings virtualHosts = this.vHostService.getMappings();
+        final List<VirtualHost> virtualHosts = this.virtualHostServiceSupplier.get().getVirtualHosts();
 
         return new VirtualHostsMapper( virtualHosts );
     }
 
     public Object createRewriteContext( final String contextKey )
     {
-        this.rewriteService.create( new RewriteContextKey( contextKey ) );
+        this.rewriteServiceSupplier.get().create( new RewriteContextKey( contextKey ) );
         return null;
     }
 
     public Object deleteRewriteContext( final String contextKey )
     {
-        this.rewriteService.delete( new RewriteContextKey( contextKey ) );
+        this.rewriteServiceSupplier.get().delete( new RewriteContextKey( contextKey ) );
         return null;
     }
 
     public Object createRule( final CreateRuleParams params )
     {
-        this.rewriteService.createRule( params );
+        this.rewriteServiceSupplier.get().createRule( params );
         return null;
     }
 
     public Object deleteRule( final DeleteRuleParams params )
     {
-        this.rewriteService.deleteRule( params );
+        this.rewriteServiceSupplier.get().deleteRule( params );
         return null;
     }
 
     public Object editRule( final EditRuleParams params )
     {
-        this.rewriteService.editRule( params );
+        this.rewriteServiceSupplier.get().editRule( params );
         return null;
     }
 
     public Object getProviderInfo( final String contextKey )
     {
-        return new ProviderInfoMapper( this.rewriteService.getProviderInfo( RewriteContextKey.from( contextKey ) ) );
+        return new ProviderInfoMapper( this.rewriteServiceSupplier.get().getProviderInfo( RewriteContextKey.from( contextKey ) ) );
     }
 
     public Object importRules( final ImportRulesParams params )
     {
-        final ImportResult importResult = this.importService.importRules( params );
+        final ImportResult importResult = this.importServiceSupplier.get().importRules( params );
         return new ImportResultMapper( importResult );
     }
 
     public Object serializeRules( final ExportRulesParams params )
     {
-        return this.importService.serializeRules( params );
+        return this.importServiceSupplier.get().serializeRules( params );
     }
 
 }

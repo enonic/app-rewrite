@@ -1,4 +1,3 @@
-const thymeleaf = require('/lib/thymeleaf');
 const rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {

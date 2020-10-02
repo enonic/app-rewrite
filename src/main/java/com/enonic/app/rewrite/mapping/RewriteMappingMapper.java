@@ -43,6 +43,7 @@ public class RewriteMappingMapper
         gen.value( "from", rule.getFrom() );
         mapTarget( gen, rule );
         gen.value( "type", rule.getType() );
+        gen.value( "ruleId", rule.getRuleId() );
 
         gen.end();
     }

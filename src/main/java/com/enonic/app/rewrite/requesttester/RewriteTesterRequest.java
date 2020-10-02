@@ -10,6 +10,7 @@ import java.net.URL;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -28,8 +29,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpUpgradeHandler;
 import javax.servlet.http.Part;
 
-import com.google.common.collect.Maps;
-
 class RewriteTesterRequest
     implements HttpServletRequest
 {
@@ -37,7 +36,7 @@ class RewriteTesterRequest
 
     private final URI requestURI;
 
-    private final Map<String, Object> attributes = Maps.newHashMap();
+    private final Map<String, Object> attributes = new HashMap<>();
 
     public RewriteTesterRequest( final String requestURL )
     {

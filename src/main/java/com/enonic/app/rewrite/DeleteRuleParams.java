@@ -4,7 +4,7 @@ import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class DeleteRuleParams
 {
-    private String from;
+    private String ruleId;
 
     private RewriteContextKey contextKey;
 
@@ -13,14 +13,14 @@ public class DeleteRuleParams
         this.contextKey = RewriteContextKey.from( contextKey );
     }
 
-    public void setFrom( final String from )
+    public String getRuleId()
     {
-        this.from = from;
+        return ruleId;
     }
 
-    public String getFrom()
+    public void setRuleId( final String ruleId )
     {
-        return from;
+        this.ruleId = ruleId;
     }
 
     public RewriteContextKey getContextKey()

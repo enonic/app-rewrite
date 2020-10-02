@@ -4,17 +4,14 @@ exports.post = function (req) {
 
     let params = req.params;
     let pattern = params.originalRulePattern;
-    let newPattern = params.editRulePattern;
-    let substitution = params.editRuleSubstitution;
-    let type = params.editRuleType;
     let contextKey = params.editRuleContextKey;
 
-    log.info("PARAMS: %s", JSON.stringify(params, null, 4));
-
     rewriteDao.editRule(contextKey, pattern, {
-        pattern: newPattern,
-        substitution: substitution,
-        type: type
+        pattern: params.editRulePattern,
+        substitution: params.editRuleSubstitution,
+        type: params.editRuleType,
+        position: params.editInsertPosition,
+        ruleId: params.editRuleId
     });
 
     let model = {
