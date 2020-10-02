@@ -1,6 +1,5 @@
 let thymeleaf = require('/lib/thymeleaf');
 let portal = require('/lib/xp/portal');
-let rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
 

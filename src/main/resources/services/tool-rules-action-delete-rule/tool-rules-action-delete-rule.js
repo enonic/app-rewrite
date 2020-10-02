@@ -4,11 +4,11 @@ exports.post = function (req) {
 
     let params = req.params;
 
-    let from = params.identifier;
+    let ruleId = params.identifier;
     let contextKey = params.actionContext;
 
     try {
-        const deleteRule = rewriteDao.deleteRule(contextKey, from)
+        rewriteDao.deleteRule(contextKey, ruleId)
     } catch (e) {
         return {
             status: 500,
@@ -18,7 +18,7 @@ exports.post = function (req) {
     }
 
     let model = {
-        message: "rule with context [" + contextKey + "], from [" + from + "] deleted",
+        message: "The rule was successfully deleted"
     };
 
     return {

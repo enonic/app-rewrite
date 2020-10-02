@@ -1,42 +1,40 @@
 package com.enonic.app.rewrite.requesttester;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectTarget;
-import com.enonic.app.rewrite.vhost.VirtualHostConfig;
-import com.enonic.app.rewrite.vhost.VirtualHostMapping;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
+import com.enonic.xp.web.vhost.VirtualHostResolver;
 
-@Component(immediate = true)
+@Component(enabled = false)
 public class RequestTesterImpl
     implements RequestTester
 {
-    private VirtualHostConfig config;
+
+    private static final Integer THRESHOLD = 100;
+
+    private VirtualHostResolver virtualHostResolver;
 
     private RewriteService rewriteService;
-
-    private static Integer THRESHOLD = 100;
 
     @Override
     public RequestTesterResult testRequest( final String requestURL )
     {
-        final List<Redirect> redirectedTargets = Lists.newArrayList();
+        final List<Redirect> redirectedTargets = new ArrayList<>();
 
         final RequestTesterResult.Builder builder = RequestTesterResult.create();
 
-        if ( Strings.isNullOrEmpty( requestURL ) )
+        if ( requestURL == null || requestURL.isEmpty() )
         {
             return builder.build();
         }
@@ -119,17 +117,18 @@ public class RequestTesterImpl
 
     private void getAndSetVHost( final RewriteTesterRequest req )
     {
-        final VirtualHostMapping virtualHostMapping = this.config.getMappings().resolve( req );
-        if ( virtualHostMapping != null )
+        final VirtualHost virtualHost = virtualHostResolver.resolveVirtualHost( req );
+
+        if ( virtualHost != null )
         {
-            VirtualHostHelper.setVirtualHost( req, virtualHostMapping );
+            VirtualHostHelper.setVirtualHost( req, virtualHost );
         }
     }
 
     @Reference
-    public void setConfig( final VirtualHostConfig config )
+    public void setVirtualHostResolver( final VirtualHostResolver virtualHostResolver )
     {
-        this.config = config;
+        this.virtualHostResolver = virtualHostResolver;
     }
 
     @Reference
@@ -137,4 +136,5 @@ public class RequestTesterImpl
     {
         this.rewriteService = rewriteService;
     }
+
 }

@@ -1,16 +1,6 @@
 <div data-th-if="${!readOnly}">
-    <!-- <button
-             class="table-action"
-             data-th-attr='data-action-context=${contextKey}'
-             data-action-service-name=edit-rule
-             data-tool-key=tool-rules
-             data-refresh-data-selector="#toolContextContextTable"
-             title="Edit rule">
-         <i class="material-icons">edit</i>
-     </button>
-     -->
     <button class="table-action delete"
-            data-th-attr='data-action-context=${contextKey},data-action-identifier=${from}'
+            data-th-attr='data-action-context=${contextKey},data-action-identifier=${identifier}'
             data-action-service-name=delete-rule
             data-tool-key=tool-rules
             data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
@@ -18,7 +8,7 @@
         <i class="material-icons">delete</i>
     </button>
     <button class="table-modal edit"
-            data-th-attr='data-action-context=${contextKey},data-action-identifier=${from}'
+            data-th-attr='data-action-context=${contextKey},data-action-identifier=${identifier}'
             data-modal-type="edit"
             data-tool-key="tool-rules"
             data-refresh-data-selector="#toolRulesRulesTable"

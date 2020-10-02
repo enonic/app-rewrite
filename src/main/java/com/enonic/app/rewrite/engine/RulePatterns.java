@@ -1,10 +1,9 @@
 package com.enonic.app.rewrite.engine;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 class RulePatterns
     implements Iterable<RulePattern>
@@ -34,7 +33,7 @@ class RulePatterns
 
     static final class Builder
     {
-        private List<RulePattern> rules = Lists.newArrayList();
+        private List<RulePattern> rules = new ArrayList<>();
 
         private Builder()
         {

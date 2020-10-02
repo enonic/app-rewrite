@@ -5,8 +5,6 @@ exports.post = function (req) {
     let params = req.params;
     let contextKey = params.createRuleContextKey;
 
-    log.info("Params: %s", JSON.stringify(params));
-
     let rule = {
         source: params.createRuleSource,
         target: params.createRuleTarget,
@@ -14,6 +12,7 @@ exports.post = function (req) {
     };
 
     let insertStrategy = params.insertStrategy;
+    let insertPosition = params.insertPosition;
 
     if (!contextKey) {
         let model = {
@@ -28,7 +27,7 @@ exports.post = function (req) {
     }
 
     try {
-        rewriteDao.createRule(contextKey, rule, insertStrategy);
+        rewriteDao.createRule(contextKey, rule, insertStrategy, insertPosition);
     } catch (e) {
         return {
             status: 500,

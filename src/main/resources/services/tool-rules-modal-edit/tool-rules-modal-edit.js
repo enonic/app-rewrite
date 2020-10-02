@@ -13,24 +13,25 @@ exports.get = function (req) {
 
     let params = req.params;
     let contextKey = params.actionContext;
-    let pattern = params.identifier;
+    let identifier = params.identifier;
 
     if (!contextKey) {
         return helpers.returnMissingValueError("context")
-    } else if (!pattern) {
-        return helpers.returnMissingValueError("context")
+    } else if (!identifier) {
+        return helpers.returnMissingValueError("identifier")
     }
 
-    let rule = rewriteService.getRule(contextKey, pattern);
+    let rule = rewriteService.getRule(contextKey, identifier);
 
     if (!rule) {
-        return helpers.returnMissingValueError("Rule with pattern: " + pattern);
+        return helpers.returnMissingValueError("Rule with identifier: " + identifier);
     }
-
-    log.info("RULE: %s", JSON.stringify(rule, null, 4));
 
     let url = createSourceUrl(rewriteDao.getRewriteContext(contextKey));
 
+    let ruleMappings = rewriteDao.getRewriteMapping(contextKey);
+
+    let maxPosition = ruleMappings.mapping ? ruleMappings.mapping.rules.length - 1 : 0;
 
     let model = {
         form: {
@@ -38,12 +39,15 @@ exports.get = function (req) {
         },
         contextKey: contextKey,
         source: {
-            url: url
+            url: url,
+            maxPosition: maxPosition
         },
         rule: {
+            ruleId: rule.ruleId,
             pattern: rule.from,
             substitution: rule.target.path,
-            type: rule.type
+            type: rule.type,
+            order: rule.order
         },
         selected: rule.type
     };

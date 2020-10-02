@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 public class RewriteMappings
     implements Iterable<RewriteMapping>
 {
@@ -63,7 +61,7 @@ public class RewriteMappings
 
     public static final class Builder
     {
-        private List<RewriteMapping> rewriteMappings = Lists.newArrayList();
+        private List<RewriteMapping> rewriteMappings = new ArrayList<>(  );
 
         private Builder()
         {

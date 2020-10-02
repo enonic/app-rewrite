@@ -1,10 +1,9 @@
 package com.enonic.app.rewrite.domain;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import com.google.common.collect.Lists;
 
 public class RewriteRules
     implements Iterable<RewriteRule>
@@ -41,7 +40,7 @@ public class RewriteRules
 
     public static final class Builder
     {
-        private List<RewriteRule> rules = Lists.newArrayList();
+        private List<RewriteRule> rules = new ArrayList<>(  );
 
         private Builder()
         {
@@ -56,6 +55,12 @@ public class RewriteRules
         public Builder addRule( final RewriteRule rule )
         {
             this.rules.add( rule );
+            return this;
+        }
+
+        public Builder addRule( final Integer position, final RewriteRule rule )
+        {
+            this.rules.add( position, rule );
             return this;
         }
 

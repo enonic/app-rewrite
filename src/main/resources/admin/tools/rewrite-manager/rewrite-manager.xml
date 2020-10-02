@@ -4,6 +4,5 @@
   <description>Rewrite-configuration and management</description>
   <allow>
     <principal>role:system.admin</principal>
-    <principal>role:system.admin</principal>
   </allow>
 </tool>

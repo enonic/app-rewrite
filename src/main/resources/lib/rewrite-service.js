@@ -1,6 +1,6 @@
 let dao = require("rewrite-dao");
 
-exports.getRule = function (contextKey, pattern) {
+exports.getRule = function (contextKey, ruleId) {
 
     const result = dao.getRewriteMapping(contextKey);
 
@@ -14,7 +14,7 @@ exports.getRule = function (contextKey, pattern) {
     }
 
     for (let i = 0; i < rules.length; i++) {
-        if (rules[i].from === pattern) {
+        if (rules[i].ruleId === ruleId) {
             return rules[i];
         }
     }

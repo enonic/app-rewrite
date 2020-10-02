@@ -5,8 +5,6 @@ const portalLib = require('/lib/xp/portal');
 exports.post = function (req) {
     let params = req.params;
 
-    log.info("PARAMS %s", JSON.stringify(params, null, 4));
-
     let contextKey = params.importRulesContextKey;
     let dryRun = params.importRulesDryRun === 'true';
     let mergeStrategy = params.toolRulesMergeStrategy ? params.toolRulesMergeStrategy : "delete";

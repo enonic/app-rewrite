@@ -11,8 +11,6 @@ exports.get = function (req) {
         toolKey: "tool-context"
     };
 
-    //  log.info("Model: %s", JSON.stringify(model, null, 4));
-
     return {
         contentType: 'text/html',
         body: thymeleaf.render(view, model)

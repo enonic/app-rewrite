@@ -1,16 +1,12 @@
 package com.enonic.app.rewrite.filter;
 
-import java.util.List;
-
 public interface RewriteFilterConfig
 {
     boolean enabled();
 
-    String provider();
+    String excludePattern();
 
-    List<String> excludePatterns();
+    String includePattern();
 
-    List<String> includePatterns();
-
-    String ruleFilePattern();
+    String ruleFileNameTemplate();
 }

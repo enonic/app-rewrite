@@ -1,8 +1,7 @@
 package com.enonic.app.rewrite.requesttester;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 public class RequestTesterResult
 {
@@ -38,7 +37,7 @@ public class RequestTesterResult
 
     public static final class Builder
     {
-        private List<RedirectTestResult> matchList = Lists.newArrayList();
+        private List<RedirectTestResult> matchList = new ArrayList<>();
 
         private TestResultState resultState = TestResultState.OK;
 

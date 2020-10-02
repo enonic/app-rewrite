@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class ContextResolver
 {
-    private final static Logger LOG = LoggerFactory.getLogger( ContextResolver.class );
+    private static final Logger LOG = LoggerFactory.getLogger( ContextResolver.class );
 
     public static String resolve( final HttpServletRequest request )
     {

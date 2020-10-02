@@ -12,6 +12,9 @@
             <input type="hidden" id="editRuleContextKey" name="editRuleContextKey" data-th-value="${contextKey}"
                    readonly="readonly"/>
 
+            <input type="hidden" id="editRuleId" name="editRuleId" data-th-value="${rule.ruleId}"
+                   readonly="readonly"/>
+
             <label for="sourceUrl">URL</label>
             <input type="text" id="sourceUrl" disabled="disabled" readonly="readonly" data-th-value="${source.url}"/>
 
@@ -29,10 +32,14 @@
                 <option value="TEMPORARILY_REDIRECT" data-th-selected="${selected == 'TEMPORARILY_REDIRECT'}">TEMPORARILY_REDIRECT</option>
             </select>
 
+            <label for="editInsertPosition">Position</label>
+            <input id="editInsertPosition" name="editInsertPosition" type="number" data-th-min="0" data-th-max="${source.maxPosition}"
+                   data-th-value="${rule.order}">
+
             <button class="modal-action"
                     data-action-type="edit-rule"
                     data-refresh-data-selector="#toolRulesRulesTable,#toolContextContextTable"
-                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Edit Rule
+                    data-th-attr='data-tool-key=tool-rules,data-form=${form.id}'>Save
             </button>
             <button class="modal-cancel">Cancel
             </button>

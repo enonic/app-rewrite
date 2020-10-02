@@ -14,6 +14,8 @@ public class CreateRuleParams
 
     private String type;
 
+    private Integer position;
+
     public RewriteContextKey getContextKey()
     {
         return contextKey;
@@ -63,4 +65,15 @@ public class CreateRuleParams
     {
         this.type = type;
     }
+
+    public Integer getPosition()
+    {
+        return position;
+    }
+
+    public void setPosition( final Integer position )
+    {
+        this.position = position;
+    }
+
 }

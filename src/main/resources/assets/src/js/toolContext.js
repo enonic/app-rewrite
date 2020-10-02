@@ -34,8 +34,6 @@ export let initToolContext = function (svcUrl) {
 };
 
 let onToolLoaded = function (result) {
-
-    console.log("Tool [" + toolKey + "] loaded");
     $(toolSelector).html(result);
 
     let df = function () {

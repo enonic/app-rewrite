@@ -1,8 +1,7 @@
 package com.enonic.app.rewrite.engine;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
@@ -13,7 +12,7 @@ class RewriteRulesLoader
 {
     static Map<RewriteContextKey, RulePatterns> load( final RewriteMappings mappings )
     {
-        final Map<RewriteContextKey, RulePatterns> rewriteMap = Maps.newHashMap();
+        final Map<RewriteContextKey, RulePatterns> rewriteMap = new HashMap<>(  );
 
         for ( final RewriteMapping rewriteMapping : mappings )
         {

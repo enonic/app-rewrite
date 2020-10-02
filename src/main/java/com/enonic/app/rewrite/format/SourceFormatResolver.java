@@ -1,7 +1,5 @@
 package com.enonic.app.rewrite.format;
 
-import java.io.File;
-
 public class SourceFormatResolver
 {
     public static SourceFormat resolve( final String fileName )

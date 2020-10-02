@@ -1,31 +1,30 @@
 package com.enonic.app.rewrite.mapping;
 
-import com.enonic.app.rewrite.vhost.VirtualHostMapping;
-import com.enonic.app.rewrite.vhost.VirtualHostMappings;
+import java.util.List;
+
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
+import com.enonic.xp.web.vhost.VirtualHost;
 
 public class VirtualHostsMapper
     implements MapSerializable
 {
-    private final VirtualHostMappings virtualHostMappings;
+    private final List<VirtualHost> virtualHosts;
 
-    public VirtualHostsMapper( final VirtualHostMappings virtualHostMappings )
+    public VirtualHostsMapper( List<VirtualHost> virtualHosts )
     {
-        this.virtualHostMappings = virtualHostMappings;
+        this.virtualHosts = virtualHosts;
     }
 
     @Override
     public void serialize( final MapGenerator gen )
     {
         gen.array( "virtualHosts" );
-        this.virtualHostMappings.forEach( mapping -> {
-            mapVirtualHost( gen, mapping );
-        } );
+        this.virtualHosts.forEach( mapping -> mapVirtualHost( gen, mapping ) );
         gen.end();
     }
 
-    private void mapVirtualHost( final MapGenerator gen, final VirtualHostMapping virtualHostMapping )
+    private void mapVirtualHost( final MapGenerator gen, final VirtualHost virtualHostMapping )
     {
         gen.map();
         gen.value( "type", "virtualHost" );

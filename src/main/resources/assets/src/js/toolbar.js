@@ -19,7 +19,7 @@ let toggleTool = function (id) {
     });
 };
 
-export let initToolbar = function () {
+export let initToolbar = function (svcUrl) {
 
     let allNavs = $(model.toolbar.toolNav);
 
@@ -30,5 +30,21 @@ export let initToolbar = function () {
             let activates = $(this).data("activator");
             toggleTool(activates);
         })
-    })
+    });
+
+    $.ajax({
+        url: svcUrl + "check-vhost-state",
+        cache: false,
+        type: 'GET',
+        error: function (request, status, error) {
+        },
+        success: function (result) {
+            let $vhost = $('#vhost-state');
+            if (result === false) {
+                $vhost.show();
+            } else {
+                $vhost.hide();
+            }
+        }
+    });
 };
