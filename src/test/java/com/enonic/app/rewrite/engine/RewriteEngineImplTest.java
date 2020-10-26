@@ -2,17 +2,19 @@ package com.enonic.app.rewrite.engine;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.eclipse.jetty.util.URIUtil;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.enonic.app.rewrite.MockHttpRequest;
-import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteMappings;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
+import com.enonic.app.rewrite.redirect.RedirectMatch;
+import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.xp.web.vhost.VirtualHost;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,31 +23,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class RewriteEngineImplTest
 {
 
-    @Test
-    void testSimpleRewrite()
+    private VirtualHost vhost;
+
+    @BeforeEach
+    void setUp()
     {
-        final RewriteRules rules = RewriteRules.create().
-            addRule( RewriteRule.create().
-                from( "/oldUrl" ).
-                target( "/newUrl" ).
-                type( RedirectType.MOVED_PERMANENTLY ).
-                build() ).
-            build();
-
-        final RewriteMappings rewriteMappings = RewriteMappings.create().
-            add( RewriteMapping.create().
-                contextKey( new RewriteContextKey( "myvhost" ) ).
-                rewriteRules( rules ).
-                build() ).
-            build();
-
-        final RewriteEngine rewriteEngine = new RewriteEngine();
-        rewriteEngine.load( rewriteMappings );
-
-        final VirtualHost vhost = Mockito.mock( VirtualHost.class );
+        vhost = Mockito.mock( VirtualHost.class );
         Mockito.when( vhost.getName() ).thenReturn( "myvhost" );
         Mockito.when( vhost.getSource() ).thenReturn( "/" );
         Mockito.when( vhost.getTarget() ).thenReturn( "/site/default/master/mysite" );
+    }
+
+    @Test
+    void testSimpleRewrite()
+    {
+        final RewriteMappings rewriteMappings = prepareRewriteMappings( "/oldUrl", "/newUrl", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
 
         final HttpServletRequest request = MockHttpRequest.create().
             contextPath( "/" ).
@@ -62,28 +57,10 @@ class RewriteEngineImplTest
     @Test
     void testWildcard()
     {
-        final RewriteRules rules = RewriteRules.create().
-            addRule( RewriteRule.create().
-                from( "/oldUrl/(.*)" ).
-                target( "/newUrl/$1" ).
-                type( RedirectType.MOVED_PERMANENTLY ).
-                build() ).
-            build();
-
-        final RewriteMappings rewriteMappings = RewriteMappings.create().
-            add( RewriteMapping.create().
-                contextKey( new RewriteContextKey( "myvhost" ) ).
-                rewriteRules( rules ).
-                build() ).
-            build();
+        final RewriteMappings rewriteMappings = prepareRewriteMappings( "/oldUrl/(.*)", "/newUrl/$1", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
-
-        final VirtualHost vhost = Mockito.mock( VirtualHost.class );
-        Mockito.when( vhost.getName() ).thenReturn( "myvhost" );
-        Mockito.when( vhost.getSource() ).thenReturn( "/" );
-        Mockito.when( vhost.getTarget() ).thenReturn( "/site/default/master/mysite" );
 
         final HttpServletRequest request = MockHttpRequest.create().
             contextPath( "/" ).
@@ -97,5 +74,65 @@ class RewriteEngineImplTest
         assertEquals( "/newUrl/child", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 
+    @Test
+    void testExtendedWildcard()
+    {
+        final RewriteMappings rewriteMappings =
+            prepareRewriteMappings( "/oldUrl/(.*)/resource/(.*)", "/newUrl/$1/res/$2", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child/resource/child2" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "/newUrl/child/res/child2", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
+    @Test
+    void testEncodedPath()
+    {
+        final String originalUrl = "brukerstøtte";
+
+        final RewriteMappings rewriteMappings = prepareRewriteMappings( "/" + originalUrl, "/support", RedirectType.FOUND );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/" + URIUtil.encodePath( originalUrl ) ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "/support", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
+    private RewriteMappings prepareRewriteMappings( final String source, final String target, final RedirectType redirectType )
+    {
+        final RewriteRules rules = RewriteRules.create().
+            addRule( RewriteRule.create().
+                from( source ).
+                target( target ).
+                type( redirectType ).
+                build() ).
+            build();
+
+        return RewriteMappings.create().
+            add( RewriteMapping.create().
+                contextKey( new RewriteContextKey( "myvhost" ) ).
+                rewriteRules( rules ).
+                build() ).
+            build();
+    }
 
 }

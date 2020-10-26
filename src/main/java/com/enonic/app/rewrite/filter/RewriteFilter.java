@@ -1,13 +1,12 @@
 package com.enonic.app.rewrite.filter;
 
-import java.nio.charset.StandardCharsets;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.jetty.util.URIUtil;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -15,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.enonic.app.rewrite.RewriteService;
-import com.enonic.app.rewrite.URLPathEncoder;
 import com.enonic.app.rewrite.context.ContextResolver;
 import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectExternal;
@@ -70,14 +68,14 @@ public class RewriteFilter
         }
     }
 
-    private boolean doExclude( final RequestWrapper request )
+    private boolean doExclude( final String requestURI )
     {
-        return this.excludePatternMatcher.match( request.getRequestURI() );
+        return this.excludePatternMatcher.match( requestURI );
     }
 
-    private boolean doInclude( final RequestWrapper request )
+    private boolean doInclude( final String requestURI )
     {
-        return this.includePatternMatcher.match( request.getRequestURI() );
+        return this.includePatternMatcher.match( requestURI );
     }
 
     private boolean doRewriteURL( HttpServletRequest hsRequest, HttpServletResponse hsResponse )
@@ -92,21 +90,23 @@ public class RewriteFilter
         final RequestWrapper wrappedRequest = new RequestWrapper( hsRequest );
         wrappedRequest.setContextPath( ContextResolver.resolve( hsRequest ) );
 
-        if ( !doInclude( wrappedRequest ) || doExclude( wrappedRequest ) )
+        final String decodedRequestURI = URIUtil.decodePath( wrappedRequest.getRequestURI() );
+
+        if ( !doInclude( decodedRequestURI ) || doExclude( decodedRequestURI ) )
         {
-            LOG.debug( "Skipped: " + hsRequest.getRequestURI() );
+            LOG.debug( "Skipped: " + decodedRequestURI );
             return false;
         }
-        final RedirectMatch match = rewriteService.process( hsRequest );
+        final RedirectMatch match = rewriteService.process( wrappedRequest );
         if ( match == null )
         {
-            LOG.debug( "No matching rules: " + hsRequest.getRequestURI() );
+            LOG.debug( "No matching rules: " + decodedRequestURI );
             return false;
         }
 
         final Redirect redirect = match.getRedirect();
         final RedirectTarget redirectTarget = redirect.getRedirectTarget();
-        LOG.debug( "Changed from: " + hsRequest.getRequestURI() + " target: " + redirectTarget );
+        LOG.debug( "Changed from: " + decodedRequestURI + " target: " + redirectTarget );
 
         final int httpCode = redirect.getType().getHttpCode();
 
@@ -118,8 +118,7 @@ public class RewriteFilter
         else
         {
             hsResponse.setStatus( httpCode );
-            hsResponse.setHeader( "Location",
-                                  URLPathEncoder.encode( redirect.getRedirectTarget().getTargetPath(), StandardCharsets.UTF_8 ) );
+            hsResponse.setHeader( "Location", redirect.getRedirectTarget().getTargetPath() );
         }
         return true;
     }

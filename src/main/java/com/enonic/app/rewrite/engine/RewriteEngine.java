@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.eclipse.jetty.util.URIUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class RewriteEngine
 
         if ( virtualHost != null )
         {
-            return this.match( new RewriteVirtualHostContext( virtualHost ), request.getRequestURI() );
+            return match( new RewriteVirtualHostContext( virtualHost ), request.getRequestURI() );
         }
 
         return null;
@@ -97,7 +98,7 @@ public class RewriteEngine
             return new Redirect( RedirectExternal.from( target.path() ), rulePattern.getType() );
         }
 
-        final String replacedTarget = matcher.replaceFirst( rulePattern.getTarget().path() );
+        final String replacedTarget = matcher.replaceFirst( target.path() );
         return new Redirect( RedirectInternal.from( rewriteContext, replacedTarget ), rulePattern.getType() );
     }
 
@@ -106,6 +107,6 @@ public class RewriteEngine
 
         final String replaced = path.replaceFirst( context.getTargetContext(), "" );
 
-        return replaced.isEmpty() ? "/" : replaced;
+        return replaced.isEmpty() ? "/" : URIUtil.decodePath( replaced );
     }
 }
