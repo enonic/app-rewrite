@@ -1,7 +1,11 @@
 package com.enonic.app.rewrite.filter;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
+import com.enonic.app.rewrite.URLPathDecoder;
 
 class RequestWrapper
     extends HttpServletRequestWrapper
@@ -16,6 +20,12 @@ class RequestWrapper
     void setContextPath( final String contextPath )
     {
         this.contextPath = contextPath;
+    }
+
+    @Override
+    public String getRequestURI()
+    {
+        return URLPathDecoder.decode( super.getRequestURI(), StandardCharsets.UTF_8 );
     }
 
     @Override

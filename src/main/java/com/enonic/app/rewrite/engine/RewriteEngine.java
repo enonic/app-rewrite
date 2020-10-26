@@ -1,5 +1,6 @@
 package com.enonic.app.rewrite.engine;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.enonic.app.rewrite.URLPathDecoder;
 import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMappings;
@@ -106,6 +108,6 @@ public class RewriteEngine
 
         final String replaced = path.replaceFirst( context.getTargetContext(), "" );
 
-        return replaced.isEmpty() ? "/" : replaced;
+        return replaced.isEmpty() ? "/" : URLPathDecoder.decode( replaced, StandardCharsets.UTF_8 );
     }
 }
