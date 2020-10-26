@@ -2,7 +2,6 @@ package com.enonic.app.rewrite.redirect;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 
 import com.enonic.app.rewrite.domain.RewriteContext;
 
@@ -31,27 +30,7 @@ public class RedirectInternal
     @Override
     public String toString()
     {
-        return "RedirectInternal{" + "target='" + target + '\'' + '}';
+        return "RedirectInternal{ target='" + target + "'}";
     }
 
-    @Override
-    public boolean equals( final Object o )
-    {
-        if ( this == o )
-        {
-            return true;
-        }
-        if ( o == null || getClass() != o.getClass() )
-        {
-            return false;
-        }
-        final RedirectInternal that = (RedirectInternal) o;
-        return Objects.equals( target, that.target );
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash( target );
-    }
 }

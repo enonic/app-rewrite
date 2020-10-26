@@ -1,5 +1,7 @@
 package com.enonic.app.rewrite.mapping;
 
+import org.eclipse.jetty.util.URIUtil;
+
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectTarget;
@@ -26,9 +28,7 @@ public class RequestTesterResultMapper
 
         gen.value( "state", result.getResultState().name() );
         gen.array( "steps" );
-        result.getMatchList().forEach( redirectMatch -> {
-            serialize( gen, redirectMatch );
-        } );
+        result.getMatchList().forEach( redirectMatch -> serialize( gen, redirectMatch ) );
         gen.end();
     }
 
@@ -47,7 +47,7 @@ public class RequestTesterResultMapper
 
         if ( incomingRequest != null )
         {
-            gen.value( "url", incomingRequest.getRequestUrl() );
+            gen.value( "url", URIUtil.decodePath( incomingRequest.getRequestUrl() ) );
 
             final VirtualHost matchingVHost = incomingRequest.getMatchingVHost();
 
@@ -82,7 +82,7 @@ public class RequestTesterResultMapper
     private void serialize( final MapGenerator gen, final RedirectTarget target )
     {
         gen.map( "target" );
-        gen.value( "url", target.getTargetPath() );
+        gen.value( "url", URIUtil.decodePath( target.getTargetPath() ) );
         gen.value( "type", target instanceof RedirectExternal ? "external" : "internal" );
         gen.end();
     }

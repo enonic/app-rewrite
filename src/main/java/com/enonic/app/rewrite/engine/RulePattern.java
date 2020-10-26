@@ -2,8 +2,8 @@ package com.enonic.app.rewrite.engine;
 
 import java.util.regex.Pattern;
 
-import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.app.rewrite.domain.RewriteTarget;
+import com.enonic.app.rewrite.redirect.RedirectType;
 
 class RulePattern
     implements Comparable<RulePattern>
@@ -81,7 +81,6 @@ class RulePattern
             this.target = RewriteTarget.from( target );
             return this;
         }
-
 
         Builder target( final RewriteTarget target )
         {
