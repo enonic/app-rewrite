@@ -117,6 +117,27 @@ class RewriteEngineImplTest
         assertEquals( "/support", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 
+    @Test
+    void testExternal()
+    {
+        final RewriteMappings rewriteMappings =
+            prepareRewriteMappings( "/oldUrl/child", "http://myvhost/newUrl/child", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "/newUrl/child", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
     private RewriteMappings prepareRewriteMappings( final String source, final String target, final RedirectType redirectType )
     {
         final RewriteRules rules = RewriteRules.create().
