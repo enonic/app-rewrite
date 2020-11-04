@@ -25,13 +25,13 @@ public class CSVSerializer
         return doSerialize( rules );
     }
 
-    private static String doSerialize( final RewriteRules rules )
+    private static String doSerialize( final RewriteRules rewriteRules )
     {
         final StringBuilder stringBuilder = new StringBuilder();
 
         try (final CSVPrinter csvPrinter = new CSVPrinter( stringBuilder, FORMAT ))
         {
-            rules.forEach( rule -> {
+            rewriteRules.getRuleList().forEach( rule -> {
                 try
                 {
                     csvPrinter.printRecord( rule.getFrom(), rule.getTarget().path(), rule.getType().getHttpCode() );

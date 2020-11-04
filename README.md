@@ -7,19 +7,19 @@ App for handling request redirects
 ``com.enonic.app.redirect.cfg:``
 
     enabled=true
-    excludePatterns=^/admin/.*,.*/_/asset/.*,.*/_/image/.*
-    includePatterns=^/site/.*
-    ruleFilePattern=com.enonic.app.rewrite.{{vhost}}.txt
+    excludePattern=^/admin/.*|.*/_/asset/.*|.*/_/image/.*
+    includePattern=^/site/.*
+    ruleFileNameTemplate=com.enonic.app.rewrite.{{vhost}}.conf
 
 
 ## Rewrite files
 
-You can specify files containing rewrite config based on the pattern in the config "ruleFilePattern"
+You can specify files containing rewrite config based on the pattern in the config "ruleFileNameTemplate"
 The vhost-name is mapped to the name of a vhost given in ``com.enonic.xp.web.vhost.cfg``
 
 Currently supported; 
 
-*apache syntax (simplyfied)*
+*Apache syntax (simplyfied)*
 
 ``com.enonic.app.rewrite.myvhost.conf``
 

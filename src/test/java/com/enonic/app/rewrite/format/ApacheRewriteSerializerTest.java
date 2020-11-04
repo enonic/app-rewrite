@@ -2,6 +2,7 @@ package com.enonic.app.rewrite.format;
 
 import java.io.BufferedReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ApacheRewriteSerializerTest
 {
@@ -27,8 +28,11 @@ class ApacheRewriteSerializerTest
         try (BufferedReader reader = source.asCharSource( StandardCharsets.UTF_8 ).openBufferedStream())
         {
             final RewriteRules rules = ApacheRewriteSerializer.read( reader ).getRules();
-            assertTrue( rules.iterator().hasNext() );
-            final RewriteRule rule = rules.iterator().next();
+
+            final List<RewriteRule> ruleList = rules.getRuleList();
+            assertFalse( ruleList.isEmpty() );
+
+            final RewriteRule rule = ruleList.get( 0 );
             assertEquals( "^/bedrift/pensjon/(.*)$", rule.getFrom() );
             assertEquals( "/virksomhet/pensjon/$1", rule.getTarget().path() );
             assertEquals( 307, rule.getType().getHttpCode() );
@@ -43,8 +47,11 @@ class ApacheRewriteSerializerTest
         try (BufferedReader reader = source.asCharSource( StandardCharsets.UTF_8 ).openBufferedStream())
         {
             final RewriteRules rules = ApacheRewriteSerializer.read( reader ).getRules();
-            assertTrue( rules.iterator().hasNext() );
-            final RewriteRule rule = rules.iterator().next();
+
+            final List<RewriteRule> ruleList = rules.getRuleList();
+            assertFalse( ruleList.isEmpty() );
+
+            final RewriteRule rule = ruleList.get( 0 );
             assertEquals( "^/bedrift/pensjon/(.*)$", rule.getFrom() );
             assertEquals( "/virksomhet/pensjon/$1", rule.getTarget().path() );
             assertEquals( 302, rule.getType().getHttpCode() );

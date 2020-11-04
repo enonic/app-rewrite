@@ -21,7 +21,7 @@ class RulePattern
         target = builder.target;
         type = builder.type;
         order = builder.order;
-        this.pattern = Pattern.compile( builder.pattern );
+        this.pattern = Pattern.compile( builder.pattern, Pattern.CASE_INSENSITIVE );
     }
 
     static Builder create()

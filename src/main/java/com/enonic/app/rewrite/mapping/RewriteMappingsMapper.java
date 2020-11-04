@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteMappings;
 import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 import com.enonic.xp.web.vhost.VirtualHost;
@@ -14,25 +14,21 @@ import com.enonic.xp.web.vhost.VirtualHost;
 public class RewriteMappingsMapper
     implements MapSerializable
 {
-    private final RewriteMappings rewriteMappings;
+    private final List<RewriteMapping> rewriteMappings;
 
-    private final Map<String, VirtualHost> virtualHostMappingMap = new HashMap<>(  );
+    private final Map<String, VirtualHost> virtualHostMappingMap = new HashMap<>();
 
-    public RewriteMappingsMapper( final RewriteMappings rewriteMappings, final List<VirtualHost> virtualHostMappings )
+    public RewriteMappingsMapper( final List<RewriteMapping> rewriteMappings, final List<VirtualHost> virtualHostMappings )
     {
         this.rewriteMappings = rewriteMappings;
 
-        virtualHostMappings.forEach( mapping -> {
-            this.virtualHostMappingMap.put( mapping.getName(), mapping );
-        } );
+        virtualHostMappings.forEach( mapping -> this.virtualHostMappingMap.put( mapping.getName(), mapping ) );
     }
 
     @Override
     public void serialize( final MapGenerator gen )
     {
-        this.rewriteMappings.forEach( mapping -> {
-            mapMapping( gen, mapping );
-        } );
+        this.rewriteMappings.forEach( mapping -> mapMapping( gen, mapping ) );
     }
 
     private void mapMapping( final MapGenerator gen, final RewriteMapping rewriteMapping )
@@ -58,16 +54,16 @@ public class RewriteMappingsMapper
             gen.value( "type", "not found" );
         }
 
-        mapRules( gen, rewriteMapping );
+        mapRules( gen, rewriteMapping.getRewriteRules() );
 
         gen.end();
     }
 
-    private void mapRules( final MapGenerator gen, final Iterable<RewriteRule> rules )
+    private void mapRules( final MapGenerator gen, final RewriteRules rewriteRules )
     {
         gen.array( "rules" );
         int i = 0;
-        for ( final RewriteRule rule : rules )
+        for ( final RewriteRule rule : rewriteRules.getRuleList() )
         {
             mapRule( gen, rule, i++ );
         }

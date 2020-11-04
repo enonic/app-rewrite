@@ -2,11 +2,9 @@ package com.enonic.app.rewrite.engine;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 class RulePatterns
-    implements Iterable<RulePattern>
 {
     private final List<RulePattern> rules;
 
@@ -20,10 +18,9 @@ class RulePatterns
         return new Builder();
     }
 
-    @Override
-    public Iterator<RulePattern> iterator()
+    public List<RulePattern> getRules()
     {
-        return this.rules.iterator();
+        return rules;
     }
 
     int size()

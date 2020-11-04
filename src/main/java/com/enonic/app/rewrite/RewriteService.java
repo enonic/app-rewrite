@@ -39,4 +39,6 @@ public interface RewriteService
 
     RewriteRulesLoadResult load();
 
+    VirtualHostsDecorator getVirtualHostMappings();
+
 }

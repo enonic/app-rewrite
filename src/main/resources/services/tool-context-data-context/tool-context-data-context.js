@@ -26,7 +26,7 @@ function getProviderInfo(configuration, contextKey) {
 
 exports.get = function (req) {
 
-    let result = rewriteDao.getRewriteConfigurations();
+    let rewriteConfigurationResult = rewriteDao.getRewriteConfigurations();
 
     let model = {
         columns: [
@@ -34,17 +34,18 @@ exports.get = function (req) {
             {title: "Url", data: "url"},
             {title: "Rules", data: "rules"},
             {title: "Source", data: "provider"},
+            {title: "Status", data: "status"},
             {title: "Actions", data: "actions"}
         ]
     };
 
     model.data = [];
 
-    result.configurations.forEach(function (configuration) {
+    rewriteConfigurationResult.configurations.forEach(function (configuration) {
 
         let contextKey = configuration.contextKey;
-        let result = rewriteDao.getRewriteContext(contextKey);
-        let rewriteContext = result.rewriteContext;
+
+        let virtualHostMapping = rewriteDao.getRewriteContext(contextKey).rewriteContext;
 
         let providerInfo = getProviderInfo(configuration, contextKey);
         const rules = getNumberOfRules(contextKey);
@@ -53,10 +54,11 @@ exports.get = function (req) {
 
         model.data.push({
             contextKey: contextKey,
-            url: createUrl(rewriteContext),
+            url: createUrl(virtualHostMapping),
             rules: rules,
             provider: hasProvider ? configuration.provider : "",
             readOnly: hasProvider ? providerInfo.readOnly : "",
+            status: virtualHostMapping.disabled === true ? 'Disabled' : 'Enabled',
             actions: createActionButtons(contextKey, configuration)
         });
     });
@@ -82,5 +84,8 @@ let createActionButtons = function (contextKey, configuration) {
 };
 
 let createUrl = function (rewriteContext) {
+    if (!rewriteContext.host && !rewriteContext.source) {
+        return 'Not available';
+    }
     return rewriteContext.host + rewriteContext.source;
 };

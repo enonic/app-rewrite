@@ -32,7 +32,7 @@ public class ApacheRewriteSerializer
     {
         final StringBuilder builder = new StringBuilder();
 
-        rewriteRules.forEach( rule -> {
+        rewriteRules.getRuleList().forEach( rule -> {
             builder.append( serialize( rule ) );
             builder.append( System.lineSeparator() );
         } );

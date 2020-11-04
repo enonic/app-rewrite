@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.util.URIUtil;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -20,6 +19,8 @@ import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectTarget;
 import com.enonic.xp.annotation.Order;
+import com.enonic.xp.trace.Trace;
+import com.enonic.xp.trace.Tracer;
 import com.enonic.xp.web.filter.OncePerRequestFilter;
 
 @Component(enabled = false, service = Filter.class)
@@ -59,7 +60,7 @@ public class RewriteFilter
         }
         catch ( Exception e )
         {
-            LOG.error( "Rewritefilter failed", e );
+            LOG.error( "RewriteFilter failed", e );
         }
 
         if ( !responseCommitted )
@@ -90,35 +91,54 @@ public class RewriteFilter
         final RequestWrapper wrappedRequest = new RequestWrapper( hsRequest );
         wrappedRequest.setContextPath( ContextResolver.resolve( hsRequest ) );
 
-        final String decodedRequestURI = URIUtil.decodePath( wrappedRequest.getRequestURI() );
+        final String requestURI = wrappedRequest.getRequestURI();
 
-        if ( !doInclude( decodedRequestURI ) || doExclude( decodedRequestURI ) )
+        if ( !doInclude( requestURI ) || doExclude( requestURI ) )
         {
-            LOG.debug( "Skipped: " + decodedRequestURI );
+            LOG.debug( "Skipped: {}", requestURI );
             return false;
         }
-        final RedirectMatch match = rewriteService.process( wrappedRequest );
+
+        RedirectMatch match;
+
+        final Trace trace = Tracer.newTrace( "rewriteFilter" );
+        if ( trace == null )
+        {
+            match = rewriteService.process( wrappedRequest );
+        }
+        else
+        {
+            match = Tracer.trace( trace, () -> rewriteService.process( wrappedRequest ) );
+
+            trace.put( "requestURI", requestURI );
+            if ( match != null )
+            {
+                trace.put( "statusCode", match.getRedirect().getType().getHttpCode() );
+                trace.put( "targetPath", match.getRedirect().getRedirectTarget().getTargetPath() );
+            }
+        }
+
         if ( match == null )
         {
-            LOG.debug( "No matching rules: " + decodedRequestURI );
+            LOG.debug( "No matching rules: {}", requestURI );
             return false;
         }
 
         final Redirect redirect = match.getRedirect();
         final RedirectTarget redirectTarget = redirect.getRedirectTarget();
-        LOG.debug( "Changed from: " + decodedRequestURI + " target: " + redirectTarget );
+        LOG.debug( "Changed from: {} target: {}", requestURI, redirectTarget );
 
         final int httpCode = redirect.getType().getHttpCode();
 
-        if ( redirect.getRedirectTarget() instanceof RedirectExternal )
+        if ( redirectTarget instanceof RedirectExternal )
         {
             hsResponse.setStatus( httpCode );
-            hsResponse.sendRedirect( redirect.getRedirectTarget().getTargetPath() );
+            hsResponse.sendRedirect( redirectTarget.getTargetPath() );
         }
         else
         {
             hsResponse.setStatus( httpCode );
-            hsResponse.setHeader( "Location", redirect.getRedirectTarget().getTargetPath() );
+            hsResponse.setHeader( "Location", redirectTarget.getTargetPath() );
         }
         return true;
     }

@@ -5,16 +5,13 @@ public class SourceFormatResolver
     public static SourceFormat resolve( final String fileName )
     {
         final String extension = getFileExtension( fileName );
-        if ( extension.equals( "conf" ) )
-        {
-            return SourceFormat.APACHE_REWRITE;
-        }
-        else if ( extension.equals( "csv" ) )
+
+        if ( "csv".equals( extension ) )
         {
             return SourceFormat.CSV;
         }
 
-        return SourceFormat.CSV;
+        return SourceFormat.APACHE_REWRITE;
     }
 
     private static String getFileExtension( final String filename )
@@ -24,6 +21,6 @@ public class SourceFormatResolver
         {
             return ""; // empty extension
         }
-        return filename.substring( lastIndexOf + 1 );
+        return filename.substring( lastIndexOf + 1 ).toLowerCase();
     }
 }

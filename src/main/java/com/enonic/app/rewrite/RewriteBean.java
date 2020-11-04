@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.ie.ImportResult;
@@ -28,6 +31,8 @@ import com.enonic.xp.web.vhost.VirtualHostService;
 public class RewriteBean
     implements ScriptBean
 {
+    private static final Logger LOG = LoggerFactory.getLogger( RewriteBean.class );
+
     private Supplier<RewriteService> rewriteServiceSupplier;
 
     private Supplier<RequestTester> requestTesterSupplier;
@@ -56,14 +61,16 @@ public class RewriteBean
 
     public Object getRewriteContext( final String contextKey )
     {
-        final VirtualHost rewriteContext = this.rewriteServiceSupplier.get().getRewriteContext( new RewriteContextKey( contextKey ) );
+        final VirtualHostsDecorator virtualHostAsMap = this.rewriteServiceSupplier.get().getVirtualHostMappings();
 
-        return new RewriteContextMapper( rewriteContext );
+        final VirtualHostWrapper virtualHostWrapper = virtualHostAsMap.getVirtualHostMapping( RewriteContextKey.from( contextKey ) );
+
+        return new RewriteContextMapper( virtualHostWrapper );
     }
 
     public Object getRewriteMapping( final String contextKey )
     {
-        final RewriteMapping rewriteMapping = this.rewriteServiceSupplier.get().getRewriteMapping( new RewriteContextKey( contextKey ) );
+        final RewriteMapping rewriteMapping = this.rewriteServiceSupplier.get().getRewriteMapping( RewriteContextKey.from( contextKey ) );
 
         if ( rewriteMapping == null )
         {
@@ -82,7 +89,7 @@ public class RewriteBean
         }
         catch ( Exception e )
         {
-            e.printStackTrace();
+            LOG.error( "RewriteBean#requestTester", e );
             return new ErrorMapper( e );
         }
 
@@ -98,13 +105,13 @@ public class RewriteBean
 
     public Object createRewriteContext( final String contextKey )
     {
-        this.rewriteServiceSupplier.get().create( new RewriteContextKey( contextKey ) );
+        this.rewriteServiceSupplier.get().create( RewriteContextKey.from( contextKey ) );
         return null;
     }
 
     public Object deleteRewriteContext( final String contextKey )
     {
-        this.rewriteServiceSupplier.get().delete( new RewriteContextKey( contextKey ) );
+        this.rewriteServiceSupplier.get().delete( RewriteContextKey.from( contextKey ) );
         return null;
     }
 

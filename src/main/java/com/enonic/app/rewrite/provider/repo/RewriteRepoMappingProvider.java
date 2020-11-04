@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
 import com.enonic.app.rewrite.EditRuleParams;
@@ -36,8 +33,6 @@ import com.enonic.xp.security.auth.AuthenticationInfo;
 public class RewriteRepoMappingProvider
     implements RewriteMappingProvider
 {
-    private final static Logger LOG = LoggerFactory.getLogger( RewriteRepoMappingProvider.class );
-
     public final static NodePath MAPPING_ROOT_NODE = NodePath.create( "/vhosts" ).build();
 
     private final NodeService nodeService;
@@ -143,7 +138,7 @@ public class RewriteRepoMappingProvider
 
         final List<RewriteRule> rules = new ArrayList<>();
 
-        for ( final RewriteRule rule : rewriteMapping.getRewriteRules() )
+        for ( final RewriteRule rule : rewriteMapping.getRewriteRules().getRuleList() )
         {
             if ( !Objects.equals( rule.getRuleId(), params.getRuleId() ) )
             {
@@ -181,7 +176,7 @@ public class RewriteRepoMappingProvider
         final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( contextNode );
 
         final RewriteRules.Builder newRules = RewriteRules.create();
-        for ( final RewriteRule rule : rewriteMapping.getRewriteRules() )
+        for ( final RewriteRule rule : rewriteMapping.getRewriteRules().getRuleList() )
         {
             if ( !rule.getRuleId().equals( params.getRuleId() ) )
             {
