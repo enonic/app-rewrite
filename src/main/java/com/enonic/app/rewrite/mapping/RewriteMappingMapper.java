@@ -2,6 +2,7 @@ package com.enonic.app.rewrite.mapping;
 
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
+import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.xp.script.serializer.MapGenerator;
 import com.enonic.xp.script.serializer.MapSerializable;
 
@@ -20,16 +21,16 @@ public class RewriteMappingMapper
     {
         gen.map( "mapping" );
         gen.value( "contextKey", rewriteMapping.getContextKey().toString() );
-        mapRules( gen, rewriteMapping );
+        mapRules( gen, rewriteMapping.getRewriteRules() );
         gen.end();
 
     }
 
-    private void mapRules( final MapGenerator gen, final Iterable<RewriteRule> rules )
+    private void mapRules( final MapGenerator gen, final RewriteRules rewriteRules )
     {
         gen.array( "rules" );
         int i = 0;
-        for ( final RewriteRule rule : rules )
+        for ( final RewriteRule rule : rewriteRules.getRuleList() )
         {
             mapRule( gen, rule, i++ );
         }

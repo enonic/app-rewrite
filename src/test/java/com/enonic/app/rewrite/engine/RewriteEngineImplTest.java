@@ -1,5 +1,7 @@
 package com.enonic.app.rewrite.engine;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.jetty.util.URIUtil;
@@ -10,7 +12,6 @@ import org.mockito.Mockito;
 import com.enonic.app.rewrite.MockHttpRequest;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteMappings;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
@@ -37,7 +38,7 @@ class RewriteEngineImplTest
     @Test
     void testSimpleRewrite()
     {
-        final RewriteMappings rewriteMappings = prepareRewriteMappings( "/oldUrl", "/newUrl", RedirectType.MOVED_PERMANENTLY );
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/oldUrl", "/newUrl", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
@@ -57,7 +58,7 @@ class RewriteEngineImplTest
     @Test
     void testWildcard()
     {
-        final RewriteMappings rewriteMappings = prepareRewriteMappings( "/oldUrl/(.*)", "/newUrl/$1", RedirectType.MOVED_PERMANENTLY );
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/oldUrl/(.*)", "/newUrl/$1", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
@@ -77,7 +78,7 @@ class RewriteEngineImplTest
     @Test
     void testExtendedWildcard()
     {
-        final RewriteMappings rewriteMappings =
+        final List<RewriteMapping> rewriteMappings =
             prepareRewriteMappings( "/oldUrl/(.*)/resource/(.*)", "/newUrl/$1/res/$2", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
@@ -100,7 +101,7 @@ class RewriteEngineImplTest
     {
         final String originalUrl = "brukerstøtte";
 
-        final RewriteMappings rewriteMappings = prepareRewriteMappings( "/" + originalUrl, "/support", RedirectType.FOUND );
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/" + originalUrl, "/support", RedirectType.FOUND );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
@@ -117,7 +118,7 @@ class RewriteEngineImplTest
         assertEquals( "/support", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 
-    private RewriteMappings prepareRewriteMappings( final String source, final String target, final RedirectType redirectType )
+    private List<RewriteMapping> prepareRewriteMappings( final String source, final String target, final RedirectType redirectType )
     {
         final RewriteRules rules = RewriteRules.create().
             addRule( RewriteRule.create().
@@ -127,12 +128,10 @@ class RewriteEngineImplTest
                 build() ).
             build();
 
-        return RewriteMappings.create().
-            add( RewriteMapping.create().
-                contextKey( new RewriteContextKey( "myvhost" ) ).
-                rewriteRules( rules ).
-                build() ).
-            build();
+        return List.of( RewriteMapping.create().
+            contextKey( new RewriteContextKey( "myvhost" ) ).
+            rewriteRules( rules ).
+            build() );
     }
 
 }

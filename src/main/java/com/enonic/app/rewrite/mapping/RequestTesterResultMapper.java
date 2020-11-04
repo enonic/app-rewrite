@@ -83,7 +83,7 @@ public class RequestTesterResultMapper
     {
         gen.map( "target" );
         gen.value( "url", URIUtil.decodePath( target.getTargetPath() ) );
-        gen.value( "type", target instanceof RedirectExternal ? "external" : "internal" );
+        gen.value( "type", target instanceof RedirectExternal ? "absolute" : "relative" );
         gen.end();
     }
 }

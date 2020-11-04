@@ -82,8 +82,8 @@ class RewriteRepoMappingProviderTest
         assertEquals( expectedRewriteRules.size(), actualRewriteRules.size() );
         assertEquals( expectedRewriteRules.size(), actualRewriteRules.size() );
 
-        final RewriteRule expectedRule = expectedRewriteRules.iterator().next();
-        final RewriteRule actualRule = actualRewriteRules.iterator().next();
+        final RewriteRule expectedRule = expectedRewriteRules.getRuleList().get( 0 );
+        final RewriteRule actualRule = actualRewriteRules.getRuleList().get( 0 );
 
         assertEquals( expectedRule.getFrom(), actualRule.getFrom() );
         assertEquals( expectedRule.getRuleId(), actualRule.getRuleId() );

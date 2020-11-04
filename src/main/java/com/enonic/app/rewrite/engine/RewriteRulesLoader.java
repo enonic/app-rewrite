@@ -1,18 +1,16 @@
 package com.enonic.app.rewrite.engine;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jetty.util.URIUtil;
-
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.domain.RewriteMappings;
 import com.enonic.app.rewrite.domain.RewriteRule;
 
 class RewriteRulesLoader
 {
-    static Map<RewriteContextKey, RulePatterns> load( final RewriteMappings mappings )
+    static Map<RewriteContextKey, RulePatterns> load( final Collection<RewriteMapping> mappings )
     {
         final Map<RewriteContextKey, RulePatterns> rewriteMap = new HashMap<>();
 
@@ -20,10 +18,10 @@ class RewriteRulesLoader
         {
             final RulePatterns.Builder patternsBuilder = RulePatterns.create();
 
-            for ( final RewriteRule rule : rewriteMapping )
+            for ( final RewriteRule rule : rewriteMapping.getRewriteRules().getRuleList() )
             {
                 final RulePattern pattern = RulePattern.create().
-                    target( URIUtil.encodePath( rule.getTarget().path() ) ).
+                    target( rule.getTarget().path() ).
                     type( rule.getType() ).
                     pattern( rule.getFrom() ).
                     build();

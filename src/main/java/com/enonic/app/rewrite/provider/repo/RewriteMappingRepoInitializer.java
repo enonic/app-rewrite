@@ -88,7 +88,7 @@ public class RewriteMappingRepoInitializer
             build() );
     }
 
-    private Context createAdminContext()
+    public static Context createAdminContext()
     {
         final User admin = User.create().
             key( SUPER_USER ).

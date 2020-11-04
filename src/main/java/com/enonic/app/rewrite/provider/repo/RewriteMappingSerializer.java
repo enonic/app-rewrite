@@ -81,7 +81,7 @@ public class RewriteMappingSerializer
     {
         final List<PropertySet> setList = new ArrayList<>();
 
-        rewriteRules.forEach( rule -> {
+        rewriteRules.getRuleList().forEach( rule -> {
             final PropertySet ruleData = new PropertySet();
             ruleData.addString( RULE_IDENTIFIER, rule.getRuleId() );
             ruleData.addString( RULE_FROM_KEY, rule.getFrom() );

@@ -1,6 +1,6 @@
 package com.enonic.app.rewrite.engine;
 
-import java.util.Iterator;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -38,11 +38,11 @@ class RulePatternsTest
                 build() ).
             build();
 
-        final Iterator<RulePattern> iterator = patterns.iterator();
-        Assertions.assertEquals( 1, iterator.next().getOrder() );
-        Assertions.assertEquals( 2, iterator.next().getOrder() );
-        Assertions.assertEquals( 2, iterator.next().getOrder() );
-        Assertions.assertEquals( 3, iterator.next().getOrder() );
-        Assertions.assertEquals( 10, iterator.next().getOrder() );
+        final List<RulePattern> iterator = patterns.getRules();
+        Assertions.assertEquals( 1, iterator.get(0).getOrder() );
+        Assertions.assertEquals( 2, iterator.get(1).getOrder() );
+        Assertions.assertEquals( 2, iterator.get(2).getOrder() );
+        Assertions.assertEquals( 3, iterator.get(3).getOrder() );
+        Assertions.assertEquals( 10, iterator.get(4).getOrder() );
     }
 }

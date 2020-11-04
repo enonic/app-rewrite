@@ -1,10 +1,8 @@
 package com.enonic.app.rewrite.domain;
 
-import java.util.Iterator;
 import java.util.Objects;
 
 public class RewriteMapping
-    implements Iterable<RewriteRule>
 {
     private final RewriteContextKey contextKey;
 
@@ -29,12 +27,6 @@ public class RewriteMapping
     public RewriteRules getRewriteRules()
     {
         return rewriteRules;
-    }
-
-    @Override
-    public Iterator<RewriteRule> iterator()
-    {
-        return this.rewriteRules.iterator();
     }
 
     public static final class Builder

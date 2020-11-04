@@ -9,6 +9,6 @@ public @interface RewriteConfig
 
     String includePattern() default "^/site/.*";
 
-    String ruleFileNameTemplate() default "com.enonic.app.rewrite.{{vhost}}.txt";
+    String ruleFileNameTemplate() default "com.enonic.app.rewrite.{{vhost}}.conf";
 
 }

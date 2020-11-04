@@ -3,7 +3,7 @@ package com.enonic.app.rewrite.provider;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class RewriteContextNotFoundException
-    extends RuntimeException
+    extends RewriteRuleException
 {
     public RewriteContextNotFoundException( final RewriteContextKey key )
     {
