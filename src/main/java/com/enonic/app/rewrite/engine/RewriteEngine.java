@@ -1,6 +1,8 @@
 package com.enonic.app.rewrite.engine;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -29,11 +31,16 @@ public class RewriteEngine
 
     public RedirectMatch process( final HttpServletRequest request )
     {
+        return process( request, null );
+    }
+
+    public RedirectMatch process( final HttpServletRequest request, final ExtRulePattern extRulePattern )
+    {
         final VirtualHost virtualHost = VirtualHostHelper.getVirtualHost( request );
 
         if ( virtualHost != null )
         {
-            return match( new RewriteVirtualHostContext( virtualHost ), request.getRequestURI() );
+            return match( new RewriteVirtualHostContext( virtualHost ), request.getRequestURI(), extRulePattern );
         }
 
         return null;
@@ -50,7 +57,7 @@ public class RewriteEngine
         return result.build();
     }
 
-    private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath )
+    private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath, final ExtRulePattern extRulePattern )
     {
         if ( requestPath == null )
         {
@@ -69,9 +76,22 @@ public class RewriteEngine
             return null;
         }
 
+        if ( extRulePattern == null )
+        {
+            return match( rewriteContext, requestPath, rulePatterns.getRules() );
+        }
+
+        final List<RulePattern> rules = new ArrayList<>( rulePatterns.getRules() );
+        rules.add( extRulePattern.getPosition(), extRulePattern.getRulePattern() );
+
+        return match( rewriteContext, requestPath, rules );
+    }
+
+    private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath, final List<RulePattern> rulePatterns )
+    {
         final String urlInContext = removeContextPrefix( rewriteContext, requestPath );
 
-        for ( final RulePattern rulePattern : rulePatterns.getRules() )
+        for ( final RulePattern rulePattern : rulePatterns )
         {
             final Matcher matcher = rulePattern.getPattern().matcher( urlInContext );
             if ( !matcher.matches() )

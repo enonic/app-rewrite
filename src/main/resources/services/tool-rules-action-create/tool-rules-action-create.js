@@ -27,7 +27,15 @@ exports.post = function (req) {
     }
 
     try {
-        rewriteDao.createRule(contextKey, rule, insertStrategy, insertPosition);
+        let result = rewriteDao.createRule(contextKey, rule, insertStrategy, insertPosition);
+
+        if (result !== null && result.error) {
+            return {
+                status: 500,
+                contentType: 'text/plain',
+                body: "cannot create context: " + result.error.message
+            }
+        }
     } catch (e) {
         return {
             status: 500,

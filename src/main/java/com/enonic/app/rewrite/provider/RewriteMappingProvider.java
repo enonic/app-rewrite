@@ -1,9 +1,8 @@
 package com.enonic.app.rewrite.provider;
 
 
-import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
-import com.enonic.app.rewrite.EditRuleParams;
+import com.enonic.app.rewrite.UpdateRuleParams;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 
@@ -19,9 +18,7 @@ public interface RewriteMappingProvider
 
     void delete( final RewriteContextKey rewriteContextKey );
 
-    void editRule( final EditRuleParams editRuleParams );
-
-    void createRule( final CreateRuleParams params );
+    void saveRule( final UpdateRuleParams params );
 
     void deleteRule( final DeleteRuleParams params );
 

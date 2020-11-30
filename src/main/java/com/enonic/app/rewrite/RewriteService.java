@@ -7,37 +7,32 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
-import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
+import com.enonic.app.rewrite.engine.ExtRulePattern;
 import com.enonic.app.rewrite.provider.ProviderInfo;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
-import com.enonic.xp.web.vhost.VirtualHost;
 
 public interface RewriteService
 {
     RedirectMatch process( final HttpServletRequest request );
 
+    RedirectMatch process( final HttpServletRequest request, final ExtRulePattern extRulePattern );
+
     RewriteMapping getRewriteMapping( final RewriteContextKey rewriteContextKey );
 
     ConcurrentMap<RewriteContextKey, Optional<RewriteMappingProvider>> getRewriteConfigurations();
 
-    VirtualHost getRewriteContext( final RewriteContextKey contextKey );
-
     void store( final RewriteMapping rewriteMapping );
 
-    void createRule( final CreateRuleParams params );
+    void saveRule( final UpdateRuleParams params );
 
     void deleteRule( final DeleteRuleParams params );
-
-    void editRule( final EditRuleParams params );
 
     void create( final RewriteContextKey rewriteContextKey );
 
     void delete( final RewriteContextKey rewriteContextKey );
 
     ProviderInfo getProviderInfo( final RewriteContextKey rewriteContextKey );
-
-    RewriteRulesLoadResult load();
 
     VirtualHostsDecorator getVirtualHostMappings();
 

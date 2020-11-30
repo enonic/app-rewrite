@@ -31,14 +31,15 @@ exports.getProviderInfo = function (contextKey) {
 };
 
 exports.createRule = function (contextKey, rule, insertStrategy, position) {
-    let params = __.newBean('com.enonic.app.rewrite.CreateRuleParams');
+    let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
     params.insertStrategy = insertStrategy;
     params.source = rule.source;
     params.target = rule.target;
     params.type = rule.type;
     params.contextKey = contextKey;
     params.position = position;
-    let result = bean.createRule(params);
+
+    let result = bean.saveRule(params);
     return __.toNativeObject(result);
 };
 
@@ -51,16 +52,15 @@ exports.deleteRule = function (contextKey, ruleId) {
 };
 
 exports.editRule = function (contextKey, pattern, rule) {
-    let params = __.newBean('com.enonic.app.rewrite.EditRuleParams');
+    let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
     params.contextKey = contextKey;
-    params.pattern = pattern;
-    params.newPattern = rule.pattern;
-    params.substitution = rule.substitution;
+    params.source = rule.source;
+    params.target = rule.target;
     params.type = rule.type;
     params.position = rule.position;
     params.ruleId = rule.ruleId;
 
-    let result = bean.editRule(params);
+    let result = bean.saveRule(params);
     return __.toNativeObject(result);
 };
 

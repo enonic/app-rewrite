@@ -1,12 +1,12 @@
 package com.enonic.app.rewrite.provider.repo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
-import com.enonic.app.rewrite.CreateRuleParams;
+import com.google.common.base.Strings;
+
 import com.enonic.app.rewrite.DeleteRuleParams;
-import com.enonic.app.rewrite.EditRuleParams;
+import com.enonic.app.rewrite.UpdateRuleParams;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
@@ -54,16 +54,6 @@ public class RewriteRepoMappingProvider
         return setRepoContext().callWith( () -> doGetRewriteMapping( contextKey ) );
     }
 
-    private RewriteMapping doGetRewriteMapping( final RewriteContextKey contextKey )
-    {
-        final Node node = doGetContextNode( contextKey );
-        if ( node == null )
-        {
-            return null;
-        }
-        return RewriteMappingSerializer.fromNode( node );
-    }
-
     @Override
     public boolean readOnly()
     {
@@ -81,15 +71,41 @@ public class RewriteRepoMappingProvider
     {
         final NodePath mappingNodePath = createContextNodePath( rewriteMapping.getContextKey() );
 
-        final Context context = setRepoContext();
-
-        context.runWith( () -> doCreateOrUpdate( mappingNodePath, rewriteMapping ) );
+        setRepoContext().runWith( () -> doCreateOrUpdate( mappingNodePath, rewriteMapping ) );
     }
 
     @Override
     public void create( final RewriteContextKey rewriteContextKey )
     {
         setRepoContext().runWith( () -> doCreate( rewriteContextKey ) );
+    }
+
+    @Override
+    public void delete( final RewriteContextKey rewriteContextKey )
+    {
+        setRepoContext().runWith( () -> doDelete( rewriteContextKey ) );
+    }
+
+    @Override
+    public void saveRule( final UpdateRuleParams params )
+    {
+        setRepoContext().runWith( () -> doCreateOrUpdateRule( params ) );
+    }
+
+    @Override
+    public void deleteRule( final DeleteRuleParams params )
+    {
+        setRepoContext().runWith( () -> doDeleteRule( params ) );
+    }
+
+    private RewriteMapping doGetRewriteMapping( final RewriteContextKey contextKey )
+    {
+        final Node node = doGetContextNode( contextKey );
+        if ( node == null )
+        {
+            return null;
+        }
+        return RewriteMappingSerializer.fromNode( node );
     }
 
     private void doCreate( final RewriteContextKey rewriteContextKey )
@@ -109,63 +125,6 @@ public class RewriteRepoMappingProvider
             build() );
 
         this.nodeService.refresh( RefreshMode.ALL );
-    }
-
-    @Override
-    public void delete( final RewriteContextKey rewriteContextKey )
-    {
-        setRepoContext().runWith( () -> doDelete( rewriteContextKey ) );
-    }
-
-    @Override
-    public void createRule( final CreateRuleParams params )
-    {
-        setRepoContext().runWith( () -> doCreateRule( params ) );
-    }
-
-    @Override
-    public void editRule( final EditRuleParams params )
-    {
-        setRepoContext().runWith( () -> doEditRule( params ) );
-    }
-
-    private void doEditRule( final EditRuleParams params )
-    {
-        final RewriteContextKey contextKey = params.getContextKey();
-        final Node contextNode = getExistingContextNode( contextKey );
-
-        final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( contextNode );
-
-        final List<RewriteRule> rules = new ArrayList<>();
-
-        for ( final RewriteRule rule : rewriteMapping.getRewriteRules().getRuleList() )
-        {
-            if ( !Objects.equals( rule.getRuleId(), params.getRuleId() ) )
-            {
-                rules.add( rule );
-            }
-        }
-
-        rules.add( params.getPosition(), RewriteRule.create().
-            ruleId( params.getRuleId() ).
-            type( RedirectType.valueOf( params.getType() ) ).
-            target( params.getSubstitution() ).
-            from( params.getNewPattern() ).
-            build() );
-
-        final RewriteRules.Builder newRules = RewriteRules.create().rules( rules );
-
-        final RewriteMapping newMapping = RewriteMapping.create().
-            contextKey( contextKey ).rewriteRules( newRules.build() ).
-            build();
-
-        doUpdateContextNode( contextNode, newMapping );
-    }
-
-    @Override
-    public void deleteRule( final DeleteRuleParams params )
-    {
-        setRepoContext().runWith( () -> doDeleteRule( params ) );
     }
 
     private void doDeleteRule( final DeleteRuleParams params )
@@ -191,7 +150,7 @@ public class RewriteRepoMappingProvider
         doUpdateContextNode( contextNode, newMapping );
     }
 
-    private void doCreateRule( final CreateRuleParams params )
+    private void doCreateOrUpdateRule( final UpdateRuleParams params )
     {
         final RewriteContextKey contextKey = params.getContextKey();
 
@@ -199,29 +158,38 @@ public class RewriteRepoMappingProvider
 
         final RewriteMapping rewriteMapping = RewriteMappingSerializer.fromNode( contextNode );
 
-        final RewriteRule rule = RewriteRule.create().
-            from( params.getFrom() ).
-            target( params.getTarget() ).
+        final RewriteRules.Builder rulesBuilder = RewriteRules.create();
+
+        for ( final RewriteRule rewriteRule : rewriteMapping.getRewriteRules().getRuleList() )
+        {
+            if ( !Objects.equals( rewriteRule.getRuleId(), params.getRuleId() ) )
+            {
+                rulesBuilder.addRule( rewriteRule );
+            }
+        }
+
+        final RewriteRule rewriteRule = RewriteRule.create().
             type( RedirectType.valueOf( params.getType() ) ).
+            target( params.getTarget() ).
+            from( params.getSource() ).
+            ruleId( Optional.ofNullable( params.getRuleId() ).orElse( null ) ).
             build();
 
-        final RewriteRules.Builder rewriteRuleBuilder = RewriteRules.from( rewriteMapping.getRewriteRules() );
-
-        if ( "position".equalsIgnoreCase( params.getInsertStrategy() ) )
+        if ( "position".equalsIgnoreCase( params.getInsertStrategy() ) || !Strings.isNullOrEmpty( params.getRuleId() ) )
         {
-            rewriteRuleBuilder.addRule( params.getPosition(), rule );
+            rulesBuilder.addRule( params.getPosition(), rewriteRule );
         }
         else
         {
-            rewriteRuleBuilder.addRule( rule, "first".equalsIgnoreCase( params.getInsertStrategy() ) );
+            rulesBuilder.addRule( rewriteRule, "first".equalsIgnoreCase( params.getInsertStrategy() ) );
         }
 
-        final RewriteMapping newMapping = RewriteMapping.create().
+        final RewriteMapping newRewriteMapping = RewriteMapping.create().
             contextKey( contextKey ).
-            rewriteRules( rewriteRuleBuilder.build() ).
+            rewriteRules( rulesBuilder.build() ).
             build();
 
-        doUpdateContextNode( contextNode, newMapping );
+        doUpdateContextNode( contextNode, newRewriteMapping );
     }
 
     private Node getExistingContextNode( final RewriteContextKey contextKey )

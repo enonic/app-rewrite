@@ -34,7 +34,7 @@ public class RewriteMappingSerializer
         final PropertyTree data = node.data();
 
         return RewriteMapping.create().
-            contextKey( new RewriteContextKey( data.getString( CONTEXT_KEY ) ) ).
+            contextKey( RewriteContextKey.from( data.getString( CONTEXT_KEY ) ) ).
             rewriteRules( createRewriteRules( node ) ).
             build();
     }

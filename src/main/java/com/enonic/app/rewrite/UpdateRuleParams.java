@@ -2,8 +2,10 @@ package com.enonic.app.rewrite;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 
-public class CreateRuleParams
+public class UpdateRuleParams
 {
+    private String ruleId;
+
     private RewriteContextKey contextKey;
 
     private String insertStrategy;
@@ -15,6 +17,16 @@ public class CreateRuleParams
     private String type;
 
     private Integer position;
+
+    public String getRuleId()
+    {
+        return ruleId;
+    }
+
+    public void setRuleId( final String ruleId )
+    {
+        this.ruleId = ruleId;
+    }
 
     public RewriteContextKey getContextKey()
     {
@@ -36,7 +48,7 @@ public class CreateRuleParams
         this.insertStrategy = insertStrategy;
     }
 
-    public String getFrom()
+    public String getSource()
     {
         return source;
     }
@@ -75,5 +87,4 @@ public class CreateRuleParams
     {
         this.position = position;
     }
-
 }
