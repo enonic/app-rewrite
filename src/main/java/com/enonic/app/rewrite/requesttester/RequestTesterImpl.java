@@ -8,10 +8,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.enonic.app.rewrite.RewriteService;
+import com.enonic.app.rewrite.UpdateRuleParams;
+import com.enonic.app.rewrite.engine.ExtRulePattern;
+import com.enonic.app.rewrite.engine.RulePattern;
 import com.enonic.app.rewrite.redirect.Redirect;
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectTarget;
+import com.enonic.app.rewrite.redirect.RedirectType;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostHelper;
 import com.enonic.xp.web.vhost.VirtualHostResolver;
@@ -21,7 +25,7 @@ public class RequestTesterImpl
     implements RequestTester
 {
 
-    private static final Integer THRESHOLD = 100;
+    private static final Integer THRESHOLD = 1_000;
 
     private VirtualHostResolver virtualHostResolver;
 
@@ -30,8 +34,27 @@ public class RequestTesterImpl
     @Override
     public RequestTesterResult testRequest( final String requestURL )
     {
-        final List<Redirect> redirectedTargets = new ArrayList<>();
+        return doExecute( requestURL, null );
+    }
 
+    @Override
+    public boolean hasLoops( final UpdateRuleParams params )
+    {
+        final ExtRulePattern extRulePattern = new ExtRulePattern( params.getPosition(), RulePattern.create().
+            type( RedirectType.TEMPORARILY_REDIRECT ).
+            pattern( params.getSource() ).
+            target( params.getTarget() ).
+            build() );
+
+        final String requestURL = Paths.get( params.getContextKey().toString(), params.getTarget() ).toString();
+
+        final RequestTesterResult redirectTestResult = doExecute( requestURL, extRulePattern );
+
+        return redirectTestResult.getResultState() == RequestTesterResult.TestResultState.LOOP;
+    }
+
+    private RequestTesterResult doExecute( final String requestURL, final ExtRulePattern extRulePattern )
+    {
         final RequestTesterResult.Builder builder = RequestTesterResult.create();
 
         if ( requestURL == null || requestURL.isEmpty() )
@@ -39,83 +62,75 @@ public class RequestTesterImpl
             return builder.build();
         }
 
-        RedirectTestResult redirectTestResult = doTest( requestURL );
+        RedirectTestResult redirectTestResult = doTest( requestURL, extRulePattern );
         builder.add( redirectTestResult );
+
+        final List<Redirect> redirectedTargets = new ArrayList<>();
 
         int counter = 0;
 
         while ( redirectTestResult.redirectMatch() != null )
         {
-            final RedirectMatch match = redirectTestResult.redirectMatch();
+            counter++;
 
-            if ( match != null )
+            if ( counter == THRESHOLD )
             {
-                final Redirect redirect = match.getRedirect();
-
-                if ( redirectedTargets.contains( redirect ) )
-                {
-                    return builder.loop().build();
-                }
-                else if ( counter > THRESHOLD )
-                {
-                    return builder.error().build();
-                }
-
-                redirectedTargets.add( redirect );
-                String newTargetPath = getNextTargetPath( redirectTestResult, redirect );
-                redirectTestResult = doTest( newTargetPath );
-                builder.add( redirectTestResult );
+                return builder.error().build();
             }
-            else
+
+            final Redirect redirect = redirectTestResult.redirectMatch().getRedirect();
+
+            if ( containsInRedirectedTargets( redirectedTargets, redirect ) )
             {
-                break;
+                return builder.loop().build();
             }
+
+            redirectedTargets.add( redirect );
+            String newTargetPath = getNextTargetPath( redirectTestResult.getMatchingVHost(), redirect );
+            redirectTestResult = doTest( newTargetPath, extRulePattern );
+            builder.add( redirectTestResult );
         }
 
         return builder.build();
     }
 
-    private String getNextTargetPath( final RedirectTestResult redirectTestResult, final Redirect redirect )
+    private boolean containsInRedirectedTargets( final List<Redirect> redirectedTargets, final Redirect redirect )
+    {
+        return redirectedTargets.stream().anyMatch(
+            r -> r.getRedirectTarget().getTargetPath().equals( redirect.getRedirectTarget().getTargetPath() ) );
+    }
+
+    private String getNextTargetPath( final VirtualHost virtualHost, final Redirect redirect )
     {
         final RedirectTarget newTarget = redirect.getRedirectTarget();
-        String newTargetPath;
 
         if ( newTarget instanceof RedirectExternal )
         {
-            newTargetPath = newTarget.getTargetPath();
+            return newTarget.getTargetPath();
         }
         else
         {
-            final IncomingRequest incomingRequest = redirectTestResult.getIncomingRequest();
-            newTargetPath = Paths.get( incomingRequest.getMatchingVHost().getHost(), newTarget.getTargetPath() ).toString();
+            return Paths.get( virtualHost.getHost(), newTarget.getTargetPath() ).toString();
         }
-        return newTargetPath;
     }
 
-    private RedirectTestResult doTest( final String requestURL )
+    private RedirectTestResult doTest( final String requestURL, final ExtRulePattern extRulePattern )
     {
         final RewriteTesterRequest req = new RewriteTesterRequest( requestURL );
-        getAndSetVHost( req );
 
-        final IncomingRequest incomingRequest = createIncomingRequest( requestURL, req );
+        final VirtualHost virtualHost = getAndSetVHost( req );
 
-        RedirectMatch redirect = null;
+        RedirectMatch redirectMatch = null;
 
-        if ( incomingRequest.getMatchingVHost() != null )
+        if ( virtualHost != null )
         {
-            redirect = this.rewriteService.process( req );
+            redirectMatch = this.rewriteService.process( req, extRulePattern );
         }
 
-        return new RedirectTestResult( incomingRequest, redirect );
+        return new RedirectTestResult( requestURL, virtualHost, redirectMatch );
     }
 
-    private IncomingRequest createIncomingRequest( final String requestURL, final RewriteTesterRequest req )
-    {
-        final VirtualHost virtualHost = VirtualHostHelper.getVirtualHost( req );
-        return new IncomingRequest( requestURL, virtualHost );
-    }
-
-    private void getAndSetVHost( final RewriteTesterRequest req )
+    private VirtualHost getAndSetVHost( final RewriteTesterRequest req )
     {
         final VirtualHost virtualHost = virtualHostResolver.resolveVirtualHost( req );
 
@@ -123,6 +138,8 @@ public class RequestTesterImpl
         {
             VirtualHostHelper.setVirtualHost( req, virtualHost );
         }
+
+        return virtualHost;
     }
 
     @Reference

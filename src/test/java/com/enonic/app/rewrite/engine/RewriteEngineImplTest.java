@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.eclipse.jetty.util.URIUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -108,7 +107,7 @@ class RewriteEngineImplTest
 
         final HttpServletRequest request = MockHttpRequest.create().
             contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/" + URIUtil.encodePath( originalUrl ) ).
+            url( "https://www.mysite.ost/site/default/master/mysite/" + originalUrl).
             vhost( vhost ).
             build().getRequest();
 

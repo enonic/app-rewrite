@@ -1,11 +1,8 @@
 package com.enonic.app.rewrite.mapping;
 
-import org.eclipse.jetty.util.URIUtil;
-
 import com.enonic.app.rewrite.redirect.RedirectExternal;
 import com.enonic.app.rewrite.redirect.RedirectMatch;
 import com.enonic.app.rewrite.redirect.RedirectTarget;
-import com.enonic.app.rewrite.requesttester.IncomingRequest;
 import com.enonic.app.rewrite.requesttester.RedirectTestResult;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.xp.script.serializer.MapGenerator;
@@ -28,28 +25,31 @@ public class RequestTesterResultMapper
 
         gen.value( "state", result.getResultState().name() );
         gen.array( "steps" );
-        result.getMatchList().forEach( redirectMatch -> serialize( gen, redirectMatch ) );
+        result.getMatchList().forEach( redirectResult -> serialize( gen, redirectResult ) );
         gen.end();
     }
 
 
-    private void serialize( final MapGenerator gen, final RedirectTestResult testResult )
+    private void serialize( final MapGenerator gen, final RedirectTestResult redirectResult )
     {
         gen.map();
-        serialize( gen, testResult.getIncomingRequest() );
-        serialize( gen, testResult.redirectMatch() );
+        serializeIncomingRequest( gen, redirectResult );
+        serializeRewrite( gen, redirectResult.redirectMatch() );
         gen.end();
     }
 
-    private void serialize( final MapGenerator gen, final IncomingRequest incomingRequest )
+    private void serializeIncomingRequest( final MapGenerator gen, final RedirectTestResult redirectResult )
     {
         gen.map( "incomingRequest" );
 
-        if ( incomingRequest != null )
+        if ( redirectResult != null )
         {
-            gen.value( "url", URIUtil.decodePath( incomingRequest.getRequestUrl() ) );
+            if ( redirectResult.getRequestUrl() != null )
+            {
+                gen.value( "url", redirectResult.getRequestUrl() );
+            }
 
-            final VirtualHost matchingVHost = incomingRequest.getMatchingVHost();
+            final VirtualHost matchingVHost = redirectResult.getMatchingVHost();
 
             if ( matchingVHost != null )
             {
@@ -66,7 +66,7 @@ public class RequestTesterResultMapper
         gen.end();
     }
 
-    private void serialize( final MapGenerator gen, final RedirectMatch match )
+    private void serializeRewrite( final MapGenerator gen, final RedirectMatch match )
     {
         gen.map( "rewrite" );
         if ( match != null )
@@ -82,7 +82,7 @@ public class RequestTesterResultMapper
     private void serialize( final MapGenerator gen, final RedirectTarget target )
     {
         gen.map( "target" );
-        gen.value( "url", URIUtil.decodePath( target.getTargetPath() ) );
+        gen.value( "url", target.getTargetPath() );
         gen.value( "type", target instanceof RedirectExternal ? "absolute" : "relative" );
         gen.end();
     }

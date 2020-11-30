@@ -25,6 +25,7 @@ import com.enonic.app.rewrite.requesttester.RequestTester;
 import com.enonic.app.rewrite.requesttester.RequestTesterResult;
 import com.enonic.xp.script.bean.BeanContext;
 import com.enonic.xp.script.bean.ScriptBean;
+import com.enonic.xp.util.Exceptions;
 import com.enonic.xp.web.vhost.VirtualHost;
 import com.enonic.xp.web.vhost.VirtualHostService;
 
@@ -115,21 +116,29 @@ public class RewriteBean
         return null;
     }
 
-    public Object createRule( final CreateRuleParams params )
+    public Object saveRule( final UpdateRuleParams params )
     {
-        this.rewriteServiceSupplier.get().createRule( params );
-        return null;
+        try
+        {
+            if ( !this.requestTesterSupplier.get().hasLoops( params ) )
+            {
+                this.rewriteServiceSupplier.get().saveRule( params );
+                return null;
+            }
+
+            return new ErrorMapper(
+                Exceptions.newRuntime( "The loop was found for the rule with source=\"{0}\" and target=\"{1}\"", params.getSource(),
+                                       params.getTarget() ).withoutCause() );
+        }
+        catch ( Exception e )
+        {
+            return new ErrorMapper( e );
+        }
     }
 
     public Object deleteRule( final DeleteRuleParams params )
     {
         this.rewriteServiceSupplier.get().deleteRule( params );
-        return null;
-    }
-
-    public Object editRule( final EditRuleParams params )
-    {
-        this.rewriteServiceSupplier.get().editRule( params );
         return null;
     }
 

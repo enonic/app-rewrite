@@ -19,11 +19,13 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
+import com.enonic.app.rewrite.engine.ExtRulePattern;
 import com.enonic.app.rewrite.engine.RewriteEngine;
 import com.enonic.app.rewrite.engine.RewriteRulesLoadResult;
 import com.enonic.app.rewrite.filter.RewriteFilterConfig;
@@ -80,12 +82,6 @@ public class RewriteServiceImpl
     }
 
     @Override
-    public RewriteRulesLoadResult load()
-    {
-        return doReload();
-    }
-
-    @Override
     public VirtualHostsDecorator getVirtualHostMappings()
     {
         return new VirtualHostsDecorator( container.asMap() );
@@ -95,6 +91,12 @@ public class RewriteServiceImpl
     public RedirectMatch process( final HttpServletRequest request )
     {
         return this.rewriteEngine.process( request );
+    }
+
+    @Override
+    public RedirectMatch process( final HttpServletRequest request, final ExtRulePattern extRulePattern )
+    {
+        return rewriteEngine.process( request, extRulePattern );
     }
 
     @Override
@@ -110,9 +112,13 @@ public class RewriteServiceImpl
     }
 
     @Override
-    public void createRule( final CreateRuleParams params )
+    public void saveRule( final UpdateRuleParams params )
     {
-        getProviderOrThrow( params.getContextKey() ).createRule( params );
+        if ( Strings.isNullOrEmpty( params.getSource()) || Strings.isNullOrEmpty( params.getTarget())) {
+          throw new IllegalArgumentException( "The fields \"Source path\" and \"Target path\" are mandatory." );
+        }
+
+        getProviderOrThrow( params.getContextKey() ).saveRule( params );
 
         doReload();
     }
@@ -157,14 +163,6 @@ public class RewriteServiceImpl
     }
 
     @Override
-    public void editRule( final EditRuleParams params )
-    {
-        getProviderOrThrow( params.getContextKey() ).editRule( params );
-
-        doReload();
-    }
-
-    @Override
     public ProviderInfo getProviderInfo( final RewriteContextKey rewriteContextKey )
     {
         final RewriteMappingProvider rewriteMappingProvider = getProviderOrThrow( rewriteContextKey );
@@ -186,20 +184,6 @@ public class RewriteServiceImpl
             provider.store( rewriteMapping );
             doReload();
         }
-    }
-
-    @Override
-    public VirtualHost getRewriteContext( final RewriteContextKey contextKey )
-    {
-        for ( final VirtualHost virtualHost : virtualHostService.getVirtualHosts() )
-        {
-            if ( virtualHost.getName().equals( contextKey.toString() ) )
-            {
-                return virtualHost;
-            }
-        }
-
-        throw new IllegalArgumentException( "RewriteContext with contextKey [" + contextKey + "] not found" );
     }
 
     private RewriteRulesLoadResult doReload()

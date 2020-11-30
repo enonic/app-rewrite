@@ -6,13 +6,29 @@ exports.post = function (req) {
     let pattern = params.originalRulePattern;
     let contextKey = params.editRuleContextKey;
 
-    rewriteDao.editRule(contextKey, pattern, {
-        pattern: params.editRulePattern,
-        substitution: params.editRuleSubstitution,
-        type: params.editRuleType,
-        position: params.editInsertPosition,
-        ruleId: params.editRuleId
-    });
+    try {
+        let result = rewriteDao.editRule(contextKey, pattern, {
+            source: params.editRulePattern,
+            target: params.editRuleSubstitution,
+            type: params.editRuleType,
+            position: params.editInsertPosition,
+            ruleId: params.editRuleId
+        });
+
+        if (result !== null && result.error) {
+            return {
+                status: 500,
+                contentType: 'text/plain',
+                body: "cannot update context: " + result.error.message
+            }
+        }
+    } catch (e) {
+        return {
+            status: 500,
+            contentType: 'text/plain',
+            body: "cannot update context: " + e
+        }
+    }
 
     let model = {
         message: "rule with context [" + contextKey + "], from [" + pattern + "] updated",

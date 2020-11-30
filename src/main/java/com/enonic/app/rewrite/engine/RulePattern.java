@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import com.enonic.app.rewrite.domain.RewriteTarget;
 import com.enonic.app.rewrite.redirect.RedirectType;
 
-class RulePattern
+public class RulePattern
     implements Comparable<RulePattern>
 {
     private final RewriteTarget target;
@@ -24,7 +24,7 @@ class RulePattern
         this.pattern = Pattern.compile( builder.pattern, Pattern.CASE_INSENSITIVE );
     }
 
-    static Builder create()
+    public static Builder create()
     {
         return new Builder();
     }
@@ -62,7 +62,7 @@ class RulePattern
         return "RulePattern{" + "target=" + target + ", type=" + type + ", order=" + order + ", pattern=" + pattern + '}';
     }
 
-    static final class Builder
+    public static final class Builder
     {
         private RewriteTarget target;
 
@@ -76,31 +76,31 @@ class RulePattern
         {
         }
 
-        Builder target( final String target )
+        public Builder target( final String target )
         {
             this.target = RewriteTarget.from( target );
             return this;
         }
 
-        Builder target( final RewriteTarget target )
+        public Builder target( final RewriteTarget target )
         {
             this.target = target;
             return this;
         }
 
-        Builder type( final RedirectType type )
+        public Builder type( final RedirectType type )
         {
             this.type = type;
             return this;
         }
 
-        Builder order( final int priority )
+        public Builder order( final int priority )
         {
             this.order = priority;
             return this;
         }
 
-        Builder pattern( final String pattern )
+        public Builder pattern( final String pattern )
         {
             this.pattern = pattern;
             return this;
@@ -114,7 +114,7 @@ class RulePattern
             }
         }
 
-        RulePattern build()
+        public RulePattern build()
         {
             validate();
             return new RulePattern( this );

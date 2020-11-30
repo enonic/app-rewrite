@@ -13,9 +13,8 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.enonic.app.rewrite.CreateRuleParams;
 import com.enonic.app.rewrite.DeleteRuleParams;
-import com.enonic.app.rewrite.EditRuleParams;
+import com.enonic.app.rewrite.UpdateRuleParams;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.format.SourceFormatResolver;
@@ -80,7 +79,7 @@ public class RewriteMappingLocalFileProvider
         try
         {
             final List<Path> files = findFiles( this.base, pattern );
-            if ( files.size() > 0 )
+            if ( !files.isEmpty() )
             {
                 final Path path = files.get( 0 );
                 LOG.info( "Loading rewrite-mapping for contextKey [{}] from file: [{}]", contextKey, path );
@@ -129,21 +128,15 @@ public class RewriteMappingLocalFileProvider
     }
 
     @Override
-    public void createRule( final CreateRuleParams params )
+    public void saveRule( final UpdateRuleParams params )
     {
-        throw new UnsupportedOperationException( "Cannot create rule in provider " + this.getClass().getName() );
+        throw new UnsupportedOperationException( "Cannot save a rule in provider " + this.getClass().getName() );
     }
 
     @Override
     public void deleteRule( final DeleteRuleParams params )
     {
         throw new UnsupportedOperationException( "Cannot delete rule in provider " + this.getClass().getName() );
-    }
-
-    @Override
-    public void editRule( final EditRuleParams params )
-    {
-        throw new UnsupportedOperationException( "Cannot edit rule in provider " + this.getClass().getName() );
     }
 
     private List<Path> findFiles( final Path base, final String ruleFilePattern )
