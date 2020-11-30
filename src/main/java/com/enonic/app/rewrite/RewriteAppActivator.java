@@ -23,14 +23,17 @@ public class RewriteAppActivator
     @Activate
     public void activate( final ComponentContext componentContext )
     {
-        RewriteMappingRepoInitializer.create().
-            repositoryService( repositoryService ).
-            nodeService( nodeService ).
-            setIndexService( indexService ).
-            build().
-            initialize();
+        if ( indexService.isMaster() )
+        {
+            RewriteMappingRepoInitializer.create().
+                repositoryService( repositoryService ).
+                nodeService( nodeService ).
+                setIndexService( indexService ).
+                build().
+                initialize();
 
-        componentContext.enableComponent( null );
+            componentContext.enableComponent( null );
+        }
     }
 
     @Reference
