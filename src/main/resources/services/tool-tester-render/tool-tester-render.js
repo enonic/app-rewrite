@@ -6,10 +6,23 @@ exports.get = function (req) {
 
     let view = resolve('tool-tester-render.html');
 
+    let rewriteContexts = rewriteDao.getRewriteContexts();
+
+    let contexts = [];
+
+    rewriteContexts.rewriteContexts.forEach(function (item) {
+        let rewriteContext = item.rewriteContext;
+        contexts.push({
+            name: rewriteContext.name,
+            disabled: rewriteContext.disabled
+        });
+    });
+
     let model = {
         assetsUrl: portal.assetUrl({path: ""}),
         svcUrl: portal.serviceUrl({service: 'Z'}).slice(0, -1),
-        toolKey: "tool-tester"
+        toolKey: "tool-tester",
+        rewriteContexts: contexts
     };
 
 

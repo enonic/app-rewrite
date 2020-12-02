@@ -10,6 +10,11 @@ exports.getRewriteContext = function (contextKey) {
     return __.toNativeObject(result);
 };
 
+exports.getRewriteContexts = function () {
+    let result = bean.getRewriteContexts();
+    return __.toNativeObject(result);
+};
+
 exports.getRewriteMapping = function (contextKey) {
     let result = bean.getRewriteMapping(contextKey);
     return __.toNativeObject(result);
