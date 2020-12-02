@@ -3,6 +3,7 @@ import {selectTool} from "./toolbar";
 export const model = {
 
     input: {
+        rewriteContext: "#rewriteContextSelection",
         requestURL: "#requestURL"
     },
     elements: {

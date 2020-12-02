@@ -18,6 +18,7 @@ import com.enonic.app.rewrite.mapping.ProviderInfoMapper;
 import com.enonic.app.rewrite.mapping.RequestTesterResultMapper;
 import com.enonic.app.rewrite.mapping.RewriteConfigurationsMapper;
 import com.enonic.app.rewrite.mapping.RewriteContextMapper;
+import com.enonic.app.rewrite.mapping.RewriteContextsMapper;
 import com.enonic.app.rewrite.mapping.RewriteMappingMapper;
 import com.enonic.app.rewrite.mapping.VirtualHostsMapper;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
@@ -58,6 +59,12 @@ public class RewriteBean
         final Map<RewriteContextKey, Optional<RewriteMappingProvider>> rewriteConfigurations =
             this.rewriteServiceSupplier.get().getRewriteConfigurations();
         return new RewriteConfigurationsMapper( rewriteConfigurations );
+    }
+
+    public Object getRewriteContexts() {
+        final VirtualHostsDecorator virtualHosts = this.rewriteServiceSupplier.get().getVirtualHostMappings();
+
+        return new RewriteContextsMapper(virtualHosts);
     }
 
     public Object getRewriteContext( final String contextKey )

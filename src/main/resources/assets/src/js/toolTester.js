@@ -1,6 +1,7 @@
 import {enableHelp, loadTool} from "./tools";
 import {createToolRendererUrl} from "./serviceRegistry";
 import {model} from "./model";
+import {showError} from "./info-bar";
 
 const toolKey = "tool-tester";
 const toolSelector = "#" + toolKey;
@@ -21,6 +22,12 @@ let onToolLoaded = function (result) {
 };
 
 let initListeners = function () {
+    $(model.input.rewriteContext).change(function () {
+        delay(function () {
+            testRequest();
+        }, 150);
+    });
+
     $(model.input.requestURL).keyup(function () {
         delay(function () {
             testRequest();
@@ -29,6 +36,11 @@ let initListeners = function () {
 };
 
 let testRequest = function () {
+    let rewriteContext = $(model.input.rewriteContext).val();
+    if (rewriteContext === null || rewriteContext === "") {
+        showError("VirtualHost is not selected.");
+        return;
+    }
 
     let fieldVal = $(model.input.requestURL).val();
     if (fieldVal === "") {
@@ -36,7 +48,7 @@ let testRequest = function () {
     }
 
     let data = {
-        requestURL: fieldVal
+        requestURL: rewriteContext + (fieldVal.startsWith("/") ? fieldVal : "/" + fieldVal)
     };
 
     jQuery.ajax({
@@ -45,40 +57,12 @@ let testRequest = function () {
         type: 'GET',
         data: data,
         error: function (response, status, error) {
-            renderError(response);
-
+            showError(response.responseText);
         },
         success: function (result) {
             $(model.elements.requestTesterResult).html(result);
         }
     });
-};
-
-
-function renderError(result) {
-
-}
-
-function renderHeading(result) {
-    const headingText = buildHeadingText(result);
-    let html = "";
-    html += "<h2 class='state-" + result.state + "'>Result: " + headingText + "</h2>";
-    return html;
-}
-
-let buildHeadingText = function (result) {
-    if (result.state === "OK") {
-        let redirects = 0;
-        result.steps.forEach(function (step) {
-            if (step.rewrite.target) {
-                redirects++;
-            }
-        });
-        return redirects + " redirects";
-
-    } else {
-        return result.state;
-    }
 };
 
 let delay = (function () {
