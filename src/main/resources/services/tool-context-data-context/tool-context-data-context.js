@@ -58,7 +58,7 @@ exports.get = function (req) {
             rules: rules,
             provider: hasProvider ? configuration.provider : "",
             readOnly: hasProvider ? providerInfo.readOnly : "",
-            status: virtualHostMapping.disabled === true ? 'Disabled' : 'Enabled',
+            status: virtualHostMapping.active === true ? 'Active' : 'Inactive',
             actions: createActionButtons(contextKey, configuration)
         });
     });

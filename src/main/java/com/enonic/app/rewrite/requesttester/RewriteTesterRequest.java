@@ -165,7 +165,7 @@ class RewriteTesterRequest
     @Override
     public String getRequestURI()
     {
-        return this.requestURI.getPath();
+        return this.requestURI.getRawPath();
     }
 
     @Override

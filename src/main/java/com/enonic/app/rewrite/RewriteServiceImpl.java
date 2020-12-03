@@ -1,6 +1,10 @@
 package com.enonic.app.rewrite;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +36,7 @@ import com.enonic.app.rewrite.filter.RewriteFilterConfig;
 import com.enonic.app.rewrite.provider.ProviderInfo;
 import com.enonic.app.rewrite.provider.RewriteContextExistsException;
 import com.enonic.app.rewrite.provider.RewriteMappingProvider;
+import com.enonic.app.rewrite.provider.file.FileNameMatcher;
 import com.enonic.app.rewrite.provider.file.RewriteMappingLocalFileProvider;
 import com.enonic.app.rewrite.provider.repo.RewriteMappingRepoInitializer;
 import com.enonic.app.rewrite.provider.repo.RewriteRepoMappingProvider;
@@ -114,8 +119,9 @@ public class RewriteServiceImpl
     @Override
     public void saveRule( final UpdateRuleParams params )
     {
-        if ( Strings.isNullOrEmpty( params.getSource()) || Strings.isNullOrEmpty( params.getTarget())) {
-          throw new IllegalArgumentException( "The fields \"Source path\" and \"Target path\" are mandatory." );
+        if ( Strings.isNullOrEmpty( params.getSource() ) || Strings.isNullOrEmpty( params.getTarget() ) )
+        {
+            throw new IllegalArgumentException( "The fields \"Source path\" and \"Target path\" are mandatory." );
         }
 
         getProviderOrThrow( params.getContextKey() ).saveRule( params );
@@ -218,30 +224,16 @@ public class RewriteServiceImpl
 
     private void initVHostProviderConfig()
     {
-        final List<VirtualHost> virtualHosts = virtualHostService.getVirtualHosts();
-
-        final Map<String, VirtualHost> virtualHostAsMap = virtualHosts.stream().
+        final Map<String, VirtualHost> virtualHostAsMap = virtualHostService.getVirtualHosts().stream().
             collect( Collectors.toMap( VirtualHost::getName, Function.identity() ) );
 
-        final List<String> repoVHostMappingNames = RewriteMappingRepoInitializer.createAdminContext().
-            callWith( () -> {
-                final FindNodesByQueryResult queryResult = nodeService.findByQuery( NodeQuery.create().
-                    parent( NodePath.create( RewriteRepoMappingProvider.MAPPING_ROOT_NODE ).build() ).
-                    build() );
-
-                return queryResult.getNodeHits().getNodeIds().stream().
-                    map( nodeId -> nodeService.getById( nodeId ) ).
-                    map( node -> node.name().toString() ).collect( Collectors.toList() );
-            } );
-
-        final Set<String> configVHostMappingNames = virtualHosts.stream().map( VirtualHost::getName ).collect( Collectors.toSet() );
+        final Set<String> configVHostMappingNames = new HashSet<>( virtualHostAsMap.keySet() );
 
         final Set<String> mappingsSet = new HashSet<>();
 
-        mappingsSet.addAll( repoVHostMappingNames );
+        mappingsSet.addAll( getRepoVHostMappingNames() );
+        mappingsSet.addAll( getFileVHostMappingNames() );
         mappingsSet.addAll( configVHostMappingNames );
-
-        LOG.debug( "Finding rewrite-configurations for vhosts" );
 
         mappingsSet.forEach( vHostMapping -> {
             final RewriteContextKey contextKey = RewriteContextKey.from( vHostMapping );
@@ -253,7 +245,7 @@ public class RewriteServiceImpl
                 contextKey( contextKey ).
                 virtualHost( virtualHostAsMap.get( vHostMapping ) ).
                 mappingProvider( fetchContextProvider( contextKey ) ).
-                disabled( !configVHostMappingNames.contains( vHostMapping ) ).
+                active( virtualHostService.isEnabled() && configVHostMappingNames.contains( vHostMapping ) ).
                 build() );
         } );
     }
@@ -303,6 +295,46 @@ public class RewriteServiceImpl
     private RewriteMappingProvider initRepoProvider()
     {
         return new RewriteRepoMappingProvider( this.nodeService );
+    }
+
+    private List<String> getRepoVHostMappingNames()
+    {
+        return RewriteMappingRepoInitializer.createAdminContext().
+            callWith( () -> {
+                final FindNodesByQueryResult queryResult = nodeService.findByQuery( NodeQuery.create().
+                    parent( NodePath.create( RewriteRepoMappingProvider.MAPPING_ROOT_NODE ).build() ).
+                    build() );
+
+                return queryResult.getNodeHits().getNodeIds().stream().
+                    map( nodeId -> nodeService.getById( nodeId ) ).
+                    map( node -> node.name().toString() ).collect( Collectors.toList() );
+            } );
+    }
+
+    private List<String> getFileVHostMappingNames()
+    {
+        try
+        {
+            final List<String> result = new ArrayList<>();
+
+            final String pattern = config.ruleFileNameTemplate().replace( "{{vhost}}", "(\\w+)" );
+
+            Files.walk( Paths.get( HomeDir.get().toFile().getPath(), "config" ) ).
+                forEach( configFile -> {
+                    final String mappingName = FileNameMatcher.getMatch( configFile, pattern, 1 );
+
+                    if ( mappingName != null )
+                    {
+                        result.add( mappingName );
+                    }
+                } );
+
+            return result;
+        }
+        catch ( IOException e )
+        {
+            throw new UncheckedIOException( e );
+        }
     }
 
     @Reference

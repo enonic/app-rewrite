@@ -6,12 +6,13 @@ import {enableActionButtons} from "./tableActions";
 import {fetch} from "./dataService";
 import {populateDataElement} from "./dataElements";
 import {model} from "./model";
-import {showInfo} from "./info-bar";
+import {showError, showInfo} from "./info-bar";
 
 const toolKey = "tool-rules";
 const toolSelector = "#" + toolKey;
 const ruleTableSelector = "#toolRulesRulesTable";
 const contextSelectorSelector = "#toolRulesContextSelect";
+const contextStateInfo = "#contextStateInfo";
 
 let svcUrl;
 
@@ -37,6 +38,7 @@ function triggerContextChanged() {
         let context = $(contextSelectorSelector).val();
         loadRules(context);
         setRuleButtonState(context);
+        updateContextStatus(context);
     });
 }
 
@@ -81,6 +83,24 @@ function setContextSelectorData() {
     };
 
     populateDataElement(contextSelectorSelector, serviceUrl, dataFunction, doPopulateSelectorValues, doRefreshContextSelector);
+}
+
+function updateContextStatus(context) {
+    $.ajax({
+        url: svcUrl + 'check-context-status',
+        cache: false,
+        type: 'GET',
+        data: {
+            "contextKey": context
+        },
+        error: function (response, status, error) {
+            console.error(response.responseText);
+            showError("Cannot load tool: " + response.responseText)
+        },
+        success: function (result) {
+            $(contextStateInfo).html(result.status === true ? '' : '(Inactive)');
+        }
+    });
 }
 
 let onToolLoaded = function (result) {

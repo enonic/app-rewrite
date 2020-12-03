@@ -13,6 +13,10 @@ table.data-table {
         cursor: pointer;
         background: #aaa;
       }
+
+      tr.inactive {
+        opacity: 0.3;
+      }
     }
   }
 

@@ -23,7 +23,7 @@ public class RewriteContextMapper
 
         gen.value( "name", virtualHostWrapper.getContextKey().toString() );
         gen.value( "type", "virtualHost" );
-        gen.value( "disabled", virtualHostWrapper.isDisabled() );
+        gen.value( "active", virtualHostWrapper.isActive() );
 
         final VirtualHost virtualHost = virtualHostWrapper.getVirtualHost();
 

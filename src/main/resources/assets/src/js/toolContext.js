@@ -16,6 +16,9 @@ let rowCallbackFunction = function (row, data) {
     if (data.provider && data.provider !== "") {
         $(row).addClass('has-provider');
     }
+    if (data.status === "Inactive") {
+        $(row).addClass('inactive');
+    }
 };
 
 const tableSettings = {

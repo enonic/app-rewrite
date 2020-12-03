@@ -13,14 +13,14 @@ public class VirtualHostWrapper
 
     private final RewriteMappingProvider mappingProvider;
 
-    private final boolean disabled;
+    private final boolean active;
 
     public VirtualHostWrapper( final Builder builder )
     {
         this.contextKey = builder.contextKey;
         this.virtualHost = builder.virtualHost;
         this.mappingProvider = builder.mappingProvider;
-        this.disabled = builder.disabled;
+        this.active = builder.active;
     }
 
     public RewriteContextKey getContextKey()
@@ -38,9 +38,9 @@ public class VirtualHostWrapper
         return mappingProvider;
     }
 
-    public boolean isDisabled()
+    public boolean isActive()
     {
-        return disabled;
+        return active;
     }
 
     public static Builder create()
@@ -57,7 +57,7 @@ public class VirtualHostWrapper
 
         private RewriteMappingProvider mappingProvider;
 
-        private boolean disabled;
+        private boolean active;
 
         public Builder mappingProvider( final RewriteMappingProvider mappingProvider )
         {
@@ -77,9 +77,9 @@ public class VirtualHostWrapper
             return this;
         }
 
-        public Builder disabled( final boolean disabled )
+        public Builder active( final boolean active )
         {
-            this.disabled = disabled;
+            this.active = active;
             return this;
         }
 
