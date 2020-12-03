@@ -12,7 +12,7 @@
                             name="rewriteContextSelection">
                         <option disabled selected value> -- select a vhost --</option>
                         <option data-th-each="rewriteContext: ${rewriteContexts}" data-th-text="${rewriteContext.name}"
-                                data-th-disabled="${rewriteContext.disabled}"></option>
+                                data-th-disabled="${rewriteContext.inactive}"></option>
                     </select>
                 </div>
             </div>

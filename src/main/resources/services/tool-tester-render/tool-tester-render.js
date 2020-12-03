@@ -14,7 +14,7 @@ exports.get = function (req) {
         let rewriteContext = item.rewriteContext;
         contexts.push({
             name: rewriteContext.name,
-            disabled: rewriteContext.disabled
+            inactive: !rewriteContext.active
         });
     });
 
