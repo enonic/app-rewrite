@@ -36,4 +36,6 @@ public interface RewriteService
 
     VirtualHostsDecorator getVirtualHostMappings();
 
+    void reloadRewriteMappings();
+
 }

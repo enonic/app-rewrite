@@ -61,10 +61,11 @@ public class RewriteBean
         return new RewriteConfigurationsMapper( rewriteConfigurations );
     }
 
-    public Object getRewriteContexts() {
+    public Object getRewriteContexts()
+    {
         final VirtualHostsDecorator virtualHosts = this.rewriteServiceSupplier.get().getVirtualHostMappings();
 
-        return new RewriteContextsMapper(virtualHosts);
+        return new RewriteContextsMapper( virtualHosts );
     }
 
     public Object getRewriteContext( final String contextKey )
@@ -163,6 +164,11 @@ public class RewriteBean
     public Object serializeRules( final ExportRulesParams params )
     {
         return this.importServiceSupplier.get().serializeRules( params );
+    }
+
+    public void reloadRewriteMappings()
+    {
+        this.rewriteServiceSupplier.get().reloadRewriteMappings();
     }
 
 }
