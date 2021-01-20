@@ -93,6 +93,12 @@ public class RewriteServiceImpl
     }
 
     @Override
+    public void reloadRewriteMappings()
+    {
+        doReload();
+    }
+
+    @Override
     public RedirectMatch process( final HttpServletRequest request )
     {
         return this.rewriteEngine.process( request );
@@ -208,7 +214,7 @@ public class RewriteServiceImpl
     {
         final Map<RewriteContextKey, RewriteMapping> map = new HashMap<>();
 
-        LOG.info( "Finding rewrite-mappings for configurations" );
+        LOG.debug( "Finding rewrite-mappings for configurations" );
 
         this.contextProviders.asMap().forEach( ( context, provider ) -> {
 

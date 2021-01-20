@@ -56,7 +56,7 @@ public class ApacheRewriteSerializer
 
     static SourceReadResult read( final BufferedReader reader )
     {
-        LOG.info( "Loading apache rewriteConfigurations from file" );
+        LOG.debug( "Loading apache rewriteConfigurations from file" );
 
         try
         {

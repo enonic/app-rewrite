@@ -82,7 +82,7 @@ public class RewriteMappingLocalFileProvider
             if ( !files.isEmpty() )
             {
                 final Path path = files.get( 0 );
-                LOG.info( "Loading rewrite-mapping for contextKey [{}] from file: [{}]", contextKey, path );
+                LOG.debug( "Loading rewrite-mapping for contextKey [{}] from file: [{}]", contextKey, path );
 
                 try (final BufferedReader reader = Files.newBufferedReader( Paths.get( path.toString() ), StandardCharsets.UTF_8 ))
                 {

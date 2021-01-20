@@ -35,6 +35,10 @@ exports.getProviderInfo = function (contextKey) {
     return __.toNativeObject(result).providerInfo;
 };
 
+exports.reloadRewriteMappings = function () {
+    bean.reloadRewriteMappings();
+};
+
 exports.createRule = function (contextKey, rule, insertStrategy, position) {
     let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
     params.insertStrategy = insertStrategy;
