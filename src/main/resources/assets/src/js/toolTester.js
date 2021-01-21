@@ -48,7 +48,9 @@ let testRequest = function () {
     }
 
     let data = {
-        requestURL: rewriteContext + (fieldVal.startsWith("/") ? fieldVal : "/" + fieldVal)
+        host: location.host,
+        requestPath: fieldVal,
+        rewriteContext: rewriteContext
     };
 
     jQuery.ajax({

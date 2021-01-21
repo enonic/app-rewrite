@@ -1,3 +1,15 @@
+/* global __*/
+
+function required(params, name) {
+    let value = params[name];
+
+    if (value === undefined) {
+        throw 'Parameter \'' + name + '\' is required';
+    }
+
+    return value;
+}
+
 let bean = __.newBean('com.enonic.app.rewrite.RewriteBean');
 
 exports.getRewriteConfigurations = function () {
@@ -96,7 +108,12 @@ exports.serializeRules = function (contextKey, format) {
     return result;
 };
 
-exports.testRequest = function (requestURL) {
-    let result = bean.requestTester(requestURL);
-    return __.toNativeObject(result);
+exports.testRequest = function (params) {
+    let testerParams = __.newBean('com.enonic.app.rewrite.RequestTesterParams');
+
+    testerParams.host = required(params, 'host');
+    testerParams.requestPath = required(params, 'requestPath');
+    testerParams.rewriteContext = required(params, 'rewriteContext');
+
+    return __.toNativeObject(bean.requestTester(testerParams));
 };
