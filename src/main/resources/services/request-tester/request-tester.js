@@ -2,21 +2,7 @@ let rewriteDao = require('/lib/rewrite-dao');
 let thymeleaf = require('/lib/thymeleaf');
 
 exports.get = function (req) {
-
-
-    let requestURL = req.params.requestURL;
-
-    if (!requestURL) {
-        return {
-            status: 500,
-            body: {
-                error: "missing request-url"
-            },
-            contentType: 'application/json'
-        }
-    }
-
-    let result = rewriteDao.testRequest(requestURL);
+    let result = rewriteDao.testRequest(req.params);
 
     if (result.error) {
 

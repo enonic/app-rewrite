@@ -89,12 +89,12 @@ public class RewriteBean
         return new RewriteMappingMapper( rewriteMapping );
     }
 
-    public Object requestTester( final String requestURI )
+    public Object requestTester( final RequestTesterParams params )
     {
         final RequestTesterResult requestTesterResult;
         try
         {
-            requestTesterResult = this.requestTesterSupplier.get().testRequest( requestURI );
+            requestTesterResult = this.requestTesterSupplier.get().testRequest( params );
         }
         catch ( Exception e )
         {

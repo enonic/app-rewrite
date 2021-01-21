@@ -19,7 +19,7 @@ To configure this application, place a file named `com.enonic.app.rewrite.cfg` i
 
 By default this application is shipped with the following configuration:
 
-    enabled=true
+    enabled=false
     excludePattern=^/admin/.*|.*/_/asset/.*|.*/_/image/.*
     includePattern=^/site/.*
     ruleFileNameTemplate=com.enonic.app.rewrite.{{vhost}}.conf

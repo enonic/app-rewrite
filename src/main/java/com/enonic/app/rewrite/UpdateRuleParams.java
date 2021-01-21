@@ -4,6 +4,8 @@ import com.enonic.app.rewrite.domain.RewriteContextKey;
 
 public class UpdateRuleParams
 {
+    private String host;
+
     private String ruleId;
 
     private RewriteContextKey contextKey;
@@ -17,6 +19,16 @@ public class UpdateRuleParams
     private String type;
 
     private Integer position;
+
+    public String getHost()
+    {
+        return host;
+    }
+
+    public void setHost( final String host )
+    {
+        this.host = host;
+    }
 
     public String getRuleId()
     {
