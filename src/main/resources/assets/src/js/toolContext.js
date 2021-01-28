@@ -18,6 +18,7 @@ let rowCallbackFunction = function (row, data) {
     }
     if (data.status === "Inactive") {
         $(row).addClass('inactive');
+        $(row).attr('title', 'VHost mapping is disabled in the config file');
     }
 };
 

@@ -11,8 +11,20 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFu
 
         let doExecuteToolActions = function (element, dataFunction, actionExecutedFunction) {
             const action = element.data('action-service-name');
+            let actionText;
+            switch (action) {
+                case 'create-repo-context':
+                    actionText = "create a vhost in the repository";
+                    break;
+                case 'delete-repo-context':
+                    actionText = "delete the vhost from the repository"
+                    break;
+            }
+            if (!actionText) {
+                return;
+            }
             let serviceUrl = createActionServiceUrl(svcUrl, toolKey, action);
-            if (confirm("Are you sure that you want to " + action + "?")) {
+            if (confirm("Are you sure that you want to " + actionText + "?")) {
                 jQuery.ajax({
                     url: serviceUrl,
                     cache: false,
