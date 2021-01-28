@@ -7,6 +7,6 @@ public class RewriteContextExistsException
 {
     public RewriteContextExistsException( final RewriteContextKey contextKey )
     {
-        super( "Rewrite-context with key [" + contextKey + "] already exists" );
+        super( "Virtual host " + contextKey + " already exists" );
     }
 }

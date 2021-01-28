@@ -26,7 +26,7 @@ exports.post = function (req) {
     }
 
     let model = {
-        message: "context with key [" + contextKey + "] deleted",
+        message: 'Virtual host "' + contextKey + '" deleted',
     };
 
     return {

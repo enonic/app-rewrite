@@ -1,5 +1,7 @@
 <html>
 <head>
+    <title>Rewrite Manager</title>
+    <link rel="icon" href="favicon.svg" data-th-href="${portal.assetUrl({'_path=icons/favicon.svg'})}">
     <link rel="stylesheet" data-th-href="${portal.assetUrl({'_path=css/main.css'})}"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
@@ -10,11 +12,11 @@
 
     <aside id="top-nav">
 
-        <div class="logo"><p>Rewrite-manager</p></div>
+        <div class="logo"><p>Rewrite Manager</p></div>
 
         <aside id="top-info-bar">
             <div class="context-info">
-                <div id="vhost-state" class="vhost-disabled">VHost configuration is disabled</div>
+                <div id="vhost-state" class="vhost-disabled">VHost mapping is disabled in the config file</div>
             </div>
         </aside>
 
@@ -34,7 +36,7 @@
 
             <div class="tool-nav selected" id="nav-tool-context" data-activator="tool-context">
                 <div class="toolIcon"><i class="material-icons">call_split</i></div>
-                <div class="toolName"><p>VirtualHosts</p></div>
+                <div class="toolName"><p>Virtual Hosts</p></div>
             </div>
 
             <div class="tool-nav" id="nav-tool-rules" data-activator="tool-rules">
@@ -44,7 +46,7 @@
 
             <div class="tool-nav" id="nav-tool-tester" data-activator="tool-tester">
                 <div class="toolIcon"><i class="material-icons">flight_takeoff</i></div>
-                <div class="toolName"><p>Request-tester</p></div>
+                <div class="toolName"><p>Request Tester</p></div>
             </div>
 
         </nav>
@@ -73,7 +75,7 @@
     };
     /*]]>*/
 </script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.23/datatables.min.js"></script>
 <script data-th-src="${portal.assetUrl({'_path=js/main.js'})}"></script>
 </body>
 </html>

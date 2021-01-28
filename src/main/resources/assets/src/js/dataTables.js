@@ -1,5 +1,4 @@
 import {populateDataElement, refreshDataElement} from "./dataElements";
-import {add} from "ramda";
 
 export let populateDataTable = function (serviceConfig, onTablePopulated, onTableRefresh, onRedraw) {
 

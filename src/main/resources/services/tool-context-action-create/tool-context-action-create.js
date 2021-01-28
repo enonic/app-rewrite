@@ -28,7 +28,7 @@ exports.post = function (req) {
     }
 
     let model = {
-        message: "context with key [" + contextKey + "] created",
+        message: 'Virtual host "' + contextKey + '" created',
     };
 
     return {
