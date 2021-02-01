@@ -28,8 +28,8 @@
 
             <label for="editRuleType">Redirect-type</label>
             <select id="editRuleType" name="editRuleType">
-                <option value="MOVED_PERMANENTLY" data-th-selected="${selected == 'MOVED_PERMANENTLY'}">MOVED_PERMANENTLY</option>
-                <option value="TEMPORARILY_REDIRECT" data-th-selected="${selected == 'TEMPORARILY_REDIRECT'}">TEMPORARILY_REDIRECT</option>
+                <option value="MOVED_PERMANENTLY" data-th-selected="${selected == 'MOVED_PERMANENTLY'}">[301] PERMANENT REDIRECT</option>
+                <option value="TEMPORARILY_REDIRECT" data-th-selected="${selected == 'TEMPORARILY_REDIRECT'}">[302] TEMPORARY REDIRECT</option>
             </select>
 
             <label for="editInsertPosition">Position</label>
