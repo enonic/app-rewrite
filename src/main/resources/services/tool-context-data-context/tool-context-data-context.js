@@ -34,7 +34,6 @@ exports.get = function (req) {
             {title: "Url", data: "url"},
             {title: "Rules", data: "rules"},
             {title: "Source", data: "provider"},
-            {title: "Status", data: "status"},
             {title: "Actions", data: "actions"}
         ]
     };
