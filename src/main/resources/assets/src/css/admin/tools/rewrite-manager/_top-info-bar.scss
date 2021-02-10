@@ -1,0 +1,15 @@
+@import "common";
+@import "colors";
+
+#top-info-bar {
+
+  font-family: $monserrat;
+  background-color: $color-top-bar;
+  padding: 5px;
+  display: none;
+
+  &.visible {
+    display: flex;
+    justify-content: center;
+  }
+}

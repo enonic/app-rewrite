@@ -39,12 +39,8 @@ export let initToolbar = function (svcUrl) {
         error: function (request, status, error) {
         },
         success: function (result) {
-            let $vhost = $('#vhost-state');
-            if (result === false) {
-                $vhost.show();
-            } else {
-                $vhost.hide();
-            }
+            const topInfoBar = $('#top-info-bar');
+            topInfoBar.toggleClass('visible', result !== false);
         }
     });
 };
