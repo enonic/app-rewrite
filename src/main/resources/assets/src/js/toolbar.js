@@ -40,7 +40,13 @@ export let initToolbar = function (svcUrl) {
         },
         success: function (result) {
             const topInfoBar = $('#top-info-bar');
-            topInfoBar.toggleClass('visible', result !== false);
+            const infoBarVisible = topInfoBar.hasClass('visible');
+            const vhostsDisabled = (result !== false);
+            if (!infoBarVisible && vhostsDisabled) {
+                topInfoBar.addClass('visible');
+            }
+            const vhostInfo = topInfoBar.find('#vhost-state');
+            vhostInfo.toggle(vhostsDisabled);
         }
     });
 };
