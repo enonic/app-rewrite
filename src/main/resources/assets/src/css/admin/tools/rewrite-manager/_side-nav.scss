@@ -17,6 +17,13 @@
     font-weight: bold;
   }
 
+  .tool-docs {
+    font-family: $titillium;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
   .tool-nav-info {
     background: $color-nav-toolbar-info;
     color: $color-font-dark;
