@@ -1,13 +1,25 @@
-let thymeleaf = require('/lib/thymeleaf');
-let portal = require('/lib/xp/portal');
+const thymeleaf = require('/lib/thymeleaf');
+const portal = require('/lib/xp/portal');
+const license = require("/lib/license");
 
 exports.get = function (req) {
+    const licenseDetail = license.validateLicense({
+        appKey: app.name,
+    });
 
-    let view = resolve('rewrite-manager.html');
+    const licenseUrl = portal.serviceUrl({
+        service: "license",
+        type: "absolute",
+    })
 
-    let model = {
+    const view = resolve('rewrite-manager.html');
+
+    const model = {
         assetsUrl: portal.assetUrl({path: ""}),
         svcUrl: portal.serviceUrl({service: 'Z'}).slice(0, -1),
+        licenseUrl,
+        licenseValid: !(licenseDetail == null || licenseDetail.expired),
+        licenseText: licenseDetail ? `Licensed to ${licenseDetail.issuedTo}` : "Invalid license",
     };
 
 

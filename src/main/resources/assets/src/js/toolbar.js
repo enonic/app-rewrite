@@ -39,11 +39,13 @@ export let initToolbar = function (svcUrl) {
         error: function (request, status, error) {
         },
         success: function (result) {
-            let $vhost = $('#vhost-state');
-            if (result === false) {
-                $vhost.show();
-            } else {
-                $vhost.hide();
+            const topInfoBar = $('#top-info-bar');
+            const infoBarVisible = topInfoBar.hasClass('visible');
+            const vhostsDisabled = (result === false);
+            if (!infoBarVisible && vhostsDisabled) {
+                topInfoBar.addClass('visible');
+                const vhostInfo = topInfoBar.find('#vhost-state');
+                vhostInfo.toggle(vhostsDisabled);
             }
         }
     });

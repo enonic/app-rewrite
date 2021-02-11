@@ -14,7 +14,6 @@ const {
 const env = require('./util/env');
 
 const isProd = env.prod;
-const isDev = env.dev;
 
 // ----------------------------------------------------------------------------
 // Base config
@@ -47,7 +46,7 @@ const config = {
     },
     plugins: [],
     mode: env.type,
-    devtool: isProd ? false : 'inline-source-map',
+    devtool: isProd ? false : 'source-map',
 };
 
 // ----------------------------------------------------------------------------
@@ -113,10 +112,8 @@ function addSassSupport(cfg) {
                             sourceMap: !isProd
                         }
                 }
-                ,
             ]
-        }
-    ;
+        };
 
     const plugin = createCssPlugin();
 
