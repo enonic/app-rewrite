@@ -1,5 +1,6 @@
 import '../css/main.scss';
 import {initToolbar} from "./toolbar";
+import {listenToLicenseUpdates} from "./license";
 import {initToolContext} from "./toolContext";
 import {initToolRules} from "./toolRules";
 import {initModals} from "./modals";
@@ -17,4 +18,5 @@ $(document).ready(function () {
     initToolTester(svcUrl);
     initModals();
     defineShortcuts();
+    listenToLicenseUpdates();
 });

@@ -7,13 +7,23 @@
   background-color: $color-top-bar;
   padding: 5px;
   display: none;
+  border-bottom: 1px solid $color-border-light;
 
   &.visible {
     display: flex;
     justify-content: center;
   }
 
-  .license-invalid {
+  .license-state {
+    .upload-license-link {
+      color: #007bff;
+      margin-bottom: 0;
 
+      &:hover {
+        cursor: pointer;
+        color: #0056b3;
+        text-decoration: underline;
+      }
+    }
   }
 }

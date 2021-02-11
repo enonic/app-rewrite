@@ -41,12 +41,12 @@ export let initToolbar = function (svcUrl) {
         success: function (result) {
             const topInfoBar = $('#top-info-bar');
             const infoBarVisible = topInfoBar.hasClass('visible');
-            const vhostsDisabled = (result !== false);
+            const vhostsDisabled = (result === false);
             if (!infoBarVisible && vhostsDisabled) {
                 topInfoBar.addClass('visible');
+                const vhostInfo = topInfoBar.find('#vhost-state');
+                vhostInfo.toggle(vhostsDisabled);
             }
-            const vhostInfo = topInfoBar.find('#vhost-state');
-            vhostInfo.toggle(vhostsDisabled);
         }
     });
 };
