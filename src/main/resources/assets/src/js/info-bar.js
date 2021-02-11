@@ -20,7 +20,7 @@ function doDisplayInfoBar(msg, type, timeout = defaultTimeout, callback) {
 }
 
 export let showError = function (msg, timeout, callback) {
-    doDisplayInfoBar(msg, "error");
+    doDisplayInfoBar(msg, "error", timeout, callback);
 };
 export let showInfo = function (msg, timeout, callback) {
     doDisplayInfoBar(msg, "info", timeout, callback);
