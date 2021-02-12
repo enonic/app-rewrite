@@ -6,6 +6,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.enonic.app.rewrite.provider.repo.RewriteMappingRepoInitializer;
+import com.enonic.lib.license.LicenseManager;
 import com.enonic.xp.index.IndexService;
 import com.enonic.xp.node.NodeService;
 import com.enonic.xp.repository.RepositoryService;
@@ -19,6 +20,8 @@ public class RewriteAppActivator
     private IndexService indexService;
 
     private NodeService nodeService;
+
+    private LicenseManager licenseManager;
 
     @Activate
     public void activate( final ComponentContext componentContext )
@@ -51,4 +54,9 @@ public class RewriteAppActivator
         this.nodeService = nodeService;
     }
 
+    @Reference
+    public void setLicenseManager( final LicenseManager licenseManager )
+    {
+        this.licenseManager = licenseManager;
+    }
 }

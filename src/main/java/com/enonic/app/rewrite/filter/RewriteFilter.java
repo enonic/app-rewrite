@@ -12,6 +12,7 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.enonic.app.rewrite.LicenseService;
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.context.ContextResolver;
 import com.enonic.app.rewrite.redirect.Redirect;
@@ -39,11 +40,15 @@ public class RewriteFilter
 
     private RewriteService rewriteService;
 
+    private LicenseService licenseService;
+
     @Activate
-    public RewriteFilter( @Reference final RewriteFilterConfig config, @Reference final RewriteService rewriteService )
+    public RewriteFilter( @Reference final RewriteFilterConfig config, @Reference final RewriteService rewriteService,
+                          @Reference final LicenseService licenseService )
     {
         this.config = config;
         this.rewriteService = rewriteService;
+        this.licenseService = licenseService;
 
         this.excludePatternMatcher = new PatternMatcher( config.excludePattern() );
         this.includePatternMatcher = new PatternMatcher( config.includePattern() );
@@ -82,8 +87,7 @@ public class RewriteFilter
     private boolean doRewriteURL( HttpServletRequest hsRequest, HttpServletResponse hsResponse )
         throws Exception
     {
-
-        if ( !this.config.enabled() )
+        if ( !this.config.enabled() || !licenseService.isLicenseEnabled() )
         {
             return false;
         }
