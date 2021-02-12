@@ -31,4 +31,13 @@ export let initToolbar = function (svcUrl) {
             toggleTool(activates);
         })
     });
+
+    const toggleIcon = $('#toggle-icon');
+    const mainContainer = $('#main');
+    const sidebar = $('#side-nav');
+
+    toggleIcon.click(function () {
+        toggleIcon.toggleClass('toggled');
+        sidebar.toggleClass('expanded');
+    });
 };

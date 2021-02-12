@@ -10,4 +10,7 @@
 
   background: $color-main-background;
 
+  > #side-nav.expanded + #tools-window {
+    padding-left: $toolbar-width;
+  }
 }

@@ -1,10 +1,12 @@
 @import 'tool-context-bar';
 @import 'data-table';
 
-
 #tools-window {
 
   flex: 1 0 auto;
+  padding-left: 0;
+
+  transition: padding-left 0.5s ease;
 
   .tool {
 
@@ -15,7 +17,7 @@
     }
 
     .tool-main {
-      padding: 40px;
+      padding: 20px;
 
       > div:not(:last-child) {
         margin-bottom: 20px;
