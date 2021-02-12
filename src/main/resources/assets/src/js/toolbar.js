@@ -31,22 +31,4 @@ export let initToolbar = function (svcUrl) {
             toggleTool(activates);
         })
     });
-/*
-    $.ajax({
-        url: svcUrl + "check-vhost-state",
-        cache: false,
-        type: 'GET',
-        error: function (request, status, error) {
-        },
-        success: function (result) {
-            const topInfoBar = $('#top-info-bar');
-            const infoBarVisible = topInfoBar.hasClass('visible');
-            const vhostsDisabled = (result === false);
-            if (!infoBarVisible && vhostsDisabled) {
-                topInfoBar.addClass('visible');
-                const vhostInfo = topInfoBar.find('#vhost-state');
-                vhostInfo.toggle(vhostsDisabled);
-            }
-        }
-    });*/
 };
