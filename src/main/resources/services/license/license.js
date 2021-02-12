@@ -1,6 +1,7 @@
 const portalLib = require("/lib/xp/portal");
 const ioLib = require("/lib/xp/io");
 const licenseLib = require("/lib/license");
+const licenseManagerLib = require('/lib/license-manager');
 
 exports.post = function () {
     let licenseStream = portalLib.getMultipartStream("license");
@@ -18,6 +19,8 @@ exports.post = function () {
             license: license,
             appKey: app.name,
         });
+
+        licenseManagerLib.activateLicense();
 
         return {
             status: 200,
