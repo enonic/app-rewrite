@@ -14,7 +14,21 @@
     justify-content: center;
   }
 
+  .error-message {
+    display: none;
+
+    &.visible {
+      display: block;
+    }
+  }
+
   .license-state {
+    display: none;
+
+    &.visible {
+      display: block;
+    }
+
     .upload-license-link {
       color: #007bff;
       margin-bottom: 0;

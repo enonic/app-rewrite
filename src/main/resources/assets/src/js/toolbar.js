@@ -31,7 +31,7 @@ export let initToolbar = function (svcUrl) {
             toggleTool(activates);
         })
     });
-
+/*
     $.ajax({
         url: svcUrl + "check-vhost-state",
         cache: false,
@@ -48,5 +48,5 @@ export let initToolbar = function (svcUrl) {
                 vhostInfo.toggle(vhostsDisabled);
             }
         }
-    });
+    });*/
 };

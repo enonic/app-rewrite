@@ -28,9 +28,11 @@
         </div>
     </aside>
 
-    <aside id="top-info-bar" data-th-class="${licenseValid ? '' : 'visible'}">
-        <div id="vhost-state" class="vhost-disabled" style="display: none;">VHost mapping is disabled in the config file</div>
-        <div class="license-state" data-th-style="${licenseValid ? 'display: none' : 'display: block'}">
+    <aside id="top-info-bar" data-th-class="${error ? 'visible' : ''}">
+        <div class="error-message" data-th-classappend="${errorMessage!='' ? 'visible' : ''}">
+            <span data-th-remove="tag" data-th-text="${errorMessage}"></span>
+        </div>
+        <div class="license-state" data-th-classappend="${licenseValid ? '' : 'visible'}">
             <form method="POST" action="" enctype="multipart/form-data">
                 <input id="upload-license" autocomplete="off" name="licenseFile" type="file" style="display:none;"/>
                 <span>Rewrites are disabled. Click <label class="upload-license-link" for="upload-license">here</label> to upload a valid license</span>
