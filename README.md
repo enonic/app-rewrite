@@ -3,7 +3,7 @@ This Enonic XP application allows you to define rewrite rules to handle the requ
 
 The application supports two types of providers to manage rewrite rules:
 
-- `File` - configuration file per a virtual host. That provider is read-only. That means that you need to manage rules directly inside file.
+- `File` - configuration file per a virtual host. With this type of provider redirect rules are defined inside the config file.
 - `Repository` - using this type of provider you can manage redirect rules directly from the application UI. Configuration for each virtual host is stored in the repository called `com.enonic.app.rewrite`. 
 
 **Note**: If you have both types of providers for one virtual host, then `File` provider will take precedence.  
