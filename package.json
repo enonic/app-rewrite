@@ -2,7 +2,7 @@
   "name": "app-rewrite",
   "version": "1.0.0",
   "description": "Enonic Rewrite App",
-  "license": "Apache-2.0",
+  "license": "Enonic License 1.0",
   "private": true,
   "scripts": {
     "build:client": "webpack --config webpack.client.config.js --color",
