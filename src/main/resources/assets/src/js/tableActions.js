@@ -19,6 +19,11 @@ export let enableActionButtons = function (svcUrl, toolSelector, toolKey, dataFu
                 case 'delete-repo-context':
                     actionText = "delete the vhost from the repository"
                     break;
+                case 'delete-rule':
+                    actionText = "delete the rule";
+                    break;
+                default:
+                    // do noting
             }
             if (!actionText) {
                 return;
