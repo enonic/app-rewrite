@@ -1,12 +1,9 @@
 const thymeleaf = require('/lib/thymeleaf');
 const portal = require('/lib/xp/portal');
-const license = require("/lib/license");
 const libVHost = require('/lib/xp/vhost');
+const licenseManager = require("/lib/license-manager");
 
 exports.get = function (req) {
-    const licenseDetail = license.validateLicense({
-        appKey: app.name,
-    });
 
     const licenseUrl = portal.serviceUrl({
         service: "license",
@@ -14,7 +11,7 @@ exports.get = function (req) {
     })
 
     const view = resolve('rewrite-manager.html');
-    const licenseValid = !(licenseDetail == null || licenseDetail.expired);
+    const licenseValid = licenseManager.isCurrentLicenseValid();
     let errorMessage = '';
 
     if (licenseValid) {
@@ -34,7 +31,7 @@ exports.get = function (req) {
         errorMessage,
         licenseUrl,
         licenseValid,
-        licenseText: licenseDetail ? `Licensed to ${licenseDetail.issuedTo}` : "Invalid license",
+        licenseText: licenseManager.getIssuedTo(),
     };
 
     return {
