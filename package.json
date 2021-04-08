@@ -35,12 +35,12 @@
     "postcss-loader": "^4.2.0",
     "postcss-normalize": "^9.0.0",
     "ramda": "^0.27.1",
-    "sass-loader": "^7.3.1",
+    "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.3",
-    "webpack": "^4.46.0",
+    "webpack": "^5.27.2",
     "webpack-cli": "^4.6.0"
   },
   "browserslist": [
