@@ -34,6 +34,7 @@ const activateLicense = function () {
 
 exports.isCurrentLicenseValid = isCurrentLicenseValid;
 exports.isLicenseValid = isLicenseValid;
+exports.activateLicense = activateLicense;
 
 exports.getIssuedTo = function () {
     if (!isCurrentLicenseValid()) {
