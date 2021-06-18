@@ -27,25 +27,25 @@ exports.post = function (req) {
     }
 
     try {
-        let result = rewriteDao.createRule(contextKey, rule, insertStrategy, insertPosition);
+        let result = rewriteDao.createRule(params.__host, contextKey, rule, insertStrategy, insertPosition);
 
         if (result !== null && result.error) {
             return {
                 status: 500,
                 contentType: 'text/plain',
-                body: "cannot create context: " + result.error.message
+                body: "cannot create rule: " + result.error.message
             }
         }
     } catch (e) {
         return {
             status: 500,
             contentType: 'text/plain',
-            body: "cannot create context: " + e
+            body: "cannot create rule: " + e
         }
     }
 
     let model = {
-        message: 'Virtual host "' + contextKey + '" created',
+        message: 'The rule was successfully created for virtual host "' + contextKey + '"',
     };
 
     return {

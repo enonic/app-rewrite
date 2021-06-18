@@ -15,7 +15,7 @@ class FileNameMatcherTest
     @Test
     void testMatcher()
     {
-        final Path path = Paths.get( "/Users/someuser/somefolder/fisk/ost/onions/com.enonic.app.rewrite.myvhost.txt" );
+        final Path path = Path.of( "/Users/someuser/somefolder/fisk/ost/onions/com.enonic.app.rewrite.myvhost.txt" );
         final String pattern = "com.enonic.app.rewrite.(\\w+)\\.txt";
 
         assertTrue( FileNameMatcher.matches( path, pattern ) );

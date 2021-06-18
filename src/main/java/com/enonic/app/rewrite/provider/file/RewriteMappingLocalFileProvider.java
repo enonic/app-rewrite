@@ -6,7 +6,6 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,7 +83,7 @@ public class RewriteMappingLocalFileProvider
                 final Path path = files.get( 0 );
                 LOG.debug( "Loading rewrite-mapping for contextKey [{}] from file: [{}]", contextKey, path );
 
-                try (final BufferedReader reader = Files.newBufferedReader( Paths.get( path.toString() ), StandardCharsets.UTF_8 ))
+                try (final BufferedReader reader = Files.newBufferedReader( path, StandardCharsets.UTF_8 ))
                 {
                     final SourceReadResult rewriteRules =
                         SourceReader.read( reader, SourceFormatResolver.resolve( path.toFile().getName() ) );

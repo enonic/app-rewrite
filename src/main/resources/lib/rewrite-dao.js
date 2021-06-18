@@ -51,8 +51,9 @@ exports.reloadRewriteMappings = function () {
     bean.reloadRewriteMappings();
 };
 
-exports.createRule = function (contextKey, rule, insertStrategy, position) {
+exports.createRule = function (host, contextKey, rule, insertStrategy, position) {
     let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
+    params.host = host;
     params.insertStrategy = insertStrategy;
     params.source = rule.source;
     params.target = rule.target;
@@ -72,8 +73,9 @@ exports.deleteRule = function (contextKey, ruleId) {
     return __.toNativeObject(result);
 };
 
-exports.editRule = function (contextKey, pattern, rule) {
+exports.editRule = function (host, contextKey, pattern, rule) {
     let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
+    params.host = host;
     params.contextKey = contextKey;
     params.source = rule.source;
     params.target = rule.target;

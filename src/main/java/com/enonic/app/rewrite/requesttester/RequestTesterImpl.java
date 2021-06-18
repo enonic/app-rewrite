@@ -1,6 +1,5 @@
 package com.enonic.app.rewrite.requesttester;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +10,7 @@ import org.osgi.service.component.annotations.Reference;
 import com.enonic.app.rewrite.RequestTesterParams;
 import com.enonic.app.rewrite.RewriteService;
 import com.enonic.app.rewrite.UpdateRuleParams;
+import com.enonic.app.rewrite.UrlHelper;
 import com.enonic.app.rewrite.engine.ExtRulePattern;
 import com.enonic.app.rewrite.engine.RulePattern;
 import com.enonic.app.rewrite.redirect.Redirect;
@@ -59,12 +59,7 @@ public class RequestTesterImpl
     {
         final RequestTesterResult.Builder builder = RequestTesterResult.create();
 
-        final String requestURL = Paths.get( host, requestPath ).toString();
-
-        if ( requestURL == null || requestURL.isEmpty() )
-        {
-            return builder.build();
-        }
+        final String requestURL = UrlHelper.createUrl( host, requestPath );
 
         RedirectTestResult redirectTestResult = doTest( requestURL, contextKey, extRulePattern );
         builder.add( redirectTestResult );
@@ -114,7 +109,7 @@ public class RequestTesterImpl
         }
         else
         {
-            return Paths.get( host, newTarget.getTargetPath() ).toString();
+            return UrlHelper.createUrl( host, newTarget.getTargetPath() );
         }
     }
 
