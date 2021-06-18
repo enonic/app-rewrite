@@ -74,6 +74,7 @@ export let postActionForm = function (formSelector, serviceUrl, successFunction)
 
     let form = $(formSelector)[0];
     let data = new FormData(form);
+    data.append('__host', location.host);
 
     jQuery.ajax({
         url: serviceUrl,

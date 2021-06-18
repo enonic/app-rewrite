@@ -3,7 +3,7 @@ package com.enonic.app.rewrite;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -293,7 +293,7 @@ public class RewriteServiceImpl
     {
         final HomeDir xpHome = HomeDir.get();
         return RewriteMappingLocalFileProvider.create().
-            base( Paths.get( xpHome.toFile().getPath(), "config" ) ).
+            base( Path.of( xpHome.toFile().getPath(), "config" ) ).
             ruleFileNameTemplate( config.ruleFileNameTemplate() ).
             build();
     }
@@ -325,7 +325,7 @@ public class RewriteServiceImpl
 
             final String pattern = config.ruleFileNameTemplate().replace( "{{vhost}}", "(\\w+)" );
 
-            Files.walk( Paths.get( HomeDir.get().toFile().getPath(), "config" ) ).
+            Files.walk( Path.of( HomeDir.get().toFile().getPath(), "config" ) ).
                 forEach( configFile -> {
                     final String mappingName = FileNameMatcher.getMatch( configFile, pattern, 1 );
 

@@ -7,7 +7,7 @@ exports.post = function (req) {
     let contextKey = params.editRuleContextKey;
 
     try {
-        let result = rewriteDao.editRule(contextKey, pattern, {
+        let result = rewriteDao.editRule(params.__host, contextKey, pattern, {
             source: params.editRulePattern,
             target: params.editRuleSubstitution,
             type: params.editRuleType,

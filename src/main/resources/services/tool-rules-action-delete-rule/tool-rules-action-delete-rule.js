@@ -13,7 +13,7 @@ exports.post = function (req) {
         return {
             status: 500,
             contentType: 'text/plain',
-            body: "cannot create context: " + e
+            body: "cannot delete rule: " + e
         }
     }
 
