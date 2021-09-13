@@ -75,6 +75,26 @@ class RewriteEngineImplTest
     }
 
     @Test
+    void testRegexpSubstitutionInExternalRedirects()
+    {
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/oldUrl/(.*)", "https://www.example.com/newUrl/$1", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "https://www.example.com/newUrl/child", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
+    @Test
     void testExtendedWildcard()
     {
         final List<RewriteMapping> rewriteMappings =

@@ -111,12 +111,13 @@ public class RewriteEngine
     {
         final RewriteTarget target = rulePattern.getTarget();
 
+        final String replacedTarget = matcher.replaceFirst( target.path() );
+
         if ( target.isExternal() )
         {
-            return new Redirect( RedirectExternal.from( target.path() ), rulePattern.getType() );
+            return new Redirect( RedirectExternal.from( replacedTarget ), rulePattern.getType() );
         }
 
-        final String replacedTarget = matcher.replaceFirst( target.path() );
         return new Redirect( RedirectInternal.from( rewriteContext, replacedTarget ), rulePattern.getType() );
     }
 
