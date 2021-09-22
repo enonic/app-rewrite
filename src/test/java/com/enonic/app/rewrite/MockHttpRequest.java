@@ -19,6 +19,7 @@ public class MockHttpRequest
         final URI uri = URI.create( builder.url );
         Mockito.when( this.request.getRequestURI() ).thenReturn( uri.getPath() );
         Mockito.when( this.request.getAttribute( VirtualHost.class.getName() ) ).thenReturn( builder.virtualHost );
+        Mockito.when( this.request.getQueryString() ).thenReturn( uri.getQuery() );
     }
 
     public HttpServletRequest getRequest()

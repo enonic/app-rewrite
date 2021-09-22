@@ -137,6 +137,86 @@ class RewriteEngineImplTest
         assertEquals( "/support", match.getRedirect().getRedirectTarget().getTargetPath() );
     }
 
+    @Test
+    void testRegexpSubstitutionExternalRedirect_withQueryStringInSource_withoutQueryStringInTarget()
+    {
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "https://example.no", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "https://example.no?k=v", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
+    @Test
+    void testRegexpSubstitutionExternalRedirect_withoutQueryStringInSource_withQueryStringInTarget()
+    {
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "https://example.no?q=v", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "https://example.no?q=v", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
+    @Test
+    void testRegexpSubstitutionInternalRedirect_withoutQueryStringInSource_withQueryStringInTarget()
+    {
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "/landing-page?k=v", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/demo" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "/landing-page?k=v", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
+    @Test
+    void testRegexpSubstitutionInternalRedirect_withQueryStringInSource_withoutQueryStringInTarget()
+    {
+        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "/landing-page", RedirectType.MOVED_PERMANENTLY );
+
+        final RewriteEngine rewriteEngine = new RewriteEngine();
+        rewriteEngine.load( rewriteMappings );
+
+        final HttpServletRequest request = MockHttpRequest.create().
+            contextPath( "/" ).
+            url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" ).
+            vhost( vhost ).
+            build().getRequest();
+
+        final RedirectMatch match = rewriteEngine.process( request );
+
+        assertNotNull( match );
+        assertEquals( "/landing-page?k=v", match.getRedirect().getRedirectTarget().getTargetPath() );
+    }
+
     private List<RewriteMapping> prepareRewriteMappings( final String source, final String target, final RedirectType redirectType )
     {
         final RewriteRules rules = RewriteRules.create().

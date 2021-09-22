@@ -40,7 +40,7 @@ public class RewriteEngine
 
         if ( virtualHost != null )
         {
-            return match( new RewriteVirtualHostContext( virtualHost ), request.getRequestURI(), extRulePattern );
+            return match( new RewriteVirtualHostContext( virtualHost ), request, extRulePattern );
         }
 
         return null;
@@ -57,9 +57,10 @@ public class RewriteEngine
         return result.build();
     }
 
-    private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath, final ExtRulePattern extRulePattern )
+    private RedirectMatch match( final RewriteContext rewriteContext, final HttpServletRequest request,
+                                 final ExtRulePattern extRulePattern )
     {
-        if ( requestPath == null )
+        if ( request.getRequestURI() == null )
         {
             return null;
         }
@@ -78,18 +79,19 @@ public class RewriteEngine
 
         if ( extRulePattern == null )
         {
-            return match( rewriteContext, requestPath, rulePatterns.getRules() );
+            return match( rewriteContext, request, rulePatterns.getRules() );
         }
 
         final List<RulePattern> rules = new ArrayList<>( rulePatterns.getRules() );
         rules.add( extRulePattern.getPosition(), extRulePattern.getRulePattern() );
 
-        return match( rewriteContext, requestPath, rules );
+        return match( rewriteContext, request, rules );
     }
 
-    private RedirectMatch match( final RewriteContext rewriteContext, final String requestPath, final List<RulePattern> rulePatterns )
+    private RedirectMatch match( final RewriteContext rewriteContext, final HttpServletRequest request,
+                                 final List<RulePattern> rulePatterns )
     {
-        final String urlInContext = removeContextPrefix( rewriteContext, requestPath );
+        final String urlInContext = removeContextPrefix( rewriteContext, request.getRequestURI() );
 
         for ( final RulePattern rulePattern : rulePatterns )
         {
@@ -99,19 +101,26 @@ public class RewriteEngine
                 continue;
             }
 
-            LOG.debug( "Redirect-match found: [{}] : [{}]", requestPath, rulePattern.getTarget() );
+            LOG.debug( "Redirect-match found: [{}] : [{}]", request.getRequestURI(), rulePattern.getTarget() );
 
-            return new RedirectMatch( createRedirect( rewriteContext, rulePattern, matcher ), rulePattern.getOrder() );
+            return new RedirectMatch( createRedirect( rewriteContext, rulePattern, matcher, request.getQueryString() ),
+                                      rulePattern.getOrder() );
         }
 
         return null;
     }
 
-    private Redirect createRedirect( final RewriteContext rewriteContext, final RulePattern rulePattern, final Matcher matcher )
+    private Redirect createRedirect( final RewriteContext rewriteContext, final RulePattern rulePattern, final Matcher matcher,
+                                     final String queryString )
     {
         final RewriteTarget target = rulePattern.getTarget();
 
-        final String replacedTarget = matcher.replaceFirst( target.path() );
+        String replacedTarget = matcher.replaceFirst( target.path() );
+
+        if ( queryString != null && !replacedTarget.contains( "?" ) )
+        {
+            replacedTarget = replacedTarget + "?" + queryString;
+        }
 
         if ( target.isExternal() )
         {
