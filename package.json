@@ -20,7 +20,7 @@
     "babel-loader": "^8.2.3",
     "browserslist": "^4.19.1",
     "browserslist-config-enonic": "^1.0.6",
-    "copy-webpack-plugin": "^10.2.3",
+    "copy-webpack-plugin": "^10.2.4",
     "cross-env": "^7.0.3",
     "css-loader": "^6.6.0",
     "cssnano": "^5.0.16",
