@@ -4,7 +4,7 @@ public class UrlHelper
 {
     public static String createUrl( final String context, final String path )
     {
-        return normalize( context ) + "/" + normalize( path );
+        return ( "/".equals( context ) ? "" : context ) + "/" + normalize( path );
     }
 
     private static String normalize( final String value )

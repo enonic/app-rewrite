@@ -9,7 +9,9 @@ public class PathBuilderTest
     @Test
     public void test()
     {
-        assertEquals( "context/target", UrlHelper.createUrl( "context", "target" ) );
-        assertEquals( "context/target", UrlHelper.createUrl( "context", "/target" ) );
+        assertEquals( "/context/target", UrlHelper.createUrl( "/context", "target" ) );
+        assertEquals( "/context/target", UrlHelper.createUrl( "/context", "/target" ) );
+        assertEquals( "/path", UrlHelper.createUrl( "/", "/path" ) );
+        assertEquals( "/path", UrlHelper.createUrl( "/", "path" ) );
     }
 }
