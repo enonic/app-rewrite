@@ -28,7 +28,7 @@ dependencies {
     include "com.enonic.xp:lib-vhost:${xpVersion}"
     include "com.enonic.xp:lib-event:${xpVersion}"
     include 'com.enonic.lib:lib-thymeleaf:2.0.2'
-    include 'com.enonic.lib:lib-license:3.0.0'
+    include 'com.enonic.lib:lib-license:3.0.1'
 
     testImplementation 'org.mockito:mockito-core:5.2.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.3.0'
