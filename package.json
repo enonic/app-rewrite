@@ -52,6 +52,6 @@
   },
   "dependencies": {
     "datatables.net-dt": "^1.13.4",
-    "jquery": "^3.6.4"
+    "jquery": "^3.7.0"
   }
 }
