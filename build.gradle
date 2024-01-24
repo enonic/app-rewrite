@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'maven-publish'
-    id 'com.enonic.defaults' version '2.1.2'
+    id 'com.enonic.defaults' version '2.1.5'
     id 'com.enonic.xp.app' version '3.4.0'
     id "com.github.node-gradle.node" version '7.0.1'
 }
@@ -44,8 +44,8 @@ repositories {
 
 jacocoTestReport {
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.required = true
+        html.required = true
     }
 }
 
@@ -57,7 +57,7 @@ test {
 
 node {
     download = true
-    version = '14.15.0'
+    version = '20.11.0'
 }
 
 task npmInstallForce( type: NpmTask ) {
