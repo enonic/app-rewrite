@@ -79,18 +79,9 @@ task clientWebpack( type: NodeTask, dependsOn: npmInstall ) {
 }
 
 processResources {
-    include '**/*'
-    exclude '**/.gitkeep'
-    exclude '**/tsconfig.*.json'
     exclude '**/src/**'
-    includeEmptyDirs false
+    dependsOn clientWebpack
 }
-
-jar {
-    dependsOn += clientWebpack
-}
-
-jar.outputs.dir "${buildDir}/resources/main"
 
 def nodeEnvironment()
 {
