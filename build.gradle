@@ -30,7 +30,7 @@ dependencies {
     include 'com.enonic.lib:lib-thymeleaf:2.1.0'
     include 'com.enonic.lib:lib-license:3.1.0'
 
-    testImplementation 'org.mockito:mockito-core:5.9.0'
+    testImplementation 'org.mockito:mockito-core:5.10.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.10.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testImplementation "com.enonic.xp:testing:${xpVersion}"
