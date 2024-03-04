@@ -51,7 +51,7 @@
     "npm": ">= 6.14.8"
   },
   "dependencies": {
-    "datatables.net-dt": "^2.0.0",
+    "datatables.net-dt": "^2.0.1",
     "jquery": "^3.7.1"
   }
 }
