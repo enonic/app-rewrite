@@ -4,6 +4,6 @@
   <description>Rewrite-configuration and management</description>
   <allow>
     <principal>role:system.admin</principal>
-    <principal>role:com.enonic.xp.rewrite.admin</principal>
+    <principal>role:com.enonic.app.rewrite.admin</principal>
   </allow>
 </tool>
