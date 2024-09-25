@@ -27,9 +27,9 @@ if(clusterLib.isMaster()) {
     contextLib.run({
         principals: ['role:system.admin'],
         }, () => {
-            if (!authLib.getPrincipal('role:com.enonic.xp.rewrite.admin')) {
+            if (!authLib.getPrincipal('role:com.enonic.app.rewrite.admin')) {
                 authLib.createRole({
-                    name: 'com.enonic.xp.rewrite.admin',
+                    name: 'com.enonic.app.rewrite.admin',
                     displayName: 'Rewrite Manager',
                     description: 'Users with this role has access to the Rewrite Manager app.'
                 });
