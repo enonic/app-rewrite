@@ -1,6 +1,9 @@
 const eventLib = require('/lib/xp/event');
 const rewriteDao = require('/lib/rewrite-dao');
 const licenseManagerLib = require('/lib/license-manager');
+const authLib = require('/lib/xp/auth');
+const contextLib = require('/lib/xp/context');
+const clusterLib = require('/lib/xp/cluster');
 
 eventLib.listener({
     type: 'node.*',
@@ -18,4 +21,19 @@ eventLib.listener({
 
 if (licenseManagerLib.isCurrentLicenseValid()) {
     licenseManagerLib.activateLicense();
+}
+
+if(clusterLib.isMaster()) {
+    contextLib.run({
+        principals: ['role:system.admin'],
+        }, () => {
+            if (!authLib.getPrincipal('role:com.enonic.app.rewrite.admin')) {
+                authLib.createRole({
+                    name: 'com.enonic.app.rewrite.admin',
+                    displayName: 'Rewrite Manager',
+                    description: 'Users with this role has access to the Rewrite Manager app.'
+                });
+            }
+        }
+    );
 }
