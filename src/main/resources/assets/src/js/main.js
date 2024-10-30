@@ -7,8 +7,7 @@ import {initModals} from "./modals";
 import {defineShortcuts} from "./shortcuts";
 import {initToolTester} from "./toolTester";
 
-let dt = require('datatables.net');
-
+const dt = require('datatables.net');
 
 $(document).ready(function () {
     let svcUrl = CONFIG.svcUrl;
