@@ -2,21 +2,17 @@ package com.enonic.app.rewrite.provider.repo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
 import com.enonic.app.rewrite.domain.RewriteRules;
 import com.enonic.app.rewrite.redirect.RedirectType;
-import com.enonic.xp.index.IndexService;
 import com.enonic.xp.node.CreateNodeParams;
 import com.enonic.xp.node.Node;
 import com.enonic.xp.node.NodePath;
 import com.enonic.xp.node.NodeService;
-import com.enonic.xp.repository.RepositoryService;
 
-import static com.enonic.app.rewrite.provider.repo.RewriteMappingRepoInitializer.REPO_ID;
 import static com.enonic.app.rewrite.provider.repo.RewriteRepoMappingProvider.MAPPING_ROOT_NODE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -25,21 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class RewriteRepoMappingProviderTest
 {
 
-    private IndexService indexService;
-
     private NodeService nodeService;
-
-    private RepositoryService repositoryService;
 
     @BeforeEach
     void setUp()
     {
-        this.indexService = Mockito.mock( IndexService.class );
-        this.nodeService = new NodeServiceMock();
-        this.repositoryService = Mockito.mock( RepositoryService.class );
-
-        Mockito.when( this.indexService.isMaster() ).thenReturn( true );
-        Mockito.when( this.repositoryService.isInitialized( REPO_ID ) ).thenReturn( true );
+        this.nodeService = new NodeServiceMock().asNodeService();
 
         this.nodeService.create( CreateNodeParams.create().
             parent( MAPPING_ROOT_NODE.getParentPath() ).
@@ -67,7 +54,7 @@ class RewriteRepoMappingProviderTest
 
         service.store( rewriteMapping );
 
-        final Node storedNode = this.nodeService.getByPath( NodePath.create( MAPPING_ROOT_NODE, "myVHost" ).build() );
+        final Node storedNode = this.nodeService.getByPath( NodePath.create( MAPPING_ROOT_NODE ).addElement( "myVHost" ).build() );
         assertNotNull( storedNode );
         final RewriteMapping storedRewriteMapping = RewriteMappingSerializer.fromNode( storedNode );
 

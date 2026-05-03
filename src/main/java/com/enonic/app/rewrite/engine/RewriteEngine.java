@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.domain.RewriteContext;
 import com.enonic.app.rewrite.domain.RewriteContextKey;

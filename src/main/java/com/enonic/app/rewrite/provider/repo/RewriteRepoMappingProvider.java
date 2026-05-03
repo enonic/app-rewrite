@@ -20,8 +20,9 @@ import com.enonic.xp.context.ContextAccessor;
 import com.enonic.xp.context.ContextBuilder;
 import com.enonic.xp.data.PropertyTree;
 import com.enonic.xp.node.CreateNodeParams;
+import com.enonic.xp.node.DeleteNodeParams;
+import com.enonic.xp.node.DeleteNodeResult;
 import com.enonic.xp.node.Node;
-import com.enonic.xp.node.NodeIds;
 import com.enonic.xp.node.NodePath;
 import com.enonic.xp.node.NodeService;
 import com.enonic.xp.node.RefreshMode;
@@ -33,7 +34,7 @@ import com.enonic.xp.security.auth.AuthenticationInfo;
 public class RewriteRepoMappingProvider
     implements RewriteMappingProvider
 {
-    public final static NodePath MAPPING_ROOT_NODE = NodePath.create( "/vhosts" ).build();
+    public final static NodePath MAPPING_ROOT_NODE = NodePath.create( NodePath.ROOT ).addElement( "vhosts" ).build();
 
     private final NodeService nodeService;
 
@@ -203,14 +204,16 @@ public class RewriteRepoMappingProvider
         return existingNode;
     }
 
-    private NodeIds doDelete( final RewriteContextKey rewriteContextKey )
+    private DeleteNodeResult doDelete( final RewriteContextKey rewriteContextKey )
     {
-        final NodeIds nodeIds = this.nodeService.deleteByPath( createContextNodePath( rewriteContextKey ) );
+        final DeleteNodeResult result = this.nodeService.delete( DeleteNodeParams.create()
+                                                                     .nodePath( createContextNodePath( rewriteContextKey ) )
+                                                                     .build() );
 
-        System.out.println( "Deleting nodes with id" + nodeIds );
+        System.out.println( "Deleting nodes with id" + result );
 
         this.nodeService.refresh( RefreshMode.ALL );
-        return nodeIds;
+        return result;
     }
 
     private Node doCreateOrUpdate( final NodePath nodePath, final RewriteMapping rewriteMapping )
@@ -254,7 +257,7 @@ public class RewriteRepoMappingProvider
 
     private NodePath createContextNodePath( final RewriteContextKey contextKey )
     {
-        return NodePath.create( MAPPING_ROOT_NODE, RewriteContextName.from( contextKey ).getName() ).build();
+        return NodePath.create( MAPPING_ROOT_NODE ).addElement( RewriteContextName.from( contextKey ).getName() ).build();
     }
 
     private Context setRepoContext()

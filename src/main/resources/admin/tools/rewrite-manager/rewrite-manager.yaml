@@ -1,0 +1,12 @@
+kind: "AdminTool"
+title:
+  text: "Rewrite Manager"
+description:
+  text: "Rewrite-configuration and management"
+allow:
+  - "role:system.admin"
+  - "role:com.enonic.app.rewrite.admin"
+apis:
+  - "admin:extension"
+  - "admin:event"
+  - "admin:status"

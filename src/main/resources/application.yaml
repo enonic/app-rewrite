@@ -1,0 +1,5 @@
+kind: "Application"
+title: "Rewrite"
+description: "Manage and execute URL redirection"
+vendorName: "Enonic"
+vendorUrl: "https://enonic.com"

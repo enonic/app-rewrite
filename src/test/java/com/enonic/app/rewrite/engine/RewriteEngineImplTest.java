@@ -2,11 +2,11 @@ package com.enonic.app.rewrite.engine;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.MockHttpRequest;
 import com.enonic.app.rewrite.domain.RewriteContextKey;

@@ -2,9 +2,9 @@ package com.enonic.app.rewrite;
 
 import java.net.URI;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.mockito.Mockito;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.enonic.xp.web.vhost.VirtualHost;
 
