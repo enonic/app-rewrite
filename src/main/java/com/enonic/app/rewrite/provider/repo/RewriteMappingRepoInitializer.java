@@ -71,7 +71,7 @@ public class RewriteMappingRepoInitializer
     @Override
     protected boolean isInitialized()
     {
-        return createAdminContext().callWith( () -> this.repositoryService.isInitialized( REPO_ID ) );
+        return createAdminContext().callWith( () -> this.repositoryService.get( REPO_ID ) != null );
     }
 
     private void doCreateRepo()
