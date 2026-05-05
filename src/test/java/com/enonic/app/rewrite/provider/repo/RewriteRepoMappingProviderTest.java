@@ -39,7 +39,7 @@ class RewriteRepoMappingProviderTest
         this.repositoryService = Mockito.mock( RepositoryService.class );
 
         Mockito.when( this.indexService.isMaster() ).thenReturn( true );
-        Mockito.when( this.repositoryService.isInitialized( REPO_ID ) ).thenReturn( true );
+        Mockito.when( this.repositoryService.get( REPO_ID ) ).thenReturn( Mockito.mock() );
 
         this.nodeService.create( CreateNodeParams.create().
             parent( MAPPING_ROOT_NODE.getParentPath() ).
@@ -67,7 +67,7 @@ class RewriteRepoMappingProviderTest
 
         service.store( rewriteMapping );
 
-        final Node storedNode = this.nodeService.getByPath( NodePath.create( MAPPING_ROOT_NODE, "myVHost" ).build() );
+        final Node storedNode = this.nodeService.getByPath( NodePath.create( MAPPING_ROOT_NODE ).addElement( "myVHost" ).build() );
         assertNotNull( storedNode );
         final RewriteMapping storedRewriteMapping = RewriteMappingSerializer.fromNode( storedNode );
 

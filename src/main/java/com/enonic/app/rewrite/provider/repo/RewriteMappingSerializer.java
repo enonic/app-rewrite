@@ -65,7 +65,7 @@ public class RewriteMappingSerializer
 
         if ( rewriteMapping.getRewriteRules() != null )
         {
-            data.addSets( RULES_KEY, createRules( rewriteMapping.getRewriteRules() ) );
+            data.addSets( RULES_KEY, createRules( propertyTree, rewriteMapping.getRewriteRules() ) );
         }
 
         data.setString( CONTEXT_KEY, rewriteMapping.getContextKey().toString() );
@@ -77,12 +77,12 @@ public class RewriteMappingSerializer
         return toBeEdited -> toBeEdited.data = toCreateNodeData( rewriteMapping );
     }
 
-    private static PropertySet[] createRules( final RewriteRules rewriteRules )
+    private static PropertySet[] createRules( final PropertyTree propertyTree, final RewriteRules rewriteRules )
     {
         final List<PropertySet> setList = new ArrayList<>();
 
         rewriteRules.getRuleList().forEach( rule -> {
-            final PropertySet ruleData = new PropertySet();
+            final PropertySet ruleData = propertyTree.newSet();
             ruleData.addString( RULE_IDENTIFIER, rule.getRuleId() );
             ruleData.addString( RULE_FROM_KEY, rule.getFrom() );
             ruleData.addString( RULE_TARGET_KEY, rule.getTarget().path() );
