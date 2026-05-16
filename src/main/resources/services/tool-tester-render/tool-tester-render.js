@@ -1,5 +1,6 @@
 let thymeleaf = require('/lib/thymeleaf');
 let portal = require('/lib/xp/portal');
+let assetLib = require('/lib/enonic/asset');
 let rewriteDao = require('/lib/rewrite-dao');
 
 exports.get = function (req) {
@@ -19,7 +20,7 @@ exports.get = function (req) {
     });
 
     let model = {
-        assetsUrl: portal.assetUrl({path: ""}),
+        assetsUrl: assetLib.assetUrl({path: ""}),
         svcUrl: portal.serviceUrl({service: 'Z'}).slice(0, -1),
         toolKey: "tool-tester",
         rewriteContexts: contexts
