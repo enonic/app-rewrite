@@ -24,6 +24,7 @@ dependencies {
     include xplibs.cluster
     include libs.lib.thymeleaf
     include libs.lib.license
+    include libs.lib.asset
 
     testImplementation 'org.mockito:mockito-core:5.23.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.23.0'

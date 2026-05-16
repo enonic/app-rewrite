@@ -1,5 +1,6 @@
 const thymeleaf = require('/lib/thymeleaf');
 const portal = require('/lib/xp/portal');
+const assetLib = require('/lib/enonic/asset');
 const libVHost = require('/lib/xp/vhost');
 const licenseManager = require("/lib/license-manager");
 
@@ -25,7 +26,7 @@ exports.get = function (req) {
     }
 
     const model = {
-        assetsUrl: portal.assetUrl({path: ""}),
+        assetsUrl: assetLib.assetUrl({path: ""}),
         svcUrl: portal.serviceUrl({service: 'Z'}).slice(0, -1),
         error: !licenseValid || !!errorMessage,
         errorMessage,
