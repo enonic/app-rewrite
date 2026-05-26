@@ -12,7 +12,7 @@ dependencies {
     compileOnly xplibs.api.portal
     compileOnly xplibs.api.web
 
-    include 'org.apache.commons:commons-csv:1.14.1'
+    include libs.commons.csv
 
     include xplibs.content
     include xplibs.portal
@@ -22,9 +22,9 @@ dependencies {
     include xplibs.auth
     include xplibs.context
     include xplibs.cluster
-    include 'com.enonic.lib:lib-thymeleaf:3.0.0-SNAPSHOT'
-    include 'com.enonic.lib:lib-license:4.0.0-SNAPSHOT'
-    include 'com.enonic.lib:lib-asset:2.0.0-SNAPSHOT'
+    include libs.lib.thymeleaf
+    include libs.lib.license
+    include libs.lib.asset
 
     testImplementation 'org.mockito:mockito-core:5.23.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.23.0'
@@ -36,7 +36,8 @@ dependencies {
 repositories {
     mavenLocal()
     mavenCentral()
-    xp.enonicRepo( "dev" )
+    xp.enonicRepo()
+    xp.enonicRepo('dev')
 }
 
 jacocoTestReport {
