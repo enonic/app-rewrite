@@ -217,11 +217,6 @@ class RewriteTesterRequest
         return false;
     }
 
-    public boolean isRequestedSessionIdFromUrl()
-    {
-        return false;
-    }
-
     @Override
     public boolean authenticate( final HttpServletResponse httpServletResponse )
         throws IOException, ServletException
@@ -413,11 +408,6 @@ class RewriteTesterRequest
 
     @Override
     public RequestDispatcher getRequestDispatcher( final String s )
-    {
-        return null;
-    }
-
-    public String getRealPath( final String s )
     {
         return null;
     }
