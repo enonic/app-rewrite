@@ -15,8 +15,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -26,6 +24,8 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
@@ -179,10 +179,7 @@ public class RewriteServiceImpl
     {
         final RewriteMappingProvider rewriteMappingProvider = getProviderOrThrow( rewriteContextKey );
 
-        return ProviderInfo.create().
-            name( rewriteMappingProvider.name() ).
-            readOnly( rewriteMappingProvider.readOnly() ).
-            build();
+        return ProviderInfo.create().name( rewriteMappingProvider.name() ).readOnly( rewriteMappingProvider.readOnly() ).build();
     }
 
     @Override
@@ -230,8 +227,8 @@ public class RewriteServiceImpl
 
     private void initVHostProviderConfig()
     {
-        final Map<String, VirtualHost> virtualHostAsMap = virtualHostService.getVirtualHosts().stream().
-            collect( Collectors.toMap( VirtualHost::getName, Function.identity() ) );
+        final Map<String, VirtualHost> virtualHostAsMap =
+            virtualHostService.getVirtualHosts().stream().collect( Collectors.toMap( VirtualHost::getName, Function.identity() ) );
 
         final Set<String> configVHostMappingNames = new HashSet<>( virtualHostAsMap.keySet() );
 
@@ -247,12 +244,12 @@ public class RewriteServiceImpl
             final RewriteMappingProvider provider = fetchContextProvider( contextKey );
             contextProviders.put( contextKey, Optional.ofNullable( provider ) );
 
-            container.put( contextKey, VirtualHostWrapper.create().
-                contextKey( contextKey ).
-                virtualHost( virtualHostAsMap.get( vHostMapping ) ).
-                mappingProvider( fetchContextProvider( contextKey ) ).
-                active( virtualHostService.isEnabled() && configVHostMappingNames.contains( vHostMapping ) ).
-                build() );
+            container.put( contextKey, VirtualHostWrapper.create()
+                .contextKey( contextKey )
+                .virtualHost( virtualHostAsMap.get( vHostMapping ) )
+                .mappingProvider( fetchContextProvider( contextKey ) )
+                .active( virtualHostService.isEnabled() && configVHostMappingNames.contains( vHostMapping ) )
+                .build() );
         } );
     }
 
@@ -292,10 +289,10 @@ public class RewriteServiceImpl
     private RewriteMappingProvider initFileProvider()
     {
         final HomeDir xpHome = HomeDir.get();
-        return RewriteMappingLocalFileProvider.create().
-            base( Path.of( xpHome.toFile().getPath(), "config" ) ).
-            ruleFileNameTemplate( config.ruleFileNameTemplate() ).
-            build();
+        return RewriteMappingLocalFileProvider.create()
+            .base( Path.of( xpHome.toFile().getPath(), "config" ) )
+            .ruleFileNameTemplate( config.ruleFileNameTemplate() )
+            .build();
     }
 
     private RewriteMappingProvider initRepoProvider()
@@ -305,16 +302,17 @@ public class RewriteServiceImpl
 
     private List<String> getRepoVHostMappingNames()
     {
-        return RewriteMappingRepoInitializer.createAdminContext().
-            callWith( () -> {
-                final FindNodesByQueryResult queryResult = nodeService.findByQuery( NodeQuery.create().
-                    parent( NodePath.create( RewriteRepoMappingProvider.MAPPING_ROOT_NODE ).build() ).
-                    build() );
+        return RewriteMappingRepoInitializer.createAdminContext().callWith( () -> {
+            final FindNodesByQueryResult queryResult = nodeService.findByQuery(
+                NodeQuery.create().parent( NodePath.create( RewriteRepoMappingProvider.MAPPING_ROOT_NODE ).build() ).build() );
 
-                return queryResult.getNodeHits().getNodeIds().stream().
-                    map( nodeId -> nodeService.getById( nodeId ) ).
-                    map( node -> node.name().toString() ).collect( Collectors.toList() );
-            } );
+            return queryResult.getNodeHits()
+                .getNodeIds()
+                .stream()
+                .map( nodeId -> nodeService.getById( nodeId ) )
+                .map( node -> node.name().toString() )
+                .collect( Collectors.toList() );
+        } );
     }
 
     private List<String> getFileVHostMappingNames()
@@ -325,15 +323,14 @@ public class RewriteServiceImpl
 
             final String pattern = config.ruleFileNameTemplate().replace( "{{vhost}}", "(\\w+)" );
 
-            Files.walk( Path.of( HomeDir.get().toFile().getPath(), "config" ) ).
-                forEach( configFile -> {
-                    final String mappingName = FileNameMatcher.getMatch( configFile, pattern, 1 );
+            Files.walk( Path.of( HomeDir.get().toFile().getPath(), "config" ) ).forEach( configFile -> {
+                final String mappingName = FileNameMatcher.getMatch( configFile, pattern, 1 );
 
-                    if ( mappingName != null )
-                    {
-                        result.add( mappingName );
-                    }
-                } );
+                if ( mappingName != null )
+                {
+                    result.add( mappingName );
+                }
+            } );
 
             return result;
         }

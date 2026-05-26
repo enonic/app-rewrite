@@ -13,9 +13,6 @@ jobs:
         with:
           repoUser: ci
           repoPassword: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          releaseBranch: |
-            master
-            1.x
 
   release:
     runs-on: ubuntu-latest

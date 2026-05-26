@@ -1,8 +1,8 @@
 kind: "AdminTool"
 title: "Rewrite Manager"
 description: "Rewrite-configuration and management"
-apis:
-  - "asset"
 allow:
   - "role:system.admin"
   - "role:com.enonic.app.rewrite.admin"
+apis:
+  - "asset"

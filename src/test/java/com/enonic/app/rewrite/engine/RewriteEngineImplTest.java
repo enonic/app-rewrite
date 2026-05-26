@@ -2,11 +2,11 @@ package com.enonic.app.rewrite.engine;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.enonic.app.rewrite.MockHttpRequest;
 import com.enonic.app.rewrite.domain.RewriteContextKey;
@@ -42,11 +42,12 @@ class RewriteEngineImplTest
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/oldUrl" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -62,11 +63,12 @@ class RewriteEngineImplTest
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -77,16 +79,18 @@ class RewriteEngineImplTest
     @Test
     void testRegexpSubstitutionInExternalRedirects()
     {
-        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/oldUrl/(.*)", "https://www.example.com/newUrl/$1", RedirectType.MOVED_PERMANENTLY );
+        final List<RewriteMapping> rewriteMappings =
+            prepareRewriteMappings( "/oldUrl/(.*)", "https://www.example.com/newUrl/$1", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -103,11 +107,12 @@ class RewriteEngineImplTest
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child/resource/child2" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/oldUrl/child/resource/child2" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -125,11 +130,12 @@ class RewriteEngineImplTest
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/" + originalUrl).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/" + originalUrl )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -140,16 +146,18 @@ class RewriteEngineImplTest
     @Test
     void testRegexpSubstitutionExternalRedirect_withQueryStringInSource_withoutQueryStringInTarget()
     {
-        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "https://example.no", RedirectType.MOVED_PERMANENTLY );
+        final List<RewriteMapping> rewriteMappings =
+            prepareRewriteMappings( "/demo(.*)", "https://example.no", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -160,16 +168,18 @@ class RewriteEngineImplTest
     @Test
     void testRegexpSubstitutionExternalRedirect_withoutQueryStringInSource_withQueryStringInTarget()
     {
-        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "https://example.no?q=v", RedirectType.MOVED_PERMANENTLY );
+        final List<RewriteMapping> rewriteMappings =
+            prepareRewriteMappings( "/demo(.*)", "https://example.no?q=v", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -180,16 +190,18 @@ class RewriteEngineImplTest
     @Test
     void testRegexpSubstitutionInternalRedirect_withoutQueryStringInSource_withQueryStringInTarget()
     {
-        final List<RewriteMapping> rewriteMappings = prepareRewriteMappings( "/demo(.*)", "/landing-page?k=v", RedirectType.MOVED_PERMANENTLY );
+        final List<RewriteMapping> rewriteMappings =
+            prepareRewriteMappings( "/demo(.*)", "/landing-page?k=v", RedirectType.MOVED_PERMANENTLY );
 
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/demo" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/demo" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -205,11 +217,12 @@ class RewriteEngineImplTest
         final RewriteEngine rewriteEngine = new RewriteEngine();
         rewriteEngine.load( rewriteMappings );
 
-        final HttpServletRequest request = MockHttpRequest.create().
-            contextPath( "/" ).
-            url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" ).
-            vhost( vhost ).
-            build().getRequest();
+        final HttpServletRequest request = MockHttpRequest.create()
+            .contextPath( "/" )
+            .url( "https://www.mysite.ost/site/default/master/mysite/demo?k=v" )
+            .vhost( vhost )
+            .build()
+            .getRequest();
 
         final RedirectMatch match = rewriteEngine.process( request );
 
@@ -219,18 +232,10 @@ class RewriteEngineImplTest
 
     private List<RewriteMapping> prepareRewriteMappings( final String source, final String target, final RedirectType redirectType )
     {
-        final RewriteRules rules = RewriteRules.create().
-            addRule( RewriteRule.create().
-                from( source ).
-                target( target ).
-                type( redirectType ).
-                build() ).
-            build();
+        final RewriteRules rules =
+            RewriteRules.create().addRule( RewriteRule.create().from( source ).target( target ).type( redirectType ).build() ).build();
 
-        return List.of( RewriteMapping.create().
-            contextKey( new RewriteContextKey( "myvhost" ) ).
-            rewriteRules( rules ).
-            build() );
+        return List.of( RewriteMapping.create().contextKey( new RewriteContextKey( "myvhost" ) ).rewriteRules( rules ).build() );
     }
 
 }
