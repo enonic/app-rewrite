@@ -1,8 +1,5 @@
 package com.enonic.app.rewrite.provider.repo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.enonic.app.rewrite.domain.RewriteContextKey;
 import com.enonic.app.rewrite.domain.RewriteMapping;
 import com.enonic.app.rewrite.domain.RewriteRule;
@@ -65,7 +62,7 @@ public class RewriteMappingSerializer
 
         if ( rewriteMapping.getRewriteRules() != null )
         {
-            data.addSets( RULES_KEY, createRules( propertyTree, rewriteMapping.getRewriteRules() ) );
+            addRules( data, rewriteMapping.getRewriteRules() );
         }
 
         data.setString( CONTEXT_KEY, rewriteMapping.getContextKey().toString() );
@@ -77,20 +74,15 @@ public class RewriteMappingSerializer
         return toBeEdited -> toBeEdited.data = toCreateNodeData( rewriteMapping );
     }
 
-    private static PropertySet[] createRules( final PropertyTree propertyTree, final RewriteRules rewriteRules )
+    private static void addRules( final PropertySet parent, final RewriteRules rewriteRules )
     {
-        final List<PropertySet> setList = new ArrayList<>();
-
         rewriteRules.getRuleList().forEach( rule -> {
-            final PropertySet ruleData = propertyTree.newSet();
+            final PropertySet ruleData = parent.addSet( RULES_KEY );
             ruleData.addString( RULE_IDENTIFIER, rule.getRuleId() );
             ruleData.addString( RULE_FROM_KEY, rule.getFrom() );
             ruleData.addString( RULE_TARGET_KEY, rule.getTarget().path() );
             ruleData.addString( RULE_TYPE_KEY, rule.getType().name() );
-            setList.add( ruleData );
         } );
-
-        return setList.toArray( new PropertySet[setList.size()] );
     }
 
     private static Double toDouble( final Integer value )
