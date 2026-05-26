@@ -1,8 +1,6 @@
 kind: "AdminTool"
-title:
-  text: "Rewrite Manager"
-description:
-  text: "Rewrite-configuration and management"
+title: "Rewrite Manager"
+description: "Rewrite-configuration and management"
 allow:
   - "role:system.admin"
   - "role:com.enonic.app.rewrite.admin"
