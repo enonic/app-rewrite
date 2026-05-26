@@ -7,7 +7,4 @@ allow:
   - "role:system.admin"
   - "role:com.enonic.app.rewrite.admin"
 apis:
-  - "admin:extension"
-  - "admin:event"
-  - "admin:status"
   - "asset"
