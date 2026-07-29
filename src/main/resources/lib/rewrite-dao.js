@@ -53,13 +53,13 @@ exports.reloadRewriteMappings = function () {
 
 exports.createRule = function (host, contextKey, rule, insertStrategy, position) {
     let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
-    params.host = host;
-    params.insertStrategy = insertStrategy;
-    params.source = rule.source;
-    params.target = rule.target;
-    params.type = rule.type;
-    params.contextKey = contextKey;
-    params.position = position;
+    params.setHost(__.nullOrValue(host));
+    params.setInsertStrategy(__.nullOrValue(insertStrategy));
+    params.setSource(__.nullOrValue(rule.source));
+    params.setTarget(__.nullOrValue(rule.target));
+    params.setType(__.nullOrValue(rule.type));
+    params.setContextKey(__.nullOrValue(contextKey));
+    params.setPosition(position);
 
     let result = bean.saveRule(params);
     return __.toNativeObject(result);
@@ -67,21 +67,21 @@ exports.createRule = function (host, contextKey, rule, insertStrategy, position)
 
 exports.deleteRule = function (contextKey, ruleId) {
     let params = __.newBean('com.enonic.app.rewrite.DeleteRuleParams');
-    params.contextKey = contextKey;
-    params.ruleId = ruleId;
+    params.setContextKey(__.nullOrValue(contextKey));
+    params.setRuleId(__.nullOrValue(ruleId));
     let result = bean.deleteRule(params);
     return __.toNativeObject(result);
 };
 
 exports.editRule = function (host, contextKey, pattern, rule) {
     let params = __.newBean('com.enonic.app.rewrite.UpdateRuleParams');
-    params.host = host;
-    params.contextKey = contextKey;
-    params.source = rule.source;
-    params.target = rule.target;
-    params.type = rule.type;
-    params.position = rule.position;
-    params.ruleId = rule.ruleId;
+    params.setHost(__.nullOrValue(host));
+    params.setContextKey(__.nullOrValue(contextKey));
+    params.setSource(__.nullOrValue(rule.source));
+    params.setTarget(__.nullOrValue(rule.target));
+    params.setType(__.nullOrValue(rule.type));
+    params.setPosition(rule.position);
+    params.setRuleId(__.nullOrValue(rule.ruleId));
 
     let result = bean.saveRule(params);
     return __.toNativeObject(result);
@@ -90,13 +90,13 @@ exports.editRule = function (host, contextKey, pattern, rule) {
 
 exports.importRules = function (contextKey, mergeStrategy, byteSource, fileName, dryRun, format) {
     let params = __.newBean('com.enonic.app.rewrite.ImportRulesParams');
-    params.contextKey = contextKey;
-    params.mergeStrategy = mergeStrategy;
-    params.byteSource = byteSource;
-    params.fileName = fileName;
-    params.dryRun = dryRun;
+    params.setContextKey(__.nullOrValue(contextKey));
+    params.setMergeStrategy(__.nullOrValue(mergeStrategy));
+    params.setByteSource(byteSource);
+    params.setFileName(__.nullOrValue(fileName));
+    params.setDryRun(dryRun);
     if (format) {
-        params.format = format;
+        params.setFormat(format);
     }
     let result = bean.importRules(params);
     return __.toNativeObject(result);
@@ -104,8 +104,8 @@ exports.importRules = function (contextKey, mergeStrategy, byteSource, fileName,
 
 exports.serializeRules = function (contextKey, format) {
     let params = __.newBean('com.enonic.app.rewrite.ExportRulesParams');
-    params.contextKey = contextKey;
-    params.format = format;
+    params.setContextKey(__.nullOrValue(contextKey));
+    params.setFormat(format);
     let result = bean.serializeRules(params);
     return result;
 };
@@ -113,9 +113,9 @@ exports.serializeRules = function (contextKey, format) {
 exports.testRequest = function (params) {
     let testerParams = __.newBean('com.enonic.app.rewrite.RequestTesterParams');
 
-    testerParams.host = required(params, 'host');
-    testerParams.requestPath = required(params, 'requestPath');
-    testerParams.rewriteContext = required(params, 'rewriteContext');
+    testerParams.setHost(required(params, 'host'));
+    testerParams.setRequestPath(required(params, 'requestPath'));
+    testerParams.setRewriteContext(required(params, 'rewriteContext'));
 
     return __.toNativeObject(bean.requestTester(testerParams));
 };
