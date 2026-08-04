@@ -53,6 +53,10 @@ test {
     useJUnitPlatform()
 }
 
+xp {
+    scriptEngines = ['Nashorn', 'GraalJS']
+}
+
 node {
     download = true
     version = '20.18.0'
