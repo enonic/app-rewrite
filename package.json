@@ -46,8 +46,8 @@
     "extends browserslist-config-enonic"
   ],
   "engines": {
-    "node": ">= 20.18.0",
-    "npm": ">= 10.8.2"
+    "node": ">= 24.20.0",
+    "npm": ">= 11.19.0"
   },
   "dependencies": {
     "datatables.net-dt": "^2.3.6",
